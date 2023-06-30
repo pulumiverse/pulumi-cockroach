@@ -1,7 +1,7 @@
 ---
 title: Cockroach DB Cloud
 meta_desc: Provides an overview of the Cockroach DB Provider for Pulumi.
-layout: overview
+layout: package
 ---
 
 The Cockroach provider for Pulumi can be used to provision any of the cloud resources available in [Cockroach DB](https://www.cockroachlabs.com) or a self hosted Cockroach DB instance
