@@ -1,0 +1,1688 @@
+{
+    "name": "cockroach",
+    "displayName": "CockroachDB",
+    "description": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
+    "keywords": [
+        "pulumi",
+        "cockroach"
+    ],
+    "homepage": "https://lbrlabs.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`cockroach` Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach).",
+    "repository": "https://github.com/lbrlabs/pulumi-cockroach",
+    "pluginDownloadURL": "github://api.github.com/lbrlabs",
+    "publisher": "lbrlabs",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": {
+                "cockroach": "Cockroach"
+            },
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "rootNamespace": "Lbrlabs.PulumiPackage"
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
+            "packageName": "@lbrlabs/pulumi-cockroach",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "packageName": "lbrlabs_pulumi_cockroach",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "apikey": {
+                "type": "string",
+                "description": "apikey to access cockroach cloud\n",
+                "secret": true
+            }
+        }
+    },
+    "types": {
+        "cockroach:index/ClusterDedicated:ClusterDedicated": {
+            "properties": {
+                "diskIops": {
+                    "type": "integer"
+                },
+                "machineType": {
+                    "type": "string"
+                },
+                "memoryGib": {
+                    "type": "number"
+                },
+                "numVirtualCpus": {
+                    "type": "integer"
+                },
+                "privateNetworkVisibility": {
+                    "type": "boolean",
+                    "description": "Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.\n"
+                },
+                "storageGib": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "diskIops",
+                        "machineType",
+                        "memoryGib",
+                        "numVirtualCpus",
+                        "privateNetworkVisibility",
+                        "storageGib"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/ClusterRegion:ClusterRegion": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of cluster\n"
+                },
+                "nodeCount": {
+                    "type": "integer"
+                },
+                "primary": {
+                    "type": "boolean",
+                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
+                },
+                "sqlDns": {
+                    "type": "string"
+                },
+                "uiDns": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "name",
+                        "nodeCount",
+                        "primary",
+                        "sqlDns",
+                        "uiDns"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/ClusterServerless:ClusterServerless": {
+            "properties": {
+                "routingId": {
+                    "type": "string"
+                },
+                "spendLimit": {
+                    "type": "integer",
+                    "description": "Spend limit in US cents.\n"
+                },
+                "usageLimits": {
+                    "$ref": "#/types/cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "routingId"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits": {
+            "properties": {
+                "requestUnitLimit": {
+                    "type": "integer"
+                },
+                "storageMibLimit": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "requestUnitLimit",
+                "storageMibLimit"
+            ]
+        },
+        "cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "nodeCount": {
+                    "type": "integer"
+                },
+                "primary": {
+                    "type": "boolean",
+                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
+                },
+                "sqlDns": {
+                    "type": "string"
+                },
+                "uiDns": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "name",
+                        "nodeCount",
+                        "primary",
+                        "sqlDns",
+                        "uiDns"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/CmekRegion:CmekRegion": {
+            "properties": {
+                "key": {
+                    "$ref": "#/types/cockroach:index/CmekRegionKey:CmekRegionKey"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "region"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "key",
+                        "region",
+                        "status"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/CmekRegionKey:CmekRegionKey": {
+            "properties": {
+                "authPrincipal": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "uri": {
+                    "type": "string"
+                },
+                "userMessage": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "authPrincipal",
+                "type",
+                "uri"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "authPrincipal",
+                        "createdAt",
+                        "status",
+                        "type",
+                        "updatedAt",
+                        "uri",
+                        "userMessage"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/LogExportConfigGroup:LogExportConfigGroup": {
+            "properties": {
+                "channels": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of CRDB log channels to include in this group\n"
+                },
+                "logName": {
+                    "type": "string",
+                    "description": "The name of the group, reflected in the log sink\n"
+                },
+                "minLevel": {
+                    "type": "string",
+                    "description": "The minimum log level to filter to this log group\n"
+                },
+                "redact": {
+                    "type": "boolean",
+                    "description": "Governs whether this log group should aggregate redacted logs if unset\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "channels",
+                "logName"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "channels",
+                        "logName",
+                        "redact"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService": {
+            "properties": {
+                "aws": {
+                    "$ref": "#/types/cockroach:index/PrivateEndpointServicesServiceAws:PrivateEndpointServicesServiceAws"
+                },
+                "cloudProvider": {
+                    "type": "string"
+                },
+                "regionName": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "aws",
+                        "cloudProvider",
+                        "regionName",
+                        "status"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/PrivateEndpointServicesServiceAws:PrivateEndpointServicesServiceAws": {
+            "properties": {
+                "availabilityZoneIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "serviceId": {
+                    "type": "string"
+                },
+                "serviceName": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "availabilityZoneIds",
+                        "serviceId",
+                        "serviceName"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole": {
+            "properties": {
+                "resourceId": {
+                    "type": "string"
+                },
+                "resourceType": {
+                    "type": "string"
+                },
+                "roleName": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "resourceType",
+                "roleName"
+            ]
+        },
+        "cockroach:index/getCockroachClusterDedicated:getCockroachClusterDedicated": {
+            "properties": {
+                "diskIops": {
+                    "type": "integer"
+                },
+                "machineType": {
+                    "type": "string"
+                },
+                "memoryGib": {
+                    "type": "number"
+                },
+                "numVirtualCpus": {
+                    "type": "integer"
+                },
+                "privateNetworkVisibility": {
+                    "type": "boolean"
+                },
+                "storageGib": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "diskIops",
+                "machineType",
+                "memoryGib",
+                "numVirtualCpus",
+                "privateNetworkVisibility",
+                "storageGib"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "cockroach:index/getCockroachClusterRegion:getCockroachClusterRegion": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of cluster\n"
+                },
+                "nodeCount": {
+                    "type": "integer"
+                },
+                "primary": {
+                    "type": "boolean"
+                },
+                "sqlDns": {
+                    "type": "string"
+                },
+                "uiDns": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "nodeCount",
+                "primary",
+                "sqlDns",
+                "uiDns"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "cockroach:index/getCockroachClusterServerless:getCockroachClusterServerless": {
+            "properties": {
+                "routingId": {
+                    "type": "string"
+                },
+                "spendLimit": {
+                    "type": "integer"
+                },
+                "usageLimits": {
+                    "$ref": "#/types/cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits"
+                }
+            },
+            "type": "object",
+            "required": [
+                "routingId",
+                "spendLimit",
+                "usageLimits"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits": {
+            "properties": {
+                "requestUnitLimit": {
+                    "type": "integer"
+                },
+                "storageMibLimit": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "requestUnitLimit",
+                "storageMibLimit"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the cockroach package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apikey": {
+                "type": "string",
+                "description": "apikey to access cockroach cloud\n",
+                "secret": true
+            }
+        },
+        "inputProperties": {
+            "apikey": {
+                "type": "string",
+                "description": "apikey to access cockroach cloud\n",
+                "secret": true
+            }
+        }
+    },
+    "resources": {
+        "cockroach:index/allowList:AllowList": {
+            "description": "Allow list of IP range\n",
+            "properties": {
+                "cidrIp": {
+                    "type": "string"
+                },
+                "cidrMask": {
+                    "type": "integer"
+                },
+                "clusterId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sql": {
+                    "type": "boolean"
+                },
+                "ui": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "cidrIp",
+                "cidrMask",
+                "clusterId",
+                "sql",
+                "ui"
+            ],
+            "inputProperties": {
+                "cidrIp": {
+                    "type": "string"
+                },
+                "cidrMask": {
+                    "type": "integer"
+                },
+                "clusterId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sql": {
+                    "type": "boolean"
+                },
+                "ui": {
+                    "type": "boolean"
+                }
+            },
+            "requiredInputs": [
+                "cidrIp",
+                "cidrMask",
+                "clusterId",
+                "sql",
+                "ui"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AllowList resources.\n",
+                "properties": {
+                    "cidrIp": {
+                        "type": "string"
+                    },
+                    "cidrMask": {
+                        "type": "integer"
+                    },
+                    "clusterId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "sql": {
+                        "type": "boolean"
+                    },
+                    "ui": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/caCert:CaCert": {
+            "description": "Manages client CA certs.\n",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": "Status of client CA certs on a cluster\n"
+                },
+                "x509PemCert": {
+                    "type": "string",
+                    "description": "X509 certificate in PEM format\n"
+                }
+            },
+            "required": [
+                "status",
+                "x509PemCert"
+            ],
+            "inputProperties": {
+                "x509PemCert": {
+                    "type": "string",
+                    "description": "X509 certificate in PEM format\n"
+                }
+            },
+            "requiredInputs": [
+                "x509PemCert"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CaCert resources.\n",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Status of client CA certs on a cluster\n"
+                    },
+                    "x509PemCert": {
+                        "type": "string",
+                        "description": "X509 certificate in PEM format\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/cluster:Cluster": {
+            "description": "Cluster Resource\n",
+            "properties": {
+                "accountId": {
+                    "type": "string"
+                },
+                "cloudProvider": {
+                    "type": "string"
+                },
+                "cockroachVersion": {
+                    "type": "string"
+                },
+                "creatorId": {
+                    "type": "string"
+                },
+                "dedicated": {
+                    "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of cluster\n"
+                },
+                "operationStatus": {
+                    "type": "string"
+                },
+                "plan": {
+                    "type": "string"
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/ClusterRegion:ClusterRegion"
+                    }
+                },
+                "serverless": {
+                    "$ref": "#/types/cockroach:index/ClusterServerless:ClusterServerless"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "upgradeStatus": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accountId",
+                "cloudProvider",
+                "cockroachVersion",
+                "creatorId",
+                "name",
+                "operationStatus",
+                "plan",
+                "regions",
+                "state",
+                "upgradeStatus"
+            ],
+            "inputProperties": {
+                "cloudProvider": {
+                    "type": "string"
+                },
+                "cockroachVersion": {
+                    "type": "string"
+                },
+                "dedicated": {
+                    "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of cluster\n"
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/ClusterRegion:ClusterRegion"
+                    }
+                },
+                "serverless": {
+                    "$ref": "#/types/cockroach:index/ClusterServerless:ClusterServerless"
+                }
+            },
+            "requiredInputs": [
+                "cloudProvider",
+                "name",
+                "regions"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Cluster resources.\n",
+                "properties": {
+                    "accountId": {
+                        "type": "string"
+                    },
+                    "cloudProvider": {
+                        "type": "string"
+                    },
+                    "cockroachVersion": {
+                        "type": "string"
+                    },
+                    "creatorId": {
+                        "type": "string"
+                    },
+                    "dedicated": {
+                        "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of cluster\n"
+                    },
+                    "operationStatus": {
+                        "type": "string"
+                    },
+                    "plan": {
+                        "type": "string"
+                    },
+                    "regions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/ClusterRegion:ClusterRegion"
+                        }
+                    },
+                    "serverless": {
+                        "$ref": "#/types/cockroach:index/ClusterServerless:ClusterServerless"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "upgradeStatus": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/cmek:Cmek": {
+            "description": "Customer-managed encryption keys (CMEK) resource for a single cluster\n",
+            "properties": {
+                "additionalRegions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
+                    },
+                    "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/CmekRegion:CmekRegion"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                }
+            },
+            "required": [
+                "regions",
+                "status"
+            ],
+            "inputProperties": {
+                "additionalRegions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
+                    },
+                    "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                },
+                "regions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/CmekRegion:CmekRegion"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                }
+            },
+            "requiredInputs": [
+                "regions"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Cmek resources.\n",
+                "properties": {
+                    "additionalRegions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
+                        },
+                        "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                    },
+                    "regions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/CmekRegion:CmekRegion"
+                        }
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Aggregated status of the cluster's encryption key(s)\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/database:Database": {
+            "description": "Database\n",
+            "properties": {
+                "clusterId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tableCount": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "clusterId",
+                "name",
+                "tableCount"
+            ],
+            "inputProperties": {
+                "clusterId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "clusterId",
+                "name"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Database resources.\n",
+                "properties": {
+                    "clusterId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "tableCount": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade": {
+            "description": "Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.\n",
+            "properties": {
+                "cockroachVersion": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cockroachVersion"
+            ],
+            "inputProperties": {
+                "cockroachVersion": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "cockroachVersion"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering FinalizeVersionUpgrade resources.\n",
+                "properties": {
+                    "cockroachVersion": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/logExportConfig:LogExportConfig": {
+            "description": "Log Export Config Resource\n",
+            "properties": {
+                "authPrincipal": {
+                    "type": "string",
+                    "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/LogExportConfigGroup:LogExportConfigGroup"
+                    }
+                },
+                "logName": {
+                    "type": "string",
+                    "description": "An identifier for the logs in the customer's log sink\n"
+                },
+                "redact": {
+                    "type": "boolean",
+                    "description": "Controls whether logs are redacted before forwarding to customer sinks\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Controls whether all logs are sent to a specific region in the customer sink\n"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`\n"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "userMessage": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "authPrincipal",
+                "createdAt",
+                "logName",
+                "region",
+                "status",
+                "type",
+                "updatedAt",
+                "userMessage"
+            ],
+            "inputProperties": {
+                "authPrincipal": {
+                    "type": "string",
+                    "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                },
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/LogExportConfigGroup:LogExportConfigGroup"
+                    }
+                },
+                "logName": {
+                    "type": "string",
+                    "description": "An identifier for the logs in the customer's log sink\n"
+                },
+                "redact": {
+                    "type": "boolean",
+                    "description": "Controls whether logs are redacted before forwarding to customer sinks\n"
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Controls whether all logs are sent to a specific region in the customer sink\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`\n"
+                }
+            },
+            "requiredInputs": [
+                "authPrincipal",
+                "logName",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering LogExportConfig resources.\n",
+                "properties": {
+                    "authPrincipal": {
+                        "type": "string",
+                        "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "groups": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/LogExportConfigGroup:LogExportConfigGroup"
+                        }
+                    },
+                    "logName": {
+                        "type": "string",
+                        "description": "An identifier for the logs in the customer's log sink\n"
+                    },
+                    "redact": {
+                        "type": "boolean",
+                        "description": "Controls whether logs are redacted before forwarding to customer sinks\n"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Controls whether all logs are sent to a specific region in the customer sink\n"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`\n"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "userMessage": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/maintenanceWindow:MaintenanceWindow": {
+            "description": "Maintenance window resource for a cluster.\n",
+            "properties": {
+                "offsetDuration": {
+                    "type": "integer",
+                    "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
+                },
+                "windowDuration": {
+                    "type": "integer",
+                    "description": "The window duration is the duration in seconds that the maintenance window will remain active for after it starts.\n"
+                }
+            },
+            "required": [
+                "offsetDuration",
+                "windowDuration"
+            ],
+            "inputProperties": {
+                "offsetDuration": {
+                    "type": "integer",
+                    "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
+                },
+                "windowDuration": {
+                    "type": "integer",
+                    "description": "The window duration is the duration in seconds that the maintenance window will remain active for after it starts.\n"
+                }
+            },
+            "requiredInputs": [
+                "offsetDuration",
+                "windowDuration"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering MaintenanceWindow resources.\n",
+                "properties": {
+                    "offsetDuration": {
+                        "type": "integer",
+                        "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
+                    },
+                    "windowDuration": {
+                        "type": "integer",
+                        "description": "The window duration is the duration in seconds that the maintenance window will remain active for after it starts.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig": {
+            "description": "Metric Export CloudWatch Config Resource\n",
+            "properties": {
+                "logGroupName": {
+                    "type": "string",
+                    "description": "The customized AWS CloudWatch log group name.\n"
+                },
+                "roleArn": {
+                    "type": "string",
+                    "description": "The IAM role used to upload metric segments to the target AWS account.\n"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "targetRegion": {
+                    "type": "string",
+                    "description": "The specific AWS region that the metrics will be exported to.\n"
+                },
+                "userMessage": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "logGroupName",
+                "roleArn",
+                "status",
+                "targetRegion",
+                "userMessage"
+            ],
+            "inputProperties": {
+                "logGroupName": {
+                    "type": "string",
+                    "description": "The customized AWS CloudWatch log group name.\n"
+                },
+                "roleArn": {
+                    "type": "string",
+                    "description": "The IAM role used to upload metric segments to the target AWS account.\n"
+                },
+                "targetRegion": {
+                    "type": "string",
+                    "description": "The specific AWS region that the metrics will be exported to.\n"
+                }
+            },
+            "requiredInputs": [
+                "roleArn"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.\n",
+                "properties": {
+                    "logGroupName": {
+                        "type": "string",
+                        "description": "The customized AWS CloudWatch log group name.\n"
+                    },
+                    "roleArn": {
+                        "type": "string",
+                        "description": "The IAM role used to upload metric segments to the target AWS account.\n"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "targetRegion": {
+                        "type": "string",
+                        "description": "The specific AWS region that the metrics will be exported to.\n"
+                    },
+                    "userMessage": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig": {
+            "description": "Metric Export Datadog Config Resource\n",
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "A Datadog API key\n",
+                    "secret": true
+                },
+                "site": {
+                    "type": "string",
+                    "description": "The Datadog region to export to\n"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "userMessage": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "apiKey",
+                "site",
+                "status",
+                "userMessage"
+            ],
+            "inputProperties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "A Datadog API key\n",
+                    "secret": true
+                },
+                "site": {
+                    "type": "string",
+                    "description": "The Datadog region to export to\n"
+                }
+            },
+            "requiredInputs": [
+                "apiKey",
+                "site"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering MetricExportDatadogConfig resources.\n",
+                "properties": {
+                    "apiKey": {
+                        "type": "string",
+                        "description": "A Datadog API key\n",
+                        "secret": true
+                    },
+                    "site": {
+                        "type": "string",
+                        "description": "The Datadog region to export to\n"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "userMessage": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/privateEndpointConnection:PrivateEndpointConnection": {
+            "description": "AWS PrivateLink Endpoint Connection\n",
+            "properties": {
+                "cloudProvider": {
+                    "type": "string"
+                },
+                "clusterId": {
+                    "type": "string"
+                },
+                "endpointId": {
+                    "type": "string"
+                },
+                "regionName": {
+                    "type": "string"
+                },
+                "serviceId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cloudProvider",
+                "clusterId",
+                "endpointId",
+                "regionName",
+                "serviceId"
+            ],
+            "inputProperties": {
+                "clusterId": {
+                    "type": "string"
+                },
+                "endpointId": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "clusterId",
+                "endpointId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PrivateEndpointConnection resources.\n",
+                "properties": {
+                    "cloudProvider": {
+                        "type": "string"
+                    },
+                    "clusterId": {
+                        "type": "string"
+                    },
+                    "endpointId": {
+                        "type": "string"
+                    },
+                    "regionName": {
+                        "type": "string"
+                    },
+                    "serviceId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/privateEndpointServices:PrivateEndpointServices": {
+            "description": "PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP)\n",
+            "properties": {
+                "clusterId": {
+                    "type": "string"
+                },
+                "services": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService"
+                    }
+                }
+            },
+            "required": [
+                "clusterId",
+                "services"
+            ],
+            "inputProperties": {
+                "clusterId": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "clusterId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PrivateEndpointServices resources.\n",
+                "properties": {
+                    "clusterId": {
+                        "type": "string"
+                    },
+                    "services": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/sqlUser:SqlUser": {
+            "description": "SQL user and password\n",
+            "properties": {
+                "clusterId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but\nnot saved to Terraform state. The password must be changed via the CockroachDB cloud console.\n",
+                    "secret": true
+                }
+            },
+            "required": [
+                "clusterId",
+                "name"
+            ],
+            "inputProperties": {
+                "clusterId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but\nnot saved to Terraform state. The password must be changed via the CockroachDB cloud console.\n",
+                    "secret": true
+                }
+            },
+            "requiredInputs": [
+                "clusterId",
+                "name"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SqlUser resources.\n",
+                "properties": {
+                    "clusterId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but\nnot saved to Terraform state. The password must be changed via the CockroachDB cloud console.\n",
+                        "secret": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/userRoleGrants:UserRoleGrants": {
+            "description": "Role grants\n",
+            "properties": {
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole"
+                    }
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "roles",
+                "userId"
+            ],
+            "inputProperties": {
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole"
+                    }
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "roles",
+                "userId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering UserRoleGrants resources.\n",
+                "properties": {
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole"
+                        }
+                    },
+                    "userId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "cockroach:index/getClusterCert:getClusterCert": {
+            "description": "TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/\u003ccluster name\u003e-ca.crt` on MacOS or Linux, or `$env:appdata\\CockroachCloud\\certs\\\u003ccluster name\u003e-ca.crt` on Windows. \n\nServerless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\\postgresql\\root.crt` on Windows.\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getClusterCert.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getClusterCert.\n",
+                "properties": {
+                    "cert": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "cert",
+                    "id"
+                ]
+            }
+        },
+        "cockroach:index/getCockroachCluster:getCockroachCluster": {
+            "description": "Cluster Data Source\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getCockroachCluster.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getCockroachCluster.\n",
+                "properties": {
+                    "accountId": {
+                        "type": "string"
+                    },
+                    "cloudProvider": {
+                        "type": "string"
+                    },
+                    "cockroachVersion": {
+                        "type": "string"
+                    },
+                    "creatorId": {
+                        "type": "string"
+                    },
+                    "dedicated": {
+                        "$ref": "#/types/cockroach:index/getCockroachClusterDedicated:getCockroachClusterDedicated"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of cluster\n"
+                    },
+                    "operationStatus": {
+                        "type": "string"
+                    },
+                    "plan": {
+                        "type": "string"
+                    },
+                    "regions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/getCockroachClusterRegion:getCockroachClusterRegion"
+                        }
+                    },
+                    "serverless": {
+                        "$ref": "#/types/cockroach:index/getCockroachClusterServerless:getCockroachClusterServerless"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "upgradeStatus": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "accountId",
+                    "cloudProvider",
+                    "cockroachVersion",
+                    "creatorId",
+                    "dedicated",
+                    "id",
+                    "name",
+                    "operationStatus",
+                    "plan",
+                    "regions",
+                    "serverless",
+                    "state",
+                    "upgradeStatus"
+                ]
+            }
+        },
+        "cockroach:index/getConnectionString:getConnectionString": {
+            "description": "Generic connection string for a given cluster\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getConnectionString.\n",
+                "properties": {
+                    "database": {
+                        "type": "string",
+                        "description": "Database to connect to. Defaults to 'defaultdb'.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    },
+                    "os": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Database user password. Must also include `sql_user`.\n",
+                        "secret": true
+                    },
+                    "sqlUser": {
+                        "type": "string",
+                        "description": "Database username.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getConnectionString.\n",
+                "properties": {
+                    "connectionParams": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "List of individual connection string parameters. Can be used to build nonstandard connection strings.\n"
+                    },
+                    "connectionString": {
+                        "type": "string",
+                        "description": "Fully formatted connection string. Assumes the cluster certificate is stored in the default location.\n"
+                    },
+                    "database": {
+                        "type": "string",
+                        "description": "Database to connect to. Defaults to 'defaultdb'.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    },
+                    "os": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Database user password. Must also include `sql_user`.\n",
+                        "secret": true
+                    },
+                    "sqlUser": {
+                        "type": "string",
+                        "description": "Database username.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "connectionParams",
+                    "connectionString",
+                    "database",
+                    "id",
+                    "os"
+                ]
+            }
+        },
+        "cockroach:index/getOrganization:getOrganization": {
+            "description": "Information about the organization associated with the user's API key\n",
+            "outputs": {
+                "description": "A collection of values returned by getOrganization.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "createdAt",
+                    "id",
+                    "label",
+                    "name"
+                ]
+            }
+        },
+        "cockroach:index/getPersonUser:getPersonUser": {
+            "description": "Information about a person user\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getPersonUser.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email address used to find the User ID.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getPersonUser.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email address used to find the User ID.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "User ID\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email",
+                    "id"
+                ]
+            }
+        }
+    }
+}
