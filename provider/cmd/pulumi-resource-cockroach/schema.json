@@ -10,6 +10,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`cockroach` Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach).",
     "repository": "https://github.com/lbrlabs/pulumi-cockroach",
+    "logoUrl": "https://raw.githubusercontent.com/lbrlabs/pulumi-cockroach/main/assets/logo.png",
     "pluginDownloadURL": "github://api.github.com/lbrlabs",
     "publisher": "lbrlabs",
     "meta": {

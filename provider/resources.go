@@ -58,6 +58,7 @@ func Provider() tfpfbridge.ProviderInfo {
 		Description:       "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
 		Keywords:          []string{"pulumi", "cockroach"},
 		License:           "Apache-2.0",
+		LogoURL:           "https://raw.githubusercontent.com/lbrlabs/pulumi-cockroach/main/assets/logo.png",
 		Homepage:          "https://lbrlabs.com",
 		Repository:        "https://github.com/lbrlabs/pulumi-cockroach",
 		Version:           version.Version,
