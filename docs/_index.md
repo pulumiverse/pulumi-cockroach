@@ -19,14 +19,14 @@ import * as cockroach from "@lbrlabs/pulumi-cockroach";
 const cluster = new cockroach.Cluster("example", {
     cloudProvider: "AWS",
     name: "cockroach-provider-ts",
-    serverless: {
-      spendLimit: 0,
-    },
     regions: [
         {
             name: "us-west-2",
         },
     ],
+    serverless: {
+      spendLimit: 0,
+    },
 });
 ```
 
@@ -40,6 +40,14 @@ cluster = cockroach.Cluster(
     "example",
     cloud_provider="AWS",
     name="cockroach-provider-py",
+    regions=[
+        cockroach.ClusterRegionArgs(
+            name="us-west-2",
+        ),
+    ],
+    serverless=cockroach.ClusterServerlessArgs(
+        spend_limit=0,
+    ),
 )
 ```
 
