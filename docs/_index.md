@@ -17,13 +17,16 @@ The Cockroach provider must be configured with credentials to deploy and update 
 import * as cockroach from "@lbrlabs/pulumi-cockroach";
 
 const cluster = new cockroach.Cluster("example", {
-  cloudProvider: "AWS",
-  name: "cockroach-provider-ts",
-  regions: [
-    {
-      name: "us-west-2",
+    cloudProvider: "AWS",
+    name: "cockroach-provider-ts",
+    serverless: {
+      spendLimit: 0,
     },
-  ],
+    regions: [
+        {
+            name: "us-west-2",
+        },
+    ],
 });
 ```
 
