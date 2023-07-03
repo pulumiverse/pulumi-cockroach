@@ -1,7 +1,7 @@
 {
     "name": "cockroach",
     "displayName": "CockroachDB",
-    "description": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
+    "description": "A Pulumi package for creating and managing CockroachDB cloud resources.",
     "keywords": [
         "pulumi",
         "cockroach"
