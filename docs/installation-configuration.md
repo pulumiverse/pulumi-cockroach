@@ -1,6 +1,6 @@
 ---
-title: Cockroach Installation & Configuration
-meta_desc: Information on how to install the Cockrach provider.
+title: CockroachDB Cloud Installation & Configuration
+meta_desc: Provides an overview on how to configure credentials for the CockroachDB provider.
 layout: package
 ---
 
@@ -25,11 +25,11 @@ Replace the version string with your desired version.
 
 ## Setup
 
-To provision resources with the Pulumi Cockroach provider, you need to have Cockorach credentials. 
+To provision resources with the Pulumi Cockroach provider, you need to have Cockroach credentials. 
 
 ### Set environment variables
 
-Once you have provisioned these credentials, you can set environment variables to provision resources in Cockorach:
+Once you have provisioned these credentials, you can set environment variables to provision resources in Cockroach:
 
 {{< chooser os "linux,macos,windows" >}}
 {{% choosable os linux %}}
