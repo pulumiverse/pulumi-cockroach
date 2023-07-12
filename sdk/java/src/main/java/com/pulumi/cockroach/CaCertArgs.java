@@ -14,6 +14,21 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
     public static final CaCertArgs Empty = new CaCertArgs();
 
     /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+
+    /**
      * X509 certificate in PEM format
      * 
      */
@@ -31,6 +46,7 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
     private CaCertArgs() {}
 
     private CaCertArgs(CaCertArgs $) {
+        this.clusterId = $.clusterId;
         this.x509PemCert = $.x509PemCert;
     }
 
@@ -50,6 +66,27 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
 
         public Builder(CaCertArgs defaults) {
             $ = new CaCertArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**
@@ -74,6 +111,7 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public CaCertArgs build() {
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.x509PemCert = Objects.requireNonNull($.x509PemCert, "expected parameter 'x509PemCert' to be non-null");
             return $;
         }

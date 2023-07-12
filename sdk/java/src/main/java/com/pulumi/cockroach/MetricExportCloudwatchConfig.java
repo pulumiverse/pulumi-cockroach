@@ -20,6 +20,20 @@ import javax.annotation.Nullable;
 @ResourceType(type="cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig")
 public class MetricExportCloudwatchConfig extends com.pulumi.resources.CustomResource {
     /**
+     * Cluster ID
+     * 
+     */
+    @Export(name="clusterId", type=String.class, parameters={})
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+    /**
      * The customized AWS CloudWatch log group name.
      * 
      */

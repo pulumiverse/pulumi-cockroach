@@ -1,7 +1,7 @@
 {
     "name": "cockroach",
     "displayName": "CockroachDB",
-    "description": "A Pulumi package for creating and managing CockroachDB cloud resources.",
+    "description": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
     "keywords": [
         "pulumi",
         "cockroach"
@@ -606,6 +606,10 @@
         "cockroach:index/caCert:CaCert": {
             "description": "Manages client CA certs.\n",
             "properties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "status": {
                     "type": "string",
                     "description": "Status of client CA certs on a cluster\n"
@@ -616,21 +620,31 @@
                 }
             },
             "required": [
+                "clusterId",
                 "status",
                 "x509PemCert"
             ],
             "inputProperties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "x509PemCert": {
                     "type": "string",
                     "description": "X509 certificate in PEM format\n"
                 }
             },
             "requiredInputs": [
+                "clusterId",
                 "x509PemCert"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering CaCert resources.\n",
                 "properties": {
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    },
                     "status": {
                         "type": "string",
                         "description": "Status of client CA certs on a cluster\n"
@@ -651,6 +665,10 @@
                 },
                 "cloudProvider": {
                     "type": "string"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
                 },
                 "cockroachVersion": {
                     "type": "string"
@@ -692,6 +710,7 @@
                 "cloudProvider",
                 "cockroachVersion",
                 "creatorId",
+                "clusterId",
                 "name",
                 "operationStatus",
                 "plan",
@@ -736,6 +755,10 @@
                     },
                     "cloudProvider": {
                         "type": "string"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
                     },
                     "cockroachVersion": {
                         "type": "string"
@@ -785,6 +808,10 @@
                     },
                     "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
                 },
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "regions": {
                     "type": "array",
                     "items": {
@@ -797,6 +824,7 @@
                 }
             },
             "required": [
+                "clusterId",
                 "regions",
                 "status"
             ],
@@ -807,6 +835,10 @@
                         "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
                     },
                     "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
                 },
                 "regions": {
                     "type": "array",
@@ -820,6 +852,7 @@
                 }
             },
             "requiredInputs": [
+                "clusterId",
                 "regions"
             ],
             "stateInputs": {
@@ -831,6 +864,10 @@
                             "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
                         },
                         "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
                     },
                     "regions": {
                         "type": "array",
@@ -895,24 +932,38 @@
         "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade": {
             "description": "Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.\n",
             "properties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "cockroachVersion": {
                     "type": "string"
                 }
             },
             "required": [
-                "cockroachVersion"
+                "cockroachVersion",
+                "clusterId"
             ],
             "inputProperties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "cockroachVersion": {
                     "type": "string"
                 }
             },
             "requiredInputs": [
-                "cockroachVersion"
+                "cockroachVersion",
+                "clusterId"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering FinalizeVersionUpgrade resources.\n",
                 "properties": {
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    },
                     "cockroachVersion": {
                         "type": "string"
                     }
@@ -926,6 +977,10 @@
                 "authPrincipal": {
                     "type": "string",
                     "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
                 },
                 "createdAt": {
                     "type": "string"
@@ -965,6 +1020,7 @@
             "required": [
                 "authPrincipal",
                 "createdAt",
+                "clusterId",
                 "logName",
                 "region",
                 "status",
@@ -976,6 +1032,10 @@
                 "authPrincipal": {
                     "type": "string",
                     "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
                 },
                 "groups": {
                     "type": "array",
@@ -1002,6 +1062,7 @@
             },
             "requiredInputs": [
                 "authPrincipal",
+                "clusterId",
                 "logName",
                 "type"
             ],
@@ -1011,6 +1072,10 @@
                     "authPrincipal": {
                         "type": "string",
                         "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
                     },
                     "createdAt": {
                         "type": "string"
@@ -1053,6 +1118,10 @@
         "cockroach:index/maintenanceWindow:MaintenanceWindow": {
             "description": "Maintenance window resource for a cluster.\n",
             "properties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "offsetDuration": {
                     "type": "integer",
                     "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
@@ -1063,10 +1132,15 @@
                 }
             },
             "required": [
+                "clusterId",
                 "offsetDuration",
                 "windowDuration"
             ],
             "inputProperties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "offsetDuration": {
                     "type": "integer",
                     "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
@@ -1077,12 +1151,17 @@
                 }
             },
             "requiredInputs": [
+                "clusterId",
                 "offsetDuration",
                 "windowDuration"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering MaintenanceWindow resources.\n",
                 "properties": {
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    },
                     "offsetDuration": {
                         "type": "integer",
                         "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
@@ -1098,6 +1177,10 @@
         "cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig": {
             "description": "Metric Export CloudWatch Config Resource\n",
             "properties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "logGroupName": {
                     "type": "string",
                     "description": "The customized AWS CloudWatch log group name.\n"
@@ -1118,6 +1201,7 @@
                 }
             },
             "required": [
+                "clusterId",
                 "logGroupName",
                 "roleArn",
                 "status",
@@ -1125,6 +1209,10 @@
                 "userMessage"
             ],
             "inputProperties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "logGroupName": {
                     "type": "string",
                     "description": "The customized AWS CloudWatch log group name.\n"
@@ -1139,11 +1227,16 @@
                 }
             },
             "requiredInputs": [
+                "clusterId",
                 "roleArn"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.\n",
                 "properties": {
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
+                    },
                     "logGroupName": {
                         "type": "string",
                         "description": "The customized AWS CloudWatch log group name.\n"
@@ -1174,6 +1267,10 @@
                     "description": "A Datadog API key\n",
                     "secret": true
                 },
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "site": {
                     "type": "string",
                     "description": "The Datadog region to export to\n"
@@ -1187,6 +1284,7 @@
             },
             "required": [
                 "apiKey",
+                "clusterId",
                 "site",
                 "status",
                 "userMessage"
@@ -1197,6 +1295,10 @@
                     "description": "A Datadog API key\n",
                     "secret": true
                 },
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID\n"
+                },
                 "site": {
                     "type": "string",
                     "description": "The Datadog region to export to\n"
@@ -1204,6 +1306,7 @@
             },
             "requiredInputs": [
                 "apiKey",
+                "clusterId",
                 "site"
             ],
             "stateInputs": {
@@ -1213,6 +1316,10 @@
                         "type": "string",
                         "description": "A Datadog API key\n",
                         "secret": true
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID\n"
                     },
                     "site": {
                         "type": "string",

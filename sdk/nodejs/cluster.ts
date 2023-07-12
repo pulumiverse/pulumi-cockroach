@@ -39,6 +39,10 @@ export class Cluster extends pulumi.CustomResource {
 
     public /*out*/ readonly accountId!: pulumi.Output<string>;
     public readonly cloudProvider!: pulumi.Output<string>;
+    /**
+     * The ID of this resource.
+     */
+    public /*out*/ readonly clusterId!: pulumi.Output<string>;
     public readonly cockroachVersion!: pulumi.Output<string>;
     public /*out*/ readonly creatorId!: pulumi.Output<string>;
     public readonly dedicated!: pulumi.Output<outputs.ClusterDedicated | undefined>;
@@ -68,6 +72,7 @@ export class Cluster extends pulumi.CustomResource {
             const state = argsOrState as ClusterState | undefined;
             resourceInputs["accountId"] = state ? state.accountId : undefined;
             resourceInputs["cloudProvider"] = state ? state.cloudProvider : undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["cockroachVersion"] = state ? state.cockroachVersion : undefined;
             resourceInputs["creatorId"] = state ? state.creatorId : undefined;
             resourceInputs["dedicated"] = state ? state.dedicated : undefined;
@@ -96,6 +101,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["regions"] = args ? args.regions : undefined;
             resourceInputs["serverless"] = args ? args.serverless : undefined;
             resourceInputs["accountId"] = undefined /*out*/;
+            resourceInputs["clusterId"] = undefined /*out*/;
             resourceInputs["creatorId"] = undefined /*out*/;
             resourceInputs["operationStatus"] = undefined /*out*/;
             resourceInputs["plan"] = undefined /*out*/;
@@ -113,6 +119,10 @@ export class Cluster extends pulumi.CustomResource {
 export interface ClusterState {
     accountId?: pulumi.Input<string>;
     cloudProvider?: pulumi.Input<string>;
+    /**
+     * The ID of this resource.
+     */
+    clusterId?: pulumi.Input<string>;
     cockroachVersion?: pulumi.Input<string>;
     creatorId?: pulumi.Input<string>;
     dedicated?: pulumi.Input<inputs.ClusterDedicated>;

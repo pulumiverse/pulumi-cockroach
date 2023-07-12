@@ -16,6 +16,21 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
     public static final MetricExportCloudwatchConfigState Empty = new MetricExportCloudwatchConfigState();
 
     /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
+    /**
      * The customized AWS CloudWatch log group name.
      * 
      */
@@ -77,6 +92,7 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
     private MetricExportCloudwatchConfigState() {}
 
     private MetricExportCloudwatchConfigState(MetricExportCloudwatchConfigState $) {
+        this.clusterId = $.clusterId;
         this.logGroupName = $.logGroupName;
         this.roleArn = $.roleArn;
         this.status = $.status;
@@ -100,6 +116,27 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
 
         public Builder(MetricExportCloudwatchConfigState defaults) {
             $ = new MetricExportCloudwatchConfigState(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**

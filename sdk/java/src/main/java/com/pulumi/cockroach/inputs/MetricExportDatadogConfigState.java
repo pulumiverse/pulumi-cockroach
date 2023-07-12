@@ -31,6 +31,21 @@ public final class MetricExportDatadogConfigState extends com.pulumi.resources.R
     }
 
     /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
+    /**
      * The Datadog region to export to
      * 
      */
@@ -63,6 +78,7 @@ public final class MetricExportDatadogConfigState extends com.pulumi.resources.R
 
     private MetricExportDatadogConfigState(MetricExportDatadogConfigState $) {
         this.apiKey = $.apiKey;
+        this.clusterId = $.clusterId;
         this.site = $.site;
         this.status = $.status;
         this.userMessage = $.userMessage;
@@ -105,6 +121,27 @@ public final class MetricExportDatadogConfigState extends com.pulumi.resources.R
          */
         public Builder apiKey(String apiKey) {
             return apiKey(Output.of(apiKey));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**

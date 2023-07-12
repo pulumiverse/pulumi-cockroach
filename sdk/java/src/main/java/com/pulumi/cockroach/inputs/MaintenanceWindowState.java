@@ -6,6 +6,7 @@ package com.pulumi.cockroach.inputs;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Integer;
+import java.lang.String;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -14,6 +15,21 @@ import javax.annotation.Nullable;
 public final class MaintenanceWindowState extends com.pulumi.resources.ResourceArgs {
 
     public static final MaintenanceWindowState Empty = new MaintenanceWindowState();
+
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
 
     /**
      * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
@@ -48,6 +64,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
     private MaintenanceWindowState() {}
 
     private MaintenanceWindowState(MaintenanceWindowState $) {
+        this.clusterId = $.clusterId;
         this.offsetDuration = $.offsetDuration;
         this.windowDuration = $.windowDuration;
     }
@@ -68,6 +85,27 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
 
         public Builder(MaintenanceWindowState defaults) {
             $ = new MaintenanceWindowState(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**

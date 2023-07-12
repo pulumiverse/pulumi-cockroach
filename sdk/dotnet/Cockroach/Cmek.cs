@@ -22,6 +22,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("additionalRegions")]
         public Output<ImmutableArray<Outputs.CmekAdditionalRegion>> AdditionalRegions { get; private set; } = null!;
 
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
         [Output("regions")]
         public Output<ImmutableArray<Outputs.CmekRegion>> Regions { get; private set; } = null!;
 
@@ -90,6 +96,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
             set => _additionalRegions = value;
         }
 
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
         [Input("regions", required: true)]
         private InputList<Inputs.CmekRegionArgs>? _regions;
         public InputList<Inputs.CmekRegionArgs> Regions
@@ -123,6 +135,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
             get => _additionalRegions ?? (_additionalRegions = new InputList<Inputs.CmekAdditionalRegionGetArgs>());
             set => _additionalRegions = value;
         }
+
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
 
         [Input("regions")]
         private InputList<Inputs.CmekRegionGetArgs>? _regions;

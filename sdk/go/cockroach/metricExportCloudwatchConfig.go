@@ -15,6 +15,8 @@ import (
 type MetricExportCloudwatchConfig struct {
 	pulumi.CustomResourceState
 
+	// Cluster ID
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// The customized AWS CloudWatch log group name.
 	LogGroupName pulumi.StringOutput `pulumi:"logGroupName"`
 	// The IAM role used to upload metric segments to the target AWS account.
@@ -32,6 +34,9 @@ func NewMetricExportCloudwatchConfig(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.ClusterId == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterId'")
+	}
 	if args.RoleArn == nil {
 		return nil, errors.New("invalid value for required argument 'RoleArn'")
 	}
@@ -58,6 +63,8 @@ func GetMetricExportCloudwatchConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.
 type metricExportCloudwatchConfigState struct {
+	// Cluster ID
+	ClusterId *string `pulumi:"clusterId"`
 	// The customized AWS CloudWatch log group name.
 	LogGroupName *string `pulumi:"logGroupName"`
 	// The IAM role used to upload metric segments to the target AWS account.
@@ -69,6 +76,8 @@ type metricExportCloudwatchConfigState struct {
 }
 
 type MetricExportCloudwatchConfigState struct {
+	// Cluster ID
+	ClusterId pulumi.StringPtrInput
 	// The customized AWS CloudWatch log group name.
 	LogGroupName pulumi.StringPtrInput
 	// The IAM role used to upload metric segments to the target AWS account.
@@ -84,6 +93,8 @@ func (MetricExportCloudwatchConfigState) ElementType() reflect.Type {
 }
 
 type metricExportCloudwatchConfigArgs struct {
+	// Cluster ID
+	ClusterId string `pulumi:"clusterId"`
 	// The customized AWS CloudWatch log group name.
 	LogGroupName *string `pulumi:"logGroupName"`
 	// The IAM role used to upload metric segments to the target AWS account.
@@ -94,6 +105,8 @@ type metricExportCloudwatchConfigArgs struct {
 
 // The set of arguments for constructing a MetricExportCloudwatchConfig resource.
 type MetricExportCloudwatchConfigArgs struct {
+	// Cluster ID
+	ClusterId pulumi.StringInput
 	// The customized AWS CloudWatch log group name.
 	LogGroupName pulumi.StringPtrInput
 	// The IAM role used to upload metric segments to the target AWS account.
@@ -187,6 +200,11 @@ func (o MetricExportCloudwatchConfigOutput) ToMetricExportCloudwatchConfigOutput
 
 func (o MetricExportCloudwatchConfigOutput) ToMetricExportCloudwatchConfigOutputWithContext(ctx context.Context) MetricExportCloudwatchConfigOutput {
 	return o
+}
+
+// Cluster ID
+func (o MetricExportCloudwatchConfigOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *MetricExportCloudwatchConfig) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 // The customized AWS CloudWatch log group name.

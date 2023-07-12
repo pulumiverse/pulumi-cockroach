@@ -17,6 +17,8 @@ type MetricExportDatadogConfig struct {
 
 	// A Datadog API key
 	ApiKey pulumi.StringOutput `pulumi:"apiKey"`
+	// Cluster ID
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// The Datadog region to export to
 	Site        pulumi.StringOutput `pulumi:"site"`
 	Status      pulumi.StringOutput `pulumi:"status"`
@@ -32,6 +34,9 @@ func NewMetricExportDatadogConfig(ctx *pulumi.Context,
 
 	if args.ApiKey == nil {
 		return nil, errors.New("invalid value for required argument 'ApiKey'")
+	}
+	if args.ClusterId == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
 	if args.Site == nil {
 		return nil, errors.New("invalid value for required argument 'Site'")
@@ -68,6 +73,8 @@ func GetMetricExportDatadogConfig(ctx *pulumi.Context,
 type metricExportDatadogConfigState struct {
 	// A Datadog API key
 	ApiKey *string `pulumi:"apiKey"`
+	// Cluster ID
+	ClusterId *string `pulumi:"clusterId"`
 	// The Datadog region to export to
 	Site        *string `pulumi:"site"`
 	Status      *string `pulumi:"status"`
@@ -77,6 +84,8 @@ type metricExportDatadogConfigState struct {
 type MetricExportDatadogConfigState struct {
 	// A Datadog API key
 	ApiKey pulumi.StringPtrInput
+	// Cluster ID
+	ClusterId pulumi.StringPtrInput
 	// The Datadog region to export to
 	Site        pulumi.StringPtrInput
 	Status      pulumi.StringPtrInput
@@ -90,6 +99,8 @@ func (MetricExportDatadogConfigState) ElementType() reflect.Type {
 type metricExportDatadogConfigArgs struct {
 	// A Datadog API key
 	ApiKey string `pulumi:"apiKey"`
+	// Cluster ID
+	ClusterId string `pulumi:"clusterId"`
 	// The Datadog region to export to
 	Site string `pulumi:"site"`
 }
@@ -98,6 +109,8 @@ type metricExportDatadogConfigArgs struct {
 type MetricExportDatadogConfigArgs struct {
 	// A Datadog API key
 	ApiKey pulumi.StringInput
+	// Cluster ID
+	ClusterId pulumi.StringInput
 	// The Datadog region to export to
 	Site pulumi.StringInput
 }
@@ -192,6 +205,11 @@ func (o MetricExportDatadogConfigOutput) ToMetricExportDatadogConfigOutputWithCo
 // A Datadog API key
 func (o MetricExportDatadogConfigOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.ApiKey }).(pulumi.StringOutput)
+}
+
+// Cluster ID
+func (o MetricExportDatadogConfigOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 // The Datadog region to export to

@@ -17,6 +17,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public partial class MetricExportCloudwatchConfig : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
         /// The customized AWS CloudWatch log group name.
         /// </summary>
         [Output("logGroupName")]
@@ -88,6 +94,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class MetricExportCloudwatchConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
+        /// <summary>
         /// The customized AWS CloudWatch log group name.
         /// </summary>
         [Input("logGroupName")]
@@ -113,6 +125,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class MetricExportCloudwatchConfigState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
         /// <summary>
         /// The customized AWS CloudWatch log group name.
         /// </summary>

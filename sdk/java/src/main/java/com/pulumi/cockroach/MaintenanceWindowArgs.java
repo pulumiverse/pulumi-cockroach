@@ -6,12 +6,28 @@ package com.pulumi.cockroach;
 import com.pulumi.core.Output;
 import com.pulumi.core.annotations.Import;
 import java.lang.Integer;
+import java.lang.String;
 import java.util.Objects;
 
 
 public final class MaintenanceWindowArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final MaintenanceWindowArgs Empty = new MaintenanceWindowArgs();
+
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
 
     /**
      * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
@@ -46,6 +62,7 @@ public final class MaintenanceWindowArgs extends com.pulumi.resources.ResourceAr
     private MaintenanceWindowArgs() {}
 
     private MaintenanceWindowArgs(MaintenanceWindowArgs $) {
+        this.clusterId = $.clusterId;
         this.offsetDuration = $.offsetDuration;
         this.windowDuration = $.windowDuration;
     }
@@ -66,6 +83,27 @@ public final class MaintenanceWindowArgs extends com.pulumi.resources.ResourceAr
 
         public Builder(MaintenanceWindowArgs defaults) {
             $ = new MaintenanceWindowArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**
@@ -111,6 +149,7 @@ public final class MaintenanceWindowArgs extends com.pulumi.resources.ResourceAr
         }
 
         public MaintenanceWindowArgs build() {
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.offsetDuration = Objects.requireNonNull($.offsetDuration, "expected parameter 'offsetDuration' to be non-null");
             $.windowDuration = Objects.requireNonNull($.windowDuration, "expected parameter 'windowDuration' to be non-null");
             return $;

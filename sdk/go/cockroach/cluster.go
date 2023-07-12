@@ -15,8 +15,10 @@ import (
 type Cluster struct {
 	pulumi.CustomResourceState
 
-	AccountId        pulumi.StringOutput       `pulumi:"accountId"`
-	CloudProvider    pulumi.StringOutput       `pulumi:"cloudProvider"`
+	AccountId     pulumi.StringOutput `pulumi:"accountId"`
+	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
+	// The ID of this resource.
+	ClusterId        pulumi.StringOutput       `pulumi:"clusterId"`
 	CockroachVersion pulumi.StringOutput       `pulumi:"cockroachVersion"`
 	CreatorId        pulumi.StringOutput       `pulumi:"creatorId"`
 	Dedicated        ClusterDedicatedPtrOutput `pulumi:"dedicated"`
@@ -69,8 +71,10 @@ func GetCluster(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cluster resources.
 type clusterState struct {
-	AccountId        *string           `pulumi:"accountId"`
-	CloudProvider    *string           `pulumi:"cloudProvider"`
+	AccountId     *string `pulumi:"accountId"`
+	CloudProvider *string `pulumi:"cloudProvider"`
+	// The ID of this resource.
+	ClusterId        *string           `pulumi:"clusterId"`
 	CockroachVersion *string           `pulumi:"cockroachVersion"`
 	CreatorId        *string           `pulumi:"creatorId"`
 	Dedicated        *ClusterDedicated `pulumi:"dedicated"`
@@ -85,8 +89,10 @@ type clusterState struct {
 }
 
 type ClusterState struct {
-	AccountId        pulumi.StringPtrInput
-	CloudProvider    pulumi.StringPtrInput
+	AccountId     pulumi.StringPtrInput
+	CloudProvider pulumi.StringPtrInput
+	// The ID of this resource.
+	ClusterId        pulumi.StringPtrInput
 	CockroachVersion pulumi.StringPtrInput
 	CreatorId        pulumi.StringPtrInput
 	Dedicated        ClusterDedicatedPtrInput
@@ -218,6 +224,11 @@ func (o ClusterOutput) AccountId() pulumi.StringOutput {
 
 func (o ClusterOutput) CloudProvider() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CloudProvider }).(pulumi.StringOutput)
+}
+
+// The ID of this resource.
+func (o ClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 func (o ClusterOutput) CockroachVersion() pulumi.StringOutput {

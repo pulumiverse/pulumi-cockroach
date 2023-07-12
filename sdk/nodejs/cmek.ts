@@ -41,6 +41,10 @@ export class Cmek extends pulumi.CustomResource {
      * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
      */
     public readonly additionalRegions!: pulumi.Output<outputs.CmekAdditionalRegion[] | undefined>;
+    /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
     public readonly regions!: pulumi.Output<outputs.CmekRegion[]>;
     /**
      * Aggregated status of the cluster's encryption key(s)
@@ -61,14 +65,19 @@ export class Cmek extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as CmekState | undefined;
             resourceInputs["additionalRegions"] = state ? state.additionalRegions : undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["regions"] = state ? state.regions : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
         } else {
             const args = argsOrState as CmekArgs | undefined;
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.regions === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'regions'");
             }
             resourceInputs["additionalRegions"] = args ? args.additionalRegions : undefined;
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["regions"] = args ? args.regions : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
         }
@@ -85,6 +94,10 @@ export interface CmekState {
      * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
      */
     additionalRegions?: pulumi.Input<pulumi.Input<inputs.CmekAdditionalRegion>[]>;
+    /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
     regions?: pulumi.Input<pulumi.Input<inputs.CmekRegion>[]>;
     /**
      * Aggregated status of the cluster's encryption key(s)
@@ -100,6 +113,10 @@ export interface CmekArgs {
      * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
      */
     additionalRegions?: pulumi.Input<pulumi.Input<inputs.CmekAdditionalRegion>[]>;
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     regions: pulumi.Input<pulumi.Input<inputs.CmekRegion>[]>;
     /**
      * Aggregated status of the cluster's encryption key(s)

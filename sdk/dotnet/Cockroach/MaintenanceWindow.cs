@@ -17,6 +17,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public partial class MaintenanceWindow : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
         /// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         /// </summary>
         [Output("offsetDuration")]
@@ -76,6 +82,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class MaintenanceWindowArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
+        /// <summary>
         /// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         /// </summary>
         [Input("offsetDuration", required: true)]
@@ -95,6 +107,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class MaintenanceWindowState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
         /// <summary>
         /// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         /// </summary>

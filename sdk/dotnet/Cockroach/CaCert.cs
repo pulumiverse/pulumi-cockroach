@@ -17,6 +17,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public partial class CaCert : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
         /// Status of client CA certs on a cluster
         /// </summary>
         [Output("status")]
@@ -76,6 +82,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class CaCertArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
+        /// <summary>
         /// X509 certificate in PEM format
         /// </summary>
         [Input("x509PemCert", required: true)]
@@ -89,6 +101,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class CaCertState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
         /// <summary>
         /// Status of client CA certs on a cluster
         /// </summary>

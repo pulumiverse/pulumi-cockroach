@@ -33,6 +33,21 @@ public final class CmekState extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.additionalRegions);
     }
 
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
     @Import(name="regions")
     private @Nullable Output<List<CmekRegionArgs>> regions;
 
@@ -59,6 +74,7 @@ public final class CmekState extends com.pulumi.resources.ResourceArgs {
 
     private CmekState(CmekState $) {
         this.additionalRegions = $.additionalRegions;
+        this.clusterId = $.clusterId;
         this.regions = $.regions;
         this.status = $.status;
     }
@@ -110,6 +126,27 @@ public final class CmekState extends com.pulumi.resources.ResourceArgs {
          */
         public Builder additionalRegions(CmekAdditionalRegionArgs... additionalRegions) {
             return additionalRegions(List.of(additionalRegions));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         public Builder regions(@Nullable Output<List<CmekRegionArgs>> regions) {

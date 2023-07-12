@@ -37,6 +37,20 @@ public class Cmek extends com.pulumi.resources.CustomResource {
     public Output<Optional<List<CmekAdditionalRegion>>> additionalRegions() {
         return Codegen.optional(this.additionalRegions);
     }
+    /**
+     * Cluster ID
+     * 
+     */
+    @Export(name="clusterId", type=String.class, parameters={})
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
     @Export(name="regions", type=List.class, parameters={CmekRegion.class})
     private Output<List<CmekRegion>> regions;
 
