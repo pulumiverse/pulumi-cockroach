@@ -14,15 +14,30 @@ __all__ = ['MaintenanceWindowArgs', 'MaintenanceWindow']
 @pulumi.input_type
 class MaintenanceWindowArgs:
     def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
                  offset_duration: pulumi.Input[int],
                  window_duration: pulumi.Input[int]):
         """
         The set of arguments for constructing a MaintenanceWindow resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[int] offset_duration: The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         :param pulumi.Input[int] window_duration: The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
         """
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "offset_duration", offset_duration)
         pulumi.set(__self__, "window_duration", window_duration)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="offsetDuration")
@@ -52,17 +67,33 @@ class MaintenanceWindowArgs:
 @pulumi.input_type
 class _MaintenanceWindowState:
     def __init__(__self__, *,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  offset_duration: Optional[pulumi.Input[int]] = None,
                  window_duration: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering MaintenanceWindow resources.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[int] offset_duration: The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         :param pulumi.Input[int] window_duration: The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
         """
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if offset_duration is not None:
             pulumi.set(__self__, "offset_duration", offset_duration)
         if window_duration is not None:
             pulumi.set(__self__, "window_duration", window_duration)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="offsetDuration")
@@ -94,6 +125,7 @@ class MaintenanceWindow(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  offset_duration: Optional[pulumi.Input[int]] = None,
                  window_duration: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -102,6 +134,7 @@ class MaintenanceWindow(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[int] offset_duration: The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         :param pulumi.Input[int] window_duration: The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
         """
@@ -129,6 +162,7 @@ class MaintenanceWindow(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  offset_duration: Optional[pulumi.Input[int]] = None,
                  window_duration: Optional[pulumi.Input[int]] = None,
                  __props__=None):
@@ -140,6 +174,9 @@ class MaintenanceWindow(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = MaintenanceWindowArgs.__new__(MaintenanceWindowArgs)
 
+            if cluster_id is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_id'")
+            __props__.__dict__["cluster_id"] = cluster_id
             if offset_duration is None and not opts.urn:
                 raise TypeError("Missing required property 'offset_duration'")
             __props__.__dict__["offset_duration"] = offset_duration
@@ -156,6 +193,7 @@ class MaintenanceWindow(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             offset_duration: Optional[pulumi.Input[int]] = None,
             window_duration: Optional[pulumi.Input[int]] = None) -> 'MaintenanceWindow':
         """
@@ -165,6 +203,7 @@ class MaintenanceWindow(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[int] offset_duration: The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
         :param pulumi.Input[int] window_duration: The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
         """
@@ -172,9 +211,18 @@ class MaintenanceWindow(pulumi.CustomResource):
 
         __props__ = _MaintenanceWindowState.__new__(_MaintenanceWindowState)
 
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["offset_duration"] = offset_duration
         __props__.__dict__["window_duration"] = window_duration
         return MaintenanceWindow(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="offsetDuration")

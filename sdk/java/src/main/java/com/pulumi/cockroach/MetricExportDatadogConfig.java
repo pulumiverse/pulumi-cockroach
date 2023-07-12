@@ -35,6 +35,20 @@ public class MetricExportDatadogConfig extends com.pulumi.resources.CustomResour
         return this.apiKey;
     }
     /**
+     * Cluster ID
+     * 
+     */
+    @Export(name="clusterId", type=String.class, parameters={})
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+    /**
      * The Datadog region to export to
      * 
      */

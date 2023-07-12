@@ -66,15 +66,79 @@ func Provider() tfpfbridge.ProviderInfo {
 		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"cockroach_allow_list":                      {Tok: cockroachResource(cockroachMod, "AllowList")},
-			"cockroach_client_ca_cert":                  {Tok: cockroachResource(cockroachMod, "CaCert")},
-			"cockroach_cluster":                         {Tok: cockroachResource(cockroachMod, "Cluster")},
-			"cockroach_cmek":                            {Tok: cockroachResource(cockroachMod, "Cmek")},
+			"cockroach_client_ca_cert":                  {
+				Tok: cockroachResource(cockroachMod, "CaCert"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
+			"cockroach_cluster":                         {
+				Tok: cockroachResource(cockroachMod, "Cluster"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
+			"cockroach_cmek":                            {
+				Tok: cockroachResource(cockroachMod, "Cmek"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
 			"cockroach_database":                        {Tok: cockroachResource(cockroachMod, "Database")},
-			"cockroach_finalize_version_upgrade":        {Tok: cockroachResource(cockroachMod, "FinalizeVersionUpgrade")},
-			"cockroach_log_export_config":               {Tok: cockroachResource(cockroachMod, "LogExportConfig")},
-			"cockroach_maintenance_window":              {Tok: cockroachResource(cockroachMod, "MaintenanceWindow")},
-			"cockroach_metric_export_cloudwatch_config": {Tok: cockroachResource(cockroachMod, "MetricExportCloudwatchConfig")},
-			"cockroach_metric_export_datadog_config":    {Tok: cockroachResource(cockroachMod, "MetricExportDatadogConfig")},
+			"cockroach_finalize_version_upgrade":        {
+				Tok: cockroachResource(cockroachMod, "FinalizeVersionUpgrade"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
+			"cockroach_log_export_config":               {
+				Tok: cockroachResource(cockroachMod, "LogExportConfig"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
+			"cockroach_maintenance_window":              {
+				Tok: cockroachResource(cockroachMod, "MaintenanceWindow"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
+			"cockroach_metric_export_cloudwatch_config": {
+				Tok: cockroachResource(cockroachMod, "MetricExportCloudwatchConfig"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
+			"cockroach_metric_export_datadog_config":    {
+				Tok: cockroachResource(cockroachMod, "MetricExportDatadogConfig"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+			},
 			"cockroach_private_endpoint_connection":     {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
 			"cockroach_private_endpoint_services":       {Tok: cockroachResource(cockroachMod, "PrivateEndpointServices")},
 			"cockroach_sql_user":                        {Tok: cockroachResource(cockroachMod, "SqlUser")},

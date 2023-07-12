@@ -16,6 +16,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     [CockroachResourceType("cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade")]
     public partial class FinalizeVersionUpgrade : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
         [Output("cockroachVersion")]
         public Output<string> CockroachVersion { get; private set; } = null!;
 
@@ -66,6 +72,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class FinalizeVersionUpgradeArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
         [Input("cockroachVersion", required: true)]
         public Input<string> CockroachVersion { get; set; } = null!;
 
@@ -77,6 +89,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class FinalizeVersionUpgradeState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
         [Input("cockroachVersion")]
         public Input<string>? CockroachVersion { get; set; }
 

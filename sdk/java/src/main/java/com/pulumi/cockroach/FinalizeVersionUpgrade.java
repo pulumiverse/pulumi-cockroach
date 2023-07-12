@@ -19,6 +19,20 @@ import javax.annotation.Nullable;
  */
 @ResourceType(type="cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade")
 public class FinalizeVersionUpgrade extends com.pulumi.resources.CustomResource {
+    /**
+     * Cluster ID
+     * 
+     */
+    @Export(name="clusterId", type=String.class, parameters={})
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
     @Export(name="cockroachVersion", type=String.class, parameters={})
     private Output<String> cockroachVersion;
 

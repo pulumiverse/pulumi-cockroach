@@ -14,20 +14,35 @@ __all__ = ['MetricExportCloudwatchConfigArgs', 'MetricExportCloudwatchConfig']
 @pulumi.input_type
 class MetricExportCloudwatchConfigArgs:
     def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
                  role_arn: pulumi.Input[str],
                  log_group_name: Optional[pulumi.Input[str]] = None,
                  target_region: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a MetricExportCloudwatchConfig resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
         """
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "role_arn", role_arn)
         if log_group_name is not None:
             pulumi.set(__self__, "log_group_name", log_group_name)
         if target_region is not None:
             pulumi.set(__self__, "target_region", target_region)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="roleArn")
@@ -69,6 +84,7 @@ class MetricExportCloudwatchConfigArgs:
 @pulumi.input_type
 class _MetricExportCloudwatchConfigState:
     def __init__(__self__, *,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  log_group_name: Optional[pulumi.Input[str]] = None,
                  role_arn: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
@@ -76,10 +92,13 @@ class _MetricExportCloudwatchConfigState:
                  user_message: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
         """
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if log_group_name is not None:
             pulumi.set(__self__, "log_group_name", log_group_name)
         if role_arn is not None:
@@ -90,6 +109,18 @@ class _MetricExportCloudwatchConfigState:
             pulumi.set(__self__, "target_region", target_region)
         if user_message is not None:
             pulumi.set(__self__, "user_message", user_message)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="logGroupName")
@@ -151,6 +182,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  log_group_name: Optional[pulumi.Input[str]] = None,
                  role_arn: Optional[pulumi.Input[str]] = None,
                  target_region: Optional[pulumi.Input[str]] = None,
@@ -160,6 +192,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
@@ -188,6 +221,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  log_group_name: Optional[pulumi.Input[str]] = None,
                  role_arn: Optional[pulumi.Input[str]] = None,
                  target_region: Optional[pulumi.Input[str]] = None,
@@ -200,6 +234,9 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = MetricExportCloudwatchConfigArgs.__new__(MetricExportCloudwatchConfigArgs)
 
+            if cluster_id is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_id'")
+            __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["log_group_name"] = log_group_name
             if role_arn is None and not opts.urn:
                 raise TypeError("Missing required property 'role_arn'")
@@ -217,6 +254,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             log_group_name: Optional[pulumi.Input[str]] = None,
             role_arn: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
@@ -229,6 +267,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
@@ -237,12 +276,21 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
 
         __props__ = _MetricExportCloudwatchConfigState.__new__(_MetricExportCloudwatchConfigState)
 
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["log_group_name"] = log_group_name
         __props__.__dict__["role_arn"] = role_arn
         __props__.__dict__["status"] = status
         __props__.__dict__["target_region"] = target_region
         __props__.__dict__["user_message"] = user_message
         return MetricExportCloudwatchConfig(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="logGroupName")

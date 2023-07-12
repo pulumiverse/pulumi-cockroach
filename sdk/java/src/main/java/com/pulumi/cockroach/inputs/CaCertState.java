@@ -16,6 +16,21 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
     public static final CaCertState Empty = new CaCertState();
 
     /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
+    /**
      * Status of client CA certs on a cluster
      * 
      */
@@ -48,6 +63,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
     private CaCertState() {}
 
     private CaCertState(CaCertState $) {
+        this.clusterId = $.clusterId;
         this.status = $.status;
         this.x509PemCert = $.x509PemCert;
     }
@@ -68,6 +84,27 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
 
         public Builder(CaCertState defaults) {
             $ = new CaCertState(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**

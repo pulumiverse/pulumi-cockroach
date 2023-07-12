@@ -36,6 +36,10 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
     }
 
     /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
+    /**
      * The customized AWS CloudWatch log group name.
      */
     public readonly logGroupName!: pulumi.Output<string>;
@@ -63,6 +67,7 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as MetricExportCloudwatchConfigState | undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["logGroupName"] = state ? state.logGroupName : undefined;
             resourceInputs["roleArn"] = state ? state.roleArn : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -70,9 +75,13 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
             resourceInputs["userMessage"] = state ? state.userMessage : undefined;
         } else {
             const args = argsOrState as MetricExportCloudwatchConfigArgs | undefined;
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.roleArn === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'roleArn'");
             }
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["logGroupName"] = args ? args.logGroupName : undefined;
             resourceInputs["roleArn"] = args ? args.roleArn : undefined;
             resourceInputs["targetRegion"] = args ? args.targetRegion : undefined;
@@ -88,6 +97,10 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
  * Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.
  */
 export interface MetricExportCloudwatchConfigState {
+    /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
     /**
      * The customized AWS CloudWatch log group name.
      */
@@ -108,6 +121,10 @@ export interface MetricExportCloudwatchConfigState {
  * The set of arguments for constructing a MetricExportCloudwatchConfig resource.
  */
 export interface MetricExportCloudwatchConfigArgs {
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     /**
      * The customized AWS CloudWatch log group name.
      */

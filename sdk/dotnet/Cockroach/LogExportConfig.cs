@@ -22,6 +22,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("authPrincipal")]
         public Output<string> AuthPrincipal { get; private set; } = null!;
 
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
         [Output("createdAt")]
         public Output<string> CreatedAt { get; private set; } = null!;
 
@@ -114,6 +120,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Input("authPrincipal", required: true)]
         public Input<string> AuthPrincipal { get; set; } = null!;
 
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
         [Input("groups")]
         private InputList<Inputs.LogExportConfigGroupArgs>? _groups;
         public InputList<Inputs.LogExportConfigGroupArgs> Groups
@@ -159,6 +171,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         /// </summary>
         [Input("authPrincipal")]
         public Input<string>? AuthPrincipal { get; set; }
+
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
 
         [Input("createdAt")]
         public Input<string>? CreatedAt { get; set; }

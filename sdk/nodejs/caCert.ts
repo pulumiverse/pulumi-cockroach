@@ -36,6 +36,10 @@ export class CaCert extends pulumi.CustomResource {
     }
 
     /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
+    /**
      * Status of client CA certs on a cluster
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
@@ -57,13 +61,18 @@ export class CaCert extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CaCertState | undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["x509PemCert"] = state ? state.x509PemCert : undefined;
         } else {
             const args = argsOrState as CaCertArgs | undefined;
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.x509PemCert === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'x509PemCert'");
             }
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["x509PemCert"] = args ? args.x509PemCert : undefined;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -76,6 +85,10 @@ export class CaCert extends pulumi.CustomResource {
  * Input properties used for looking up and filtering CaCert resources.
  */
 export interface CaCertState {
+    /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
     /**
      * Status of client CA certs on a cluster
      */
@@ -90,6 +103,10 @@ export interface CaCertState {
  * The set of arguments for constructing a CaCert resource.
  */
 export interface CaCertArgs {
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     /**
      * X509 certificate in PEM format
      */

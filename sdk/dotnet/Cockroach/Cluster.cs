@@ -22,6 +22,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("cloudProvider")]
         public Output<string> CloudProvider { get; private set; } = null!;
 
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
         [Output("cockroachVersion")]
         public Output<string> CockroachVersion { get; private set; } = null!;
 
@@ -141,6 +147,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
         [Input("cloudProvider")]
         public Input<string>? CloudProvider { get; set; }
+
+        /// <summary>
+        /// The ID of this resource.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
 
         [Input("cockroachVersion")]
         public Input<string>? CockroachVersion { get; set; }

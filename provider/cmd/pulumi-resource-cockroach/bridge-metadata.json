@@ -81,24 +81,28 @@
                 "clusterId": "cluster_id"
             },
             "cockroach:index/caCert:CaCert": {
+                "clusterId": "id",
                 "x509PemCert": "x509_pem_cert"
             },
             "cockroach:index/cluster:Cluster": {
                 "accountId": "account_id",
                 "cloudProvider": "cloud_provider",
+                "clusterId": "id",
                 "cockroachVersion": "cockroach_version",
                 "creatorId": "creator_id",
                 "operationStatus": "operation_status",
                 "upgradeStatus": "upgrade_status"
             },
             "cockroach:index/cmek:Cmek": {
-                "additionalRegions": "additional_regions"
+                "additionalRegions": "additional_regions",
+                "clusterId": "id"
             },
             "cockroach:index/database:Database": {
                 "clusterId": "cluster_id",
                 "tableCount": "table_count"
             },
             "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade": {
+                "clusterId": "id",
                 "cockroachVersion": "cockroach_version"
             },
             "cockroach:index/getCockroachCluster:getCockroachCluster": {
@@ -141,16 +145,19 @@
             },
             "cockroach:index/logExportConfig:LogExportConfig": {
                 "authPrincipal": "auth_principal",
+                "clusterId": "id",
                 "createdAt": "created_at",
                 "logName": "log_name",
                 "updatedAt": "updated_at",
                 "userMessage": "user_message"
             },
             "cockroach:index/maintenanceWindow:MaintenanceWindow": {
+                "clusterId": "id",
                 "offsetDuration": "offset_duration",
                 "windowDuration": "window_duration"
             },
             "cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig": {
+                "clusterId": "id",
                 "logGroupName": "log_group_name",
                 "roleArn": "role_arn",
                 "targetRegion": "target_region",
@@ -158,6 +165,7 @@
             },
             "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig": {
                 "apiKey": "api_key",
+                "clusterId": "id",
                 "userMessage": "user_message"
             },
             "cockroach:index/privateEndpointConnection:PrivateEndpointConnection": {

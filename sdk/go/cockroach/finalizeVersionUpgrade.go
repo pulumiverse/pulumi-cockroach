@@ -15,6 +15,8 @@ import (
 type FinalizeVersionUpgrade struct {
 	pulumi.CustomResourceState
 
+	// Cluster ID
+	ClusterId        pulumi.StringOutput `pulumi:"clusterId"`
 	CockroachVersion pulumi.StringOutput `pulumi:"cockroachVersion"`
 }
 
@@ -25,6 +27,9 @@ func NewFinalizeVersionUpgrade(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.ClusterId == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterId'")
+	}
 	if args.CockroachVersion == nil {
 		return nil, errors.New("invalid value for required argument 'CockroachVersion'")
 	}
@@ -51,10 +56,14 @@ func GetFinalizeVersionUpgrade(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FinalizeVersionUpgrade resources.
 type finalizeVersionUpgradeState struct {
+	// Cluster ID
+	ClusterId        *string `pulumi:"clusterId"`
 	CockroachVersion *string `pulumi:"cockroachVersion"`
 }
 
 type FinalizeVersionUpgradeState struct {
+	// Cluster ID
+	ClusterId        pulumi.StringPtrInput
 	CockroachVersion pulumi.StringPtrInput
 }
 
@@ -63,11 +72,15 @@ func (FinalizeVersionUpgradeState) ElementType() reflect.Type {
 }
 
 type finalizeVersionUpgradeArgs struct {
+	// Cluster ID
+	ClusterId        string `pulumi:"clusterId"`
 	CockroachVersion string `pulumi:"cockroachVersion"`
 }
 
 // The set of arguments for constructing a FinalizeVersionUpgrade resource.
 type FinalizeVersionUpgradeArgs struct {
+	// Cluster ID
+	ClusterId        pulumi.StringInput
 	CockroachVersion pulumi.StringInput
 }
 
@@ -156,6 +169,11 @@ func (o FinalizeVersionUpgradeOutput) ToFinalizeVersionUpgradeOutput() FinalizeV
 
 func (o FinalizeVersionUpgradeOutput) ToFinalizeVersionUpgradeOutputWithContext(ctx context.Context) FinalizeVersionUpgradeOutput {
 	return o
+}
+
+// Cluster ID
+func (o FinalizeVersionUpgradeOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *FinalizeVersionUpgrade) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 func (o FinalizeVersionUpgradeOutput) CockroachVersion() pulumi.StringOutput {

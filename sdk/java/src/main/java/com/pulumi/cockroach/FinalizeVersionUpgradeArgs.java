@@ -13,6 +13,21 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
 
     public static final FinalizeVersionUpgradeArgs Empty = new FinalizeVersionUpgradeArgs();
 
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+
     @Import(name="cockroachVersion", required=true)
     private Output<String> cockroachVersion;
 
@@ -23,6 +38,7 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
     private FinalizeVersionUpgradeArgs() {}
 
     private FinalizeVersionUpgradeArgs(FinalizeVersionUpgradeArgs $) {
+        this.clusterId = $.clusterId;
         this.cockroachVersion = $.cockroachVersion;
     }
 
@@ -44,6 +60,27 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
             $ = new FinalizeVersionUpgradeArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
+        }
+
         public Builder cockroachVersion(Output<String> cockroachVersion) {
             $.cockroachVersion = cockroachVersion;
             return this;
@@ -54,6 +91,7 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
         }
 
         public FinalizeVersionUpgradeArgs build() {
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.cockroachVersion = Objects.requireNonNull($.cockroachVersion, "expected parameter 'cockroachVersion' to be non-null");
             return $;
         }

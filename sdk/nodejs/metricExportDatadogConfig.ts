@@ -40,6 +40,10 @@ export class MetricExportDatadogConfig extends pulumi.CustomResource {
      */
     public readonly apiKey!: pulumi.Output<string>;
     /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
+    /**
      * The Datadog region to export to
      */
     public readonly site!: pulumi.Output<string>;
@@ -60,6 +64,7 @@ export class MetricExportDatadogConfig extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as MetricExportDatadogConfigState | undefined;
             resourceInputs["apiKey"] = state ? state.apiKey : undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["site"] = state ? state.site : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["userMessage"] = state ? state.userMessage : undefined;
@@ -68,10 +73,14 @@ export class MetricExportDatadogConfig extends pulumi.CustomResource {
             if ((!args || args.apiKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'apiKey'");
             }
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.site === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'site'");
             }
             resourceInputs["apiKey"] = args?.apiKey ? pulumi.secret(args.apiKey) : undefined;
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["site"] = args ? args.site : undefined;
             resourceInputs["status"] = undefined /*out*/;
             resourceInputs["userMessage"] = undefined /*out*/;
@@ -92,6 +101,10 @@ export interface MetricExportDatadogConfigState {
      */
     apiKey?: pulumi.Input<string>;
     /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
+    /**
      * The Datadog region to export to
      */
     site?: pulumi.Input<string>;
@@ -107,6 +120,10 @@ export interface MetricExportDatadogConfigArgs {
      * A Datadog API key
      */
     apiKey: pulumi.Input<string>;
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     /**
      * The Datadog region to export to
      */

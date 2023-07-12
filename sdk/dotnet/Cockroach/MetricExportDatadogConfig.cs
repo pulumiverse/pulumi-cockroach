@@ -23,6 +23,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         public Output<string> ApiKey { get; private set; } = null!;
 
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
         /// The Datadog region to export to
         /// </summary>
         [Output("site")]
@@ -102,6 +108,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
+        /// <summary>
         /// The Datadog region to export to
         /// </summary>
         [Input("site", required: true)]
@@ -130,6 +142,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
                 _apiKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
+
+        /// <summary>
+        /// Cluster ID
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
 
         /// <summary>
         /// The Datadog region to export to

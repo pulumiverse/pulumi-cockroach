@@ -15,6 +15,21 @@ public final class FinalizeVersionUpgradeState extends com.pulumi.resources.Reso
 
     public static final FinalizeVersionUpgradeState Empty = new FinalizeVersionUpgradeState();
 
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
     @Import(name="cockroachVersion")
     private @Nullable Output<String> cockroachVersion;
 
@@ -25,6 +40,7 @@ public final class FinalizeVersionUpgradeState extends com.pulumi.resources.Reso
     private FinalizeVersionUpgradeState() {}
 
     private FinalizeVersionUpgradeState(FinalizeVersionUpgradeState $) {
+        this.clusterId = $.clusterId;
         this.cockroachVersion = $.cockroachVersion;
     }
 
@@ -44,6 +60,27 @@ public final class FinalizeVersionUpgradeState extends com.pulumi.resources.Reso
 
         public Builder(FinalizeVersionUpgradeState defaults) {
             $ = new FinalizeVersionUpgradeState(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         public Builder cockroachVersion(@Nullable Output<String> cockroachVersion) {

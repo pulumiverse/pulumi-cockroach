@@ -17,7 +17,9 @@ type Cmek struct {
 
 	// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
 	AdditionalRegions CmekAdditionalRegionArrayOutput `pulumi:"additionalRegions"`
-	Regions           CmekRegionArrayOutput           `pulumi:"regions"`
+	// Cluster ID
+	ClusterId pulumi.StringOutput   `pulumi:"clusterId"`
+	Regions   CmekRegionArrayOutput `pulumi:"regions"`
 	// Aggregated status of the cluster's encryption key(s)
 	Status pulumi.StringOutput `pulumi:"status"`
 }
@@ -29,6 +31,9 @@ func NewCmek(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.ClusterId == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterId'")
+	}
 	if args.Regions == nil {
 		return nil, errors.New("invalid value for required argument 'Regions'")
 	}
@@ -57,7 +62,9 @@ func GetCmek(ctx *pulumi.Context,
 type cmekState struct {
 	// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
 	AdditionalRegions []CmekAdditionalRegion `pulumi:"additionalRegions"`
-	Regions           []CmekRegion           `pulumi:"regions"`
+	// Cluster ID
+	ClusterId *string      `pulumi:"clusterId"`
+	Regions   []CmekRegion `pulumi:"regions"`
 	// Aggregated status of the cluster's encryption key(s)
 	Status *string `pulumi:"status"`
 }
@@ -65,7 +72,9 @@ type cmekState struct {
 type CmekState struct {
 	// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
 	AdditionalRegions CmekAdditionalRegionArrayInput
-	Regions           CmekRegionArrayInput
+	// Cluster ID
+	ClusterId pulumi.StringPtrInput
+	Regions   CmekRegionArrayInput
 	// Aggregated status of the cluster's encryption key(s)
 	Status pulumi.StringPtrInput
 }
@@ -77,7 +86,9 @@ func (CmekState) ElementType() reflect.Type {
 type cmekArgs struct {
 	// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
 	AdditionalRegions []CmekAdditionalRegion `pulumi:"additionalRegions"`
-	Regions           []CmekRegion           `pulumi:"regions"`
+	// Cluster ID
+	ClusterId string       `pulumi:"clusterId"`
+	Regions   []CmekRegion `pulumi:"regions"`
 	// Aggregated status of the cluster's encryption key(s)
 	Status *string `pulumi:"status"`
 }
@@ -86,7 +97,9 @@ type cmekArgs struct {
 type CmekArgs struct {
 	// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
 	AdditionalRegions CmekAdditionalRegionArrayInput
-	Regions           CmekRegionArrayInput
+	// Cluster ID
+	ClusterId pulumi.StringInput
+	Regions   CmekRegionArrayInput
 	// Aggregated status of the cluster's encryption key(s)
 	Status pulumi.StringPtrInput
 }
@@ -181,6 +194,11 @@ func (o CmekOutput) ToCmekOutputWithContext(ctx context.Context) CmekOutput {
 // Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
 func (o CmekOutput) AdditionalRegions() CmekAdditionalRegionArrayOutput {
 	return o.ApplyT(func(v *Cmek) CmekAdditionalRegionArrayOutput { return v.AdditionalRegions }).(CmekAdditionalRegionArrayOutput)
+}
+
+// Cluster ID
+func (o CmekOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cmek) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 func (o CmekOutput) Regions() CmekRegionArrayOutput {

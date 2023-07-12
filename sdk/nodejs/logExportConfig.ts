@@ -41,6 +41,10 @@ export class LogExportConfig extends pulumi.CustomResource {
      * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
      */
     public readonly authPrincipal!: pulumi.Output<string>;
+    /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
     public /*out*/ readonly createdAt!: pulumi.Output<string>;
     public readonly groups!: pulumi.Output<outputs.LogExportConfigGroup[] | undefined>;
     /**
@@ -77,6 +81,7 @@ export class LogExportConfig extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as LogExportConfigState | undefined;
             resourceInputs["authPrincipal"] = state ? state.authPrincipal : undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["createdAt"] = state ? state.createdAt : undefined;
             resourceInputs["groups"] = state ? state.groups : undefined;
             resourceInputs["logName"] = state ? state.logName : undefined;
@@ -91,6 +96,9 @@ export class LogExportConfig extends pulumi.CustomResource {
             if ((!args || args.authPrincipal === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'authPrincipal'");
             }
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.logName === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'logName'");
             }
@@ -98,6 +106,7 @@ export class LogExportConfig extends pulumi.CustomResource {
                 throw new Error("Missing required property 'type'");
             }
             resourceInputs["authPrincipal"] = args ? args.authPrincipal : undefined;
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["groups"] = args ? args.groups : undefined;
             resourceInputs["logName"] = args ? args.logName : undefined;
             resourceInputs["redact"] = args ? args.redact : undefined;
@@ -121,6 +130,10 @@ export interface LogExportConfigState {
      * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
      */
     authPrincipal?: pulumi.Input<string>;
+    /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
     createdAt?: pulumi.Input<string>;
     groups?: pulumi.Input<pulumi.Input<inputs.LogExportConfigGroup>[]>;
     /**
@@ -152,6 +165,10 @@ export interface LogExportConfigArgs {
      * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
      */
     authPrincipal: pulumi.Input<string>;
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     groups?: pulumi.Input<pulumi.Input<inputs.LogExportConfigGroup>[]>;
     /**
      * An identifier for the logs in the customer's log sink

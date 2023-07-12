@@ -16,6 +16,21 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
     public static final MetricExportCloudwatchConfigArgs Empty = new MetricExportCloudwatchConfigArgs();
 
     /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+
+    /**
      * The customized AWS CloudWatch log group name.
      * 
      */
@@ -63,6 +78,7 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
     private MetricExportCloudwatchConfigArgs() {}
 
     private MetricExportCloudwatchConfigArgs(MetricExportCloudwatchConfigArgs $) {
+        this.clusterId = $.clusterId;
         this.logGroupName = $.logGroupName;
         this.roleArn = $.roleArn;
         this.targetRegion = $.targetRegion;
@@ -84,6 +100,27 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
 
         public Builder(MetricExportCloudwatchConfigArgs defaults) {
             $ = new MetricExportCloudwatchConfigArgs(Objects.requireNonNull(defaults));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         /**
@@ -150,6 +187,7 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
         }
 
         public MetricExportCloudwatchConfigArgs build() {
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.roleArn = Objects.requireNonNull($.roleArn, "expected parameter 'roleArn' to be non-null");
             return $;
         }

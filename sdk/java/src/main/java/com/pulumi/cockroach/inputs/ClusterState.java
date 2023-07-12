@@ -33,6 +33,21 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.cloudProvider);
     }
 
+    /**
+     * The ID of this resource.
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return The ID of this resource.
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
     @Import(name="cockroachVersion")
     private @Nullable Output<String> cockroachVersion;
 
@@ -116,6 +131,7 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
     private ClusterState(ClusterState $) {
         this.accountId = $.accountId;
         this.cloudProvider = $.cloudProvider;
+        this.clusterId = $.clusterId;
         this.cockroachVersion = $.cockroachVersion;
         this.creatorId = $.creatorId;
         this.dedicated = $.dedicated;
@@ -162,6 +178,27 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
 
         public Builder cloudProvider(String cloudProvider) {
             return cloudProvider(Output.of(cloudProvider));
+        }
+
+        /**
+         * @param clusterId The ID of this resource.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId The ID of this resource.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         public Builder cockroachVersion(@Nullable Output<String> cockroachVersion) {

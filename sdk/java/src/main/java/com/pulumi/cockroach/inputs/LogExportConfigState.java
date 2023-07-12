@@ -33,6 +33,21 @@ public final class LogExportConfigState extends com.pulumi.resources.ResourceArg
         return Optional.ofNullable(this.authPrincipal);
     }
 
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId")
+    private @Nullable Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Optional<Output<String>> clusterId() {
+        return Optional.ofNullable(this.clusterId);
+    }
+
     @Import(name="createdAt")
     private @Nullable Output<String> createdAt;
 
@@ -132,6 +147,7 @@ public final class LogExportConfigState extends com.pulumi.resources.ResourceArg
 
     private LogExportConfigState(LogExportConfigState $) {
         this.authPrincipal = $.authPrincipal;
+        this.clusterId = $.clusterId;
         this.createdAt = $.createdAt;
         this.groups = $.groups;
         this.logName = $.logName;
@@ -180,6 +196,27 @@ public final class LogExportConfigState extends com.pulumi.resources.ResourceArg
          */
         public Builder authPrincipal(String authPrincipal) {
             return authPrincipal(Output.of(authPrincipal));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(@Nullable Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         public Builder createdAt(@Nullable Output<String> createdAt) {

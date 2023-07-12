@@ -15,13 +15,16 @@ __all__ = ['MetricExportDatadogConfigArgs', 'MetricExportDatadogConfig']
 class MetricExportDatadogConfigArgs:
     def __init__(__self__, *,
                  api_key: pulumi.Input[str],
+                 cluster_id: pulumi.Input[str],
                  site: pulumi.Input[str]):
         """
         The set of arguments for constructing a MetricExportDatadogConfig resource.
         :param pulumi.Input[str] api_key: A Datadog API key
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] site: The Datadog region to export to
         """
         pulumi.set(__self__, "api_key", api_key)
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "site", site)
 
     @property
@@ -35,6 +38,18 @@ class MetricExportDatadogConfigArgs:
     @api_key.setter
     def api_key(self, value: pulumi.Input[str]):
         pulumi.set(self, "api_key", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter
@@ -53,16 +68,20 @@ class MetricExportDatadogConfigArgs:
 class _MetricExportDatadogConfigState:
     def __init__(__self__, *,
                  api_key: Optional[pulumi.Input[str]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  site: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  user_message: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering MetricExportDatadogConfig resources.
         :param pulumi.Input[str] api_key: A Datadog API key
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] site: The Datadog region to export to
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if site is not None:
             pulumi.set(__self__, "site", site)
         if status is not None:
@@ -81,6 +100,18 @@ class _MetricExportDatadogConfigState:
     @api_key.setter
     def api_key(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "api_key", value)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter
@@ -119,6 +150,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: Optional[pulumi.Input[str]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  site: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -127,6 +159,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_key: A Datadog API key
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] site: The Datadog region to export to
         """
         ...
@@ -154,6 +187,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_key: Optional[pulumi.Input[str]] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  site: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -167,6 +201,9 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
             if api_key is None and not opts.urn:
                 raise TypeError("Missing required property 'api_key'")
             __props__.__dict__["api_key"] = None if api_key is None else pulumi.Output.secret(api_key)
+            if cluster_id is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_id'")
+            __props__.__dict__["cluster_id"] = cluster_id
             if site is None and not opts.urn:
                 raise TypeError("Missing required property 'site'")
             __props__.__dict__["site"] = site
@@ -185,6 +222,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             api_key: Optional[pulumi.Input[str]] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             site: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             user_message: Optional[pulumi.Input[str]] = None) -> 'MetricExportDatadogConfig':
@@ -196,6 +234,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_key: A Datadog API key
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] site: The Datadog region to export to
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -203,6 +242,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
         __props__ = _MetricExportDatadogConfigState.__new__(_MetricExportDatadogConfigState)
 
         __props__.__dict__["api_key"] = api_key
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["site"] = site
         __props__.__dict__["status"] = status
         __props__.__dict__["user_message"] = user_message
@@ -215,6 +255,14 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
         A Datadog API key
         """
         return pulumi.get(self, "api_key")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter

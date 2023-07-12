@@ -16,9 +16,11 @@ type LogExportConfig struct {
 	pulumi.CustomResourceState
 
 	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-	AuthPrincipal pulumi.StringOutput             `pulumi:"authPrincipal"`
-	CreatedAt     pulumi.StringOutput             `pulumi:"createdAt"`
-	Groups        LogExportConfigGroupArrayOutput `pulumi:"groups"`
+	AuthPrincipal pulumi.StringOutput `pulumi:"authPrincipal"`
+	// Cluster ID
+	ClusterId pulumi.StringOutput             `pulumi:"clusterId"`
+	CreatedAt pulumi.StringOutput             `pulumi:"createdAt"`
+	Groups    LogExportConfigGroupArrayOutput `pulumi:"groups"`
 	// An identifier for the logs in the customer's log sink
 	LogName pulumi.StringOutput `pulumi:"logName"`
 	// Controls whether logs are redacted before forwarding to customer sinks
@@ -41,6 +43,9 @@ func NewLogExportConfig(ctx *pulumi.Context,
 
 	if args.AuthPrincipal == nil {
 		return nil, errors.New("invalid value for required argument 'AuthPrincipal'")
+	}
+	if args.ClusterId == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
 	if args.LogName == nil {
 		return nil, errors.New("invalid value for required argument 'LogName'")
@@ -72,9 +77,11 @@ func GetLogExportConfig(ctx *pulumi.Context,
 // Input properties used for looking up and filtering LogExportConfig resources.
 type logExportConfigState struct {
 	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-	AuthPrincipal *string                `pulumi:"authPrincipal"`
-	CreatedAt     *string                `pulumi:"createdAt"`
-	Groups        []LogExportConfigGroup `pulumi:"groups"`
+	AuthPrincipal *string `pulumi:"authPrincipal"`
+	// Cluster ID
+	ClusterId *string                `pulumi:"clusterId"`
+	CreatedAt *string                `pulumi:"createdAt"`
+	Groups    []LogExportConfigGroup `pulumi:"groups"`
 	// An identifier for the logs in the customer's log sink
 	LogName *string `pulumi:"logName"`
 	// Controls whether logs are redacted before forwarding to customer sinks
@@ -91,8 +98,10 @@ type logExportConfigState struct {
 type LogExportConfigState struct {
 	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
 	AuthPrincipal pulumi.StringPtrInput
-	CreatedAt     pulumi.StringPtrInput
-	Groups        LogExportConfigGroupArrayInput
+	// Cluster ID
+	ClusterId pulumi.StringPtrInput
+	CreatedAt pulumi.StringPtrInput
+	Groups    LogExportConfigGroupArrayInput
 	// An identifier for the logs in the customer's log sink
 	LogName pulumi.StringPtrInput
 	// Controls whether logs are redacted before forwarding to customer sinks
@@ -112,8 +121,10 @@ func (LogExportConfigState) ElementType() reflect.Type {
 
 type logExportConfigArgs struct {
 	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-	AuthPrincipal string                 `pulumi:"authPrincipal"`
-	Groups        []LogExportConfigGroup `pulumi:"groups"`
+	AuthPrincipal string `pulumi:"authPrincipal"`
+	// Cluster ID
+	ClusterId string                 `pulumi:"clusterId"`
+	Groups    []LogExportConfigGroup `pulumi:"groups"`
 	// An identifier for the logs in the customer's log sink
 	LogName string `pulumi:"logName"`
 	// Controls whether logs are redacted before forwarding to customer sinks
@@ -128,7 +139,9 @@ type logExportConfigArgs struct {
 type LogExportConfigArgs struct {
 	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
 	AuthPrincipal pulumi.StringInput
-	Groups        LogExportConfigGroupArrayInput
+	// Cluster ID
+	ClusterId pulumi.StringInput
+	Groups    LogExportConfigGroupArrayInput
 	// An identifier for the logs in the customer's log sink
 	LogName pulumi.StringInput
 	// Controls whether logs are redacted before forwarding to customer sinks
@@ -229,6 +242,11 @@ func (o LogExportConfigOutput) ToLogExportConfigOutputWithContext(ctx context.Co
 // Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
 func (o LogExportConfigOutput) AuthPrincipal() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.AuthPrincipal }).(pulumi.StringOutput)
+}
+
+// Cluster ID
+func (o LogExportConfigOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 func (o LogExportConfigOutput) CreatedAt() pulumi.StringOutput {

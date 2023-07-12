@@ -14,12 +14,27 @@ __all__ = ['CaCertArgs', 'CaCert']
 @pulumi.input_type
 class CaCertArgs:
     def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
                  x509_pem_cert: pulumi.Input[str]):
         """
         The set of arguments for constructing a CaCert resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
         """
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "x509_pem_cert", x509_pem_cert)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="x509PemCert")
@@ -37,17 +52,33 @@ class CaCertArgs:
 @pulumi.input_type
 class _CaCertState:
     def __init__(__self__, *,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  x509_pem_cert: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CaCert resources.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] status: Status of client CA certs on a cluster
         :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
         """
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if x509_pem_cert is not None:
             pulumi.set(__self__, "x509_pem_cert", x509_pem_cert)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter
@@ -79,6 +110,7 @@ class CaCert(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  x509_pem_cert: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -86,6 +118,7 @@ class CaCert(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
         """
         ...
@@ -112,6 +145,7 @@ class CaCert(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  x509_pem_cert: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -122,6 +156,9 @@ class CaCert(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = CaCertArgs.__new__(CaCertArgs)
 
+            if cluster_id is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_id'")
+            __props__.__dict__["cluster_id"] = cluster_id
             if x509_pem_cert is None and not opts.urn:
                 raise TypeError("Missing required property 'x509_pem_cert'")
             __props__.__dict__["x509_pem_cert"] = x509_pem_cert
@@ -136,6 +173,7 @@ class CaCert(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             x509_pem_cert: Optional[pulumi.Input[str]] = None) -> 'CaCert':
         """
@@ -145,6 +183,7 @@ class CaCert(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         :param pulumi.Input[str] status: Status of client CA certs on a cluster
         :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
         """
@@ -152,9 +191,18 @@ class CaCert(pulumi.CustomResource):
 
         __props__ = _CaCertState.__new__(_CaCertState)
 
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["status"] = status
         __props__.__dict__["x509_pem_cert"] = x509_pem_cert
         return CaCert(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter

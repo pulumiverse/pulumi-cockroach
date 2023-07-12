@@ -29,6 +29,21 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
     }
 
     /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+
+    /**
      * The Datadog region to export to
      * 
      */
@@ -47,6 +62,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
 
     private MetricExportDatadogConfigArgs(MetricExportDatadogConfigArgs $) {
         this.apiKey = $.apiKey;
+        this.clusterId = $.clusterId;
         this.site = $.site;
     }
 
@@ -90,6 +106,27 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
+        }
+
+        /**
          * @param site The Datadog region to export to
          * 
          * @return builder
@@ -112,6 +149,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
 
         public MetricExportDatadogConfigArgs build() {
             $.apiKey = Objects.requireNonNull($.apiKey, "expected parameter 'apiKey' to be non-null");
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.site = Objects.requireNonNull($.site, "expected parameter 'site' to be non-null");
             return $;
         }

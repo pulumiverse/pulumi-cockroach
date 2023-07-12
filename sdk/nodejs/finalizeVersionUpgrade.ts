@@ -35,6 +35,10 @@ export class FinalizeVersionUpgrade extends pulumi.CustomResource {
         return obj['__pulumiType'] === FinalizeVersionUpgrade.__pulumiType;
     }
 
+    /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
     public readonly cockroachVersion!: pulumi.Output<string>;
 
     /**
@@ -50,12 +54,17 @@ export class FinalizeVersionUpgrade extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as FinalizeVersionUpgradeState | undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["cockroachVersion"] = state ? state.cockroachVersion : undefined;
         } else {
             const args = argsOrState as FinalizeVersionUpgradeArgs | undefined;
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.cockroachVersion === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'cockroachVersion'");
             }
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["cockroachVersion"] = args ? args.cockroachVersion : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -67,6 +76,10 @@ export class FinalizeVersionUpgrade extends pulumi.CustomResource {
  * Input properties used for looking up and filtering FinalizeVersionUpgrade resources.
  */
 export interface FinalizeVersionUpgradeState {
+    /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
     cockroachVersion?: pulumi.Input<string>;
 }
 
@@ -74,5 +87,9 @@ export interface FinalizeVersionUpgradeState {
  * The set of arguments for constructing a FinalizeVersionUpgrade resource.
  */
 export interface FinalizeVersionUpgradeArgs {
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     cockroachVersion: pulumi.Input<string>;
 }

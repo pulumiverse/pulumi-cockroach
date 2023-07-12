@@ -14,11 +14,26 @@ __all__ = ['FinalizeVersionUpgradeArgs', 'FinalizeVersionUpgrade']
 @pulumi.input_type
 class FinalizeVersionUpgradeArgs:
     def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
                  cockroach_version: pulumi.Input[str]):
         """
         The set of arguments for constructing a FinalizeVersionUpgrade resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         """
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "cockroach_version", cockroach_version)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="cockroachVersion")
@@ -33,12 +48,28 @@ class FinalizeVersionUpgradeArgs:
 @pulumi.input_type
 class _FinalizeVersionUpgradeState:
     def __init__(__self__, *,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering FinalizeVersionUpgrade resources.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         """
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if cockroach_version is not None:
             pulumi.set(__self__, "cockroach_version", cockroach_version)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="cockroachVersion")
@@ -55,6 +86,7 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -62,6 +94,7 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         """
         ...
     @overload
@@ -87,6 +120,7 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -97,6 +131,9 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = FinalizeVersionUpgradeArgs.__new__(FinalizeVersionUpgradeArgs)
 
+            if cluster_id is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_id'")
+            __props__.__dict__["cluster_id"] = cluster_id
             if cockroach_version is None and not opts.urn:
                 raise TypeError("Missing required property 'cockroach_version'")
             __props__.__dict__["cockroach_version"] = cockroach_version
@@ -110,6 +147,7 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             cockroach_version: Optional[pulumi.Input[str]] = None) -> 'FinalizeVersionUpgrade':
         """
         Get an existing FinalizeVersionUpgrade resource's state with the given name, id, and optional extra
@@ -118,13 +156,23 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _FinalizeVersionUpgradeState.__new__(_FinalizeVersionUpgradeState)
 
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["cockroach_version"] = cockroach_version
         return FinalizeVersionUpgrade(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[str]:
+        """
+        Cluster ID
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="cockroachVersion")

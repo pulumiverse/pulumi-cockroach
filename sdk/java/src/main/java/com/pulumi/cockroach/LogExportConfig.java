@@ -37,6 +37,20 @@ public class LogExportConfig extends com.pulumi.resources.CustomResource {
     public Output<String> authPrincipal() {
         return this.authPrincipal;
     }
+    /**
+     * Cluster ID
+     * 
+     */
+    @Export(name="clusterId", type=String.class, parameters={})
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
     @Export(name="createdAt", type=String.class, parameters={})
     private Output<String> createdAt;
 

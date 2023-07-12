@@ -33,6 +33,21 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.additionalRegions);
     }
 
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+
     @Import(name="regions", required=true)
     private Output<List<CmekRegionArgs>> regions;
 
@@ -59,6 +74,7 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
 
     private CmekArgs(CmekArgs $) {
         this.additionalRegions = $.additionalRegions;
+        this.clusterId = $.clusterId;
         this.regions = $.regions;
         this.status = $.status;
     }
@@ -112,6 +128,27 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
             return additionalRegions(List.of(additionalRegions));
         }
 
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
+        }
+
         public Builder regions(Output<List<CmekRegionArgs>> regions) {
             $.regions = regions;
             return this;
@@ -147,6 +184,7 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         public CmekArgs build() {
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.regions = Objects.requireNonNull($.regions, "expected parameter 'regions' to be non-null");
             return $;
         }

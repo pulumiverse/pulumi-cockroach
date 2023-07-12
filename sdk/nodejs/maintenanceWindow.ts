@@ -36,6 +36,10 @@ export class MaintenanceWindow extends pulumi.CustomResource {
     }
 
     /**
+     * Cluster ID
+     */
+    public readonly clusterId!: pulumi.Output<string>;
+    /**
      * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      */
     public readonly offsetDuration!: pulumi.Output<number>;
@@ -57,16 +61,21 @@ export class MaintenanceWindow extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as MaintenanceWindowState | undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["offsetDuration"] = state ? state.offsetDuration : undefined;
             resourceInputs["windowDuration"] = state ? state.windowDuration : undefined;
         } else {
             const args = argsOrState as MaintenanceWindowArgs | undefined;
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.offsetDuration === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'offsetDuration'");
             }
             if ((!args || args.windowDuration === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'windowDuration'");
             }
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["offsetDuration"] = args ? args.offsetDuration : undefined;
             resourceInputs["windowDuration"] = args ? args.windowDuration : undefined;
         }
@@ -79,6 +88,10 @@ export class MaintenanceWindow extends pulumi.CustomResource {
  * Input properties used for looking up and filtering MaintenanceWindow resources.
  */
 export interface MaintenanceWindowState {
+    /**
+     * Cluster ID
+     */
+    clusterId?: pulumi.Input<string>;
     /**
      * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      */
@@ -93,6 +106,10 @@ export interface MaintenanceWindowState {
  * The set of arguments for constructing a MaintenanceWindow resource.
  */
 export interface MaintenanceWindowArgs {
+    /**
+     * Cluster ID
+     */
+    clusterId: pulumi.Input<string>;
     /**
      * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      */

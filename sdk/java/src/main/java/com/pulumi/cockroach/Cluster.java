@@ -36,6 +36,20 @@ public class Cluster extends com.pulumi.resources.CustomResource {
     public Output<String> cloudProvider() {
         return this.cloudProvider;
     }
+    /**
+     * The ID of this resource.
+     * 
+     */
+    @Export(name="clusterId", type=String.class, parameters={})
+    private Output<String> clusterId;
+
+    /**
+     * @return The ID of this resource.
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
     @Export(name="cockroachVersion", type=String.class, parameters={})
     private Output<String> cockroachVersion;
 

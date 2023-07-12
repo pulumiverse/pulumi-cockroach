@@ -33,6 +33,21 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         return this.authPrincipal;
     }
 
+    /**
+     * Cluster ID
+     * 
+     */
+    @Import(name="clusterId", required=true)
+    private Output<String> clusterId;
+
+    /**
+     * @return Cluster ID
+     * 
+     */
+    public Output<String> clusterId() {
+        return this.clusterId;
+    }
+
     @Import(name="groups")
     private @Nullable Output<List<LogExportConfigGroupArgs>> groups;
 
@@ -104,6 +119,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
 
     private LogExportConfigArgs(LogExportConfigArgs $) {
         this.authPrincipal = $.authPrincipal;
+        this.clusterId = $.clusterId;
         this.groups = $.groups;
         this.logName = $.logName;
         this.redact = $.redact;
@@ -148,6 +164,27 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
          */
         public Builder authPrincipal(String authPrincipal) {
             return authPrincipal(Output.of(authPrincipal));
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(Output<String> clusterId) {
+            $.clusterId = clusterId;
+            return this;
+        }
+
+        /**
+         * @param clusterId Cluster ID
+         * 
+         * @return builder
+         * 
+         */
+        public Builder clusterId(String clusterId) {
+            return clusterId(Output.of(clusterId));
         }
 
         public Builder groups(@Nullable Output<List<LogExportConfigGroupArgs>> groups) {
@@ -249,6 +286,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
 
         public LogExportConfigArgs build() {
             $.authPrincipal = Objects.requireNonNull($.authPrincipal, "expected parameter 'authPrincipal' to be non-null");
+            $.clusterId = Objects.requireNonNull($.clusterId, "expected parameter 'clusterId' to be non-null");
             $.logName = Objects.requireNonNull($.logName, "expected parameter 'logName' to be non-null");
             $.type = Objects.requireNonNull($.type, "expected parameter 'type' to be non-null");
             return $;
