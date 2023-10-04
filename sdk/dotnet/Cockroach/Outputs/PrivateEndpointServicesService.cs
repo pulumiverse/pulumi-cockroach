@@ -15,8 +15,17 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     public sealed class PrivateEndpointServicesService
     {
         public readonly Outputs.PrivateEndpointServicesServiceAws? Aws;
+        /// <summary>
+        /// Cloud provider associated with this service.
+        /// </summary>
         public readonly string? CloudProvider;
+        /// <summary>
+        /// Cloud provider region code associated with this service.
+        /// </summary>
         public readonly string? RegionName;
+        /// <summary>
+        /// Operation status of the service.
+        /// </summary>
         public readonly string? Status;
 
         [OutputConstructor]

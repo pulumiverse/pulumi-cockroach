@@ -24,9 +24,17 @@ public final class UserRoleGrantsState extends com.pulumi.resources.ResourceArgs
         return Optional.ofNullable(this.roles);
     }
 
+    /**
+     * ID of the user to grant these roles to.
+     * 
+     */
     @Import(name="userId")
     private @Nullable Output<String> userId;
 
+    /**
+     * @return ID of the user to grant these roles to.
+     * 
+     */
     public Optional<Output<String>> userId() {
         return Optional.ofNullable(this.userId);
     }
@@ -69,11 +77,23 @@ public final class UserRoleGrantsState extends com.pulumi.resources.ResourceArgs
             return roles(List.of(roles));
         }
 
+        /**
+         * @param userId ID of the user to grant these roles to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder userId(@Nullable Output<String> userId) {
             $.userId = userId;
             return this;
         }
 
+        /**
+         * @param userId ID of the user to grant these roles to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder userId(String userId) {
             return userId(Output.of(userId));
         }

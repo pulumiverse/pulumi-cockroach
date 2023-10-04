@@ -23,23 +23,47 @@ public final class PrivateEndpointServicesServiceArgs extends com.pulumi.resourc
         return Optional.ofNullable(this.aws);
     }
 
+    /**
+     * Cloud provider associated with this service.
+     * 
+     */
     @Import(name="cloudProvider")
     private @Nullable Output<String> cloudProvider;
 
+    /**
+     * @return Cloud provider associated with this service.
+     * 
+     */
     public Optional<Output<String>> cloudProvider() {
         return Optional.ofNullable(this.cloudProvider);
     }
 
+    /**
+     * Cloud provider region code associated with this service.
+     * 
+     */
     @Import(name="regionName")
     private @Nullable Output<String> regionName;
 
+    /**
+     * @return Cloud provider region code associated with this service.
+     * 
+     */
     public Optional<Output<String>> regionName() {
         return Optional.ofNullable(this.regionName);
     }
 
+    /**
+     * Operation status of the service.
+     * 
+     */
     @Import(name="status")
     private @Nullable Output<String> status;
 
+    /**
+     * @return Operation status of the service.
+     * 
+     */
     public Optional<Output<String>> status() {
         return Optional.ofNullable(this.status);
     }
@@ -80,29 +104,65 @@ public final class PrivateEndpointServicesServiceArgs extends com.pulumi.resourc
             return aws(Output.of(aws));
         }
 
+        /**
+         * @param cloudProvider Cloud provider associated with this service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(@Nullable Output<String> cloudProvider) {
             $.cloudProvider = cloudProvider;
             return this;
         }
 
+        /**
+         * @param cloudProvider Cloud provider associated with this service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(String cloudProvider) {
             return cloudProvider(Output.of(cloudProvider));
         }
 
+        /**
+         * @param regionName Cloud provider region code associated with this service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder regionName(@Nullable Output<String> regionName) {
             $.regionName = regionName;
             return this;
         }
 
+        /**
+         * @param regionName Cloud provider region code associated with this service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder regionName(String regionName) {
             return regionName(Output.of(regionName));
         }
 
+        /**
+         * @param status Operation status of the service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder status(@Nullable Output<String> status) {
             $.status = status;
             return this;
         }
 
+        /**
+         * @param status Operation status of the service.
+         * 
+         * @return builder
+         * 
+         */
         public Builder status(String status) {
             return status(Output.of(status));
         }

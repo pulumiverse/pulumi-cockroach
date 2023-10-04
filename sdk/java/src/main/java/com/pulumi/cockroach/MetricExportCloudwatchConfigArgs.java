@@ -16,14 +16,14 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
     public static final MetricExportCloudwatchConfigArgs Empty = new MetricExportCloudwatchConfigArgs();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -103,7 +103,7 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -114,7 +114,7 @@ public final class MetricExportCloudwatchConfigArgs extends com.pulumi.resources
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 

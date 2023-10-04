@@ -25,14 +25,15 @@ func GetClusterCert(ctx *pulumi.Context, args *GetClusterCertArgs, opts ...pulum
 
 // A collection of arguments for invoking getClusterCert.
 type GetClusterCertArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	Id string `pulumi:"id"`
 }
 
 // A collection of values returned by getClusterCert.
 type GetClusterCertResult struct {
+	// Certificate contents.
 	Cert string `pulumi:"cert"`
-	// Cluster ID
+	// Cluster ID.
 	Id string `pulumi:"id"`
 }
 
@@ -51,7 +52,7 @@ func GetClusterCertOutput(ctx *pulumi.Context, args GetClusterCertOutputArgs, op
 
 // A collection of arguments for invoking getClusterCert.
 type GetClusterCertOutputArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	Id pulumi.StringInput `pulumi:"id"`
 }
 
@@ -74,11 +75,12 @@ func (o GetClusterCertResultOutput) ToGetClusterCertResultOutputWithContext(ctx 
 	return o
 }
 
+// Certificate contents.
 func (o GetClusterCertResultOutput) Cert() pulumi.StringOutput {
 	return o.ApplyT(func(v GetClusterCertResult) string { return v.Cert }).(pulumi.StringOutput)
 }
 
-// Cluster ID
+// Cluster ID.
 func (o GetClusterCertResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetClusterCertResult) string { return v.Id }).(pulumi.StringOutput)
 }

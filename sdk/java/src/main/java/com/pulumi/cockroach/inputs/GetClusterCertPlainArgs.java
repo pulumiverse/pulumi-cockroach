@@ -13,14 +13,14 @@ public final class GetClusterCertPlainArgs extends com.pulumi.resources.InvokeAr
     public static final GetClusterCertPlainArgs Empty = new GetClusterCertPlainArgs();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="id", required=true)
     private String id;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public String id() {
@@ -52,7 +52,7 @@ public final class GetClusterCertPlainArgs extends com.pulumi.resources.InvokeAr
         }
 
         /**
-         * @param id Cluster ID
+         * @param id Cluster ID.
          * 
          * @return builder
          * 

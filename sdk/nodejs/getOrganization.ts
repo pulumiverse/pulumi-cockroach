@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Information about the organization associated with the user's API key
+ * Information about the organization associated with the user's API key.
  */
 export function getOrganization(opts?: pulumi.InvokeOptions): Promise<GetOrganizationResult> {
 
@@ -18,11 +18,20 @@ export function getOrganization(opts?: pulumi.InvokeOptions): Promise<GetOrganiz
  * A collection of values returned by getOrganization.
  */
 export interface GetOrganizationResult {
+    /**
+     * Indicates when the organization was created.
+     */
     readonly createdAt: string;
     /**
-     * The ID of this resource.
+     * Organization ID.
      */
     readonly id: string;
+    /**
+     * A short ID used by CockroachDB Support.
+     */
     readonly label: string;
+    /**
+     * Name of the organization.
+     */
     readonly name: string;
 }

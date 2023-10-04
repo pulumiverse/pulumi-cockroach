@@ -11,20 +11,22 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Metric Export CloudWatch Config Resource
+// Amazon CloudWatch metric export configuration for a cluster.
 type MetricExportCloudwatchConfig struct {
 	pulumi.CustomResourceState
 
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// The customized AWS CloudWatch log group name.
 	LogGroupName pulumi.StringOutput `pulumi:"logGroupName"`
 	// The IAM role used to upload metric segments to the target AWS account.
 	RoleArn pulumi.StringOutput `pulumi:"roleArn"`
-	Status  pulumi.StringOutput `pulumi:"status"`
+	// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+	Status pulumi.StringOutput `pulumi:"status"`
 	// The specific AWS region that the metrics will be exported to.
 	TargetRegion pulumi.StringOutput `pulumi:"targetRegion"`
-	UserMessage  pulumi.StringOutput `pulumi:"userMessage"`
+	// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+	UserMessage pulumi.StringOutput `pulumi:"userMessage"`
 }
 
 // NewMetricExportCloudwatchConfig registers a new resource with the given unique name, arguments, and options.
@@ -63,29 +65,33 @@ func GetMetricExportCloudwatchConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.
 type metricExportCloudwatchConfigState struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
 	// The customized AWS CloudWatch log group name.
 	LogGroupName *string `pulumi:"logGroupName"`
 	// The IAM role used to upload metric segments to the target AWS account.
 	RoleArn *string `pulumi:"roleArn"`
-	Status  *string `pulumi:"status"`
+	// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+	Status *string `pulumi:"status"`
 	// The specific AWS region that the metrics will be exported to.
 	TargetRegion *string `pulumi:"targetRegion"`
-	UserMessage  *string `pulumi:"userMessage"`
+	// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+	UserMessage *string `pulumi:"userMessage"`
 }
 
 type MetricExportCloudwatchConfigState struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
 	// The customized AWS CloudWatch log group name.
 	LogGroupName pulumi.StringPtrInput
 	// The IAM role used to upload metric segments to the target AWS account.
 	RoleArn pulumi.StringPtrInput
-	Status  pulumi.StringPtrInput
+	// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+	Status pulumi.StringPtrInput
 	// The specific AWS region that the metrics will be exported to.
 	TargetRegion pulumi.StringPtrInput
-	UserMessage  pulumi.StringPtrInput
+	// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+	UserMessage pulumi.StringPtrInput
 }
 
 func (MetricExportCloudwatchConfigState) ElementType() reflect.Type {
@@ -93,7 +99,7 @@ func (MetricExportCloudwatchConfigState) ElementType() reflect.Type {
 }
 
 type metricExportCloudwatchConfigArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId string `pulumi:"clusterId"`
 	// The customized AWS CloudWatch log group name.
 	LogGroupName *string `pulumi:"logGroupName"`
@@ -105,7 +111,7 @@ type metricExportCloudwatchConfigArgs struct {
 
 // The set of arguments for constructing a MetricExportCloudwatchConfig resource.
 type MetricExportCloudwatchConfigArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringInput
 	// The customized AWS CloudWatch log group name.
 	LogGroupName pulumi.StringPtrInput
@@ -202,7 +208,7 @@ func (o MetricExportCloudwatchConfigOutput) ToMetricExportCloudwatchConfigOutput
 	return o
 }
 
-// Cluster ID
+// Cluster ID.
 func (o MetricExportCloudwatchConfigOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportCloudwatchConfig) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
@@ -217,6 +223,7 @@ func (o MetricExportCloudwatchConfigOutput) RoleArn() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportCloudwatchConfig) pulumi.StringOutput { return v.RoleArn }).(pulumi.StringOutput)
 }
 
+// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
 func (o MetricExportCloudwatchConfigOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportCloudwatchConfig) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
@@ -226,6 +233,7 @@ func (o MetricExportCloudwatchConfigOutput) TargetRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportCloudwatchConfig) pulumi.StringOutput { return v.TargetRegion }).(pulumi.StringOutput)
 }
 
+// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
 func (o MetricExportCloudwatchConfigOutput) UserMessage() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportCloudwatchConfig) pulumi.StringOutput { return v.UserMessage }).(pulumi.StringOutput)
 }

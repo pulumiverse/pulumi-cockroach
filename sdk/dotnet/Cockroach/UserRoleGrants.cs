@@ -11,7 +11,7 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Role grants
+    /// Role grants for a single user.
     /// </summary>
     [CockroachResourceType("cockroach:index/userRoleGrants:UserRoleGrants")]
     public partial class UserRoleGrants : global::Pulumi.CustomResource
@@ -19,6 +19,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("roles")]
         public Output<ImmutableArray<Outputs.UserRoleGrantsRole>> Roles { get; private set; } = null!;
 
+        /// <summary>
+        /// ID of the user to grant these roles to.
+        /// </summary>
         [Output("userId")]
         public Output<string> UserId { get; private set; } = null!;
 
@@ -77,6 +80,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
             set => _roles = value;
         }
 
+        /// <summary>
+        /// ID of the user to grant these roles to.
+        /// </summary>
         [Input("userId", required: true)]
         public Input<string> UserId { get; set; } = null!;
 
@@ -96,6 +102,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
             set => _roles = value;
         }
 
+        /// <summary>
+        /// ID of the user to grant these roles to.
+        /// </summary>
         [Input("userId")]
         public Input<string>? UserId { get; set; }
 

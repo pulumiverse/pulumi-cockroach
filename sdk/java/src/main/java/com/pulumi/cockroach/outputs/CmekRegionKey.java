@@ -13,10 +13,6 @@ import javax.annotation.Nullable;
 public final class CmekRegionKey {
     private String authPrincipal;
     private @Nullable String createdAt;
-    /**
-     * @return Aggregated status of the cluster&#39;s encryption key(s)
-     * 
-     */
     private @Nullable String status;
     private String type;
     private @Nullable String updatedAt;
@@ -30,10 +26,6 @@ public final class CmekRegionKey {
     public Optional<String> createdAt() {
         return Optional.ofNullable(this.createdAt);
     }
-    /**
-     * @return Aggregated status of the cluster&#39;s encryption key(s)
-     * 
-     */
     public Optional<String> status() {
         return Optional.ofNullable(this.status);
     }

@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Cluster Resource
+ * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -37,24 +37,49 @@ export class Cluster extends pulumi.CustomResource {
         return obj['__pulumiType'] === Cluster.__pulumiType;
     }
 
-    public /*out*/ readonly accountId!: pulumi.Output<string>;
-    public readonly cloudProvider!: pulumi.Output<string>;
     /**
-     * The ID of this resource.
+     * The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
      */
+    public /*out*/ readonly accountId!: pulumi.Output<string>;
+    /**
+     * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     */
+    public readonly cloudProvider!: pulumi.Output<string>;
     public /*out*/ readonly clusterId!: pulumi.Output<string>;
+    /**
+     * Major version of CockroachDB running on the cluster.
+     */
     public readonly cockroachVersion!: pulumi.Output<string>;
+    /**
+     * ID of the user who created the cluster.
+     */
     public /*out*/ readonly creatorId!: pulumi.Output<string>;
     public readonly dedicated!: pulumi.Output<outputs.ClusterDedicated | undefined>;
     /**
-     * Name of cluster
+     * Name of the cluster.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Describes the current long-running operation, if any.
+     */
     public /*out*/ readonly operationStatus!: pulumi.Output<string>;
+    /**
+     * The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+     */
+    public readonly parentId!: pulumi.Output<string>;
+    /**
+     * Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+     */
     public /*out*/ readonly plan!: pulumi.Output<string>;
     public readonly regions!: pulumi.Output<outputs.ClusterRegion[]>;
     public readonly serverless!: pulumi.Output<outputs.ClusterServerless | undefined>;
+    /**
+     * Describes whether the cluster is being created, updated, deleted, etc.
+     */
     public /*out*/ readonly state!: pulumi.Output<string>;
+    /**
+     * Describes the status of any in-progress CockroachDB upgrade or rollback.
+     */
     public /*out*/ readonly upgradeStatus!: pulumi.Output<string>;
 
     /**
@@ -78,6 +103,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["dedicated"] = state ? state.dedicated : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["operationStatus"] = state ? state.operationStatus : undefined;
+            resourceInputs["parentId"] = state ? state.parentId : undefined;
             resourceInputs["plan"] = state ? state.plan : undefined;
             resourceInputs["regions"] = state ? state.regions : undefined;
             resourceInputs["serverless"] = state ? state.serverless : undefined;
@@ -98,6 +124,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["cockroachVersion"] = args ? args.cockroachVersion : undefined;
             resourceInputs["dedicated"] = args ? args.dedicated : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["parentId"] = args ? args.parentId : undefined;
             resourceInputs["regions"] = args ? args.regions : undefined;
             resourceInputs["serverless"] = args ? args.serverless : undefined;
             resourceInputs["accountId"] = undefined /*out*/;
@@ -117,24 +144,49 @@ export class Cluster extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Cluster resources.
  */
 export interface ClusterState {
-    accountId?: pulumi.Input<string>;
-    cloudProvider?: pulumi.Input<string>;
     /**
-     * The ID of this resource.
+     * The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
      */
+    accountId?: pulumi.Input<string>;
+    /**
+     * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     */
+    cloudProvider?: pulumi.Input<string>;
     clusterId?: pulumi.Input<string>;
+    /**
+     * Major version of CockroachDB running on the cluster.
+     */
     cockroachVersion?: pulumi.Input<string>;
+    /**
+     * ID of the user who created the cluster.
+     */
     creatorId?: pulumi.Input<string>;
     dedicated?: pulumi.Input<inputs.ClusterDedicated>;
     /**
-     * Name of cluster
+     * Name of the cluster.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Describes the current long-running operation, if any.
+     */
     operationStatus?: pulumi.Input<string>;
+    /**
+     * The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+     */
+    parentId?: pulumi.Input<string>;
+    /**
+     * Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+     */
     plan?: pulumi.Input<string>;
     regions?: pulumi.Input<pulumi.Input<inputs.ClusterRegion>[]>;
     serverless?: pulumi.Input<inputs.ClusterServerless>;
+    /**
+     * Describes whether the cluster is being created, updated, deleted, etc.
+     */
     state?: pulumi.Input<string>;
+    /**
+     * Describes the status of any in-progress CockroachDB upgrade or rollback.
+     */
     upgradeStatus?: pulumi.Input<string>;
 }
 
@@ -142,13 +194,23 @@ export interface ClusterState {
  * The set of arguments for constructing a Cluster resource.
  */
 export interface ClusterArgs {
+    /**
+     * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     */
     cloudProvider: pulumi.Input<string>;
+    /**
+     * Major version of CockroachDB running on the cluster.
+     */
     cockroachVersion?: pulumi.Input<string>;
     dedicated?: pulumi.Input<inputs.ClusterDedicated>;
     /**
-     * Name of cluster
+     * Name of the cluster.
      */
     name: pulumi.Input<string>;
+    /**
+     * The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+     */
+    parentId?: pulumi.Input<string>;
     regions: pulumi.Input<pulumi.Input<inputs.ClusterRegion>[]>;
     serverless?: pulumi.Input<inputs.ClusterServerless>;
 }

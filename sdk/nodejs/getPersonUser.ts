@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Information about a person user
+ * Information about an individual user.
  */
 export function getPersonUser(args: GetPersonUserArgs, opts?: pulumi.InvokeOptions): Promise<GetPersonUserResult> {
 
@@ -34,12 +34,12 @@ export interface GetPersonUserResult {
      */
     readonly email: string;
     /**
-     * User ID
+     * User ID.
      */
     readonly id: string;
 }
 /**
- * Information about a person user
+ * Information about an individual user.
  */
 export function getPersonUserOutput(args: GetPersonUserOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPersonUserResult> {
     return pulumi.output(args).apply((a: any) => getPersonUser(a, opts))

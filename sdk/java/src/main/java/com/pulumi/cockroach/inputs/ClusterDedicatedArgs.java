@@ -46,17 +46,9 @@ public final class ClusterDedicatedArgs extends com.pulumi.resources.ResourceArg
         return Optional.ofNullable(this.numVirtualCpus);
     }
 
-    /**
-     * Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-     * 
-     */
     @Import(name="privateNetworkVisibility")
     private @Nullable Output<Boolean> privateNetworkVisibility;
 
-    /**
-     * @return Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-     * 
-     */
     public Optional<Output<Boolean>> privateNetworkVisibility() {
         return Optional.ofNullable(this.privateNetworkVisibility);
     }
@@ -133,23 +125,11 @@ public final class ClusterDedicatedArgs extends com.pulumi.resources.ResourceArg
             return numVirtualCpus(Output.of(numVirtualCpus));
         }
 
-        /**
-         * @param privateNetworkVisibility Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-         * 
-         * @return builder
-         * 
-         */
         public Builder privateNetworkVisibility(@Nullable Output<Boolean> privateNetworkVisibility) {
             $.privateNetworkVisibility = privateNetworkVisibility;
             return this;
         }
 
-        /**
-         * @param privateNetworkVisibility Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-         * 
-         * @return builder
-         * 
-         */
         public Builder privateNetworkVisibility(Boolean privateNetworkVisibility) {
             return privateNetworkVisibility(Output.of(privateNetworkVisibility));
         }

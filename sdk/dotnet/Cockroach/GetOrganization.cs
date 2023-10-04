@@ -13,7 +13,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public static class GetOrganization
     {
         /// <summary>
-        /// Information about the organization associated with the user's API key
+        /// Information about the organization associated with the user's API key.
         /// </summary>
         public static Task<GetOrganizationResult> InvokeAsync(InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrganizationResult>("cockroach:index/getOrganization:getOrganization", InvokeArgs.Empty, options.WithDefaults());
@@ -23,12 +23,21 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     [OutputType]
     public sealed class GetOrganizationResult
     {
+        /// <summary>
+        /// Indicates when the organization was created.
+        /// </summary>
         public readonly string CreatedAt;
         /// <summary>
-        /// The ID of this resource.
+        /// Organization ID.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// A short ID used by CockroachDB Support.
+        /// </summary>
         public readonly string Label;
+        /// <summary>
+        /// Name of the organization.
+        /// </summary>
         public readonly string Name;
 
         [OutputConstructor]

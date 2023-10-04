@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Cluster Data Source
+// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
 func GetCockroachCluster(ctx *pulumi.Context, args *GetCockroachClusterArgs, opts ...pulumi.InvokeOption) (*GetCockroachClusterResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetCockroachClusterResult
@@ -23,27 +23,25 @@ func GetCockroachCluster(ctx *pulumi.Context, args *GetCockroachClusterArgs, opt
 
 // A collection of arguments for invoking getCockroachCluster.
 type GetCockroachClusterArgs struct {
-	// The ID of this resource.
 	Id string `pulumi:"id"`
 }
 
 // A collection of values returned by getCockroachCluster.
 type GetCockroachClusterResult struct {
-	AccountId        string                       `pulumi:"accountId"`
-	CloudProvider    string                       `pulumi:"cloudProvider"`
-	CockroachVersion string                       `pulumi:"cockroachVersion"`
-	CreatorId        string                       `pulumi:"creatorId"`
-	Dedicated        GetCockroachClusterDedicated `pulumi:"dedicated"`
-	// The ID of this resource.
-	Id string `pulumi:"id"`
-	// Name of cluster
-	Name            string                        `pulumi:"name"`
-	OperationStatus string                        `pulumi:"operationStatus"`
-	Plan            string                        `pulumi:"plan"`
-	Regions         []GetCockroachClusterRegion   `pulumi:"regions"`
-	Serverless      GetCockroachClusterServerless `pulumi:"serverless"`
-	State           string                        `pulumi:"state"`
-	UpgradeStatus   string                        `pulumi:"upgradeStatus"`
+	AccountId        string                        `pulumi:"accountId"`
+	CloudProvider    string                        `pulumi:"cloudProvider"`
+	CockroachVersion string                        `pulumi:"cockroachVersion"`
+	CreatorId        string                        `pulumi:"creatorId"`
+	Dedicated        GetCockroachClusterDedicated  `pulumi:"dedicated"`
+	Id               string                        `pulumi:"id"`
+	Name             string                        `pulumi:"name"`
+	OperationStatus  string                        `pulumi:"operationStatus"`
+	ParentId         string                        `pulumi:"parentId"`
+	Plan             string                        `pulumi:"plan"`
+	Regions          []GetCockroachClusterRegion   `pulumi:"regions"`
+	Serverless       GetCockroachClusterServerless `pulumi:"serverless"`
+	State            string                        `pulumi:"state"`
+	UpgradeStatus    string                        `pulumi:"upgradeStatus"`
 }
 
 func GetCockroachClusterOutput(ctx *pulumi.Context, args GetCockroachClusterOutputArgs, opts ...pulumi.InvokeOption) GetCockroachClusterResultOutput {
@@ -61,7 +59,6 @@ func GetCockroachClusterOutput(ctx *pulumi.Context, args GetCockroachClusterOutp
 
 // A collection of arguments for invoking getCockroachCluster.
 type GetCockroachClusterOutputArgs struct {
-	// The ID of this resource.
 	Id pulumi.StringInput `pulumi:"id"`
 }
 
@@ -104,18 +101,20 @@ func (o GetCockroachClusterResultOutput) Dedicated() GetCockroachClusterDedicate
 	return o.ApplyT(func(v GetCockroachClusterResult) GetCockroachClusterDedicated { return v.Dedicated }).(GetCockroachClusterDedicatedOutput)
 }
 
-// The ID of this resource.
 func (o GetCockroachClusterResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// Name of cluster
 func (o GetCockroachClusterResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o GetCockroachClusterResultOutput) OperationStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterResult) string { return v.OperationStatus }).(pulumi.StringOutput)
+}
+
+func (o GetCockroachClusterResultOutput) ParentId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCockroachClusterResult) string { return v.ParentId }).(pulumi.StringOutput)
 }
 
 func (o GetCockroachClusterResultOutput) Plan() pulumi.StringOutput {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// SQL user and password
+    /// CockroachDB SQL user.
     /// </summary>
     [CockroachResourceType("cockroach:index/sqlUser:SqlUser")]
     public partial class SqlUser : global::Pulumi.CustomResource
@@ -19,6 +19,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
+        /// <summary>
+        /// SQL user name.
+        /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
@@ -83,6 +86,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// SQL user name.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
@@ -114,6 +120,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
+        /// <summary>
+        /// SQL user name.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 

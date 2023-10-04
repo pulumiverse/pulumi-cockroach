@@ -15,32 +15,16 @@ public final class GetConnectionStringArgs extends com.pulumi.resources.InvokeAr
 
     public static final GetConnectionStringArgs Empty = new GetConnectionStringArgs();
 
-    /**
-     * Database to connect to. Defaults to &#39;defaultdb&#39;.
-     * 
-     */
     @Import(name="database")
     private @Nullable Output<String> database;
 
-    /**
-     * @return Database to connect to. Defaults to &#39;defaultdb&#39;.
-     * 
-     */
     public Optional<Output<String>> database() {
         return Optional.ofNullable(this.database);
     }
 
-    /**
-     * Cluster ID
-     * 
-     */
     @Import(name="id", required=true)
     private Output<String> id;
 
-    /**
-     * @return Cluster ID
-     * 
-     */
     public Output<String> id() {
         return this.id;
     }
@@ -52,32 +36,16 @@ public final class GetConnectionStringArgs extends com.pulumi.resources.InvokeAr
         return Optional.ofNullable(this.os);
     }
 
-    /**
-     * Database user password. Must also include `sql_user`.
-     * 
-     */
     @Import(name="password")
     private @Nullable Output<String> password;
 
-    /**
-     * @return Database user password. Must also include `sql_user`.
-     * 
-     */
     public Optional<Output<String>> password() {
         return Optional.ofNullable(this.password);
     }
 
-    /**
-     * Database username.
-     * 
-     */
     @Import(name="sqlUser")
     private @Nullable Output<String> sqlUser;
 
-    /**
-     * @return Database username.
-     * 
-     */
     public Optional<Output<String>> sqlUser() {
         return Optional.ofNullable(this.sqlUser);
     }
@@ -110,44 +78,20 @@ public final class GetConnectionStringArgs extends com.pulumi.resources.InvokeAr
             $ = new GetConnectionStringArgs(Objects.requireNonNull(defaults));
         }
 
-        /**
-         * @param database Database to connect to. Defaults to &#39;defaultdb&#39;.
-         * 
-         * @return builder
-         * 
-         */
         public Builder database(@Nullable Output<String> database) {
             $.database = database;
             return this;
         }
 
-        /**
-         * @param database Database to connect to. Defaults to &#39;defaultdb&#39;.
-         * 
-         * @return builder
-         * 
-         */
         public Builder database(String database) {
             return database(Output.of(database));
         }
 
-        /**
-         * @param id Cluster ID
-         * 
-         * @return builder
-         * 
-         */
         public Builder id(Output<String> id) {
             $.id = id;
             return this;
         }
 
-        /**
-         * @param id Cluster ID
-         * 
-         * @return builder
-         * 
-         */
         public Builder id(String id) {
             return id(Output.of(id));
         }
@@ -161,44 +105,20 @@ public final class GetConnectionStringArgs extends com.pulumi.resources.InvokeAr
             return os(Output.of(os));
         }
 
-        /**
-         * @param password Database user password. Must also include `sql_user`.
-         * 
-         * @return builder
-         * 
-         */
         public Builder password(@Nullable Output<String> password) {
             $.password = password;
             return this;
         }
 
-        /**
-         * @param password Database user password. Must also include `sql_user`.
-         * 
-         * @return builder
-         * 
-         */
         public Builder password(String password) {
             return password(Output.of(password));
         }
 
-        /**
-         * @param sqlUser Database username.
-         * 
-         * @return builder
-         * 
-         */
         public Builder sqlUser(@Nullable Output<String> sqlUser) {
             $.sqlUser = sqlUser;
             return this;
         }
 
-        /**
-         * @param sqlUser Database username.
-         * 
-         * @return builder
-         * 
-         */
         public Builder sqlUser(String sqlUser) {
             return sqlUser(Output.of(sqlUser));
         }

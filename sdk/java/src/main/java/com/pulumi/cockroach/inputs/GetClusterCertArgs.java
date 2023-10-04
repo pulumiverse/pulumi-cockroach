@@ -14,14 +14,14 @@ public final class GetClusterCertArgs extends com.pulumi.resources.InvokeArgs {
     public static final GetClusterCertArgs Empty = new GetClusterCertArgs();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="id", required=true)
     private Output<String> id;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> id() {
@@ -53,7 +53,7 @@ public final class GetClusterCertArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param id Cluster ID
+         * @param id Cluster ID.
          * 
          * @return builder
          * 
@@ -64,7 +64,7 @@ public final class GetClusterCertArgs extends com.pulumi.resources.InvokeArgs {
         }
 
         /**
-         * @param id Cluster ID
+         * @param id Cluster ID.
          * 
          * @return builder
          * 

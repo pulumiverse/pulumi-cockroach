@@ -11,17 +11,19 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Metric Export Datadog Config Resource
+// DataDog metric export configuration for a cluster.
 type MetricExportDatadogConfig struct {
 	pulumi.CustomResourceState
 
-	// A Datadog API key
+	// A Datadog API key.
 	ApiKey pulumi.StringOutput `pulumi:"apiKey"`
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	// The Datadog region to export to
-	Site        pulumi.StringOutput `pulumi:"site"`
-	Status      pulumi.StringOutput `pulumi:"status"`
+	// The Datadog region to export to.
+	Site pulumi.StringOutput `pulumi:"site"`
+	// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+	Status pulumi.StringOutput `pulumi:"status"`
+	// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
 	UserMessage pulumi.StringOutput `pulumi:"userMessage"`
 }
 
@@ -71,24 +73,28 @@ func GetMetricExportDatadogConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering MetricExportDatadogConfig resources.
 type metricExportDatadogConfigState struct {
-	// A Datadog API key
+	// A Datadog API key.
 	ApiKey *string `pulumi:"apiKey"`
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
-	// The Datadog region to export to
-	Site        *string `pulumi:"site"`
-	Status      *string `pulumi:"status"`
+	// The Datadog region to export to.
+	Site *string `pulumi:"site"`
+	// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+	Status *string `pulumi:"status"`
+	// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
 	UserMessage *string `pulumi:"userMessage"`
 }
 
 type MetricExportDatadogConfigState struct {
-	// A Datadog API key
+	// A Datadog API key.
 	ApiKey pulumi.StringPtrInput
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
-	// The Datadog region to export to
-	Site        pulumi.StringPtrInput
-	Status      pulumi.StringPtrInput
+	// The Datadog region to export to.
+	Site pulumi.StringPtrInput
+	// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+	Status pulumi.StringPtrInput
+	// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
 	UserMessage pulumi.StringPtrInput
 }
 
@@ -97,21 +103,21 @@ func (MetricExportDatadogConfigState) ElementType() reflect.Type {
 }
 
 type metricExportDatadogConfigArgs struct {
-	// A Datadog API key
+	// A Datadog API key.
 	ApiKey string `pulumi:"apiKey"`
-	// Cluster ID
+	// Cluster ID.
 	ClusterId string `pulumi:"clusterId"`
-	// The Datadog region to export to
+	// The Datadog region to export to.
 	Site string `pulumi:"site"`
 }
 
 // The set of arguments for constructing a MetricExportDatadogConfig resource.
 type MetricExportDatadogConfigArgs struct {
-	// A Datadog API key
+	// A Datadog API key.
 	ApiKey pulumi.StringInput
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringInput
-	// The Datadog region to export to
+	// The Datadog region to export to.
 	Site pulumi.StringInput
 }
 
@@ -202,25 +208,27 @@ func (o MetricExportDatadogConfigOutput) ToMetricExportDatadogConfigOutputWithCo
 	return o
 }
 
-// A Datadog API key
+// A Datadog API key.
 func (o MetricExportDatadogConfigOutput) ApiKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.ApiKey }).(pulumi.StringOutput)
 }
 
-// Cluster ID
+// Cluster ID.
 func (o MetricExportDatadogConfigOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// The Datadog region to export to
+// The Datadog region to export to.
 func (o MetricExportDatadogConfigOutput) Site() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.Site }).(pulumi.StringOutput)
 }
 
+// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
 func (o MetricExportDatadogConfigOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
+// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
 func (o MetricExportDatadogConfigOutput) UserMessage() pulumi.StringOutput {
 	return o.ApplyT(func(v *MetricExportDatadogConfig) pulumi.StringOutput { return v.UserMessage }).(pulumi.StringOutput)
 }

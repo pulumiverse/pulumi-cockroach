@@ -5,27 +5,34 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ApiOidcConfigIdentityMap {
+    /**
+     * The username (email or service account id) of the CC user that the token should map to.
+     */
+    ccIdentity: string;
+    /**
+     * Indicates that the tokenPrincipal field is a regex value.
+     */
+    isRegex: boolean;
+    /**
+     * The token value that needs to be mapped.
+     */
+    tokenIdentity: string;
+}
+
 export interface ClusterDedicated {
     diskIops: number;
     machineType: string;
     memoryGib: number;
     numVirtualCpus: number;
-    /**
-     * Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-     */
     privateNetworkVisibility: boolean;
     storageGib: number;
 }
 
 export interface ClusterRegion {
-    /**
-     * Name of cluster
-     */
+    internalDns: string;
     name: string;
     nodeCount: number;
-    /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     */
     primary: boolean;
     sqlDns: string;
     uiDns: string;
@@ -33,9 +40,6 @@ export interface ClusterRegion {
 
 export interface ClusterServerless {
     routingId: string;
-    /**
-     * Spend limit in US cents.
-     */
     spendLimit?: number;
     usageLimits?: outputs.ClusterServerlessUsageLimits;
 }
@@ -46,11 +50,9 @@ export interface ClusterServerlessUsageLimits {
 }
 
 export interface CmekAdditionalRegion {
+    internalDns: string;
     name: string;
     nodeCount: number;
-    /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     */
     primary: boolean;
     sqlDns: string;
     uiDns: string;
@@ -59,18 +61,12 @@ export interface CmekAdditionalRegion {
 export interface CmekRegion {
     key: outputs.CmekRegionKey;
     region: string;
-    /**
-     * Aggregated status of the cluster's encryption key(s)
-     */
     status: string;
 }
 
 export interface CmekRegionKey {
     authPrincipal: string;
     createdAt: string;
-    /**
-     * Aggregated status of the cluster's encryption key(s)
-     */
     status: string;
     type: string;
     updatedAt: string;
@@ -88,9 +84,7 @@ export interface GetCockroachClusterDedicated {
 }
 
 export interface GetCockroachClusterRegion {
-    /**
-     * Name of cluster
-     */
+    internalDns: string;
     name: string;
     nodeCount: number;
     primary: boolean;
@@ -109,29 +103,34 @@ export interface GetCockroachClusterServerlessUsageLimits {
     storageMibLimit: number;
 }
 
+export interface GetConnectionStringConnectionParams {
+    database: string;
+    host: string;
+    password: string;
+    port: string;
+    username: string;
+}
+
 export interface LogExportConfigGroup {
-    /**
-     * A list of CRDB log channels to include in this group
-     */
     channels: string[];
-    /**
-     * The name of the group, reflected in the log sink
-     */
     logName: string;
-    /**
-     * The minimum log level to filter to this log group
-     */
     minLevel?: string;
-    /**
-     * Governs whether this log group should aggregate redacted logs if unset
-     */
     redact: boolean;
 }
 
 export interface PrivateEndpointServicesService {
     aws: outputs.PrivateEndpointServicesServiceAws;
+    /**
+     * Cloud provider associated with this service.
+     */
     cloudProvider: string;
+    /**
+     * Cloud provider region code associated with this service.
+     */
     regionName: string;
+    /**
+     * Operation status of the service.
+     */
     status: string;
 }
 

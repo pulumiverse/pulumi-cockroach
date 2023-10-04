@@ -15,9 +15,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     public sealed class ClusterServerless
     {
         public readonly string? RoutingId;
-        /// <summary>
-        /// Spend limit in US cents.
-        /// </summary>
         public readonly int? SpendLimit;
         public readonly Outputs.ClusterServerlessUsageLimits? UsageLimits;
 

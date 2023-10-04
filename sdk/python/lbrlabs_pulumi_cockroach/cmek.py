@@ -22,9 +22,10 @@ class CmekArgs:
                  status: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Cmek resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[Sequence[pulumi.Input['CmekAdditionalRegionArgs']]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
-        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s)
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[Sequence[pulumi.Input['CmekAdditionalRegionArgs']]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+               info stored in the CMEK resource. New regions can be added and maintained here instead.
+        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s).
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "regions", regions)
@@ -37,7 +38,7 @@ class CmekArgs:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -58,7 +59,8 @@ class CmekArgs:
     @pulumi.getter(name="additionalRegions")
     def additional_regions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CmekAdditionalRegionArgs']]]]:
         """
-        Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+        Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+        info stored in the CMEK resource. New regions can be added and maintained here instead.
         """
         return pulumi.get(self, "additional_regions")
 
@@ -70,7 +72,7 @@ class CmekArgs:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Aggregated status of the cluster's encryption key(s)
+        Aggregated status of the cluster's encryption key(s).
         """
         return pulumi.get(self, "status")
 
@@ -88,9 +90,10 @@ class _CmekState:
                  status: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Cmek resources.
-        :param pulumi.Input[Sequence[pulumi.Input['CmekAdditionalRegionArgs']]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s)
+        :param pulumi.Input[Sequence[pulumi.Input['CmekAdditionalRegionArgs']]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+               info stored in the CMEK resource. New regions can be added and maintained here instead.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s).
         """
         if additional_regions is not None:
             pulumi.set(__self__, "additional_regions", additional_regions)
@@ -105,7 +108,8 @@ class _CmekState:
     @pulumi.getter(name="additionalRegions")
     def additional_regions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CmekAdditionalRegionArgs']]]]:
         """
-        Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+        Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+        info stored in the CMEK resource. New regions can be added and maintained here instead.
         """
         return pulumi.get(self, "additional_regions")
 
@@ -117,7 +121,7 @@ class _CmekState:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -138,7 +142,7 @@ class _CmekState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Aggregated status of the cluster's encryption key(s)
+        Aggregated status of the cluster's encryption key(s).
         """
         return pulumi.get(self, "status")
 
@@ -158,13 +162,14 @@ class Cmek(pulumi.CustomResource):
                  status: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Customer-managed encryption keys (CMEK) resource for a single cluster
+        Customer-managed encryption keys (CMEK) resource for a single cluster.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CmekAdditionalRegionArgs']]]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s)
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CmekAdditionalRegionArgs']]]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+               info stored in the CMEK resource. New regions can be added and maintained here instead.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s).
         """
         ...
     @overload
@@ -173,7 +178,7 @@ class Cmek(pulumi.CustomResource):
                  args: CmekArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Customer-managed encryption keys (CMEK) resource for a single cluster
+        Customer-managed encryption keys (CMEK) resource for a single cluster.
 
         :param str resource_name: The name of the resource.
         :param CmekArgs args: The arguments to use to populate this resource's properties.
@@ -232,9 +237,10 @@ class Cmek(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CmekAdditionalRegionArgs']]]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s)
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CmekAdditionalRegionArgs']]]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+               info stored in the CMEK resource. New regions can be added and maintained here instead.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -250,7 +256,8 @@ class Cmek(pulumi.CustomResource):
     @pulumi.getter(name="additionalRegions")
     def additional_regions(self) -> pulumi.Output[Optional[Sequence['outputs.CmekAdditionalRegion']]]:
         """
-        Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+        Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+        info stored in the CMEK resource. New regions can be added and maintained here instead.
         """
         return pulumi.get(self, "additional_regions")
 
@@ -258,7 +265,7 @@ class Cmek(pulumi.CustomResource):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -271,7 +278,7 @@ class Cmek(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Aggregated status of the cluster's encryption key(s)
+        Aggregated status of the cluster's encryption key(s).
         """
         return pulumi.get(self, "status")
 

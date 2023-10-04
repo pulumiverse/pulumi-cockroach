@@ -15,26 +15,50 @@ import java.lang.String;
 import javax.annotation.Nullable;
 
 /**
- * Database
+ * CockroachDB database.
  * 
  */
 @ResourceType(type="cockroach:index/database:Database")
 public class Database extends com.pulumi.resources.CustomResource {
+    /**
+     * ID of the cluster the database belongs to.
+     * 
+     */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
+    /**
+     * @return ID of the cluster the database belongs to.
+     * 
+     */
     public Output<String> clusterId() {
         return this.clusterId;
     }
+    /**
+     * Database name.
+     * 
+     */
     @Export(name="name", type=String.class, parameters={})
     private Output<String> name;
 
+    /**
+     * @return Database name.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }
+    /**
+     * Number of tables in the database.
+     * 
+     */
     @Export(name="tableCount", type=Integer.class, parameters={})
     private Output<Integer> tableCount;
 
+    /**
+     * @return Number of tables in the database.
+     * 
+     */
     public Output<Integer> tableCount() {
         return this.tableCount;
     }

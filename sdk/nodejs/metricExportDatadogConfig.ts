@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Metric Export Datadog Config Resource
+ * DataDog metric export configuration for a cluster.
  */
 export class MetricExportDatadogConfig extends pulumi.CustomResource {
     /**
@@ -36,18 +36,24 @@ export class MetricExportDatadogConfig extends pulumi.CustomResource {
     }
 
     /**
-     * A Datadog API key
+     * A Datadog API key.
      */
     public readonly apiKey!: pulumi.Output<string>;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * The Datadog region to export to
+     * The Datadog region to export to.
      */
     public readonly site!: pulumi.Output<string>;
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     */
     public /*out*/ readonly status!: pulumi.Output<string>;
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     */
     public /*out*/ readonly userMessage!: pulumi.Output<string>;
 
     /**
@@ -97,18 +103,24 @@ export class MetricExportDatadogConfig extends pulumi.CustomResource {
  */
 export interface MetricExportDatadogConfigState {
     /**
-     * A Datadog API key
+     * A Datadog API key.
      */
     apiKey?: pulumi.Input<string>;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * The Datadog region to export to
+     * The Datadog region to export to.
      */
     site?: pulumi.Input<string>;
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     */
     status?: pulumi.Input<string>;
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     */
     userMessage?: pulumi.Input<string>;
 }
 
@@ -117,15 +129,15 @@ export interface MetricExportDatadogConfigState {
  */
 export interface MetricExportDatadogConfigArgs {
     /**
-     * A Datadog API key
+     * A Datadog API key.
      */
     apiKey: pulumi.Input<string>;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId: pulumi.Input<string>;
     /**
-     * The Datadog region to export to
+     * The Datadog region to export to.
      */
     site: pulumi.Input<string>;
 }

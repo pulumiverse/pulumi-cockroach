@@ -11,10 +11,7 @@ import java.util.Objects;
 
 @CustomType
 public final class GetCockroachClusterRegion {
-    /**
-     * @return Name of cluster
-     * 
-     */
+    private String internalDns;
     private String name;
     private Integer nodeCount;
     private Boolean primary;
@@ -22,10 +19,9 @@ public final class GetCockroachClusterRegion {
     private String uiDns;
 
     private GetCockroachClusterRegion() {}
-    /**
-     * @return Name of cluster
-     * 
-     */
+    public String internalDns() {
+        return this.internalDns;
+    }
     public String name() {
         return this.name;
     }
@@ -51,6 +47,7 @@ public final class GetCockroachClusterRegion {
     }
     @CustomType.Builder
     public static final class Builder {
+        private String internalDns;
         private String name;
         private Integer nodeCount;
         private Boolean primary;
@@ -59,6 +56,7 @@ public final class GetCockroachClusterRegion {
         public Builder() {}
         public Builder(GetCockroachClusterRegion defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.internalDns = defaults.internalDns;
     	      this.name = defaults.name;
     	      this.nodeCount = defaults.nodeCount;
     	      this.primary = defaults.primary;
@@ -66,6 +64,11 @@ public final class GetCockroachClusterRegion {
     	      this.uiDns = defaults.uiDns;
         }
 
+        @CustomType.Setter
+        public Builder internalDns(String internalDns) {
+            this.internalDns = Objects.requireNonNull(internalDns);
+            return this;
+        }
         @CustomType.Setter
         public Builder name(String name) {
             this.name = Objects.requireNonNull(name);
@@ -93,6 +96,7 @@ public final class GetCockroachClusterRegion {
         }
         public GetCockroachClusterRegion build() {
             final var o = new GetCockroachClusterRegion();
+            o.internalDns = internalDns;
             o.name = name;
             o.nodeCount = nodeCount;
             o.primary = primary;

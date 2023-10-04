@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Role grants
+ * Role grants for a single user.
  */
 export class UserRoleGrants extends pulumi.CustomResource {
     /**
@@ -38,6 +38,9 @@ export class UserRoleGrants extends pulumi.CustomResource {
     }
 
     public readonly roles!: pulumi.Output<outputs.UserRoleGrantsRole[]>;
+    /**
+     * ID of the user to grant these roles to.
+     */
     public readonly userId!: pulumi.Output<string>;
 
     /**
@@ -76,6 +79,9 @@ export class UserRoleGrants extends pulumi.CustomResource {
  */
 export interface UserRoleGrantsState {
     roles?: pulumi.Input<pulumi.Input<inputs.UserRoleGrantsRole>[]>;
+    /**
+     * ID of the user to grant these roles to.
+     */
     userId?: pulumi.Input<string>;
 }
 
@@ -84,5 +90,8 @@ export interface UserRoleGrantsState {
  */
 export interface UserRoleGrantsArgs {
     roles: pulumi.Input<pulumi.Input<inputs.UserRoleGrantsRole>[]>;
+    /**
+     * ID of the user to grant these roles to.
+     */
     userId: pulumi.Input<string>;
 }

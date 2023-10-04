@@ -30,17 +30,9 @@ public final class CmekRegionArgs extends com.pulumi.resources.ResourceArgs {
         return this.region;
     }
 
-    /**
-     * Aggregated status of the cluster&#39;s encryption key(s)
-     * 
-     */
     @Import(name="status")
     private @Nullable Output<String> status;
 
-    /**
-     * @return Aggregated status of the cluster&#39;s encryption key(s)
-     * 
-     */
     public Optional<Output<String>> status() {
         return Optional.ofNullable(this.status);
     }
@@ -89,23 +81,11 @@ public final class CmekRegionArgs extends com.pulumi.resources.ResourceArgs {
             return region(Output.of(region));
         }
 
-        /**
-         * @param status Aggregated status of the cluster&#39;s encryption key(s)
-         * 
-         * @return builder
-         * 
-         */
         public Builder status(@Nullable Output<String> status) {
             $.status = status;
             return this;
         }
 
-        /**
-         * @param status Aggregated status of the cluster&#39;s encryption key(s)
-         * 
-         * @return builder
-         * 
-         */
         public Builder status(String status) {
             return status(Output.of(status));
         }

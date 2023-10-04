@@ -18,34 +18,36 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * Customer-managed encryption keys (CMEK) resource for a single cluster
+ * Customer-managed encryption keys (CMEK) resource for a single cluster.
  * 
  */
 @ResourceType(type="cockroach:index/cmek:Cmek")
 public class Cmek extends com.pulumi.resources.CustomResource {
     /**
-     * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+     * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+     * info stored in the CMEK resource. New regions can be added and maintained here instead.
      * 
      */
     @Export(name="additionalRegions", type=List.class, parameters={CmekAdditionalRegion.class})
     private Output</* @Nullable */ List<CmekAdditionalRegion>> additionalRegions;
 
     /**
-     * @return Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+     * @return Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+     * info stored in the CMEK resource. New regions can be added and maintained here instead.
      * 
      */
     public Output<Optional<List<CmekAdditionalRegion>>> additionalRegions() {
         return Codegen.optional(this.additionalRegions);
     }
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -58,14 +60,14 @@ public class Cmek extends com.pulumi.resources.CustomResource {
         return this.regions;
     }
     /**
-     * Aggregated status of the cluster&#39;s encryption key(s)
+     * Aggregated status of the cluster&#39;s encryption key(s).
      * 
      */
     @Export(name="status", type=String.class, parameters={})
     private Output<String> status;
 
     /**
-     * @return Aggregated status of the cluster&#39;s encryption key(s)
+     * @return Aggregated status of the cluster&#39;s encryption key(s).
      * 
      */
     public Output<String> status() {

@@ -22,6 +22,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "cockroach:index/allowList:AllowList":
 		r = &AllowList{}
+	case "cockroach:index/apiOidcConfig:ApiOidcConfig":
+		r = &ApiOidcConfig{}
 	case "cockroach:index/caCert:CaCert":
 		r = &CaCert{}
 	case "cockroach:index/cluster:Cluster":
@@ -32,6 +34,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Database{}
 	case "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade":
 		r = &FinalizeVersionUpgrade{}
+	case "cockroach:index/folder:Folder":
+		r = &Folder{}
 	case "cockroach:index/logExportConfig:LogExportConfig":
 		r = &LogExportConfig{}
 	case "cockroach:index/maintenanceWindow:MaintenanceWindow":
@@ -44,10 +48,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PrivateEndpointConnection{}
 	case "cockroach:index/privateEndpointServices:PrivateEndpointServices":
 		r = &PrivateEndpointServices{}
+	case "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner":
+		r = &PrivateEndpointTrustedOwner{}
 	case "cockroach:index/sqlUser:SqlUser":
 		r = &SqlUser{}
 	case "cockroach:index/userRoleGrants:UserRoleGrants":
 		r = &UserRoleGrants{}
+	case "cockroach:index/versionDeferral:VersionDeferral":
+		r = &VersionDeferral{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -83,6 +91,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"cockroach",
+		"index/apiOidcConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
 		"index/caCert",
 		&module{version},
 	)
@@ -104,6 +117,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/finalizeVersionUpgrade",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/folder",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -138,12 +156,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"cockroach",
+		"index/privateEndpointTrustedOwner",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
 		"index/sqlUser",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/userRoleGrants",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/versionDeferral",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

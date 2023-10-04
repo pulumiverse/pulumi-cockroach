@@ -11,13 +11,16 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Database
+// CockroachDB database.
 type Database struct {
 	pulumi.CustomResourceState
 
-	ClusterId  pulumi.StringOutput `pulumi:"clusterId"`
-	Name       pulumi.StringOutput `pulumi:"name"`
-	TableCount pulumi.IntOutput    `pulumi:"tableCount"`
+	// ID of the cluster the database belongs to.
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
+	// Database name.
+	Name pulumi.StringOutput `pulumi:"name"`
+	// Number of tables in the database.
+	TableCount pulumi.IntOutput `pulumi:"tableCount"`
 }
 
 // NewDatabase registers a new resource with the given unique name, arguments, and options.
@@ -56,14 +59,20 @@ func GetDatabase(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Database resources.
 type databaseState struct {
-	ClusterId  *string `pulumi:"clusterId"`
-	Name       *string `pulumi:"name"`
-	TableCount *int    `pulumi:"tableCount"`
+	// ID of the cluster the database belongs to.
+	ClusterId *string `pulumi:"clusterId"`
+	// Database name.
+	Name *string `pulumi:"name"`
+	// Number of tables in the database.
+	TableCount *int `pulumi:"tableCount"`
 }
 
 type DatabaseState struct {
-	ClusterId  pulumi.StringPtrInput
-	Name       pulumi.StringPtrInput
+	// ID of the cluster the database belongs to.
+	ClusterId pulumi.StringPtrInput
+	// Database name.
+	Name pulumi.StringPtrInput
+	// Number of tables in the database.
 	TableCount pulumi.IntPtrInput
 }
 
@@ -72,14 +81,18 @@ func (DatabaseState) ElementType() reflect.Type {
 }
 
 type databaseArgs struct {
+	// ID of the cluster the database belongs to.
 	ClusterId string `pulumi:"clusterId"`
-	Name      string `pulumi:"name"`
+	// Database name.
+	Name string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a Database resource.
 type DatabaseArgs struct {
+	// ID of the cluster the database belongs to.
 	ClusterId pulumi.StringInput
-	Name      pulumi.StringInput
+	// Database name.
+	Name pulumi.StringInput
 }
 
 func (DatabaseArgs) ElementType() reflect.Type {
@@ -169,14 +182,17 @@ func (o DatabaseOutput) ToDatabaseOutputWithContext(ctx context.Context) Databas
 	return o
 }
 
+// ID of the cluster the database belongs to.
 func (o DatabaseOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Database) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Database name.
 func (o DatabaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Database) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Number of tables in the database.
 func (o DatabaseOutput) TableCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *Database) pulumi.IntOutput { return v.TableCount }).(pulumi.IntOutput)
 }

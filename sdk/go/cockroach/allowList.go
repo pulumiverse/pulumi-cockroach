@@ -11,16 +11,21 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Allow list of IP range
+// List of IP ranges allowed to access the cluster.
 type AllowList struct {
 	pulumi.CustomResourceState
 
-	CidrIp    pulumi.StringOutput    `pulumi:"cidrIp"`
-	CidrMask  pulumi.IntOutput       `pulumi:"cidrMask"`
-	ClusterId pulumi.StringOutput    `pulumi:"clusterId"`
-	Name      pulumi.StringPtrOutput `pulumi:"name"`
-	Sql       pulumi.BoolOutput      `pulumi:"sql"`
-	Ui        pulumi.BoolOutput      `pulumi:"ui"`
+	// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrIp pulumi.StringOutput `pulumi:"cidrIp"`
+	// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrMask  pulumi.IntOutput    `pulumi:"cidrMask"`
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
+	// Name of this allowlist entry.
+	Name pulumi.StringPtrOutput `pulumi:"name"`
+	// Set to 'true' to allow SQL connections from this CIDR range.
+	Sql pulumi.BoolOutput `pulumi:"sql"`
+	// Set to 'true' to allow access to the management console from this CIDR range.
+	Ui pulumi.BoolOutput `pulumi:"ui"`
 }
 
 // NewAllowList registers a new resource with the given unique name, arguments, and options.
@@ -68,21 +73,31 @@ func GetAllowList(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering AllowList resources.
 type allowListState struct {
-	CidrIp    *string `pulumi:"cidrIp"`
+	// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrIp *string `pulumi:"cidrIp"`
+	// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
 	CidrMask  *int    `pulumi:"cidrMask"`
 	ClusterId *string `pulumi:"clusterId"`
-	Name      *string `pulumi:"name"`
-	Sql       *bool   `pulumi:"sql"`
-	Ui        *bool   `pulumi:"ui"`
+	// Name of this allowlist entry.
+	Name *string `pulumi:"name"`
+	// Set to 'true' to allow SQL connections from this CIDR range.
+	Sql *bool `pulumi:"sql"`
+	// Set to 'true' to allow access to the management console from this CIDR range.
+	Ui *bool `pulumi:"ui"`
 }
 
 type AllowListState struct {
-	CidrIp    pulumi.StringPtrInput
+	// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrIp pulumi.StringPtrInput
+	// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
 	CidrMask  pulumi.IntPtrInput
 	ClusterId pulumi.StringPtrInput
-	Name      pulumi.StringPtrInput
-	Sql       pulumi.BoolPtrInput
-	Ui        pulumi.BoolPtrInput
+	// Name of this allowlist entry.
+	Name pulumi.StringPtrInput
+	// Set to 'true' to allow SQL connections from this CIDR range.
+	Sql pulumi.BoolPtrInput
+	// Set to 'true' to allow access to the management console from this CIDR range.
+	Ui pulumi.BoolPtrInput
 }
 
 func (AllowListState) ElementType() reflect.Type {
@@ -90,22 +105,32 @@ func (AllowListState) ElementType() reflect.Type {
 }
 
 type allowListArgs struct {
-	CidrIp    string  `pulumi:"cidrIp"`
-	CidrMask  int     `pulumi:"cidrMask"`
-	ClusterId string  `pulumi:"clusterId"`
-	Name      *string `pulumi:"name"`
-	Sql       bool    `pulumi:"sql"`
-	Ui        bool    `pulumi:"ui"`
+	// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrIp string `pulumi:"cidrIp"`
+	// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrMask  int    `pulumi:"cidrMask"`
+	ClusterId string `pulumi:"clusterId"`
+	// Name of this allowlist entry.
+	Name *string `pulumi:"name"`
+	// Set to 'true' to allow SQL connections from this CIDR range.
+	Sql bool `pulumi:"sql"`
+	// Set to 'true' to allow access to the management console from this CIDR range.
+	Ui bool `pulumi:"ui"`
 }
 
 // The set of arguments for constructing a AllowList resource.
 type AllowListArgs struct {
-	CidrIp    pulumi.StringInput
+	// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+	CidrIp pulumi.StringInput
+	// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
 	CidrMask  pulumi.IntInput
 	ClusterId pulumi.StringInput
-	Name      pulumi.StringPtrInput
-	Sql       pulumi.BoolInput
-	Ui        pulumi.BoolInput
+	// Name of this allowlist entry.
+	Name pulumi.StringPtrInput
+	// Set to 'true' to allow SQL connections from this CIDR range.
+	Sql pulumi.BoolInput
+	// Set to 'true' to allow access to the management console from this CIDR range.
+	Ui pulumi.BoolInput
 }
 
 func (AllowListArgs) ElementType() reflect.Type {
@@ -195,10 +220,12 @@ func (o AllowListOutput) ToAllowListOutputWithContext(ctx context.Context) Allow
 	return o
 }
 
+// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
 func (o AllowListOutput) CidrIp() pulumi.StringOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.StringOutput { return v.CidrIp }).(pulumi.StringOutput)
 }
 
+// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
 func (o AllowListOutput) CidrMask() pulumi.IntOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.IntOutput { return v.CidrMask }).(pulumi.IntOutput)
 }
@@ -207,14 +234,17 @@ func (o AllowListOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Name of this allowlist entry.
 func (o AllowListOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.StringPtrOutput { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Set to 'true' to allow SQL connections from this CIDR range.
 func (o AllowListOutput) Sql() pulumi.BoolOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.BoolOutput { return v.Sql }).(pulumi.BoolOutput)
 }
 
+// Set to 'true' to allow access to the management console from this CIDR range.
 func (o AllowListOutput) Ui() pulumi.BoolOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.BoolOutput { return v.Ui }).(pulumi.BoolOutput)
 }

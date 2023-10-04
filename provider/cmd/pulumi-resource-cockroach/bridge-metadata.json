@@ -2,19 +2,23 @@
     "renames": {
         "resources": {
             "cockroach:index/allowList:AllowList": "cockroach_allow_list",
+            "cockroach:index/apiOidcConfig:ApiOidcConfig": "cockroach_api_oidc_config",
             "cockroach:index/caCert:CaCert": "cockroach_client_ca_cert",
             "cockroach:index/cluster:Cluster": "cockroach_cluster",
             "cockroach:index/cmek:Cmek": "cockroach_cmek",
             "cockroach:index/database:Database": "cockroach_database",
             "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade": "cockroach_finalize_version_upgrade",
+            "cockroach:index/folder:Folder": "cockroach_folder",
             "cockroach:index/logExportConfig:LogExportConfig": "cockroach_log_export_config",
             "cockroach:index/maintenanceWindow:MaintenanceWindow": "cockroach_maintenance_window",
             "cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig": "cockroach_metric_export_cloudwatch_config",
             "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig": "cockroach_metric_export_datadog_config",
             "cockroach:index/privateEndpointConnection:PrivateEndpointConnection": "cockroach_private_endpoint_connection",
             "cockroach:index/privateEndpointServices:PrivateEndpointServices": "cockroach_private_endpoint_services",
+            "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner": "cockroach_private_endpoint_trusted_owner",
             "cockroach:index/sqlUser:SqlUser": "cockroach_sql_user",
-            "cockroach:index/userRoleGrants:UserRoleGrants": "cockroach_user_role_grants"
+            "cockroach:index/userRoleGrants:UserRoleGrants": "cockroach_user_role_grants",
+            "cockroach:index/versionDeferral:VersionDeferral": "cockroach_version_deferral"
         },
         "functions": {
             "cockroach:index/getClusterCert:getClusterCert": "cockroach_cluster_cert",
@@ -24,6 +28,11 @@
             "cockroach:index/getPersonUser:getPersonUser": "cockroach_person_user"
         },
         "renamedProperties": {
+            "cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap": {
+                "ccIdentity": "cc_identity",
+                "isRegex": "is_regex",
+                "tokenIdentity": "token_identity"
+            },
             "cockroach:index/ClusterDedicated:ClusterDedicated": {
                 "diskIops": "disk_iops",
                 "machineType": "machine_type",
@@ -33,6 +42,7 @@
                 "storageGib": "storage_gib"
             },
             "cockroach:index/ClusterRegion:ClusterRegion": {
+                "internalDns": "internal_dns",
                 "nodeCount": "node_count",
                 "sqlDns": "sql_dns",
                 "uiDns": "ui_dns"
@@ -47,6 +57,7 @@
                 "storageMibLimit": "storage_mib_limit"
             },
             "cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion": {
+                "internalDns": "internal_dns",
                 "nodeCount": "node_count",
                 "sqlDns": "sql_dns",
                 "uiDns": "ui_dns"
@@ -80,6 +91,9 @@
                 "cidrMask": "cidr_mask",
                 "clusterId": "cluster_id"
             },
+            "cockroach:index/apiOidcConfig:ApiOidcConfig": {
+                "identityMaps": "identity_map"
+            },
             "cockroach:index/caCert:CaCert": {
                 "clusterId": "id",
                 "x509PemCert": "x509_pem_cert"
@@ -91,6 +105,7 @@
                 "cockroachVersion": "cockroach_version",
                 "creatorId": "creator_id",
                 "operationStatus": "operation_status",
+                "parentId": "parent_id",
                 "upgradeStatus": "upgrade_status"
             },
             "cockroach:index/cmek:Cmek": {
@@ -105,12 +120,16 @@
                 "clusterId": "id",
                 "cockroachVersion": "cockroach_version"
             },
+            "cockroach:index/folder:Folder": {
+                "parentId": "parent_id"
+            },
             "cockroach:index/getCockroachCluster:getCockroachCluster": {
                 "accountId": "account_id",
                 "cloudProvider": "cloud_provider",
                 "cockroachVersion": "cockroach_version",
                 "creatorId": "creator_id",
                 "operationStatus": "operation_status",
+                "parentId": "parent_id",
                 "upgradeStatus": "upgrade_status"
             },
             "cockroach:index/getCockroachClusterDedicated:getCockroachClusterDedicated": {
@@ -122,6 +141,7 @@
                 "storageGib": "storage_gib"
             },
             "cockroach:index/getCockroachClusterRegion:getCockroachClusterRegion": {
+                "internalDns": "internal_dns",
                 "nodeCount": "node_count",
                 "sqlDns": "sql_dns",
                 "uiDns": "ui_dns"
@@ -148,6 +168,7 @@
                 "clusterId": "id",
                 "createdAt": "created_at",
                 "logName": "log_name",
+                "omittedChannels": "omitted_channels",
                 "updatedAt": "updated_at",
                 "userMessage": "user_message"
             },
@@ -178,11 +199,19 @@
             "cockroach:index/privateEndpointServices:PrivateEndpointServices": {
                 "clusterId": "cluster_id"
             },
+            "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner": {
+                "clusterId": "cluster_id",
+                "externalOwnerId": "external_owner_id",
+                "ownerId": "owner_id"
+            },
             "cockroach:index/sqlUser:SqlUser": {
                 "clusterId": "cluster_id"
             },
             "cockroach:index/userRoleGrants:UserRoleGrants": {
                 "userId": "user_id"
+            },
+            "cockroach:index/versionDeferral:VersionDeferral": {
+                "deferralPolicy": "deferral_policy"
             }
         }
     }

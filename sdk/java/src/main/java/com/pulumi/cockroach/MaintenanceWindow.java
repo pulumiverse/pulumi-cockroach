@@ -15,48 +15,48 @@ import java.lang.String;
 import javax.annotation.Nullable;
 
 /**
- * Maintenance window resource for a cluster.
+ * Maintenance window configuration for a cluster.
  * 
  */
 @ResourceType(type="cockroach:index/maintenanceWindow:MaintenanceWindow")
 public class MaintenanceWindow extends com.pulumi.resources.CustomResource {
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
         return this.clusterId;
     }
     /**
-     * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      * 
      */
     @Export(name="offsetDuration", type=Integer.class, parameters={})
     private Output<Integer> offsetDuration;
 
     /**
-     * @return The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * @return Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      * 
      */
     public Output<Integer> offsetDuration() {
         return this.offsetDuration;
     }
     /**
-     * The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * Duration in seconds that the maintenance window will remain active for after it starts.
      * 
      */
     @Export(name="windowDuration", type=Integer.class, parameters={})
     private Output<Integer> windowDuration;
 
     /**
-     * @return The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * @return Duration in seconds that the maintenance window will remain active for after it starts.
      * 
      */
     public Output<Integer> windowDuration() {

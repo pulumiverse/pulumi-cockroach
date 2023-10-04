@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Metric Export CloudWatch Config Resource
+ * Amazon CloudWatch metric export configuration for a cluster.
  */
 export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
     /**
@@ -36,7 +36,7 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
@@ -47,11 +47,17 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
      * The IAM role used to upload metric segments to the target AWS account.
      */
     public readonly roleArn!: pulumi.Output<string>;
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
      * The specific AWS region that the metrics will be exported to.
      */
     public readonly targetRegion!: pulumi.Output<string>;
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     */
     public /*out*/ readonly userMessage!: pulumi.Output<string>;
 
     /**
@@ -98,7 +104,7 @@ export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
  */
 export interface MetricExportCloudwatchConfigState {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId?: pulumi.Input<string>;
     /**
@@ -109,11 +115,17 @@ export interface MetricExportCloudwatchConfigState {
      * The IAM role used to upload metric segments to the target AWS account.
      */
     roleArn?: pulumi.Input<string>;
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     */
     status?: pulumi.Input<string>;
     /**
      * The specific AWS region that the metrics will be exported to.
      */
     targetRegion?: pulumi.Input<string>;
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     */
     userMessage?: pulumi.Input<string>;
 }
 
@@ -122,7 +134,7 @@ export interface MetricExportCloudwatchConfigState {
  */
 export interface MetricExportCloudwatchConfigArgs {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId: pulumi.Input<string>;
     /**

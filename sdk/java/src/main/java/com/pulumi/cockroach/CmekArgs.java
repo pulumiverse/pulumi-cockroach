@@ -19,14 +19,16 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
     public static final CmekArgs Empty = new CmekArgs();
 
     /**
-     * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+     * Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+     * info stored in the CMEK resource. New regions can be added and maintained here instead.
      * 
      */
     @Import(name="additionalRegions")
     private @Nullable Output<List<CmekAdditionalRegionArgs>> additionalRegions;
 
     /**
-     * @return Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+     * @return Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+     * info stored in the CMEK resource. New regions can be added and maintained here instead.
      * 
      */
     public Optional<Output<List<CmekAdditionalRegionArgs>>> additionalRegions() {
@@ -34,14 +36,14 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -56,14 +58,14 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Aggregated status of the cluster&#39;s encryption key(s)
+     * Aggregated status of the cluster&#39;s encryption key(s).
      * 
      */
     @Import(name="status")
     private @Nullable Output<String> status;
 
     /**
-     * @return Aggregated status of the cluster&#39;s encryption key(s)
+     * @return Aggregated status of the cluster&#39;s encryption key(s).
      * 
      */
     public Optional<Output<String>> status() {
@@ -98,7 +100,8 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param additionalRegions Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+         * @param additionalRegions Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+         * info stored in the CMEK resource. New regions can be added and maintained here instead.
          * 
          * @return builder
          * 
@@ -109,7 +112,8 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param additionalRegions Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+         * @param additionalRegions Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+         * info stored in the CMEK resource. New regions can be added and maintained here instead.
          * 
          * @return builder
          * 
@@ -119,7 +123,8 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param additionalRegions Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+         * @param additionalRegions Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+         * info stored in the CMEK resource. New regions can be added and maintained here instead.
          * 
          * @return builder
          * 
@@ -129,7 +134,7 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -140,7 +145,7 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -163,7 +168,7 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param status Aggregated status of the cluster&#39;s encryption key(s)
+         * @param status Aggregated status of the cluster&#39;s encryption key(s).
          * 
          * @return builder
          * 
@@ -174,7 +179,7 @@ public final class CmekArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param status Aggregated status of the cluster&#39;s encryption key(s)
+         * @param status Aggregated status of the cluster&#39;s encryption key(s).
          * 
          * @return builder
          * 

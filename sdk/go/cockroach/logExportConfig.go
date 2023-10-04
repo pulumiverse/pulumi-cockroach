@@ -11,26 +11,35 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Log Export Config Resource
+// Log Export configuration for a cluster.
 type LogExportConfig struct {
 	pulumi.CustomResourceState
 
-	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+	// Project ID that the cluster service account has permissions to write to for cloud logging.
 	AuthPrincipal pulumi.StringOutput `pulumi:"authPrincipal"`
-	// Cluster ID
-	ClusterId pulumi.StringOutput             `pulumi:"clusterId"`
+	// Cluster ID.
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
+	// Indicates when log export was initially configured.
 	CreatedAt pulumi.StringOutput             `pulumi:"createdAt"`
 	Groups    LogExportConfigGroupArrayOutput `pulumi:"groups"`
-	// An identifier for the logs in the customer's log sink
+	// An identifier for the logs in the customer's log sink.
 	LogName pulumi.StringOutput `pulumi:"logName"`
-	// Controls whether logs are redacted before forwarding to customer sinks
+	// Controls what CRDB channels do not get exported.
+	OmittedChannels pulumi.StringArrayOutput `pulumi:"omittedChannels"`
+	// Controls whether logs are redacted before forwarding to customer sinks.
 	Redact pulumi.BoolPtrOutput `pulumi:"redact"`
-	// Controls whether all logs are sent to a specific region in the customer sink
+	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region pulumi.StringOutput `pulumi:"region"`
+	// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 	Status pulumi.StringOutput `pulumi:"status"`
-	// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
-	Type        pulumi.StringOutput `pulumi:"type"`
-	UpdatedAt   pulumi.StringOutput `pulumi:"updatedAt"`
+	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+	// GCP_CLOUD_LOGGING
+	Type pulumi.StringOutput `pulumi:"type"`
+	// Indicates when the log export configuration was last updated.
+	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
+	// Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+	// operations.
 	UserMessage pulumi.StringOutput `pulumi:"userMessage"`
 }
 
@@ -76,42 +85,60 @@ func GetLogExportConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering LogExportConfig resources.
 type logExportConfigState struct {
-	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+	// Project ID that the cluster service account has permissions to write to for cloud logging.
 	AuthPrincipal *string `pulumi:"authPrincipal"`
-	// Cluster ID
-	ClusterId *string                `pulumi:"clusterId"`
+	// Cluster ID.
+	ClusterId *string `pulumi:"clusterId"`
+	// Indicates when log export was initially configured.
 	CreatedAt *string                `pulumi:"createdAt"`
 	Groups    []LogExportConfigGroup `pulumi:"groups"`
-	// An identifier for the logs in the customer's log sink
+	// An identifier for the logs in the customer's log sink.
 	LogName *string `pulumi:"logName"`
-	// Controls whether logs are redacted before forwarding to customer sinks
+	// Controls what CRDB channels do not get exported.
+	OmittedChannels []string `pulumi:"omittedChannels"`
+	// Controls whether logs are redacted before forwarding to customer sinks.
 	Redact *bool `pulumi:"redact"`
-	// Controls whether all logs are sent to a specific region in the customer sink
+	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region *string `pulumi:"region"`
+	// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 	Status *string `pulumi:"status"`
-	// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
-	Type        *string `pulumi:"type"`
-	UpdatedAt   *string `pulumi:"updatedAt"`
+	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+	// GCP_CLOUD_LOGGING
+	Type *string `pulumi:"type"`
+	// Indicates when the log export configuration was last updated.
+	UpdatedAt *string `pulumi:"updatedAt"`
+	// Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+	// operations.
 	UserMessage *string `pulumi:"userMessage"`
 }
 
 type LogExportConfigState struct {
-	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+	// Project ID that the cluster service account has permissions to write to for cloud logging.
 	AuthPrincipal pulumi.StringPtrInput
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
+	// Indicates when log export was initially configured.
 	CreatedAt pulumi.StringPtrInput
 	Groups    LogExportConfigGroupArrayInput
-	// An identifier for the logs in the customer's log sink
+	// An identifier for the logs in the customer's log sink.
 	LogName pulumi.StringPtrInput
-	// Controls whether logs are redacted before forwarding to customer sinks
+	// Controls what CRDB channels do not get exported.
+	OmittedChannels pulumi.StringArrayInput
+	// Controls whether logs are redacted before forwarding to customer sinks.
 	Redact pulumi.BoolPtrInput
-	// Controls whether all logs are sent to a specific region in the customer sink
+	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region pulumi.StringPtrInput
+	// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 	Status pulumi.StringPtrInput
-	// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
-	Type        pulumi.StringPtrInput
-	UpdatedAt   pulumi.StringPtrInput
+	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+	// GCP_CLOUD_LOGGING
+	Type pulumi.StringPtrInput
+	// Indicates when the log export configuration was last updated.
+	UpdatedAt pulumi.StringPtrInput
+	// Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+	// operations.
 	UserMessage pulumi.StringPtrInput
 }
 
@@ -120,35 +147,43 @@ func (LogExportConfigState) ElementType() reflect.Type {
 }
 
 type logExportConfigArgs struct {
-	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+	// Project ID that the cluster service account has permissions to write to for cloud logging.
 	AuthPrincipal string `pulumi:"authPrincipal"`
-	// Cluster ID
+	// Cluster ID.
 	ClusterId string                 `pulumi:"clusterId"`
 	Groups    []LogExportConfigGroup `pulumi:"groups"`
-	// An identifier for the logs in the customer's log sink
+	// An identifier for the logs in the customer's log sink.
 	LogName string `pulumi:"logName"`
-	// Controls whether logs are redacted before forwarding to customer sinks
+	// Controls what CRDB channels do not get exported.
+	OmittedChannels []string `pulumi:"omittedChannels"`
+	// Controls whether logs are redacted before forwarding to customer sinks.
 	Redact *bool `pulumi:"redact"`
-	// Controls whether all logs are sent to a specific region in the customer sink
+	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region *string `pulumi:"region"`
-	// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+	// GCP_CLOUD_LOGGING
 	Type string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a LogExportConfig resource.
 type LogExportConfigArgs struct {
-	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+	// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+	// Project ID that the cluster service account has permissions to write to for cloud logging.
 	AuthPrincipal pulumi.StringInput
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringInput
 	Groups    LogExportConfigGroupArrayInput
-	// An identifier for the logs in the customer's log sink
+	// An identifier for the logs in the customer's log sink.
 	LogName pulumi.StringInput
-	// Controls whether logs are redacted before forwarding to customer sinks
+	// Controls what CRDB channels do not get exported.
+	OmittedChannels pulumi.StringArrayInput
+	// Controls whether logs are redacted before forwarding to customer sinks.
 	Redact pulumi.BoolPtrInput
-	// Controls whether all logs are sent to a specific region in the customer sink
+	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region pulumi.StringPtrInput
-	// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+	// GCP_CLOUD_LOGGING
 	Type pulumi.StringInput
 }
 
@@ -239,16 +274,18 @@ func (o LogExportConfigOutput) ToLogExportConfigOutputWithContext(ctx context.Co
 	return o
 }
 
-// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+// Project ID that the cluster service account has permissions to write to for cloud logging.
 func (o LogExportConfigOutput) AuthPrincipal() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.AuthPrincipal }).(pulumi.StringOutput)
 }
 
-// Cluster ID
+// Cluster ID.
 func (o LogExportConfigOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Indicates when log export was initially configured.
 func (o LogExportConfigOutput) CreatedAt() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.CreatedAt }).(pulumi.StringOutput)
 }
@@ -257,34 +294,44 @@ func (o LogExportConfigOutput) Groups() LogExportConfigGroupArrayOutput {
 	return o.ApplyT(func(v *LogExportConfig) LogExportConfigGroupArrayOutput { return v.Groups }).(LogExportConfigGroupArrayOutput)
 }
 
-// An identifier for the logs in the customer's log sink
+// An identifier for the logs in the customer's log sink.
 func (o LogExportConfigOutput) LogName() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.LogName }).(pulumi.StringOutput)
 }
 
-// Controls whether logs are redacted before forwarding to customer sinks
+// Controls what CRDB channels do not get exported.
+func (o LogExportConfigOutput) OmittedChannels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *LogExportConfig) pulumi.StringArrayOutput { return v.OmittedChannels }).(pulumi.StringArrayOutput)
+}
+
+// Controls whether logs are redacted before forwarding to customer sinks.
 func (o LogExportConfigOutput) Redact() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.BoolPtrOutput { return v.Redact }).(pulumi.BoolPtrOutput)
 }
 
-// Controls whether all logs are sent to a specific region in the customer sink
+// Controls whether all logs are sent to a specific region in the customer sink.
 func (o LogExportConfigOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.Region }).(pulumi.StringOutput)
 }
 
+// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 func (o LogExportConfigOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+// GCP_CLOUD_LOGGING
 func (o LogExportConfigOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
 
+// Indicates when the log export configuration was last updated.
 func (o LogExportConfigOutput) UpdatedAt() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.UpdatedAt }).(pulumi.StringOutput)
 }
 
+// Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+// operations.
 func (o LogExportConfigOutput) UserMessage() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.UserMessage }).(pulumi.StringOutput)
 }

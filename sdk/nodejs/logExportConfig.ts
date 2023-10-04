@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Log Export Config Resource
+ * Log Export configuration for a cluster.
  */
 export class LogExportConfig extends pulumi.CustomResource {
     /**
@@ -38,33 +38,52 @@ export class LogExportConfig extends pulumi.CustomResource {
     }
 
     /**
-     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      */
     public readonly authPrincipal!: pulumi.Output<string>;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     public readonly clusterId!: pulumi.Output<string>;
+    /**
+     * Indicates when log export was initially configured.
+     */
     public /*out*/ readonly createdAt!: pulumi.Output<string>;
     public readonly groups!: pulumi.Output<outputs.LogExportConfigGroup[] | undefined>;
     /**
-     * An identifier for the logs in the customer's log sink
+     * An identifier for the logs in the customer's log sink.
      */
     public readonly logName!: pulumi.Output<string>;
     /**
-     * Controls whether logs are redacted before forwarding to customer sinks
+     * Controls what CRDB channels do not get exported.
+     */
+    public readonly omittedChannels!: pulumi.Output<string[] | undefined>;
+    /**
+     * Controls whether logs are redacted before forwarding to customer sinks.
      */
     public readonly redact!: pulumi.Output<boolean | undefined>;
     /**
-     * Controls whether all logs are sent to a specific region in the customer sink
+     * Controls whether all logs are sent to a specific region in the customer sink.
      */
     public readonly region!: pulumi.Output<string>;
+    /**
+     * Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+     */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      */
     public readonly type!: pulumi.Output<string>;
+    /**
+     * Indicates when the log export configuration was last updated.
+     */
     public /*out*/ readonly updatedAt!: pulumi.Output<string>;
+    /**
+     * Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+     * operations.
+     */
     public /*out*/ readonly userMessage!: pulumi.Output<string>;
 
     /**
@@ -85,6 +104,7 @@ export class LogExportConfig extends pulumi.CustomResource {
             resourceInputs["createdAt"] = state ? state.createdAt : undefined;
             resourceInputs["groups"] = state ? state.groups : undefined;
             resourceInputs["logName"] = state ? state.logName : undefined;
+            resourceInputs["omittedChannels"] = state ? state.omittedChannels : undefined;
             resourceInputs["redact"] = state ? state.redact : undefined;
             resourceInputs["region"] = state ? state.region : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -109,6 +129,7 @@ export class LogExportConfig extends pulumi.CustomResource {
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["groups"] = args ? args.groups : undefined;
             resourceInputs["logName"] = args ? args.logName : undefined;
+            resourceInputs["omittedChannels"] = args ? args.omittedChannels : undefined;
             resourceInputs["redact"] = args ? args.redact : undefined;
             resourceInputs["region"] = args ? args.region : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
@@ -127,33 +148,52 @@ export class LogExportConfig extends pulumi.CustomResource {
  */
 export interface LogExportConfigState {
     /**
-     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      */
     authPrincipal?: pulumi.Input<string>;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId?: pulumi.Input<string>;
+    /**
+     * Indicates when log export was initially configured.
+     */
     createdAt?: pulumi.Input<string>;
     groups?: pulumi.Input<pulumi.Input<inputs.LogExportConfigGroup>[]>;
     /**
-     * An identifier for the logs in the customer's log sink
+     * An identifier for the logs in the customer's log sink.
      */
     logName?: pulumi.Input<string>;
     /**
-     * Controls whether logs are redacted before forwarding to customer sinks
+     * Controls what CRDB channels do not get exported.
+     */
+    omittedChannels?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Controls whether logs are redacted before forwarding to customer sinks.
      */
     redact?: pulumi.Input<boolean>;
     /**
-     * Controls whether all logs are sent to a specific region in the customer sink
+     * Controls whether all logs are sent to a specific region in the customer sink.
      */
     region?: pulumi.Input<string>;
+    /**
+     * Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+     */
     status?: pulumi.Input<string>;
     /**
-     * The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      */
     type?: pulumi.Input<string>;
+    /**
+     * Indicates when the log export configuration was last updated.
+     */
     updatedAt?: pulumi.Input<string>;
+    /**
+     * Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+     * operations.
+     */
     userMessage?: pulumi.Input<string>;
 }
 
@@ -162,28 +202,34 @@ export interface LogExportConfigState {
  */
 export interface LogExportConfigArgs {
     /**
-     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      */
     authPrincipal: pulumi.Input<string>;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId: pulumi.Input<string>;
     groups?: pulumi.Input<pulumi.Input<inputs.LogExportConfigGroup>[]>;
     /**
-     * An identifier for the logs in the customer's log sink
+     * An identifier for the logs in the customer's log sink.
      */
     logName: pulumi.Input<string>;
     /**
-     * Controls whether logs are redacted before forwarding to customer sinks
+     * Controls what CRDB channels do not get exported.
+     */
+    omittedChannels?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Controls whether logs are redacted before forwarding to customer sinks.
      */
     redact?: pulumi.Input<boolean>;
     /**
-     * Controls whether all logs are sent to a specific region in the customer sink
+     * Controls whether all logs are sent to a specific region in the customer sink.
      */
     region?: pulumi.Input<string>;
     /**
-     * The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      */
     type: pulumi.Input<string>;
 }

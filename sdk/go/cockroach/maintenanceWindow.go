@@ -11,15 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Maintenance window resource for a cluster.
+// Maintenance window configuration for a cluster.
 type MaintenanceWindow struct {
 	pulumi.CustomResourceState
 
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+	// Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
 	OffsetDuration pulumi.IntOutput `pulumi:"offsetDuration"`
-	// The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+	// Duration in seconds that the maintenance window will remain active for after it starts.
 	WindowDuration pulumi.IntOutput `pulumi:"windowDuration"`
 }
 
@@ -62,20 +62,20 @@ func GetMaintenanceWindow(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering MaintenanceWindow resources.
 type maintenanceWindowState struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
-	// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+	// Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
 	OffsetDuration *int `pulumi:"offsetDuration"`
-	// The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+	// Duration in seconds that the maintenance window will remain active for after it starts.
 	WindowDuration *int `pulumi:"windowDuration"`
 }
 
 type MaintenanceWindowState struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
-	// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+	// Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
 	OffsetDuration pulumi.IntPtrInput
-	// The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+	// Duration in seconds that the maintenance window will remain active for after it starts.
 	WindowDuration pulumi.IntPtrInput
 }
 
@@ -84,21 +84,21 @@ func (MaintenanceWindowState) ElementType() reflect.Type {
 }
 
 type maintenanceWindowArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId string `pulumi:"clusterId"`
-	// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+	// Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
 	OffsetDuration int `pulumi:"offsetDuration"`
-	// The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+	// Duration in seconds that the maintenance window will remain active for after it starts.
 	WindowDuration int `pulumi:"windowDuration"`
 }
 
 // The set of arguments for constructing a MaintenanceWindow resource.
 type MaintenanceWindowArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringInput
-	// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+	// Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
 	OffsetDuration pulumi.IntInput
-	// The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+	// Duration in seconds that the maintenance window will remain active for after it starts.
 	WindowDuration pulumi.IntInput
 }
 
@@ -189,17 +189,17 @@ func (o MaintenanceWindowOutput) ToMaintenanceWindowOutputWithContext(ctx contex
 	return o
 }
 
-// Cluster ID
+// Cluster ID.
 func (o MaintenanceWindowOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *MaintenanceWindow) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+// Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
 func (o MaintenanceWindowOutput) OffsetDuration() pulumi.IntOutput {
 	return o.ApplyT(func(v *MaintenanceWindow) pulumi.IntOutput { return v.OffsetDuration }).(pulumi.IntOutput)
 }
 
-// The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+// Duration in seconds that the maintenance window will remain active for after it starts.
 func (o MaintenanceWindowOutput) WindowDuration() pulumi.IntOutput {
 	return o.ApplyT(func(v *MaintenanceWindow) pulumi.IntOutput { return v.WindowDuration }).(pulumi.IntOutput)
 }

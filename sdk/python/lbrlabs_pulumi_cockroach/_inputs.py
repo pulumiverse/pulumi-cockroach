@@ -10,6 +10,7 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
+    'ApiOidcConfigIdentityMapArgs',
     'ClusterDedicatedArgs',
     'ClusterRegionArgs',
     'ClusterServerlessArgs',
@@ -24,6 +25,59 @@ __all__ = [
 ]
 
 @pulumi.input_type
+class ApiOidcConfigIdentityMapArgs:
+    def __init__(__self__, *,
+                 cc_identity: pulumi.Input[str],
+                 token_identity: pulumi.Input[str],
+                 is_regex: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] cc_identity: The username (email or service account id) of the CC user that the token should map to.
+        :param pulumi.Input[str] token_identity: The token value that needs to be mapped.
+        :param pulumi.Input[bool] is_regex: Indicates that the token_principal field is a regex value.
+        """
+        pulumi.set(__self__, "cc_identity", cc_identity)
+        pulumi.set(__self__, "token_identity", token_identity)
+        if is_regex is not None:
+            pulumi.set(__self__, "is_regex", is_regex)
+
+    @property
+    @pulumi.getter(name="ccIdentity")
+    def cc_identity(self) -> pulumi.Input[str]:
+        """
+        The username (email or service account id) of the CC user that the token should map to.
+        """
+        return pulumi.get(self, "cc_identity")
+
+    @cc_identity.setter
+    def cc_identity(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cc_identity", value)
+
+    @property
+    @pulumi.getter(name="tokenIdentity")
+    def token_identity(self) -> pulumi.Input[str]:
+        """
+        The token value that needs to be mapped.
+        """
+        return pulumi.get(self, "token_identity")
+
+    @token_identity.setter
+    def token_identity(self, value: pulumi.Input[str]):
+        pulumi.set(self, "token_identity", value)
+
+    @property
+    @pulumi.getter(name="isRegex")
+    def is_regex(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates that the token_principal field is a regex value.
+        """
+        return pulumi.get(self, "is_regex")
+
+    @is_regex.setter
+    def is_regex(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_regex", value)
+
+
+@pulumi.input_type
 class ClusterDedicatedArgs:
     def __init__(__self__, *,
                  disk_iops: Optional[pulumi.Input[int]] = None,
@@ -32,9 +86,6 @@ class ClusterDedicatedArgs:
                  num_virtual_cpus: Optional[pulumi.Input[int]] = None,
                  private_network_visibility: Optional[pulumi.Input[bool]] = None,
                  storage_gib: Optional[pulumi.Input[int]] = None):
-        """
-        :param pulumi.Input[bool] private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-        """
         if disk_iops is not None:
             pulumi.set(__self__, "disk_iops", disk_iops)
         if machine_type is not None:
@@ -87,9 +138,6 @@ class ClusterDedicatedArgs:
     @property
     @pulumi.getter(name="privateNetworkVisibility")
     def private_network_visibility(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-        """
         return pulumi.get(self, "private_network_visibility")
 
     @private_network_visibility.setter
@@ -110,15 +158,14 @@ class ClusterDedicatedArgs:
 class ClusterRegionArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
+                 internal_dns: Optional[pulumi.Input[str]] = None,
                  node_count: Optional[pulumi.Input[int]] = None,
                  primary: Optional[pulumi.Input[bool]] = None,
                  sql_dns: Optional[pulumi.Input[str]] = None,
                  ui_dns: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] name: Name of cluster
-        :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-        """
         pulumi.set(__self__, "name", name)
+        if internal_dns is not None:
+            pulumi.set(__self__, "internal_dns", internal_dns)
         if node_count is not None:
             pulumi.set(__self__, "node_count", node_count)
         if primary is not None:
@@ -131,14 +178,20 @@ class ClusterRegionArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
-        """
-        Name of cluster
-        """
         return pulumi.get(self, "name")
 
     @name.setter
     def name(self, value: pulumi.Input[str]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="internalDns")
+    def internal_dns(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "internal_dns")
+
+    @internal_dns.setter
+    def internal_dns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internal_dns", value)
 
     @property
     @pulumi.getter(name="nodeCount")
@@ -152,9 +205,6 @@ class ClusterRegionArgs:
     @property
     @pulumi.getter
     def primary(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-        """
         return pulumi.get(self, "primary")
 
     @primary.setter
@@ -186,9 +236,6 @@ class ClusterServerlessArgs:
                  routing_id: Optional[pulumi.Input[str]] = None,
                  spend_limit: Optional[pulumi.Input[int]] = None,
                  usage_limits: Optional[pulumi.Input['ClusterServerlessUsageLimitsArgs']] = None):
-        """
-        :param pulumi.Input[int] spend_limit: Spend limit in US cents.
-        """
         if routing_id is not None:
             pulumi.set(__self__, "routing_id", routing_id)
         if spend_limit is not None:
@@ -208,9 +255,6 @@ class ClusterServerlessArgs:
     @property
     @pulumi.getter(name="spendLimit")
     def spend_limit(self) -> Optional[pulumi.Input[int]]:
-        """
-        Spend limit in US cents.
-        """
         return pulumi.get(self, "spend_limit")
 
     @spend_limit.setter
@@ -258,14 +302,14 @@ class ClusterServerlessUsageLimitsArgs:
 class CmekAdditionalRegionArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
+                 internal_dns: Optional[pulumi.Input[str]] = None,
                  node_count: Optional[pulumi.Input[int]] = None,
                  primary: Optional[pulumi.Input[bool]] = None,
                  sql_dns: Optional[pulumi.Input[str]] = None,
                  ui_dns: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-        """
         pulumi.set(__self__, "name", name)
+        if internal_dns is not None:
+            pulumi.set(__self__, "internal_dns", internal_dns)
         if node_count is not None:
             pulumi.set(__self__, "node_count", node_count)
         if primary is not None:
@@ -285,6 +329,15 @@ class CmekAdditionalRegionArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="internalDns")
+    def internal_dns(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "internal_dns")
+
+    @internal_dns.setter
+    def internal_dns(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "internal_dns", value)
+
+    @property
     @pulumi.getter(name="nodeCount")
     def node_count(self) -> Optional[pulumi.Input[int]]:
         return pulumi.get(self, "node_count")
@@ -296,9 +349,6 @@ class CmekAdditionalRegionArgs:
     @property
     @pulumi.getter
     def primary(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-        """
         return pulumi.get(self, "primary")
 
     @primary.setter
@@ -330,9 +380,6 @@ class CmekRegionArgs:
                  key: pulumi.Input['CmekRegionKeyArgs'],
                  region: pulumi.Input[str],
                  status: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s)
-        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "region", region)
         if status is not None:
@@ -359,9 +406,6 @@ class CmekRegionArgs:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
-        """
-        Aggregated status of the cluster's encryption key(s)
-        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -379,9 +423,6 @@ class CmekRegionKeyArgs:
                  status: Optional[pulumi.Input[str]] = None,
                  updated_at: Optional[pulumi.Input[str]] = None,
                  user_message: Optional[pulumi.Input[str]] = None):
-        """
-        :param pulumi.Input[str] status: Aggregated status of the cluster's encryption key(s)
-        """
         pulumi.set(__self__, "auth_principal", auth_principal)
         pulumi.set(__self__, "type", type)
         pulumi.set(__self__, "uri", uri)
@@ -433,9 +474,6 @@ class CmekRegionKeyArgs:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
-        """
-        Aggregated status of the cluster's encryption key(s)
-        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -468,12 +506,6 @@ class LogExportConfigGroupArgs:
                  log_name: pulumi.Input[str],
                  min_level: Optional[pulumi.Input[str]] = None,
                  redact: Optional[pulumi.Input[bool]] = None):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] channels: A list of CRDB log channels to include in this group
-        :param pulumi.Input[str] log_name: The name of the group, reflected in the log sink
-        :param pulumi.Input[str] min_level: The minimum log level to filter to this log group
-        :param pulumi.Input[bool] redact: Governs whether this log group should aggregate redacted logs if unset
-        """
         pulumi.set(__self__, "channels", channels)
         pulumi.set(__self__, "log_name", log_name)
         if min_level is not None:
@@ -484,9 +516,6 @@ class LogExportConfigGroupArgs:
     @property
     @pulumi.getter
     def channels(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
-        """
-        A list of CRDB log channels to include in this group
-        """
         return pulumi.get(self, "channels")
 
     @channels.setter
@@ -496,9 +525,6 @@ class LogExportConfigGroupArgs:
     @property
     @pulumi.getter(name="logName")
     def log_name(self) -> pulumi.Input[str]:
-        """
-        The name of the group, reflected in the log sink
-        """
         return pulumi.get(self, "log_name")
 
     @log_name.setter
@@ -508,9 +534,6 @@ class LogExportConfigGroupArgs:
     @property
     @pulumi.getter(name="minLevel")
     def min_level(self) -> Optional[pulumi.Input[str]]:
-        """
-        The minimum log level to filter to this log group
-        """
         return pulumi.get(self, "min_level")
 
     @min_level.setter
@@ -520,9 +543,6 @@ class LogExportConfigGroupArgs:
     @property
     @pulumi.getter
     def redact(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Governs whether this log group should aggregate redacted logs if unset
-        """
         return pulumi.get(self, "redact")
 
     @redact.setter
@@ -537,6 +557,11 @@ class PrivateEndpointServicesServiceArgs:
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  region_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] cloud_provider: Cloud provider associated with this service.
+        :param pulumi.Input[str] region_name: Cloud provider region code associated with this service.
+        :param pulumi.Input[str] status: Operation status of the service.
+        """
         if aws is not None:
             pulumi.set(__self__, "aws", aws)
         if cloud_provider is not None:
@@ -558,6 +583,9 @@ class PrivateEndpointServicesServiceArgs:
     @property
     @pulumi.getter(name="cloudProvider")
     def cloud_provider(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud provider associated with this service.
+        """
         return pulumi.get(self, "cloud_provider")
 
     @cloud_provider.setter
@@ -567,6 +595,9 @@ class PrivateEndpointServicesServiceArgs:
     @property
     @pulumi.getter(name="regionName")
     def region_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud provider region code associated with this service.
+        """
         return pulumi.get(self, "region_name")
 
     @region_name.setter
@@ -576,6 +607,9 @@ class PrivateEndpointServicesServiceArgs:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Operation status of the service.
+        """
         return pulumi.get(self, "status")
 
     @status.setter

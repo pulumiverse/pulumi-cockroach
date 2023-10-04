@@ -13,20 +13,44 @@ import javax.annotation.Nullable;
 @CustomType
 public final class PrivateEndpointServicesService {
     private @Nullable PrivateEndpointServicesServiceAws aws;
+    /**
+     * @return Cloud provider associated with this service.
+     * 
+     */
     private @Nullable String cloudProvider;
+    /**
+     * @return Cloud provider region code associated with this service.
+     * 
+     */
     private @Nullable String regionName;
+    /**
+     * @return Operation status of the service.
+     * 
+     */
     private @Nullable String status;
 
     private PrivateEndpointServicesService() {}
     public Optional<PrivateEndpointServicesServiceAws> aws() {
         return Optional.ofNullable(this.aws);
     }
+    /**
+     * @return Cloud provider associated with this service.
+     * 
+     */
     public Optional<String> cloudProvider() {
         return Optional.ofNullable(this.cloudProvider);
     }
+    /**
+     * @return Cloud provider region code associated with this service.
+     * 
+     */
     public Optional<String> regionName() {
         return Optional.ofNullable(this.regionName);
     }
+    /**
+     * @return Operation status of the service.
+     * 
+     */
     public Optional<String> status() {
         return Optional.ofNullable(this.status);
     }

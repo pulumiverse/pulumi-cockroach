@@ -12,17 +12,9 @@ public final class GetCockroachClusterPlainArgs extends com.pulumi.resources.Inv
 
     public static final GetCockroachClusterPlainArgs Empty = new GetCockroachClusterPlainArgs();
 
-    /**
-     * The ID of this resource.
-     * 
-     */
     @Import(name="id", required=true)
     private String id;
 
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     public String id() {
         return this.id;
     }
@@ -51,12 +43,6 @@ public final class GetCockroachClusterPlainArgs extends com.pulumi.resources.Inv
             $ = new GetCockroachClusterPlainArgs(Objects.requireNonNull(defaults));
         }
 
-        /**
-         * @param id The ID of this resource.
-         * 
-         * @return builder
-         * 
-         */
         public Builder id(String id) {
             $.id = id;
             return this;

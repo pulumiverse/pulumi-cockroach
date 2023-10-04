@@ -15,7 +15,7 @@ public final class GetPersonUserResult {
      */
     private String email;
     /**
-     * @return User ID
+     * @return User ID.
      * 
      */
     private String id;
@@ -29,7 +29,7 @@ public final class GetPersonUserResult {
         return this.email;
     }
     /**
-     * @return User ID
+     * @return User ID.
      * 
      */
     public String id() {

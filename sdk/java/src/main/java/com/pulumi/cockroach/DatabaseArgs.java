@@ -13,16 +13,32 @@ public final class DatabaseArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final DatabaseArgs Empty = new DatabaseArgs();
 
+    /**
+     * ID of the cluster the database belongs to.
+     * 
+     */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
+    /**
+     * @return ID of the cluster the database belongs to.
+     * 
+     */
     public Output<String> clusterId() {
         return this.clusterId;
     }
 
+    /**
+     * Database name.
+     * 
+     */
     @Import(name="name", required=true)
     private Output<String> name;
 
+    /**
+     * @return Database name.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }
@@ -52,20 +68,44 @@ public final class DatabaseArgs extends com.pulumi.resources.ResourceArgs {
             $ = new DatabaseArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param clusterId ID of the cluster the database belongs to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder clusterId(Output<String> clusterId) {
             $.clusterId = clusterId;
             return this;
         }
 
+        /**
+         * @param clusterId ID of the cluster the database belongs to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder clusterId(String clusterId) {
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param name Database name.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name Database name.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }

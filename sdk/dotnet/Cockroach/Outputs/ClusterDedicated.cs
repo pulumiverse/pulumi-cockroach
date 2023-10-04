@@ -18,9 +18,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
         public readonly string? MachineType;
         public readonly double? MemoryGib;
         public readonly int? NumVirtualCpus;
-        /// <summary>
-        /// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-        /// </summary>
         public readonly bool? PrivateNetworkVisibility;
         public readonly int? StorageGib;
 

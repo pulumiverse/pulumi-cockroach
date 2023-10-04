@@ -11,23 +11,35 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// AWS PrivateLink Endpoint Connection
+    /// AWS PrivateLink Endpoint Connection.
     /// </summary>
     [CockroachResourceType("cockroach:index/privateEndpointConnection:PrivateEndpointConnection")]
     public partial class PrivateEndpointConnection : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Cloud provider associated with this connection.
+        /// </summary>
         [Output("cloudProvider")]
         public Output<string> CloudProvider { get; private set; } = null!;
 
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
+        /// <summary>
+        /// Client side ID of the PrivateLink connection.
+        /// </summary>
         [Output("endpointId")]
         public Output<string> EndpointId { get; private set; } = null!;
 
+        /// <summary>
+        /// Cloud provider region code associated with this connection.
+        /// </summary>
         [Output("regionName")]
         public Output<string> RegionName { get; private set; } = null!;
 
+        /// <summary>
+        /// Server side ID of the PrivateLink connection.
+        /// </summary>
         [Output("serviceId")]
         public Output<string> ServiceId { get; private set; } = null!;
 
@@ -81,6 +93,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// Client side ID of the PrivateLink connection.
+        /// </summary>
         [Input("endpointId", required: true)]
         public Input<string> EndpointId { get; set; } = null!;
 
@@ -92,18 +107,30 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class PrivateEndpointConnectionState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cloud provider associated with this connection.
+        /// </summary>
         [Input("cloudProvider")]
         public Input<string>? CloudProvider { get; set; }
 
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
+        /// <summary>
+        /// Client side ID of the PrivateLink connection.
+        /// </summary>
         [Input("endpointId")]
         public Input<string>? EndpointId { get; set; }
 
+        /// <summary>
+        /// Cloud provider region code associated with this connection.
+        /// </summary>
         [Input("regionName")]
         public Input<string>? RegionName { get; set; }
 
+        /// <summary>
+        /// Server side ID of the PrivateLink connection.
+        /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
 

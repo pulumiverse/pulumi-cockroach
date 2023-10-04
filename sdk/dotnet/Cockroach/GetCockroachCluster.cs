@@ -13,13 +13,13 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public static class GetCockroachCluster
     {
         /// <summary>
-        /// Cluster Data Source
+        /// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
         /// </summary>
         public static Task<GetCockroachClusterResult> InvokeAsync(GetCockroachClusterArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCockroachClusterResult>("cockroach:index/getCockroachCluster:getCockroachCluster", args ?? new GetCockroachClusterArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Cluster Data Source
+        /// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
         /// </summary>
         public static Output<GetCockroachClusterResult> Invoke(GetCockroachClusterInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCockroachClusterResult>("cockroach:index/getCockroachCluster:getCockroachCluster", args ?? new GetCockroachClusterInvokeArgs(), options.WithDefaults());
@@ -28,9 +28,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class GetCockroachClusterArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The ID of this resource.
-        /// </summary>
         [Input("id", required: true)]
         public string Id { get; set; } = null!;
 
@@ -42,9 +39,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class GetCockroachClusterInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The ID of this resource.
-        /// </summary>
         [Input("id", required: true)]
         public Input<string> Id { get; set; } = null!;
 
@@ -63,15 +57,10 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         public readonly string CockroachVersion;
         public readonly string CreatorId;
         public readonly Outputs.GetCockroachClusterDedicatedResult Dedicated;
-        /// <summary>
-        /// The ID of this resource.
-        /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// Name of cluster
-        /// </summary>
         public readonly string Name;
         public readonly string OperationStatus;
+        public readonly string ParentId;
         public readonly string Plan;
         public readonly ImmutableArray<Outputs.GetCockroachClusterRegionResult> Regions;
         public readonly Outputs.GetCockroachClusterServerlessResult Serverless;
@@ -96,6 +85,8 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
             string operationStatus,
 
+            string parentId,
+
             string plan,
 
             ImmutableArray<Outputs.GetCockroachClusterRegionResult> regions,
@@ -114,6 +105,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
             Id = id;
             Name = name;
             OperationStatus = operationStatus;
+            ParentId = parentId;
             Plan = plan;
             Regions = regions;
             Serverless = serverless;

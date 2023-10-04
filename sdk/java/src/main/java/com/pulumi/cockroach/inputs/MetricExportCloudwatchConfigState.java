@@ -16,14 +16,14 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
     public static final MetricExportCloudwatchConfigState Empty = new MetricExportCloudwatchConfigState();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId")
     private @Nullable Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Optional<Output<String>> clusterId() {
@@ -60,9 +60,17 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
         return Optional.ofNullable(this.roleArn);
     }
 
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     @Import(name="status")
     private @Nullable Output<String> status;
 
+    /**
+     * @return Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     public Optional<Output<String>> status() {
         return Optional.ofNullable(this.status);
     }
@@ -82,9 +90,17 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
         return Optional.ofNullable(this.targetRegion);
     }
 
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     * 
+     */
     @Import(name="userMessage")
     private @Nullable Output<String> userMessage;
 
+    /**
+     * @return Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     * 
+     */
     public Optional<Output<String>> userMessage() {
         return Optional.ofNullable(this.userMessage);
     }
@@ -119,7 +135,7 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -130,7 +146,7 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -181,11 +197,23 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
             return roleArn(Output.of(roleArn));
         }
 
+        /**
+         * @param status Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+         * 
+         * @return builder
+         * 
+         */
         public Builder status(@Nullable Output<String> status) {
             $.status = status;
             return this;
         }
 
+        /**
+         * @param status Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+         * 
+         * @return builder
+         * 
+         */
         public Builder status(String status) {
             return status(Output.of(status));
         }
@@ -211,11 +239,23 @@ public final class MetricExportCloudwatchConfigState extends com.pulumi.resource
             return targetRegion(Output.of(targetRegion));
         }
 
+        /**
+         * @param userMessage Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+         * 
+         * @return builder
+         * 
+         */
         public Builder userMessage(@Nullable Output<String> userMessage) {
             $.userMessage = userMessage;
             return this;
         }
 
+        /**
+         * @param userMessage Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+         * 
+         * @return builder
+         * 
+         */
         public Builder userMessage(String userMessage) {
             return userMessage(Output.of(userMessage));
         }

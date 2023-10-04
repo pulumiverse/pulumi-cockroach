@@ -36,15 +36,15 @@ export class CaCert extends pulumi.CustomResource {
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Status of client CA certs on a cluster
+     * Status of client CA certs on a cluster.
      */
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
-     * X509 certificate in PEM format
+     * X509 certificate in PEM format.
      */
     public readonly x509PemCert!: pulumi.Output<string>;
 
@@ -86,15 +86,15 @@ export class CaCert extends pulumi.CustomResource {
  */
 export interface CaCertState {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Status of client CA certs on a cluster
+     * Status of client CA certs on a cluster.
      */
     status?: pulumi.Input<string>;
     /**
-     * X509 certificate in PEM format
+     * X509 certificate in PEM format.
      */
     x509PemCert?: pulumi.Input<string>;
 }
@@ -104,11 +104,11 @@ export interface CaCertState {
  */
 export interface CaCertArgs {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId: pulumi.Input<string>;
     /**
-     * X509 certificate in PEM format
+     * X509 certificate in PEM format.
      */
     x509PemCert: pulumi.Input<string>;
 }

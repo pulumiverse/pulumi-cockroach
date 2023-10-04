@@ -21,16 +21,20 @@ class LogExportConfigArgs:
                  log_name: pulumi.Input[str],
                  type: pulumi.Input[str],
                  groups: Optional[pulumi.Input[Sequence[pulumi.Input['LogExportConfigGroupArgs']]]] = None,
+                 omitted_channels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  redact: Optional[pulumi.Input[bool]] = None,
                  region: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a LogExportConfig resource.
-        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink
-        :param pulumi.Input[str] type: The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
-        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks
-        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink
+        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+               Project ID that the cluster service account has permissions to write to for cloud logging.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink.
+        :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+               GCP_CLOUD_LOGGING
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] omitted_channels: Controls what CRDB channels do not get exported.
+        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks.
+        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
         """
         pulumi.set(__self__, "auth_principal", auth_principal)
         pulumi.set(__self__, "cluster_id", cluster_id)
@@ -38,6 +42,8 @@ class LogExportConfigArgs:
         pulumi.set(__self__, "type", type)
         if groups is not None:
             pulumi.set(__self__, "groups", groups)
+        if omitted_channels is not None:
+            pulumi.set(__self__, "omitted_channels", omitted_channels)
         if redact is not None:
             pulumi.set(__self__, "redact", redact)
         if region is not None:
@@ -47,7 +53,8 @@ class LogExportConfigArgs:
     @pulumi.getter(name="authPrincipal")
     def auth_principal(self) -> pulumi.Input[str]:
         """
-        Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+        Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+        Project ID that the cluster service account has permissions to write to for cloud logging.
         """
         return pulumi.get(self, "auth_principal")
 
@@ -59,7 +66,7 @@ class LogExportConfigArgs:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -71,7 +78,7 @@ class LogExportConfigArgs:
     @pulumi.getter(name="logName")
     def log_name(self) -> pulumi.Input[str]:
         """
-        An identifier for the logs in the customer's log sink
+        An identifier for the logs in the customer's log sink.
         """
         return pulumi.get(self, "log_name")
 
@@ -83,7 +90,8 @@ class LogExportConfigArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[str]:
         """
-        The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+        GCP_CLOUD_LOGGING
         """
         return pulumi.get(self, "type")
 
@@ -101,10 +109,22 @@ class LogExportConfigArgs:
         pulumi.set(self, "groups", value)
 
     @property
+    @pulumi.getter(name="omittedChannels")
+    def omitted_channels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Controls what CRDB channels do not get exported.
+        """
+        return pulumi.get(self, "omitted_channels")
+
+    @omitted_channels.setter
+    def omitted_channels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "omitted_channels", value)
+
+    @property
     @pulumi.getter
     def redact(self) -> Optional[pulumi.Input[bool]]:
         """
-        Controls whether logs are redacted before forwarding to customer sinks
+        Controls whether logs are redacted before forwarding to customer sinks.
         """
         return pulumi.get(self, "redact")
 
@@ -116,7 +136,7 @@ class LogExportConfigArgs:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Controls whether all logs are sent to a specific region in the customer sink
+        Controls whether all logs are sent to a specific region in the customer sink.
         """
         return pulumi.get(self, "region")
 
@@ -133,6 +153,7 @@ class _LogExportConfigState:
                  created_at: Optional[pulumi.Input[str]] = None,
                  groups: Optional[pulumi.Input[Sequence[pulumi.Input['LogExportConfigGroupArgs']]]] = None,
                  log_name: Optional[pulumi.Input[str]] = None,
+                 omitted_channels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  redact: Optional[pulumi.Input[bool]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
@@ -141,12 +162,20 @@ class _LogExportConfigState:
                  user_message: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering LogExportConfig resources.
-        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink
-        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks
-        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink
-        :param pulumi.Input[str] type: The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+               Project ID that the cluster service account has permissions to write to for cloud logging.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] created_at: Indicates when log export was initially configured.
+        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] omitted_channels: Controls what CRDB channels do not get exported.
+        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks.
+        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
+        :param pulumi.Input[str] status: Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+        :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+               GCP_CLOUD_LOGGING
+        :param pulumi.Input[str] updated_at: Indicates when the log export configuration was last updated.
+        :param pulumi.Input[str] user_message: Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+               operations.
         """
         if auth_principal is not None:
             pulumi.set(__self__, "auth_principal", auth_principal)
@@ -158,6 +187,8 @@ class _LogExportConfigState:
             pulumi.set(__self__, "groups", groups)
         if log_name is not None:
             pulumi.set(__self__, "log_name", log_name)
+        if omitted_channels is not None:
+            pulumi.set(__self__, "omitted_channels", omitted_channels)
         if redact is not None:
             pulumi.set(__self__, "redact", redact)
         if region is not None:
@@ -175,7 +206,8 @@ class _LogExportConfigState:
     @pulumi.getter(name="authPrincipal")
     def auth_principal(self) -> Optional[pulumi.Input[str]]:
         """
-        Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+        Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+        Project ID that the cluster service account has permissions to write to for cloud logging.
         """
         return pulumi.get(self, "auth_principal")
 
@@ -187,7 +219,7 @@ class _LogExportConfigState:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -198,6 +230,9 @@ class _LogExportConfigState:
     @property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> Optional[pulumi.Input[str]]:
+        """
+        Indicates when log export was initially configured.
+        """
         return pulumi.get(self, "created_at")
 
     @created_at.setter
@@ -217,7 +252,7 @@ class _LogExportConfigState:
     @pulumi.getter(name="logName")
     def log_name(self) -> Optional[pulumi.Input[str]]:
         """
-        An identifier for the logs in the customer's log sink
+        An identifier for the logs in the customer's log sink.
         """
         return pulumi.get(self, "log_name")
 
@@ -226,10 +261,22 @@ class _LogExportConfigState:
         pulumi.set(self, "log_name", value)
 
     @property
+    @pulumi.getter(name="omittedChannels")
+    def omitted_channels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Controls what CRDB channels do not get exported.
+        """
+        return pulumi.get(self, "omitted_channels")
+
+    @omitted_channels.setter
+    def omitted_channels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "omitted_channels", value)
+
+    @property
     @pulumi.getter
     def redact(self) -> Optional[pulumi.Input[bool]]:
         """
-        Controls whether logs are redacted before forwarding to customer sinks
+        Controls whether logs are redacted before forwarding to customer sinks.
         """
         return pulumi.get(self, "redact")
 
@@ -241,7 +288,7 @@ class _LogExportConfigState:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        Controls whether all logs are sent to a specific region in the customer sink
+        Controls whether all logs are sent to a specific region in the customer sink.
         """
         return pulumi.get(self, "region")
 
@@ -252,6 +299,9 @@ class _LogExportConfigState:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -262,7 +312,8 @@ class _LogExportConfigState:
     @pulumi.getter
     def type(self) -> Optional[pulumi.Input[str]]:
         """
-        The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+        GCP_CLOUD_LOGGING
         """
         return pulumi.get(self, "type")
 
@@ -273,6 +324,9 @@ class _LogExportConfigState:
     @property
     @pulumi.getter(name="updatedAt")
     def updated_at(self) -> Optional[pulumi.Input[str]]:
+        """
+        Indicates when the log export configuration was last updated.
+        """
         return pulumi.get(self, "updated_at")
 
     @updated_at.setter
@@ -282,6 +336,10 @@ class _LogExportConfigState:
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> Optional[pulumi.Input[str]]:
+        """
+        Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+        operations.
+        """
         return pulumi.get(self, "user_message")
 
     @user_message.setter
@@ -298,21 +356,25 @@ class LogExportConfig(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  groups: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['LogExportConfigGroupArgs']]]]] = None,
                  log_name: Optional[pulumi.Input[str]] = None,
+                 omitted_channels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  redact: Optional[pulumi.Input[bool]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Log Export Config Resource
+        Log Export configuration for a cluster.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink
-        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks
-        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink
-        :param pulumi.Input[str] type: The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+               Project ID that the cluster service account has permissions to write to for cloud logging.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] omitted_channels: Controls what CRDB channels do not get exported.
+        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks.
+        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
+        :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+               GCP_CLOUD_LOGGING
         """
         ...
     @overload
@@ -321,7 +383,7 @@ class LogExportConfig(pulumi.CustomResource):
                  args: LogExportConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Log Export Config Resource
+        Log Export configuration for a cluster.
 
         :param str resource_name: The name of the resource.
         :param LogExportConfigArgs args: The arguments to use to populate this resource's properties.
@@ -342,6 +404,7 @@ class LogExportConfig(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  groups: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['LogExportConfigGroupArgs']]]]] = None,
                  log_name: Optional[pulumi.Input[str]] = None,
+                 omitted_channels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  redact: Optional[pulumi.Input[bool]] = None,
                  region: Optional[pulumi.Input[str]] = None,
                  type: Optional[pulumi.Input[str]] = None,
@@ -364,6 +427,7 @@ class LogExportConfig(pulumi.CustomResource):
             if log_name is None and not opts.urn:
                 raise TypeError("Missing required property 'log_name'")
             __props__.__dict__["log_name"] = log_name
+            __props__.__dict__["omitted_channels"] = omitted_channels
             __props__.__dict__["redact"] = redact
             __props__.__dict__["region"] = region
             if type is None and not opts.urn:
@@ -388,6 +452,7 @@ class LogExportConfig(pulumi.CustomResource):
             created_at: Optional[pulumi.Input[str]] = None,
             groups: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['LogExportConfigGroupArgs']]]]] = None,
             log_name: Optional[pulumi.Input[str]] = None,
+            omitted_channels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             redact: Optional[pulumi.Input[bool]] = None,
             region: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
@@ -401,12 +466,20 @@ class LogExportConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink
-        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks
-        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink
-        :param pulumi.Input[str] type: The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+               Project ID that the cluster service account has permissions to write to for cloud logging.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] created_at: Indicates when log export was initially configured.
+        :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] omitted_channels: Controls what CRDB channels do not get exported.
+        :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks.
+        :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
+        :param pulumi.Input[str] status: Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+        :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+               GCP_CLOUD_LOGGING
+        :param pulumi.Input[str] updated_at: Indicates when the log export configuration was last updated.
+        :param pulumi.Input[str] user_message: Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+               operations.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -417,6 +490,7 @@ class LogExportConfig(pulumi.CustomResource):
         __props__.__dict__["created_at"] = created_at
         __props__.__dict__["groups"] = groups
         __props__.__dict__["log_name"] = log_name
+        __props__.__dict__["omitted_channels"] = omitted_channels
         __props__.__dict__["redact"] = redact
         __props__.__dict__["region"] = region
         __props__.__dict__["status"] = status
@@ -429,7 +503,8 @@ class LogExportConfig(pulumi.CustomResource):
     @pulumi.getter(name="authPrincipal")
     def auth_principal(self) -> pulumi.Output[str]:
         """
-        Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+        Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+        Project ID that the cluster service account has permissions to write to for cloud logging.
         """
         return pulumi.get(self, "auth_principal")
 
@@ -437,13 +512,16 @@ class LogExportConfig(pulumi.CustomResource):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> pulumi.Output[str]:
+        """
+        Indicates when log export was initially configured.
+        """
         return pulumi.get(self, "created_at")
 
     @property
@@ -455,15 +533,23 @@ class LogExportConfig(pulumi.CustomResource):
     @pulumi.getter(name="logName")
     def log_name(self) -> pulumi.Output[str]:
         """
-        An identifier for the logs in the customer's log sink
+        An identifier for the logs in the customer's log sink.
         """
         return pulumi.get(self, "log_name")
+
+    @property
+    @pulumi.getter(name="omittedChannels")
+    def omitted_channels(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        Controls what CRDB channels do not get exported.
+        """
+        return pulumi.get(self, "omitted_channels")
 
     @property
     @pulumi.getter
     def redact(self) -> pulumi.Output[Optional[bool]]:
         """
-        Controls whether logs are redacted before forwarding to customer sinks
+        Controls whether logs are redacted before forwarding to customer sinks.
         """
         return pulumi.get(self, "redact")
 
@@ -471,30 +557,41 @@ class LogExportConfig(pulumi.CustomResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[str]:
         """
-        Controls whether all logs are sent to a specific region in the customer sink
+        Controls whether all logs are sent to a specific region in the customer sink.
         """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
+        """
+        Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter
     def type(self) -> pulumi.Output[str]:
         """
-        The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+        GCP_CLOUD_LOGGING
         """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter(name="updatedAt")
     def updated_at(self) -> pulumi.Output[str]:
+        """
+        Indicates when the log export configuration was last updated.
+        """
         return pulumi.get(self, "updated_at")
 
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> pulumi.Output[str]:
+        """
+        Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+        operations.
+        """
         return pulumi.get(self, "user_message")
 

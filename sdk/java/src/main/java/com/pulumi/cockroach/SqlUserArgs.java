@@ -22,9 +22,17 @@ public final class SqlUserArgs extends com.pulumi.resources.ResourceArgs {
         return this.clusterId;
     }
 
+    /**
+     * SQL user name.
+     * 
+     */
     @Import(name="name", required=true)
     private Output<String> name;
 
+    /**
+     * @return SQL user name.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }
@@ -81,11 +89,23 @@ public final class SqlUserArgs extends com.pulumi.resources.ResourceArgs {
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param name SQL user name.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name SQL user name.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }

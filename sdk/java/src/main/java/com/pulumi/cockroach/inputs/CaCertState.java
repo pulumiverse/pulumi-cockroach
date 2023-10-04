@@ -16,14 +16,14 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
     public static final CaCertState Empty = new CaCertState();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId")
     private @Nullable Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Optional<Output<String>> clusterId() {
@@ -31,14 +31,14 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Status of client CA certs on a cluster
+     * Status of client CA certs on a cluster.
      * 
      */
     @Import(name="status")
     private @Nullable Output<String> status;
 
     /**
-     * @return Status of client CA certs on a cluster
+     * @return Status of client CA certs on a cluster.
      * 
      */
     public Optional<Output<String>> status() {
@@ -46,14 +46,14 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * X509 certificate in PEM format
+     * X509 certificate in PEM format.
      * 
      */
     @Import(name="x509PemCert")
     private @Nullable Output<String> x509PemCert;
 
     /**
-     * @return X509 certificate in PEM format
+     * @return X509 certificate in PEM format.
      * 
      */
     public Optional<Output<String>> x509PemCert() {
@@ -87,7 +87,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -98,7 +98,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -108,7 +108,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param status Status of client CA certs on a cluster
+         * @param status Status of client CA certs on a cluster.
          * 
          * @return builder
          * 
@@ -119,7 +119,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param status Status of client CA certs on a cluster
+         * @param status Status of client CA certs on a cluster.
          * 
          * @return builder
          * 
@@ -129,7 +129,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param x509PemCert X509 certificate in PEM format
+         * @param x509PemCert X509 certificate in PEM format.
          * 
          * @return builder
          * 
@@ -140,7 +140,7 @@ public final class CaCertState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param x509PemCert X509 certificate in PEM format
+         * @param x509PemCert X509 certificate in PEM format.
          * 
          * @return builder
          * 

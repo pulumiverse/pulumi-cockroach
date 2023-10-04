@@ -20,6 +20,7 @@ class UserRoleGrantsArgs:
                  user_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a UserRoleGrants resource.
+        :param pulumi.Input[str] user_id: ID of the user to grant these roles to.
         """
         pulumi.set(__self__, "roles", roles)
         pulumi.set(__self__, "user_id", user_id)
@@ -36,6 +37,9 @@ class UserRoleGrantsArgs:
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> pulumi.Input[str]:
+        """
+        ID of the user to grant these roles to.
+        """
         return pulumi.get(self, "user_id")
 
     @user_id.setter
@@ -50,6 +54,7 @@ class _UserRoleGrantsState:
                  user_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering UserRoleGrants resources.
+        :param pulumi.Input[str] user_id: ID of the user to grant these roles to.
         """
         if roles is not None:
             pulumi.set(__self__, "roles", roles)
@@ -68,6 +73,9 @@ class _UserRoleGrantsState:
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the user to grant these roles to.
+        """
         return pulumi.get(self, "user_id")
 
     @user_id.setter
@@ -84,10 +92,11 @@ class UserRoleGrants(pulumi.CustomResource):
                  user_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Role grants
+        Role grants for a single user.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] user_id: ID of the user to grant these roles to.
         """
         ...
     @overload
@@ -96,7 +105,7 @@ class UserRoleGrants(pulumi.CustomResource):
                  args: UserRoleGrantsArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Role grants
+        Role grants for a single user.
 
         :param str resource_name: The name of the resource.
         :param UserRoleGrantsArgs args: The arguments to use to populate this resource's properties.
@@ -149,6 +158,7 @@ class UserRoleGrants(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] user_id: ID of the user to grant these roles to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -166,5 +176,8 @@ class UserRoleGrants(pulumi.CustomResource):
     @property
     @pulumi.getter(name="userId")
     def user_id(self) -> pulumi.Output[str]:
+        """
+        ID of the user to grant these roles to.
+        """
         return pulumi.get(self, "user_id")
 

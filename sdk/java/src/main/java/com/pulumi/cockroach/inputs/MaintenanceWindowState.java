@@ -17,14 +17,14 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
     public static final MaintenanceWindowState Empty = new MaintenanceWindowState();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId")
     private @Nullable Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Optional<Output<String>> clusterId() {
@@ -32,14 +32,14 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
     }
 
     /**
-     * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      * 
      */
     @Import(name="offsetDuration")
     private @Nullable Output<Integer> offsetDuration;
 
     /**
-     * @return The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * @return Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      * 
      */
     public Optional<Output<Integer>> offsetDuration() {
@@ -47,14 +47,14 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
     }
 
     /**
-     * The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * Duration in seconds that the maintenance window will remain active for after it starts.
      * 
      */
     @Import(name="windowDuration")
     private @Nullable Output<Integer> windowDuration;
 
     /**
-     * @return The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * @return Duration in seconds that the maintenance window will remain active for after it starts.
      * 
      */
     public Optional<Output<Integer>> windowDuration() {
@@ -88,7 +88,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -99,7 +99,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -109,7 +109,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param offsetDuration The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+         * @param offsetDuration Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
          * 
          * @return builder
          * 
@@ -120,7 +120,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param offsetDuration The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+         * @param offsetDuration Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
          * 
          * @return builder
          * 
@@ -130,7 +130,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param windowDuration The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+         * @param windowDuration Duration in seconds that the maintenance window will remain active for after it starts.
          * 
          * @return builder
          * 
@@ -141,7 +141,7 @@ public final class MaintenanceWindowState extends com.pulumi.resources.ResourceA
         }
 
         /**
-         * @param windowDuration The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+         * @param windowDuration Duration in seconds that the maintenance window will remain active for after it starts.
          * 
          * @return builder
          * 

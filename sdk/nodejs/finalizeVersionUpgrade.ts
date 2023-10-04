@@ -36,9 +36,12 @@ export class FinalizeVersionUpgrade extends pulumi.CustomResource {
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     public readonly clusterId!: pulumi.Output<string>;
+    /**
+     * Major version of the cluster to be finalized.
+     */
     public readonly cockroachVersion!: pulumi.Output<string>;
 
     /**
@@ -77,9 +80,12 @@ export class FinalizeVersionUpgrade extends pulumi.CustomResource {
  */
 export interface FinalizeVersionUpgradeState {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId?: pulumi.Input<string>;
+    /**
+     * Major version of the cluster to be finalized.
+     */
     cockroachVersion?: pulumi.Input<string>;
 }
 
@@ -88,8 +94,11 @@ export interface FinalizeVersionUpgradeState {
  */
 export interface FinalizeVersionUpgradeArgs {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId: pulumi.Input<string>;
+    /**
+     * Major version of the cluster to be finalized.
+     */
     cockroachVersion: pulumi.Input<string>;
 }

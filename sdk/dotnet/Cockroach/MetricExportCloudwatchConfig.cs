@@ -11,13 +11,13 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Metric Export CloudWatch Config Resource
+    /// Amazon CloudWatch metric export configuration for a cluster.
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig")]
     public partial class MetricExportCloudwatchConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
@@ -34,6 +34,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("roleArn")]
         public Output<string> RoleArn { get; private set; } = null!;
 
+        /// <summary>
+        /// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
 
@@ -43,6 +46,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Output("targetRegion")]
         public Output<string> TargetRegion { get; private set; } = null!;
 
+        /// <summary>
+        /// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        /// </summary>
         [Output("userMessage")]
         public Output<string> UserMessage { get; private set; } = null!;
 
@@ -94,7 +100,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class MetricExportCloudwatchConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
@@ -126,7 +132,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class MetricExportCloudwatchConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
@@ -143,6 +149,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Input("roleArn")]
         public Input<string>? RoleArn { get; set; }
 
+        /// <summary>
+        /// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
@@ -152,6 +161,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         [Input("targetRegion")]
         public Input<string>? TargetRegion { get; set; }
 
+        /// <summary>
+        /// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        /// </summary>
         [Input("userMessage")]
         public Input<string>? UserMessage { get; set; }
 

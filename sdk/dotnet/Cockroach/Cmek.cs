@@ -11,19 +11,20 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Customer-managed encryption keys (CMEK) resource for a single cluster
+    /// Customer-managed encryption keys (CMEK) resource for a single cluster.
     /// </summary>
     [CockroachResourceType("cockroach:index/cmek:Cmek")]
     public partial class Cmek : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+        /// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+        /// info stored in the CMEK resource. New regions can be added and maintained here instead.
         /// </summary>
         [Output("additionalRegions")]
         public Output<ImmutableArray<Outputs.CmekAdditionalRegion>> AdditionalRegions { get; private set; } = null!;
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
@@ -32,7 +33,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         public Output<ImmutableArray<Outputs.CmekRegion>> Regions { get; private set; } = null!;
 
         /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
+        /// Aggregated status of the cluster's encryption key(s).
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -88,7 +89,8 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         private InputList<Inputs.CmekAdditionalRegionArgs>? _additionalRegions;
 
         /// <summary>
-        /// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+        /// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+        /// info stored in the CMEK resource. New regions can be added and maintained here instead.
         /// </summary>
         public InputList<Inputs.CmekAdditionalRegionArgs> AdditionalRegions
         {
@@ -97,7 +99,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
@@ -111,7 +113,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
+        /// Aggregated status of the cluster's encryption key(s).
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -128,7 +130,8 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         private InputList<Inputs.CmekAdditionalRegionGetArgs>? _additionalRegions;
 
         /// <summary>
-        /// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.
+        /// Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
+        /// info stored in the CMEK resource. New regions can be added and maintained here instead.
         /// </summary>
         public InputList<Inputs.CmekAdditionalRegionGetArgs> AdditionalRegions
         {
@@ -137,7 +140,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
@@ -151,7 +154,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
+        /// Aggregated status of the cluster's encryption key(s).
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

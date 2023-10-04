@@ -16,7 +16,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * SQL user and password
+ * CockroachDB SQL user.
  * 
  */
 @ResourceType(type="cockroach:index/sqlUser:SqlUser")
@@ -27,9 +27,17 @@ public class SqlUser extends com.pulumi.resources.CustomResource {
     public Output<String> clusterId() {
         return this.clusterId;
     }
+    /**
+     * SQL user name.
+     * 
+     */
     @Export(name="name", type=String.class, parameters={})
     private Output<String> name;
 
+    /**
+     * @return SQL user name.
+     * 
+     */
     public Output<String> name() {
         return this.name;
     }

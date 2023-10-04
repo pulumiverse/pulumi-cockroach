@@ -62,126 +62,126 @@ public final class CockroachFunctions {
         return Deployment.getInstance().invokeAsync("cockroach:index/getClusterCert:getClusterCert", TypeShape.of(GetClusterCertResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Cluster Data Source
+     * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
      * 
      */
     public static Output<GetCockroachClusterResult> getCockroachCluster(GetCockroachClusterArgs args) {
         return getCockroachCluster(args, InvokeOptions.Empty);
     }
     /**
-     * Cluster Data Source
+     * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
      * 
      */
     public static CompletableFuture<GetCockroachClusterResult> getCockroachClusterPlain(GetCockroachClusterPlainArgs args) {
         return getCockroachClusterPlain(args, InvokeOptions.Empty);
     }
     /**
-     * Cluster Data Source
+     * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
      * 
      */
     public static Output<GetCockroachClusterResult> getCockroachCluster(GetCockroachClusterArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("cockroach:index/getCockroachCluster:getCockroachCluster", TypeShape.of(GetCockroachClusterResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Cluster Data Source
+     * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
      * 
      */
     public static CompletableFuture<GetCockroachClusterResult> getCockroachClusterPlain(GetCockroachClusterPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("cockroach:index/getCockroachCluster:getCockroachCluster", TypeShape.of(GetCockroachClusterResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Generic connection string for a given cluster
+     * Generic connection string for a cluster.
      * 
      */
     public static Output<GetConnectionStringResult> getConnectionString(GetConnectionStringArgs args) {
         return getConnectionString(args, InvokeOptions.Empty);
     }
     /**
-     * Generic connection string for a given cluster
+     * Generic connection string for a cluster.
      * 
      */
     public static CompletableFuture<GetConnectionStringResult> getConnectionStringPlain(GetConnectionStringPlainArgs args) {
         return getConnectionStringPlain(args, InvokeOptions.Empty);
     }
     /**
-     * Generic connection string for a given cluster
+     * Generic connection string for a cluster.
      * 
      */
     public static Output<GetConnectionStringResult> getConnectionString(GetConnectionStringArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("cockroach:index/getConnectionString:getConnectionString", TypeShape.of(GetConnectionStringResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Generic connection string for a given cluster
+     * Generic connection string for a cluster.
      * 
      */
     public static CompletableFuture<GetConnectionStringResult> getConnectionStringPlain(GetConnectionStringPlainArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("cockroach:index/getConnectionString:getConnectionString", TypeShape.of(GetConnectionStringResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Information about the organization associated with the user&#39;s API key
+     * Information about the organization associated with the user&#39;s API key.
      * 
      */
     public static Output<GetOrganizationResult> getOrganization() {
         return getOrganization(InvokeArgs.Empty, InvokeOptions.Empty);
     }
     /**
-     * Information about the organization associated with the user&#39;s API key
+     * Information about the organization associated with the user&#39;s API key.
      * 
      */
     public static CompletableFuture<GetOrganizationResult> getOrganizationPlain() {
         return getOrganizationPlain(InvokeArgs.Empty, InvokeOptions.Empty);
     }
     /**
-     * Information about the organization associated with the user&#39;s API key
+     * Information about the organization associated with the user&#39;s API key.
      * 
      */
     public static Output<GetOrganizationResult> getOrganization(InvokeArgs args) {
         return getOrganization(args, InvokeOptions.Empty);
     }
     /**
-     * Information about the organization associated with the user&#39;s API key
+     * Information about the organization associated with the user&#39;s API key.
      * 
      */
     public static CompletableFuture<GetOrganizationResult> getOrganizationPlain(InvokeArgs args) {
         return getOrganizationPlain(args, InvokeOptions.Empty);
     }
     /**
-     * Information about the organization associated with the user&#39;s API key
+     * Information about the organization associated with the user&#39;s API key.
      * 
      */
     public static Output<GetOrganizationResult> getOrganization(InvokeArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("cockroach:index/getOrganization:getOrganization", TypeShape.of(GetOrganizationResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Information about the organization associated with the user&#39;s API key
+     * Information about the organization associated with the user&#39;s API key.
      * 
      */
     public static CompletableFuture<GetOrganizationResult> getOrganizationPlain(InvokeArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("cockroach:index/getOrganization:getOrganization", TypeShape.of(GetOrganizationResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Information about a person user
+     * Information about an individual user.
      * 
      */
     public static Output<GetPersonUserResult> getPersonUser(GetPersonUserArgs args) {
         return getPersonUser(args, InvokeOptions.Empty);
     }
     /**
-     * Information about a person user
+     * Information about an individual user.
      * 
      */
     public static CompletableFuture<GetPersonUserResult> getPersonUserPlain(GetPersonUserPlainArgs args) {
         return getPersonUserPlain(args, InvokeOptions.Empty);
     }
     /**
-     * Information about a person user
+     * Information about an individual user.
      * 
      */
     public static Output<GetPersonUserResult> getPersonUser(GetPersonUserArgs args, InvokeOptions options) {
         return Deployment.getInstance().invoke("cockroach:index/getPersonUser:getPersonUser", TypeShape.of(GetPersonUserResult.class), args, Utilities.withVersion(options));
     }
     /**
-     * Information about a person user
+     * Information about an individual user.
      * 
      */
     public static CompletableFuture<GetPersonUserResult> getPersonUserPlain(GetPersonUserPlainArgs args, InvokeOptions options) {

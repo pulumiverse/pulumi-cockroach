@@ -11,17 +11,26 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Database
+    /// CockroachDB database.
     /// </summary>
     [CockroachResourceType("cockroach:index/database:Database")]
     public partial class Database : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// ID of the cluster the database belongs to.
+        /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
+        /// <summary>
+        /// Database name.
+        /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// Number of tables in the database.
+        /// </summary>
         [Output("tableCount")]
         public Output<int> TableCount { get; private set; } = null!;
 
@@ -72,9 +81,15 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class DatabaseArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of the cluster the database belongs to.
+        /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// Database name.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
@@ -86,12 +101,21 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class DatabaseState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ID of the cluster the database belongs to.
+        /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
+        /// <summary>
+        /// Database name.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Number of tables in the database.
+        /// </summary>
         [Input("tableCount")]
         public Input<int>? TableCount { get; set; }
 

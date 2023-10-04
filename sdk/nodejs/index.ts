@@ -10,6 +10,11 @@ export type AllowList = import("./allowList").AllowList;
 export const AllowList: typeof import("./allowList").AllowList = null as any;
 utilities.lazyLoad(exports, ["AllowList"], () => require("./allowList"));
 
+export { ApiOidcConfigArgs, ApiOidcConfigState } from "./apiOidcConfig";
+export type ApiOidcConfig = import("./apiOidcConfig").ApiOidcConfig;
+export const ApiOidcConfig: typeof import("./apiOidcConfig").ApiOidcConfig = null as any;
+utilities.lazyLoad(exports, ["ApiOidcConfig"], () => require("./apiOidcConfig"));
+
 export { CaCertArgs, CaCertState } from "./caCert";
 export type CaCert = import("./caCert").CaCert;
 export const CaCert: typeof import("./caCert").CaCert = null as any;
@@ -34,6 +39,11 @@ export { FinalizeVersionUpgradeArgs, FinalizeVersionUpgradeState } from "./final
 export type FinalizeVersionUpgrade = import("./finalizeVersionUpgrade").FinalizeVersionUpgrade;
 export const FinalizeVersionUpgrade: typeof import("./finalizeVersionUpgrade").FinalizeVersionUpgrade = null as any;
 utilities.lazyLoad(exports, ["FinalizeVersionUpgrade"], () => require("./finalizeVersionUpgrade"));
+
+export { FolderArgs, FolderState } from "./folder";
+export type Folder = import("./folder").Folder;
+export const Folder: typeof import("./folder").Folder = null as any;
+utilities.lazyLoad(exports, ["Folder"], () => require("./folder"));
 
 export { GetClusterCertArgs, GetClusterCertResult, GetClusterCertOutputArgs } from "./getClusterCert";
 export const getClusterCert: typeof import("./getClusterCert").getClusterCert = null as any;
@@ -89,6 +99,11 @@ export type PrivateEndpointServices = import("./privateEndpointServices").Privat
 export const PrivateEndpointServices: typeof import("./privateEndpointServices").PrivateEndpointServices = null as any;
 utilities.lazyLoad(exports, ["PrivateEndpointServices"], () => require("./privateEndpointServices"));
 
+export { PrivateEndpointTrustedOwnerArgs, PrivateEndpointTrustedOwnerState } from "./privateEndpointTrustedOwner";
+export type PrivateEndpointTrustedOwner = import("./privateEndpointTrustedOwner").PrivateEndpointTrustedOwner;
+export const PrivateEndpointTrustedOwner: typeof import("./privateEndpointTrustedOwner").PrivateEndpointTrustedOwner = null as any;
+utilities.lazyLoad(exports, ["PrivateEndpointTrustedOwner"], () => require("./privateEndpointTrustedOwner"));
+
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
@@ -103,6 +118,11 @@ export { UserRoleGrantsArgs, UserRoleGrantsState } from "./userRoleGrants";
 export type UserRoleGrants = import("./userRoleGrants").UserRoleGrants;
 export const UserRoleGrants: typeof import("./userRoleGrants").UserRoleGrants = null as any;
 utilities.lazyLoad(exports, ["UserRoleGrants"], () => require("./userRoleGrants"));
+
+export { VersionDeferralArgs, VersionDeferralState } from "./versionDeferral";
+export type VersionDeferral = import("./versionDeferral").VersionDeferral;
+export const VersionDeferral: typeof import("./versionDeferral").VersionDeferral = null as any;
+utilities.lazyLoad(exports, ["VersionDeferral"], () => require("./versionDeferral"));
 
 
 // Export sub-modules:
@@ -120,6 +140,8 @@ const _module = {
         switch (type) {
             case "cockroach:index/allowList:AllowList":
                 return new AllowList(name, <any>undefined, { urn })
+            case "cockroach:index/apiOidcConfig:ApiOidcConfig":
+                return new ApiOidcConfig(name, <any>undefined, { urn })
             case "cockroach:index/caCert:CaCert":
                 return new CaCert(name, <any>undefined, { urn })
             case "cockroach:index/cluster:Cluster":
@@ -130,6 +152,8 @@ const _module = {
                 return new Database(name, <any>undefined, { urn })
             case "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade":
                 return new FinalizeVersionUpgrade(name, <any>undefined, { urn })
+            case "cockroach:index/folder:Folder":
+                return new Folder(name, <any>undefined, { urn })
             case "cockroach:index/logExportConfig:LogExportConfig":
                 return new LogExportConfig(name, <any>undefined, { urn })
             case "cockroach:index/maintenanceWindow:MaintenanceWindow":
@@ -142,29 +166,37 @@ const _module = {
                 return new PrivateEndpointConnection(name, <any>undefined, { urn })
             case "cockroach:index/privateEndpointServices:PrivateEndpointServices":
                 return new PrivateEndpointServices(name, <any>undefined, { urn })
+            case "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner":
+                return new PrivateEndpointTrustedOwner(name, <any>undefined, { urn })
             case "cockroach:index/sqlUser:SqlUser":
                 return new SqlUser(name, <any>undefined, { urn })
             case "cockroach:index/userRoleGrants:UserRoleGrants":
                 return new UserRoleGrants(name, <any>undefined, { urn })
+            case "cockroach:index/versionDeferral:VersionDeferral":
+                return new VersionDeferral(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("cockroach", "index/allowList", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/apiOidcConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/caCert", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/cluster", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/cmek", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/database", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/finalizeVersionUpgrade", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/folder", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/logExportConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/maintenanceWindow", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/metricExportCloudwatchConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/metricExportDatadogConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointConnection", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointServices", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointTrustedOwner", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/sqlUser", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/userRoleGrants", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/versionDeferral", _module)
 pulumi.runtime.registerResourcePackage("cockroach", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

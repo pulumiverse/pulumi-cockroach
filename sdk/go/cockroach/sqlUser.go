@@ -11,12 +11,13 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// SQL user and password
+// CockroachDB SQL user.
 type SqlUser struct {
 	pulumi.CustomResourceState
 
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	Name      pulumi.StringOutput `pulumi:"name"`
+	// SQL user name.
+	Name pulumi.StringOutput `pulumi:"name"`
 	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
 	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
@@ -66,7 +67,8 @@ func GetSqlUser(ctx *pulumi.Context,
 // Input properties used for looking up and filtering SqlUser resources.
 type sqlUserState struct {
 	ClusterId *string `pulumi:"clusterId"`
-	Name      *string `pulumi:"name"`
+	// SQL user name.
+	Name *string `pulumi:"name"`
 	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
 	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
 	Password *string `pulumi:"password"`
@@ -74,7 +76,8 @@ type sqlUserState struct {
 
 type SqlUserState struct {
 	ClusterId pulumi.StringPtrInput
-	Name      pulumi.StringPtrInput
+	// SQL user name.
+	Name pulumi.StringPtrInput
 	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
 	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
 	Password pulumi.StringPtrInput
@@ -86,7 +89,8 @@ func (SqlUserState) ElementType() reflect.Type {
 
 type sqlUserArgs struct {
 	ClusterId string `pulumi:"clusterId"`
-	Name      string `pulumi:"name"`
+	// SQL user name.
+	Name string `pulumi:"name"`
 	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
 	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
 	Password *string `pulumi:"password"`
@@ -95,7 +99,8 @@ type sqlUserArgs struct {
 // The set of arguments for constructing a SqlUser resource.
 type SqlUserArgs struct {
 	ClusterId pulumi.StringInput
-	Name      pulumi.StringInput
+	// SQL user name.
+	Name pulumi.StringInput
 	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
 	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
 	Password pulumi.StringPtrInput
@@ -192,6 +197,7 @@ func (o SqlUserOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SqlUser) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// SQL user name.
 func (o SqlUserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SqlUser) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

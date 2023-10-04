@@ -15,62 +15,78 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 /**
- * Metric Export Datadog Config Resource
+ * DataDog metric export configuration for a cluster.
  * 
  */
 @ResourceType(type="cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig")
 public class MetricExportDatadogConfig extends com.pulumi.resources.CustomResource {
     /**
-     * A Datadog API key
+     * A Datadog API key.
      * 
      */
     @Export(name="apiKey", type=String.class, parameters={})
     private Output<String> apiKey;
 
     /**
-     * @return A Datadog API key
+     * @return A Datadog API key.
      * 
      */
     public Output<String> apiKey() {
         return this.apiKey;
     }
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
         return this.clusterId;
     }
     /**
-     * The Datadog region to export to
+     * The Datadog region to export to.
      * 
      */
     @Export(name="site", type=String.class, parameters={})
     private Output<String> site;
 
     /**
-     * @return The Datadog region to export to
+     * @return The Datadog region to export to.
      * 
      */
     public Output<String> site() {
         return this.site;
     }
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     @Export(name="status", type=String.class, parameters={})
     private Output<String> status;
 
+    /**
+     * @return Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     public Output<String> status() {
         return this.status;
     }
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     * 
+     */
     @Export(name="userMessage", type=String.class, parameters={})
     private Output<String> userMessage;
 
+    /**
+     * @return Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     * 
+     */
     public Output<String> userMessage() {
         return this.userMessage;
     }

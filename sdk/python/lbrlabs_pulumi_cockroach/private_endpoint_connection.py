@@ -18,6 +18,7 @@ class PrivateEndpointConnectionArgs:
                  endpoint_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a PrivateEndpointConnection resource.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "endpoint_id", endpoint_id)
@@ -34,6 +35,9 @@ class PrivateEndpointConnectionArgs:
     @property
     @pulumi.getter(name="endpointId")
     def endpoint_id(self) -> pulumi.Input[str]:
+        """
+        Client side ID of the PrivateLink connection.
+        """
         return pulumi.get(self, "endpoint_id")
 
     @endpoint_id.setter
@@ -51,6 +55,10 @@ class _PrivateEndpointConnectionState:
                  service_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering PrivateEndpointConnection resources.
+        :param pulumi.Input[str] cloud_provider: Cloud provider associated with this connection.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
+        :param pulumi.Input[str] region_name: Cloud provider region code associated with this connection.
+        :param pulumi.Input[str] service_id: Server side ID of the PrivateLink connection.
         """
         if cloud_provider is not None:
             pulumi.set(__self__, "cloud_provider", cloud_provider)
@@ -66,6 +74,9 @@ class _PrivateEndpointConnectionState:
     @property
     @pulumi.getter(name="cloudProvider")
     def cloud_provider(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud provider associated with this connection.
+        """
         return pulumi.get(self, "cloud_provider")
 
     @cloud_provider.setter
@@ -84,6 +95,9 @@ class _PrivateEndpointConnectionState:
     @property
     @pulumi.getter(name="endpointId")
     def endpoint_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Client side ID of the PrivateLink connection.
+        """
         return pulumi.get(self, "endpoint_id")
 
     @endpoint_id.setter
@@ -93,6 +107,9 @@ class _PrivateEndpointConnectionState:
     @property
     @pulumi.getter(name="regionName")
     def region_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud provider region code associated with this connection.
+        """
         return pulumi.get(self, "region_name")
 
     @region_name.setter
@@ -102,6 +119,9 @@ class _PrivateEndpointConnectionState:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server side ID of the PrivateLink connection.
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -118,10 +138,11 @@ class PrivateEndpointConnection(pulumi.CustomResource):
                  endpoint_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        AWS PrivateLink Endpoint Connection
+        AWS PrivateLink Endpoint Connection.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
         """
         ...
     @overload
@@ -130,7 +151,7 @@ class PrivateEndpointConnection(pulumi.CustomResource):
                  args: PrivateEndpointConnectionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        AWS PrivateLink Endpoint Connection
+        AWS PrivateLink Endpoint Connection.
 
         :param str resource_name: The name of the resource.
         :param PrivateEndpointConnectionArgs args: The arguments to use to populate this resource's properties.
@@ -189,6 +210,10 @@ class PrivateEndpointConnection(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cloud_provider: Cloud provider associated with this connection.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
+        :param pulumi.Input[str] region_name: Cloud provider region code associated with this connection.
+        :param pulumi.Input[str] service_id: Server side ID of the PrivateLink connection.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -204,6 +229,9 @@ class PrivateEndpointConnection(pulumi.CustomResource):
     @property
     @pulumi.getter(name="cloudProvider")
     def cloud_provider(self) -> pulumi.Output[str]:
+        """
+        Cloud provider associated with this connection.
+        """
         return pulumi.get(self, "cloud_provider")
 
     @property
@@ -214,15 +242,24 @@ class PrivateEndpointConnection(pulumi.CustomResource):
     @property
     @pulumi.getter(name="endpointId")
     def endpoint_id(self) -> pulumi.Output[str]:
+        """
+        Client side ID of the PrivateLink connection.
+        """
         return pulumi.get(self, "endpoint_id")
 
     @property
     @pulumi.getter(name="regionName")
     def region_name(self) -> pulumi.Output[str]:
+        """
+        Cloud provider region code associated with this connection.
+        """
         return pulumi.get(self, "region_name")
 
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Output[str]:
+        """
+        Server side ID of the PrivateLink connection.
+        """
         return pulumi.get(self, "service_id")
 

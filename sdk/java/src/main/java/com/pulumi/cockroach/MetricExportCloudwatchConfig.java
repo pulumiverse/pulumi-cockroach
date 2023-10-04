@@ -14,20 +14,20 @@ import java.lang.String;
 import javax.annotation.Nullable;
 
 /**
- * Metric Export CloudWatch Config Resource
+ * Amazon CloudWatch metric export configuration for a cluster.
  * 
  */
 @ResourceType(type="cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig")
 public class MetricExportCloudwatchConfig extends com.pulumi.resources.CustomResource {
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -61,9 +61,17 @@ public class MetricExportCloudwatchConfig extends com.pulumi.resources.CustomRes
     public Output<String> roleArn() {
         return this.roleArn;
     }
+    /**
+     * Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     @Export(name="status", type=String.class, parameters={})
     private Output<String> status;
 
+    /**
+     * @return Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     public Output<String> status() {
         return this.status;
     }
@@ -81,9 +89,17 @@ public class MetricExportCloudwatchConfig extends com.pulumi.resources.CustomRes
     public Output<String> targetRegion() {
         return this.targetRegion;
     }
+    /**
+     * Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     * 
+     */
     @Export(name="userMessage", type=String.class, parameters={})
     private Output<String> userMessage;
 
+    /**
+     * @return Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+     * 
+     */
     public Output<String> userMessage() {
         return this.userMessage;
     }

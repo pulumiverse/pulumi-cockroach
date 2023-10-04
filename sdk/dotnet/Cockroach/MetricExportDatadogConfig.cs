@@ -11,32 +11,38 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Metric Export Datadog Config Resource
+    /// DataDog metric export configuration for a cluster.
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig")]
     public partial class MetricExportDatadogConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// A Datadog API key
+        /// A Datadog API key.
         /// </summary>
         [Output("apiKey")]
         public Output<string> ApiKey { get; private set; } = null!;
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// The Datadog region to export to
+        /// The Datadog region to export to.
         /// </summary>
         [Output("site")]
         public Output<string> Site { get; private set; } = null!;
 
+        /// <summary>
+        /// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
 
+        /// <summary>
+        /// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        /// </summary>
         [Output("userMessage")]
         public Output<string> UserMessage { get; private set; } = null!;
 
@@ -95,7 +101,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         private Input<string>? _apiKey;
 
         /// <summary>
-        /// A Datadog API key
+        /// A Datadog API key.
         /// </summary>
         public Input<string>? ApiKey
         {
@@ -108,13 +114,13 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// The Datadog region to export to
+        /// The Datadog region to export to.
         /// </summary>
         [Input("site", required: true)]
         public Input<string> Site { get; set; } = null!;
@@ -131,7 +137,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         private Input<string>? _apiKey;
 
         /// <summary>
-        /// A Datadog API key
+        /// A Datadog API key.
         /// </summary>
         public Input<string>? ApiKey
         {
@@ -144,20 +150,26 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// The Datadog region to export to
+        /// The Datadog region to export to.
         /// </summary>
         [Input("site")]
         public Input<string>? Site { get; set; }
 
+        /// <summary>
+        /// Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
+        /// <summary>
+        /// Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        /// </summary>
         [Input("userMessage")]
         public Input<string>? UserMessage { get; set; }
 

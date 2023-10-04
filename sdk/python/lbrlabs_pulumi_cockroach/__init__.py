@@ -6,11 +6,13 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .allow_list import *
+from .api_oidc_config import *
 from .ca_cert import *
 from .cluster import *
 from .cmek import *
 from .database import *
 from .finalize_version_upgrade import *
+from .folder import *
 from .get_cluster_cert import *
 from .get_cockroach_cluster import *
 from .get_connection_string import *
@@ -22,9 +24,11 @@ from .metric_export_cloudwatch_config import *
 from .metric_export_datadog_config import *
 from .private_endpoint_connection import *
 from .private_endpoint_services import *
+from .private_endpoint_trusted_owner import *
 from .provider import *
 from .sql_user import *
 from .user_role_grants import *
+from .version_deferral import *
 from ._inputs import *
 from . import outputs
 
@@ -44,6 +48,14 @@ _utilities.register(
   "fqn": "lbrlabs_pulumi_cockroach",
   "classes": {
    "cockroach:index/allowList:AllowList": "AllowList"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/apiOidcConfig",
+  "fqn": "lbrlabs_pulumi_cockroach",
+  "classes": {
+   "cockroach:index/apiOidcConfig:ApiOidcConfig": "ApiOidcConfig"
   }
  },
  {
@@ -84,6 +96,14 @@ _utilities.register(
   "fqn": "lbrlabs_pulumi_cockroach",
   "classes": {
    "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade": "FinalizeVersionUpgrade"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/folder",
+  "fqn": "lbrlabs_pulumi_cockroach",
+  "classes": {
+   "cockroach:index/folder:Folder": "Folder"
   }
  },
  {
@@ -136,6 +156,14 @@ _utilities.register(
  },
  {
   "pkg": "cockroach",
+  "mod": "index/privateEndpointTrustedOwner",
+  "fqn": "lbrlabs_pulumi_cockroach",
+  "classes": {
+   "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner": "PrivateEndpointTrustedOwner"
+  }
+ },
+ {
+  "pkg": "cockroach",
   "mod": "index/sqlUser",
   "fqn": "lbrlabs_pulumi_cockroach",
   "classes": {
@@ -148,6 +176,14 @@ _utilities.register(
   "fqn": "lbrlabs_pulumi_cockroach",
   "classes": {
    "cockroach:index/userRoleGrants:UserRoleGrants": "UserRoleGrants"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/versionDeferral",
+  "fqn": "lbrlabs_pulumi_cockroach",
+  "classes": {
+   "cockroach:index/versionDeferral:VersionDeferral": "VersionDeferral"
   }
  }
 ]

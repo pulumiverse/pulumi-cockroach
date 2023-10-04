@@ -19,9 +19,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
-        /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
-        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 

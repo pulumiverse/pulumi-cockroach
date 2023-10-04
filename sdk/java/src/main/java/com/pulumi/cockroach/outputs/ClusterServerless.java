@@ -14,10 +14,6 @@ import javax.annotation.Nullable;
 @CustomType
 public final class ClusterServerless {
     private @Nullable String routingId;
-    /**
-     * @return Spend limit in US cents.
-     * 
-     */
     private @Nullable Integer spendLimit;
     private @Nullable ClusterServerlessUsageLimits usageLimits;
 
@@ -25,10 +21,6 @@ public final class ClusterServerless {
     public Optional<String> routingId() {
         return Optional.ofNullable(this.routingId);
     }
-    /**
-     * @return Spend limit in US cents.
-     * 
-     */
     public Optional<Integer> spendLimit() {
         return Optional.ofNullable(this.spendLimit);
     }

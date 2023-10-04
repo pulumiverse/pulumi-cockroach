@@ -11,12 +11,13 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Role grants
+// Role grants for a single user.
 type UserRoleGrants struct {
 	pulumi.CustomResourceState
 
-	Roles  UserRoleGrantsRoleArrayOutput `pulumi:"roles"`
-	UserId pulumi.StringOutput           `pulumi:"userId"`
+	Roles UserRoleGrantsRoleArrayOutput `pulumi:"roles"`
+	// ID of the user to grant these roles to.
+	UserId pulumi.StringOutput `pulumi:"userId"`
 }
 
 // NewUserRoleGrants registers a new resource with the given unique name, arguments, and options.
@@ -55,12 +56,14 @@ func GetUserRoleGrants(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering UserRoleGrants resources.
 type userRoleGrantsState struct {
-	Roles  []UserRoleGrantsRole `pulumi:"roles"`
-	UserId *string              `pulumi:"userId"`
+	Roles []UserRoleGrantsRole `pulumi:"roles"`
+	// ID of the user to grant these roles to.
+	UserId *string `pulumi:"userId"`
 }
 
 type UserRoleGrantsState struct {
-	Roles  UserRoleGrantsRoleArrayInput
+	Roles UserRoleGrantsRoleArrayInput
+	// ID of the user to grant these roles to.
 	UserId pulumi.StringPtrInput
 }
 
@@ -69,13 +72,15 @@ func (UserRoleGrantsState) ElementType() reflect.Type {
 }
 
 type userRoleGrantsArgs struct {
-	Roles  []UserRoleGrantsRole `pulumi:"roles"`
-	UserId string               `pulumi:"userId"`
+	Roles []UserRoleGrantsRole `pulumi:"roles"`
+	// ID of the user to grant these roles to.
+	UserId string `pulumi:"userId"`
 }
 
 // The set of arguments for constructing a UserRoleGrants resource.
 type UserRoleGrantsArgs struct {
-	Roles  UserRoleGrantsRoleArrayInput
+	Roles UserRoleGrantsRoleArrayInput
+	// ID of the user to grant these roles to.
 	UserId pulumi.StringInput
 }
 
@@ -170,6 +175,7 @@ func (o UserRoleGrantsOutput) Roles() UserRoleGrantsRoleArrayOutput {
 	return o.ApplyT(func(v *UserRoleGrants) UserRoleGrantsRoleArrayOutput { return v.Roles }).(UserRoleGrantsRoleArrayOutput)
 }
 
+// ID of the user to grant these roles to.
 func (o UserRoleGrantsOutput) UserId() pulumi.StringOutput {
 	return o.ApplyT(func(v *UserRoleGrants) pulumi.StringOutput { return v.UserId }).(pulumi.StringOutput)
 }

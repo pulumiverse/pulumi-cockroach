@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * AWS PrivateLink Endpoint Connection
+ * AWS PrivateLink Endpoint Connection.
  */
 export class PrivateEndpointConnection extends pulumi.CustomResource {
     /**
@@ -35,10 +35,22 @@ export class PrivateEndpointConnection extends pulumi.CustomResource {
         return obj['__pulumiType'] === PrivateEndpointConnection.__pulumiType;
     }
 
+    /**
+     * Cloud provider associated with this connection.
+     */
     public /*out*/ readonly cloudProvider!: pulumi.Output<string>;
     public readonly clusterId!: pulumi.Output<string>;
+    /**
+     * Client side ID of the PrivateLink connection.
+     */
     public readonly endpointId!: pulumi.Output<string>;
+    /**
+     * Cloud provider region code associated with this connection.
+     */
     public /*out*/ readonly regionName!: pulumi.Output<string>;
+    /**
+     * Server side ID of the PrivateLink connection.
+     */
     public /*out*/ readonly serviceId!: pulumi.Output<string>;
 
     /**
@@ -82,10 +94,22 @@ export class PrivateEndpointConnection extends pulumi.CustomResource {
  * Input properties used for looking up and filtering PrivateEndpointConnection resources.
  */
 export interface PrivateEndpointConnectionState {
+    /**
+     * Cloud provider associated with this connection.
+     */
     cloudProvider?: pulumi.Input<string>;
     clusterId?: pulumi.Input<string>;
+    /**
+     * Client side ID of the PrivateLink connection.
+     */
     endpointId?: pulumi.Input<string>;
+    /**
+     * Cloud provider region code associated with this connection.
+     */
     regionName?: pulumi.Input<string>;
+    /**
+     * Server side ID of the PrivateLink connection.
+     */
     serviceId?: pulumi.Input<string>;
 }
 
@@ -94,5 +118,8 @@ export interface PrivateEndpointConnectionState {
  */
 export interface PrivateEndpointConnectionArgs {
     clusterId: pulumi.Input<string>;
+    /**
+     * Client side ID of the PrivateLink connection.
+     */
     endpointId: pulumi.Input<string>;
 }

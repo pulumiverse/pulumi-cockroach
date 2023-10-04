@@ -2,10 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Generic connection string for a given cluster
+ * Generic connection string for a cluster.
  */
 export function getConnectionString(args: GetConnectionStringArgs, opts?: pulumi.InvokeOptions): Promise<GetConnectionStringResult> {
 
@@ -23,22 +25,10 @@ export function getConnectionString(args: GetConnectionStringArgs, opts?: pulumi
  * A collection of arguments for invoking getConnectionString.
  */
 export interface GetConnectionStringArgs {
-    /**
-     * Database to connect to. Defaults to 'defaultdb'.
-     */
     database?: string;
-    /**
-     * Cluster ID
-     */
     id: string;
     os?: string;
-    /**
-     * Database user password. Must also include `sqlUser`.
-     */
     password?: string;
-    /**
-     * Database username.
-     */
     sqlUser?: string;
 }
 
@@ -46,34 +36,16 @@ export interface GetConnectionStringArgs {
  * A collection of values returned by getConnectionString.
  */
 export interface GetConnectionStringResult {
-    /**
-     * List of individual connection string parameters. Can be used to build nonstandard connection strings.
-     */
-    readonly connectionParams: {[key: string]: string};
-    /**
-     * Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
-     */
+    readonly connectionParams: outputs.GetConnectionStringConnectionParams;
     readonly connectionString: string;
-    /**
-     * Database to connect to. Defaults to 'defaultdb'.
-     */
     readonly database: string;
-    /**
-     * Cluster ID
-     */
     readonly id: string;
     readonly os: string;
-    /**
-     * Database user password. Must also include `sqlUser`.
-     */
     readonly password?: string;
-    /**
-     * Database username.
-     */
     readonly sqlUser?: string;
 }
 /**
- * Generic connection string for a given cluster
+ * Generic connection string for a cluster.
  */
 export function getConnectionStringOutput(args: GetConnectionStringOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConnectionStringResult> {
     return pulumi.output(args).apply((a: any) => getConnectionString(a, opts))
@@ -83,21 +55,9 @@ export function getConnectionStringOutput(args: GetConnectionStringOutputArgs, o
  * A collection of arguments for invoking getConnectionString.
  */
 export interface GetConnectionStringOutputArgs {
-    /**
-     * Database to connect to. Defaults to 'defaultdb'.
-     */
     database?: pulumi.Input<string>;
-    /**
-     * Cluster ID
-     */
     id: pulumi.Input<string>;
     os?: pulumi.Input<string>;
-    /**
-     * Database user password. Must also include `sqlUser`.
-     */
     password?: pulumi.Input<string>;
-    /**
-     * Database username.
-     */
     sqlUser?: pulumi.Input<string>;
 }

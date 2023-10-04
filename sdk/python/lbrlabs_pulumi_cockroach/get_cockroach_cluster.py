@@ -22,7 +22,7 @@ class GetCockroachClusterResult:
     """
     A collection of values returned by getCockroachCluster.
     """
-    def __init__(__self__, account_id=None, cloud_provider=None, cockroach_version=None, creator_id=None, dedicated=None, id=None, name=None, operation_status=None, plan=None, regions=None, serverless=None, state=None, upgrade_status=None):
+    def __init__(__self__, account_id=None, cloud_provider=None, cockroach_version=None, creator_id=None, dedicated=None, id=None, name=None, operation_status=None, parent_id=None, plan=None, regions=None, serverless=None, state=None, upgrade_status=None):
         if account_id and not isinstance(account_id, str):
             raise TypeError("Expected argument 'account_id' to be a str")
         pulumi.set(__self__, "account_id", account_id)
@@ -47,6 +47,9 @@ class GetCockroachClusterResult:
         if operation_status and not isinstance(operation_status, str):
             raise TypeError("Expected argument 'operation_status' to be a str")
         pulumi.set(__self__, "operation_status", operation_status)
+        if parent_id and not isinstance(parent_id, str):
+            raise TypeError("Expected argument 'parent_id' to be a str")
+        pulumi.set(__self__, "parent_id", parent_id)
         if plan and not isinstance(plan, str):
             raise TypeError("Expected argument 'plan' to be a str")
         pulumi.set(__self__, "plan", plan)
@@ -91,23 +94,22 @@ class GetCockroachClusterResult:
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        The ID of this resource.
-        """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def name(self) -> str:
-        """
-        Name of cluster
-        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="operationStatus")
     def operation_status(self) -> str:
         return pulumi.get(self, "operation_status")
+
+    @property
+    @pulumi.getter(name="parentId")
+    def parent_id(self) -> str:
+        return pulumi.get(self, "parent_id")
 
     @property
     @pulumi.getter
@@ -149,6 +151,7 @@ class AwaitableGetCockroachClusterResult(GetCockroachClusterResult):
             id=self.id,
             name=self.name,
             operation_status=self.operation_status,
+            parent_id=self.parent_id,
             plan=self.plan,
             regions=self.regions,
             serverless=self.serverless,
@@ -159,10 +162,7 @@ class AwaitableGetCockroachClusterResult(GetCockroachClusterResult):
 def get_cockroach_cluster(id: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetCockroachClusterResult:
     """
-    Cluster Data Source
-
-
-    :param str id: The ID of this resource.
+    CockroachDB Cloud cluster. Can be Dedicated or Serverless.
     """
     __args__ = dict()
     __args__['id'] = id
@@ -178,6 +178,7 @@ def get_cockroach_cluster(id: Optional[str] = None,
         id=__ret__.id,
         name=__ret__.name,
         operation_status=__ret__.operation_status,
+        parent_id=__ret__.parent_id,
         plan=__ret__.plan,
         regions=__ret__.regions,
         serverless=__ret__.serverless,
@@ -189,9 +190,6 @@ def get_cockroach_cluster(id: Optional[str] = None,
 def get_cockroach_cluster_output(id: Optional[pulumi.Input[str]] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCockroachClusterResult]:
     """
-    Cluster Data Source
-
-
-    :param str id: The ID of this resource.
+    CockroachDB Cloud cluster. Can be Dedicated or Serverless.
     """
     ...

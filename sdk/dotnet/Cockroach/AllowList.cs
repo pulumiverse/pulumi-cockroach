@@ -11,26 +11,41 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Allow list of IP range
+    /// List of IP ranges allowed to access the cluster.
     /// </summary>
     [CockroachResourceType("cockroach:index/allowList:AllowList")]
     public partial class AllowList : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// </summary>
         [Output("cidrIp")]
         public Output<string> CidrIp { get; private set; } = null!;
 
+        /// <summary>
+        /// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// </summary>
         [Output("cidrMask")]
         public Output<int> CidrMask { get; private set; } = null!;
 
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
+        /// <summary>
+        /// Name of this allowlist entry.
+        /// </summary>
         [Output("name")]
         public Output<string?> Name { get; private set; } = null!;
 
+        /// <summary>
+        /// Set to 'true' to allow SQL connections from this CIDR range.
+        /// </summary>
         [Output("sql")]
         public Output<bool> Sql { get; private set; } = null!;
 
+        /// <summary>
+        /// Set to 'true' to allow access to the management console from this CIDR range.
+        /// </summary>
         [Output("ui")]
         public Output<bool> Ui { get; private set; } = null!;
 
@@ -81,21 +96,36 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class AllowListArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// </summary>
         [Input("cidrIp", required: true)]
         public Input<string> CidrIp { get; set; } = null!;
 
+        /// <summary>
+        /// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// </summary>
         [Input("cidrMask", required: true)]
         public Input<int> CidrMask { get; set; } = null!;
 
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        /// <summary>
+        /// Name of this allowlist entry.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Set to 'true' to allow SQL connections from this CIDR range.
+        /// </summary>
         [Input("sql", required: true)]
         public Input<bool> Sql { get; set; } = null!;
 
+        /// <summary>
+        /// Set to 'true' to allow access to the management console from this CIDR range.
+        /// </summary>
         [Input("ui", required: true)]
         public Input<bool> Ui { get; set; } = null!;
 
@@ -107,21 +137,36 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class AllowListState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// </summary>
         [Input("cidrIp")]
         public Input<string>? CidrIp { get; set; }
 
+        /// <summary>
+        /// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// </summary>
         [Input("cidrMask")]
         public Input<int>? CidrMask { get; set; }
 
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
+        /// <summary>
+        /// Name of this allowlist entry.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// Set to 'true' to allow SQL connections from this CIDR range.
+        /// </summary>
         [Input("sql")]
         public Input<bool>? Sql { get; set; }
 
+        /// <summary>
+        /// Set to 'true' to allow access to the management console from this CIDR range.
+        /// </summary>
         [Input("ui")]
         public Input<bool>? Ui { get; set; }
 

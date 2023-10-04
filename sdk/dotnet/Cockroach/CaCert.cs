@@ -17,19 +17,19 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public partial class CaCert : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Status of client CA certs on a cluster
+        /// Status of client CA certs on a cluster.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
-        /// X509 certificate in PEM format
+        /// X509 certificate in PEM format.
         /// </summary>
         [Output("x509PemCert")]
         public Output<string> X509PemCert { get; private set; } = null!;
@@ -82,13 +82,13 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class CaCertArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// X509 certificate in PEM format
+        /// X509 certificate in PEM format.
         /// </summary>
         [Input("x509PemCert", required: true)]
         public Input<string> X509PemCert { get; set; } = null!;
@@ -102,19 +102,19 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class CaCertState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Status of client CA certs on a cluster
+        /// Status of client CA certs on a cluster.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// X509 certificate in PEM format
+        /// X509 certificate in PEM format.
         /// </summary>
         [Input("x509PemCert")]
         public Input<string>? X509PemCert { get; set; }
