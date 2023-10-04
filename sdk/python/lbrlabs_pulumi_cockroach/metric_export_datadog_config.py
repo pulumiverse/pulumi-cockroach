@@ -19,9 +19,9 @@ class MetricExportDatadogConfigArgs:
                  site: pulumi.Input[str]):
         """
         The set of arguments for constructing a MetricExportDatadogConfig resource.
-        :param pulumi.Input[str] api_key: A Datadog API key
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] site: The Datadog region to export to
+        :param pulumi.Input[str] api_key: A Datadog API key.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] site: The Datadog region to export to.
         """
         pulumi.set(__self__, "api_key", api_key)
         pulumi.set(__self__, "cluster_id", cluster_id)
@@ -31,7 +31,7 @@ class MetricExportDatadogConfigArgs:
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Input[str]:
         """
-        A Datadog API key
+        A Datadog API key.
         """
         return pulumi.get(self, "api_key")
 
@@ -43,7 +43,7 @@ class MetricExportDatadogConfigArgs:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -55,7 +55,7 @@ class MetricExportDatadogConfigArgs:
     @pulumi.getter
     def site(self) -> pulumi.Input[str]:
         """
-        The Datadog region to export to
+        The Datadog region to export to.
         """
         return pulumi.get(self, "site")
 
@@ -74,9 +74,11 @@ class _MetricExportDatadogConfigState:
                  user_message: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering MetricExportDatadogConfig resources.
-        :param pulumi.Input[str] api_key: A Datadog API key
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] site: The Datadog region to export to
+        :param pulumi.Input[str] api_key: A Datadog API key.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] site: The Datadog region to export to.
+        :param pulumi.Input[str] status: Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        :param pulumi.Input[str] user_message: Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
         """
         if api_key is not None:
             pulumi.set(__self__, "api_key", api_key)
@@ -93,7 +95,7 @@ class _MetricExportDatadogConfigState:
     @pulumi.getter(name="apiKey")
     def api_key(self) -> Optional[pulumi.Input[str]]:
         """
-        A Datadog API key
+        A Datadog API key.
         """
         return pulumi.get(self, "api_key")
 
@@ -105,7 +107,7 @@ class _MetricExportDatadogConfigState:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -117,7 +119,7 @@ class _MetricExportDatadogConfigState:
     @pulumi.getter
     def site(self) -> Optional[pulumi.Input[str]]:
         """
-        The Datadog region to export to
+        The Datadog region to export to.
         """
         return pulumi.get(self, "site")
 
@@ -128,6 +130,9 @@ class _MetricExportDatadogConfigState:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -137,6 +142,9 @@ class _MetricExportDatadogConfigState:
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> Optional[pulumi.Input[str]]:
+        """
+        Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        """
         return pulumi.get(self, "user_message")
 
     @user_message.setter
@@ -154,13 +162,13 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
                  site: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Metric Export Datadog Config Resource
+        DataDog metric export configuration for a cluster.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] api_key: A Datadog API key
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] site: The Datadog region to export to
+        :param pulumi.Input[str] api_key: A Datadog API key.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] site: The Datadog region to export to.
         """
         ...
     @overload
@@ -169,7 +177,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
                  args: MetricExportDatadogConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Metric Export Datadog Config Resource
+        DataDog metric export configuration for a cluster.
 
         :param str resource_name: The name of the resource.
         :param MetricExportDatadogConfigArgs args: The arguments to use to populate this resource's properties.
@@ -233,9 +241,11 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] api_key: A Datadog API key
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] site: The Datadog region to export to
+        :param pulumi.Input[str] api_key: A Datadog API key.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] site: The Datadog region to export to.
+        :param pulumi.Input[str] status: Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        :param pulumi.Input[str] user_message: Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -252,7 +262,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
     @pulumi.getter(name="apiKey")
     def api_key(self) -> pulumi.Output[str]:
         """
-        A Datadog API key
+        A Datadog API key.
         """
         return pulumi.get(self, "api_key")
 
@@ -260,7 +270,7 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -268,17 +278,23 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
     @pulumi.getter
     def site(self) -> pulumi.Output[str]:
         """
-        The Datadog region to export to
+        The Datadog region to export to.
         """
         return pulumi.get(self, "site")
 
     @property
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
+        """
+        Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> pulumi.Output[str]:
+        """
+        Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        """
         return pulumi.get(self, "user_message")
 

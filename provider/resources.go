@@ -65,8 +65,9 @@ func Provider() tfpfbridge.ProviderInfo {
 		GitHubOrg:         "cockroachdb",
 		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"cockroach_allow_list":                      {Tok: cockroachResource(cockroachMod, "AllowList")},
-			"cockroach_client_ca_cert":                  {
+			"cockroach_allow_list":      {Tok: cockroachResource(cockroachMod, "AllowList")},
+			"cockroach_api_oidc_config": {Tok: cockroachResource(cockroachMod, "ApiOidcConfig")},
+			"cockroach_client_ca_cert": {
 				Tok: cockroachResource(cockroachMod, "CaCert"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -75,7 +76,7 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_cluster":                         {
+			"cockroach_cluster": {
 				Tok: cockroachResource(cockroachMod, "Cluster"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -84,7 +85,7 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_cmek":                            {
+			"cockroach_cmek": {
 				Tok: cockroachResource(cockroachMod, "Cmek"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -93,8 +94,9 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_database":                        {Tok: cockroachResource(cockroachMod, "Database")},
-			"cockroach_finalize_version_upgrade":        {
+			"cockroach_database": {Tok: cockroachResource(cockroachMod, "Database")},
+			"cockroach_folder":   {Tok: cockroachResource(cockroachMod, "Folder")},
+			"cockroach_finalize_version_upgrade": {
 				Tok: cockroachResource(cockroachMod, "FinalizeVersionUpgrade"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -103,7 +105,7 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_log_export_config":               {
+			"cockroach_log_export_config": {
 				Tok: cockroachResource(cockroachMod, "LogExportConfig"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -112,7 +114,7 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_maintenance_window":              {
+			"cockroach_maintenance_window": {
 				Tok: cockroachResource(cockroachMod, "MaintenanceWindow"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -130,7 +132,7 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_metric_export_datadog_config":    {
+			"cockroach_metric_export_datadog_config": {
 				Tok: cockroachResource(cockroachMod, "MetricExportDatadogConfig"),
 				Fields: map[string]*tfbridge.SchemaInfo{
 					"id": {
@@ -139,10 +141,13 @@ func Provider() tfpfbridge.ProviderInfo {
 					},
 				},
 			},
-			"cockroach_private_endpoint_connection":     {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
-			"cockroach_private_endpoint_services":       {Tok: cockroachResource(cockroachMod, "PrivateEndpointServices")},
-			"cockroach_sql_user":                        {Tok: cockroachResource(cockroachMod, "SqlUser")},
-			"cockroach_user_role_grants":                {Tok: cockroachResource(cockroachMod, "UserRoleGrants")},
+
+			"cockroach_private_endpoint_connection":    {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
+			"cockroach_private_endpoint_services":      {Tok: cockroachResource(cockroachMod, "PrivateEndpointServices")},
+			"cockroach_private_endpoint_trusted_owner": {Tok: cockroachResource(cockroachMod, "PrivateEndpointTrustedOwner")},
+			"cockroach_sql_user":                       {Tok: cockroachResource(cockroachMod, "SqlUser")},
+			"cockroach_user_role_grants":               {Tok: cockroachResource(cockroachMod, "UserRoleGrants")},
+			"cockroach_version_deferral":               {Tok: cockroachResource(cockroachMod, "VersionDeferral")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"cockroach_cluster":           {Tok: cockroachDataSource(cockroachMod, "getCockroachCluster")},

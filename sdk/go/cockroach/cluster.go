@@ -11,25 +11,34 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Cluster Resource
+// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
 type Cluster struct {
 	pulumi.CustomResourceState
 
-	AccountId     pulumi.StringOutput `pulumi:"accountId"`
+	// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+	AccountId pulumi.StringOutput `pulumi:"accountId"`
+	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
-	// The ID of this resource.
-	ClusterId        pulumi.StringOutput       `pulumi:"clusterId"`
-	CockroachVersion pulumi.StringOutput       `pulumi:"cockroachVersion"`
-	CreatorId        pulumi.StringOutput       `pulumi:"creatorId"`
-	Dedicated        ClusterDedicatedPtrOutput `pulumi:"dedicated"`
-	// Name of cluster
-	Name            pulumi.StringOutput        `pulumi:"name"`
-	OperationStatus pulumi.StringOutput        `pulumi:"operationStatus"`
-	Plan            pulumi.StringOutput        `pulumi:"plan"`
-	Regions         ClusterRegionArrayOutput   `pulumi:"regions"`
-	Serverless      ClusterServerlessPtrOutput `pulumi:"serverless"`
-	State           pulumi.StringOutput        `pulumi:"state"`
-	UpgradeStatus   pulumi.StringOutput        `pulumi:"upgradeStatus"`
+	ClusterId     pulumi.StringOutput `pulumi:"clusterId"`
+	// Major version of CockroachDB running on the cluster.
+	CockroachVersion pulumi.StringOutput `pulumi:"cockroachVersion"`
+	// ID of the user who created the cluster.
+	CreatorId pulumi.StringOutput       `pulumi:"creatorId"`
+	Dedicated ClusterDedicatedPtrOutput `pulumi:"dedicated"`
+	// Name of the cluster.
+	Name pulumi.StringOutput `pulumi:"name"`
+	// Describes the current long-running operation, if any.
+	OperationStatus pulumi.StringOutput `pulumi:"operationStatus"`
+	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+	ParentId pulumi.StringOutput `pulumi:"parentId"`
+	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	Plan       pulumi.StringOutput        `pulumi:"plan"`
+	Regions    ClusterRegionArrayOutput   `pulumi:"regions"`
+	Serverless ClusterServerlessPtrOutput `pulumi:"serverless"`
+	// Describes whether the cluster is being created, updated, deleted, etc.
+	State pulumi.StringOutput `pulumi:"state"`
+	// Describes the status of any in-progress CockroachDB upgrade or rollback.
+	UpgradeStatus pulumi.StringOutput `pulumi:"upgradeStatus"`
 }
 
 // NewCluster registers a new resource with the given unique name, arguments, and options.
@@ -71,39 +80,57 @@ func GetCluster(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cluster resources.
 type clusterState struct {
-	AccountId     *string `pulumi:"accountId"`
+	// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+	AccountId *string `pulumi:"accountId"`
+	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider *string `pulumi:"cloudProvider"`
-	// The ID of this resource.
-	ClusterId        *string           `pulumi:"clusterId"`
-	CockroachVersion *string           `pulumi:"cockroachVersion"`
-	CreatorId        *string           `pulumi:"creatorId"`
-	Dedicated        *ClusterDedicated `pulumi:"dedicated"`
-	// Name of cluster
-	Name            *string            `pulumi:"name"`
-	OperationStatus *string            `pulumi:"operationStatus"`
-	Plan            *string            `pulumi:"plan"`
-	Regions         []ClusterRegion    `pulumi:"regions"`
-	Serverless      *ClusterServerless `pulumi:"serverless"`
-	State           *string            `pulumi:"state"`
-	UpgradeStatus   *string            `pulumi:"upgradeStatus"`
+	ClusterId     *string `pulumi:"clusterId"`
+	// Major version of CockroachDB running on the cluster.
+	CockroachVersion *string `pulumi:"cockroachVersion"`
+	// ID of the user who created the cluster.
+	CreatorId *string           `pulumi:"creatorId"`
+	Dedicated *ClusterDedicated `pulumi:"dedicated"`
+	// Name of the cluster.
+	Name *string `pulumi:"name"`
+	// Describes the current long-running operation, if any.
+	OperationStatus *string `pulumi:"operationStatus"`
+	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+	ParentId *string `pulumi:"parentId"`
+	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	Plan       *string            `pulumi:"plan"`
+	Regions    []ClusterRegion    `pulumi:"regions"`
+	Serverless *ClusterServerless `pulumi:"serverless"`
+	// Describes whether the cluster is being created, updated, deleted, etc.
+	State *string `pulumi:"state"`
+	// Describes the status of any in-progress CockroachDB upgrade or rollback.
+	UpgradeStatus *string `pulumi:"upgradeStatus"`
 }
 
 type ClusterState struct {
-	AccountId     pulumi.StringPtrInput
+	// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+	AccountId pulumi.StringPtrInput
+	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringPtrInput
-	// The ID of this resource.
-	ClusterId        pulumi.StringPtrInput
+	ClusterId     pulumi.StringPtrInput
+	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringPtrInput
-	CreatorId        pulumi.StringPtrInput
-	Dedicated        ClusterDedicatedPtrInput
-	// Name of cluster
-	Name            pulumi.StringPtrInput
+	// ID of the user who created the cluster.
+	CreatorId pulumi.StringPtrInput
+	Dedicated ClusterDedicatedPtrInput
+	// Name of the cluster.
+	Name pulumi.StringPtrInput
+	// Describes the current long-running operation, if any.
 	OperationStatus pulumi.StringPtrInput
-	Plan            pulumi.StringPtrInput
-	Regions         ClusterRegionArrayInput
-	Serverless      ClusterServerlessPtrInput
-	State           pulumi.StringPtrInput
-	UpgradeStatus   pulumi.StringPtrInput
+	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+	ParentId pulumi.StringPtrInput
+	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	Plan       pulumi.StringPtrInput
+	Regions    ClusterRegionArrayInput
+	Serverless ClusterServerlessPtrInput
+	// Describes whether the cluster is being created, updated, deleted, etc.
+	State pulumi.StringPtrInput
+	// Describes the status of any in-progress CockroachDB upgrade or rollback.
+	UpgradeStatus pulumi.StringPtrInput
 }
 
 func (ClusterState) ElementType() reflect.Type {
@@ -111,22 +138,30 @@ func (ClusterState) ElementType() reflect.Type {
 }
 
 type clusterArgs struct {
-	CloudProvider    string            `pulumi:"cloudProvider"`
+	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+	CloudProvider string `pulumi:"cloudProvider"`
+	// Major version of CockroachDB running on the cluster.
 	CockroachVersion *string           `pulumi:"cockroachVersion"`
 	Dedicated        *ClusterDedicated `pulumi:"dedicated"`
-	// Name of cluster
-	Name       string             `pulumi:"name"`
+	// Name of the cluster.
+	Name string `pulumi:"name"`
+	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+	ParentId   *string            `pulumi:"parentId"`
 	Regions    []ClusterRegion    `pulumi:"regions"`
 	Serverless *ClusterServerless `pulumi:"serverless"`
 }
 
 // The set of arguments for constructing a Cluster resource.
 type ClusterArgs struct {
-	CloudProvider    pulumi.StringInput
+	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+	CloudProvider pulumi.StringInput
+	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringPtrInput
 	Dedicated        ClusterDedicatedPtrInput
-	// Name of cluster
-	Name       pulumi.StringInput
+	// Name of the cluster.
+	Name pulumi.StringInput
+	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+	ParentId   pulumi.StringPtrInput
 	Regions    ClusterRegionArrayInput
 	Serverless ClusterServerlessPtrInput
 }
@@ -218,23 +253,26 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 	return o
 }
 
+// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
 func (o ClusterOutput) AccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.AccountId }).(pulumi.StringOutput)
 }
 
+// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 func (o ClusterOutput) CloudProvider() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CloudProvider }).(pulumi.StringOutput)
 }
 
-// The ID of this resource.
 func (o ClusterOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Major version of CockroachDB running on the cluster.
 func (o ClusterOutput) CockroachVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CockroachVersion }).(pulumi.StringOutput)
 }
 
+// ID of the user who created the cluster.
 func (o ClusterOutput) CreatorId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CreatorId }).(pulumi.StringOutput)
 }
@@ -243,15 +281,22 @@ func (o ClusterOutput) Dedicated() ClusterDedicatedPtrOutput {
 	return o.ApplyT(func(v *Cluster) ClusterDedicatedPtrOutput { return v.Dedicated }).(ClusterDedicatedPtrOutput)
 }
 
-// Name of cluster
+// Name of the cluster.
 func (o ClusterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Describes the current long-running operation, if any.
 func (o ClusterOutput) OperationStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.OperationStatus }).(pulumi.StringOutput)
 }
 
+// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+func (o ClusterOutput) ParentId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ParentId }).(pulumi.StringOutput)
+}
+
+// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
 func (o ClusterOutput) Plan() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.Plan }).(pulumi.StringOutput)
 }
@@ -264,10 +309,12 @@ func (o ClusterOutput) Serverless() ClusterServerlessPtrOutput {
 	return o.ApplyT(func(v *Cluster) ClusterServerlessPtrOutput { return v.Serverless }).(ClusterServerlessPtrOutput)
 }
 
+// Describes whether the cluster is being created, updated, deleted, etc.
 func (o ClusterOutput) State() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.State }).(pulumi.StringOutput)
 }
 
+// Describes the status of any in-progress CockroachDB upgrade or rollback.
 func (o ClusterOutput) UpgradeStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.UpgradeStatus }).(pulumi.StringOutput)
 }

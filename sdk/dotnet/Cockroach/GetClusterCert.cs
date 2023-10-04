@@ -33,7 +33,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class GetClusterCertArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("id", required: true)]
         public string Id { get; set; } = null!;
@@ -47,7 +47,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class GetClusterCertInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("id", required: true)]
         public Input<string> Id { get; set; } = null!;
@@ -62,9 +62,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     [OutputType]
     public sealed class GetClusterCertResult
     {
+        /// <summary>
+        /// Certificate contents.
+        /// </summary>
         public readonly string Cert;
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         public readonly string Id;
 

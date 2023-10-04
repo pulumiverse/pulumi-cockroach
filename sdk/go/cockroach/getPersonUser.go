@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Information about a person user
+// Information about an individual user.
 func GetPersonUser(ctx *pulumi.Context, args *GetPersonUserArgs, opts ...pulumi.InvokeOption) (*GetPersonUserResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetPersonUserResult
@@ -31,7 +31,7 @@ type GetPersonUserArgs struct {
 type GetPersonUserResult struct {
 	// Email address used to find the User ID.
 	Email string `pulumi:"email"`
-	// User ID
+	// User ID.
 	Id string `pulumi:"id"`
 }
 
@@ -78,7 +78,7 @@ func (o GetPersonUserResultOutput) Email() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPersonUserResult) string { return v.Email }).(pulumi.StringOutput)
 }
 
-// User ID
+// User ID.
 func (o GetPersonUserResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPersonUserResult) string { return v.Id }).(pulumi.StringOutput)
 }

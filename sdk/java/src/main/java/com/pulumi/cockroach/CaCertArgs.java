@@ -14,14 +14,14 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
     public static final CaCertArgs Empty = new CaCertArgs();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -29,14 +29,14 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * X509 certificate in PEM format
+     * X509 certificate in PEM format.
      * 
      */
     @Import(name="x509PemCert", required=true)
     private Output<String> x509PemCert;
 
     /**
-     * @return X509 certificate in PEM format
+     * @return X509 certificate in PEM format.
      * 
      */
     public Output<String> x509PemCert() {
@@ -69,7 +69,7 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -80,7 +80,7 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -90,7 +90,7 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param x509PemCert X509 certificate in PEM format
+         * @param x509PemCert X509 certificate in PEM format.
          * 
          * @return builder
          * 
@@ -101,7 +101,7 @@ public final class CaCertArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param x509PemCert X509 certificate in PEM format
+         * @param x509PemCert X509 certificate in PEM format.
          * 
          * @return builder
          * 

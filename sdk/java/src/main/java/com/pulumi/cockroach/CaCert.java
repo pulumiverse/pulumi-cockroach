@@ -20,42 +20,42 @@ import javax.annotation.Nullable;
 @ResourceType(type="cockroach:index/caCert:CaCert")
 public class CaCert extends com.pulumi.resources.CustomResource {
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
         return this.clusterId;
     }
     /**
-     * Status of client CA certs on a cluster
+     * Status of client CA certs on a cluster.
      * 
      */
     @Export(name="status", type=String.class, parameters={})
     private Output<String> status;
 
     /**
-     * @return Status of client CA certs on a cluster
+     * @return Status of client CA certs on a cluster.
      * 
      */
     public Output<String> status() {
         return this.status;
     }
     /**
-     * X509 certificate in PEM format
+     * X509 certificate in PEM format.
      * 
      */
     @Export(name="x509PemCert", type=String.class, parameters={})
     private Output<String> x509PemCert;
 
     /**
-     * @return X509 certificate in PEM format
+     * @return X509 certificate in PEM format.
      * 
      */
     public Output<String> x509PemCert() {

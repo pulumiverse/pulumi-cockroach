@@ -11,23 +11,27 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// Log Export Config Resource
+    /// Log Export configuration for a cluster.
     /// </summary>
     [CockroachResourceType("cockroach:index/logExportConfig:LogExportConfig")]
     public partial class LogExportConfig : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+        /// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+        /// Project ID that the cluster service account has permissions to write to for cloud logging.
         /// </summary>
         [Output("authPrincipal")]
         public Output<string> AuthPrincipal { get; private set; } = null!;
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
 
+        /// <summary>
+        /// Indicates when log export was initially configured.
+        /// </summary>
         [Output("createdAt")]
         public Output<string> CreatedAt { get; private set; } = null!;
 
@@ -35,35 +39,52 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         public Output<ImmutableArray<Outputs.LogExportConfigGroup>> Groups { get; private set; } = null!;
 
         /// <summary>
-        /// An identifier for the logs in the customer's log sink
+        /// An identifier for the logs in the customer's log sink.
         /// </summary>
         [Output("logName")]
         public Output<string> LogName { get; private set; } = null!;
 
         /// <summary>
-        /// Controls whether logs are redacted before forwarding to customer sinks
+        /// Controls what CRDB channels do not get exported.
+        /// </summary>
+        [Output("omittedChannels")]
+        public Output<ImmutableArray<string>> OmittedChannels { get; private set; } = null!;
+
+        /// <summary>
+        /// Controls whether logs are redacted before forwarding to customer sinks.
         /// </summary>
         [Output("redact")]
         public Output<bool?> Redact { get; private set; } = null!;
 
         /// <summary>
-        /// Controls whether all logs are sent to a specific region in the customer sink
+        /// Controls whether all logs are sent to a specific region in the customer sink.
         /// </summary>
         [Output("region")]
         public Output<string> Region { get; private set; } = null!;
 
+        /// <summary>
+        /// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+        /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
 
         /// <summary>
-        /// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        /// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+        /// GCP_CLOUD_LOGGING
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
 
+        /// <summary>
+        /// Indicates when the log export configuration was last updated.
+        /// </summary>
         [Output("updatedAt")]
         public Output<string> UpdatedAt { get; private set; } = null!;
 
+        /// <summary>
+        /// Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+        /// operations.
+        /// </summary>
         [Output("userMessage")]
         public Output<string> UserMessage { get; private set; } = null!;
 
@@ -115,13 +136,14 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class LogExportConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+        /// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+        /// Project ID that the cluster service account has permissions to write to for cloud logging.
         /// </summary>
         [Input("authPrincipal", required: true)]
         public Input<string> AuthPrincipal { get; set; } = null!;
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
@@ -135,25 +157,38 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// An identifier for the logs in the customer's log sink
+        /// An identifier for the logs in the customer's log sink.
         /// </summary>
         [Input("logName", required: true)]
         public Input<string> LogName { get; set; } = null!;
 
+        [Input("omittedChannels")]
+        private InputList<string>? _omittedChannels;
+
         /// <summary>
-        /// Controls whether logs are redacted before forwarding to customer sinks
+        /// Controls what CRDB channels do not get exported.
+        /// </summary>
+        public InputList<string> OmittedChannels
+        {
+            get => _omittedChannels ?? (_omittedChannels = new InputList<string>());
+            set => _omittedChannels = value;
+        }
+
+        /// <summary>
+        /// Controls whether logs are redacted before forwarding to customer sinks.
         /// </summary>
         [Input("redact")]
         public Input<bool>? Redact { get; set; }
 
         /// <summary>
-        /// Controls whether all logs are sent to a specific region in the customer sink
+        /// Controls whether all logs are sent to a specific region in the customer sink.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        /// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+        /// GCP_CLOUD_LOGGING
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -167,17 +202,21 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public sealed class LogExportConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+        /// Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+        /// Project ID that the cluster service account has permissions to write to for cloud logging.
         /// </summary>
         [Input("authPrincipal")]
         public Input<string>? AuthPrincipal { get; set; }
 
         /// <summary>
-        /// Cluster ID
+        /// Cluster ID.
         /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
 
+        /// <summary>
+        /// Indicates when log export was initially configured.
+        /// </summary>
         [Input("createdAt")]
         public Input<string>? CreatedAt { get; set; }
 
@@ -190,35 +229,58 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         }
 
         /// <summary>
-        /// An identifier for the logs in the customer's log sink
+        /// An identifier for the logs in the customer's log sink.
         /// </summary>
         [Input("logName")]
         public Input<string>? LogName { get; set; }
 
+        [Input("omittedChannels")]
+        private InputList<string>? _omittedChannels;
+
         /// <summary>
-        /// Controls whether logs are redacted before forwarding to customer sinks
+        /// Controls what CRDB channels do not get exported.
+        /// </summary>
+        public InputList<string> OmittedChannels
+        {
+            get => _omittedChannels ?? (_omittedChannels = new InputList<string>());
+            set => _omittedChannels = value;
+        }
+
+        /// <summary>
+        /// Controls whether logs are redacted before forwarding to customer sinks.
         /// </summary>
         [Input("redact")]
         public Input<bool>? Redact { get; set; }
 
         /// <summary>
-        /// Controls whether all logs are sent to a specific region in the customer sink
+        /// Controls whether all logs are sent to a specific region in the customer sink.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
+        /// <summary>
+        /// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
         /// <summary>
-        /// The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+        /// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+        /// GCP_CLOUD_LOGGING
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
+        /// <summary>
+        /// Indicates when the log export configuration was last updated.
+        /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
+        /// <summary>
+        /// Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+        /// operations.
+        /// </summary>
         [Input("userMessage")]
         public Input<string>? UserMessage { get; set; }
 

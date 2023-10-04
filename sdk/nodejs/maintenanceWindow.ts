@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Maintenance window resource for a cluster.
+ * Maintenance window configuration for a cluster.
  */
 export class MaintenanceWindow extends pulumi.CustomResource {
     /**
@@ -36,15 +36,15 @@ export class MaintenanceWindow extends pulumi.CustomResource {
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      */
     public readonly offsetDuration!: pulumi.Output<number>;
     /**
-     * The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * Duration in seconds that the maintenance window will remain active for after it starts.
      */
     public readonly windowDuration!: pulumi.Output<number>;
 
@@ -89,15 +89,15 @@ export class MaintenanceWindow extends pulumi.CustomResource {
  */
 export interface MaintenanceWindowState {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      */
     offsetDuration?: pulumi.Input<number>;
     /**
-     * The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * Duration in seconds that the maintenance window will remain active for after it starts.
      */
     windowDuration?: pulumi.Input<number>;
 }
@@ -107,15 +107,15 @@ export interface MaintenanceWindowState {
  */
 export interface MaintenanceWindowArgs {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     clusterId: pulumi.Input<string>;
     /**
-     * The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
+     * Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.
      */
     offsetDuration: pulumi.Input<number>;
     /**
-     * The window duration is the duration in seconds that the maintenance window will remain active for after it starts.
+     * Duration in seconds that the maintenance window will remain active for after it starts.
      */
     windowDuration: pulumi.Input<number>;
 }

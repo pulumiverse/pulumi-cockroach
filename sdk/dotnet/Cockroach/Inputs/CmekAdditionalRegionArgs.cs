@@ -13,15 +13,15 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
 
     public sealed class CmekAdditionalRegionArgs : global::Pulumi.ResourceArgs
     {
+        [Input("internalDns")]
+        public Input<string>? InternalDns { get; set; }
+
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         [Input("nodeCount")]
         public Input<int>? NodeCount { get; set; }
 
-        /// <summary>
-        /// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-        /// </summary>
         [Input("primary")]
         public Input<bool>? Primary { get; set; }
 

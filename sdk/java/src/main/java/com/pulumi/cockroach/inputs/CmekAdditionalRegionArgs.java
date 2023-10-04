@@ -17,6 +17,13 @@ public final class CmekAdditionalRegionArgs extends com.pulumi.resources.Resourc
 
     public static final CmekAdditionalRegionArgs Empty = new CmekAdditionalRegionArgs();
 
+    @Import(name="internalDns")
+    private @Nullable Output<String> internalDns;
+
+    public Optional<Output<String>> internalDns() {
+        return Optional.ofNullable(this.internalDns);
+    }
+
     @Import(name="name", required=true)
     private Output<String> name;
 
@@ -31,17 +38,9 @@ public final class CmekAdditionalRegionArgs extends com.pulumi.resources.Resourc
         return Optional.ofNullable(this.nodeCount);
     }
 
-    /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     * 
-     */
     @Import(name="primary")
     private @Nullable Output<Boolean> primary;
 
-    /**
-     * @return Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     * 
-     */
     public Optional<Output<Boolean>> primary() {
         return Optional.ofNullable(this.primary);
     }
@@ -63,6 +62,7 @@ public final class CmekAdditionalRegionArgs extends com.pulumi.resources.Resourc
     private CmekAdditionalRegionArgs() {}
 
     private CmekAdditionalRegionArgs(CmekAdditionalRegionArgs $) {
+        this.internalDns = $.internalDns;
         this.name = $.name;
         this.nodeCount = $.nodeCount;
         this.primary = $.primary;
@@ -88,6 +88,15 @@ public final class CmekAdditionalRegionArgs extends com.pulumi.resources.Resourc
             $ = new CmekAdditionalRegionArgs(Objects.requireNonNull(defaults));
         }
 
+        public Builder internalDns(@Nullable Output<String> internalDns) {
+            $.internalDns = internalDns;
+            return this;
+        }
+
+        public Builder internalDns(String internalDns) {
+            return internalDns(Output.of(internalDns));
+        }
+
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
@@ -106,23 +115,11 @@ public final class CmekAdditionalRegionArgs extends com.pulumi.resources.Resourc
             return nodeCount(Output.of(nodeCount));
         }
 
-        /**
-         * @param primary Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-         * 
-         * @return builder
-         * 
-         */
         public Builder primary(@Nullable Output<Boolean> primary) {
             $.primary = primary;
             return this;
         }
 
-        /**
-         * @param primary Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-         * 
-         * @return builder
-         * 
-         */
         public Builder primary(Boolean primary) {
             return primary(Output.of(primary));
         }

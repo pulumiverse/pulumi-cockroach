@@ -13,53 +13,21 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class LogExportConfigGroup {
-    /**
-     * @return A list of CRDB log channels to include in this group
-     * 
-     */
     private List<String> channels;
-    /**
-     * @return The name of the group, reflected in the log sink
-     * 
-     */
     private String logName;
-    /**
-     * @return The minimum log level to filter to this log group
-     * 
-     */
     private @Nullable String minLevel;
-    /**
-     * @return Governs whether this log group should aggregate redacted logs if unset
-     * 
-     */
     private @Nullable Boolean redact;
 
     private LogExportConfigGroup() {}
-    /**
-     * @return A list of CRDB log channels to include in this group
-     * 
-     */
     public List<String> channels() {
         return this.channels;
     }
-    /**
-     * @return The name of the group, reflected in the log sink
-     * 
-     */
     public String logName() {
         return this.logName;
     }
-    /**
-     * @return The minimum log level to filter to this log group
-     * 
-     */
     public Optional<String> minLevel() {
         return Optional.ofNullable(this.minLevel);
     }
-    /**
-     * @return Governs whether this log group should aggregate redacted logs if unset
-     * 
-     */
     public Optional<Boolean> redact() {
         return Optional.ofNullable(this.redact);
     }

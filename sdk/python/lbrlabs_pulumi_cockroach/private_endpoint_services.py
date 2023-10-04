@@ -72,7 +72,7 @@ class PrivateEndpointServices(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP)
+        PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -84,7 +84,7 @@ class PrivateEndpointServices(pulumi.CustomResource):
                  args: PrivateEndpointServicesArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP)
+        PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
 
         :param str resource_name: The name of the resource.
         :param PrivateEndpointServicesArgs args: The arguments to use to populate this resource's properties.

@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * SQL user and password
+ * CockroachDB SQL user.
  */
 export class SqlUser extends pulumi.CustomResource {
     /**
@@ -36,6 +36,9 @@ export class SqlUser extends pulumi.CustomResource {
     }
 
     public readonly clusterId!: pulumi.Output<string>;
+    /**
+     * SQL user name.
+     */
     public readonly name!: pulumi.Output<string>;
     /**
      * If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
@@ -83,6 +86,9 @@ export class SqlUser extends pulumi.CustomResource {
  */
 export interface SqlUserState {
     clusterId?: pulumi.Input<string>;
+    /**
+     * SQL user name.
+     */
     name?: pulumi.Input<string>;
     /**
      * If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
@@ -96,6 +102,9 @@ export interface SqlUserState {
  */
 export interface SqlUserArgs {
     clusterId: pulumi.Input<string>;
+    /**
+     * SQL user name.
+     */
     name: pulumi.Input<string>;
     /**
      * If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but

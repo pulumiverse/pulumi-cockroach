@@ -22,6 +22,11 @@ class AllowListArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AllowList resource.
+        :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
+        :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
+        :param pulumi.Input[str] name: Name of this allowlist entry.
         """
         pulumi.set(__self__, "cidr_ip", cidr_ip)
         pulumi.set(__self__, "cidr_mask", cidr_mask)
@@ -34,6 +39,9 @@ class AllowListArgs:
     @property
     @pulumi.getter(name="cidrIp")
     def cidr_ip(self) -> pulumi.Input[str]:
+        """
+        IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        """
         return pulumi.get(self, "cidr_ip")
 
     @cidr_ip.setter
@@ -43,6 +51,9 @@ class AllowListArgs:
     @property
     @pulumi.getter(name="cidrMask")
     def cidr_mask(self) -> pulumi.Input[int]:
+        """
+        Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        """
         return pulumi.get(self, "cidr_mask")
 
     @cidr_mask.setter
@@ -61,6 +72,9 @@ class AllowListArgs:
     @property
     @pulumi.getter
     def sql(self) -> pulumi.Input[bool]:
+        """
+        Set to 'true' to allow SQL connections from this CIDR range.
+        """
         return pulumi.get(self, "sql")
 
     @sql.setter
@@ -70,6 +84,9 @@ class AllowListArgs:
     @property
     @pulumi.getter
     def ui(self) -> pulumi.Input[bool]:
+        """
+        Set to 'true' to allow access to the management console from this CIDR range.
+        """
         return pulumi.get(self, "ui")
 
     @ui.setter
@@ -79,6 +96,9 @@ class AllowListArgs:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of this allowlist entry.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -97,6 +117,11 @@ class _AllowListState:
                  ui: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering AllowList resources.
+        :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
+        :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
         """
         if cidr_ip is not None:
             pulumi.set(__self__, "cidr_ip", cidr_ip)
@@ -114,6 +139,9 @@ class _AllowListState:
     @property
     @pulumi.getter(name="cidrIp")
     def cidr_ip(self) -> Optional[pulumi.Input[str]]:
+        """
+        IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        """
         return pulumi.get(self, "cidr_ip")
 
     @cidr_ip.setter
@@ -123,6 +151,9 @@ class _AllowListState:
     @property
     @pulumi.getter(name="cidrMask")
     def cidr_mask(self) -> Optional[pulumi.Input[int]]:
+        """
+        Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        """
         return pulumi.get(self, "cidr_mask")
 
     @cidr_mask.setter
@@ -141,6 +172,9 @@ class _AllowListState:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of this allowlist entry.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -150,6 +184,9 @@ class _AllowListState:
     @property
     @pulumi.getter
     def sql(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to 'true' to allow SQL connections from this CIDR range.
+        """
         return pulumi.get(self, "sql")
 
     @sql.setter
@@ -159,6 +196,9 @@ class _AllowListState:
     @property
     @pulumi.getter
     def ui(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to 'true' to allow access to the management console from this CIDR range.
+        """
         return pulumi.get(self, "ui")
 
     @ui.setter
@@ -179,10 +219,15 @@ class AllowList(pulumi.CustomResource):
                  ui: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Allow list of IP range
+        List of IP ranges allowed to access the cluster.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
+        :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
         """
         ...
     @overload
@@ -191,7 +236,7 @@ class AllowList(pulumi.CustomResource):
                  args: AllowListArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Allow list of IP range
+        List of IP ranges allowed to access the cluster.
 
         :param str resource_name: The name of the resource.
         :param AllowListArgs args: The arguments to use to populate this resource's properties.
@@ -262,6 +307,11 @@ class AllowList(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
+        :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -278,11 +328,17 @@ class AllowList(pulumi.CustomResource):
     @property
     @pulumi.getter(name="cidrIp")
     def cidr_ip(self) -> pulumi.Output[str]:
+        """
+        IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        """
         return pulumi.get(self, "cidr_ip")
 
     @property
     @pulumi.getter(name="cidrMask")
     def cidr_mask(self) -> pulumi.Output[int]:
+        """
+        Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        """
         return pulumi.get(self, "cidr_mask")
 
     @property
@@ -293,15 +349,24 @@ class AllowList(pulumi.CustomResource):
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[Optional[str]]:
+        """
+        Name of this allowlist entry.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter
     def sql(self) -> pulumi.Output[bool]:
+        """
+        Set to 'true' to allow SQL connections from this CIDR range.
+        """
         return pulumi.get(self, "sql")
 
     @property
     @pulumi.getter
     def ui(self) -> pulumi.Output[bool]:
+        """
+        Set to 'true' to allow access to the management console from this CIDR range.
+        """
         return pulumi.get(self, "ui")
 

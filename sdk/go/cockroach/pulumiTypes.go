@@ -10,14 +10,128 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+type ApiOidcConfigIdentityMap struct {
+	// The username (email or service account id) of the CC user that the token should map to.
+	CcIdentity string `pulumi:"ccIdentity"`
+	// Indicates that the tokenPrincipal field is a regex value.
+	IsRegex *bool `pulumi:"isRegex"`
+	// The token value that needs to be mapped.
+	TokenIdentity string `pulumi:"tokenIdentity"`
+}
+
+// ApiOidcConfigIdentityMapInput is an input type that accepts ApiOidcConfigIdentityMap and ApiOidcConfigIdentityMapOutput values.
+// You can construct a concrete instance of `ApiOidcConfigIdentityMapInput` via:
+//
+//	ApiOidcConfigIdentityMap{ "key": ApiOidcConfigIdentityArgs{...} }
+type ApiOidcConfigIdentityMapInput interface {
+	pulumi.Input
+
+	ToApiOidcConfigIdentityMapOutput() ApiOidcConfigIdentityMapOutput
+	ToApiOidcConfigIdentityMapOutputWithContext(context.Context) ApiOidcConfigIdentityMapOutput
+}
+
+type ApiOidcConfigIdentityMapArgs struct {
+	// The username (email or service account id) of the CC user that the token should map to.
+	CcIdentity pulumi.StringInput `pulumi:"ccIdentity"`
+	// Indicates that the tokenPrincipal field is a regex value.
+	IsRegex pulumi.BoolPtrInput `pulumi:"isRegex"`
+	// The token value that needs to be mapped.
+	TokenIdentity pulumi.StringInput `pulumi:"tokenIdentity"`
+}
+
+func (ApiOidcConfigIdentityMapArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiOidcConfigIdentityMap)(nil)).Elem()
+}
+
+func (i ApiOidcConfigIdentityMapArgs) ToApiOidcConfigIdentityMapOutput() ApiOidcConfigIdentityMapOutput {
+	return i.ToApiOidcConfigIdentityMapOutputWithContext(context.Background())
+}
+
+func (i ApiOidcConfigIdentityMapArgs) ToApiOidcConfigIdentityMapOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiOidcConfigIdentityMapOutput)
+}
+
+// ApiOidcConfigIdentityMapArrayInput is an input type that accepts ApiOidcConfigIdentityMapArray and ApiOidcConfigIdentityMapArrayOutput values.
+// You can construct a concrete instance of `ApiOidcConfigIdentityMapArrayInput` via:
+//
+//	ApiOidcConfigIdentityMapArray{ ApiOidcConfigIdentityMapArgs{...} }
+type ApiOidcConfigIdentityMapArrayInput interface {
+	pulumi.Input
+
+	ToApiOidcConfigIdentityMapArrayOutput() ApiOidcConfigIdentityMapArrayOutput
+	ToApiOidcConfigIdentityMapArrayOutputWithContext(context.Context) ApiOidcConfigIdentityMapArrayOutput
+}
+
+type ApiOidcConfigIdentityMapArray []ApiOidcConfigIdentityMapInput
+
+func (ApiOidcConfigIdentityMapArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiOidcConfigIdentityMap)(nil)).Elem()
+}
+
+func (i ApiOidcConfigIdentityMapArray) ToApiOidcConfigIdentityMapArrayOutput() ApiOidcConfigIdentityMapArrayOutput {
+	return i.ToApiOidcConfigIdentityMapArrayOutputWithContext(context.Background())
+}
+
+func (i ApiOidcConfigIdentityMapArray) ToApiOidcConfigIdentityMapArrayOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApiOidcConfigIdentityMapArrayOutput)
+}
+
+type ApiOidcConfigIdentityMapOutput struct{ *pulumi.OutputState }
+
+func (ApiOidcConfigIdentityMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApiOidcConfigIdentityMap)(nil)).Elem()
+}
+
+func (o ApiOidcConfigIdentityMapOutput) ToApiOidcConfigIdentityMapOutput() ApiOidcConfigIdentityMapOutput {
+	return o
+}
+
+func (o ApiOidcConfigIdentityMapOutput) ToApiOidcConfigIdentityMapOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapOutput {
+	return o
+}
+
+// The username (email or service account id) of the CC user that the token should map to.
+func (o ApiOidcConfigIdentityMapOutput) CcIdentity() pulumi.StringOutput {
+	return o.ApplyT(func(v ApiOidcConfigIdentityMap) string { return v.CcIdentity }).(pulumi.StringOutput)
+}
+
+// Indicates that the tokenPrincipal field is a regex value.
+func (o ApiOidcConfigIdentityMapOutput) IsRegex() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ApiOidcConfigIdentityMap) *bool { return v.IsRegex }).(pulumi.BoolPtrOutput)
+}
+
+// The token value that needs to be mapped.
+func (o ApiOidcConfigIdentityMapOutput) TokenIdentity() pulumi.StringOutput {
+	return o.ApplyT(func(v ApiOidcConfigIdentityMap) string { return v.TokenIdentity }).(pulumi.StringOutput)
+}
+
+type ApiOidcConfigIdentityMapArrayOutput struct{ *pulumi.OutputState }
+
+func (ApiOidcConfigIdentityMapArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApiOidcConfigIdentityMap)(nil)).Elem()
+}
+
+func (o ApiOidcConfigIdentityMapArrayOutput) ToApiOidcConfigIdentityMapArrayOutput() ApiOidcConfigIdentityMapArrayOutput {
+	return o
+}
+
+func (o ApiOidcConfigIdentityMapArrayOutput) ToApiOidcConfigIdentityMapArrayOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapArrayOutput {
+	return o
+}
+
+func (o ApiOidcConfigIdentityMapArrayOutput) Index(i pulumi.IntInput) ApiOidcConfigIdentityMapOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiOidcConfigIdentityMap {
+		return vs[0].([]ApiOidcConfigIdentityMap)[vs[1].(int)]
+	}).(ApiOidcConfigIdentityMapOutput)
+}
+
 type ClusterDedicated struct {
-	DiskIops       *int     `pulumi:"diskIops"`
-	MachineType    *string  `pulumi:"machineType"`
-	MemoryGib      *float64 `pulumi:"memoryGib"`
-	NumVirtualCpus *int     `pulumi:"numVirtualCpus"`
-	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-	PrivateNetworkVisibility *bool `pulumi:"privateNetworkVisibility"`
-	StorageGib               *int  `pulumi:"storageGib"`
+	DiskIops                 *int     `pulumi:"diskIops"`
+	MachineType              *string  `pulumi:"machineType"`
+	MemoryGib                *float64 `pulumi:"memoryGib"`
+	NumVirtualCpus           *int     `pulumi:"numVirtualCpus"`
+	PrivateNetworkVisibility *bool    `pulumi:"privateNetworkVisibility"`
+	StorageGib               *int     `pulumi:"storageGib"`
 }
 
 // ClusterDedicatedInput is an input type that accepts ClusterDedicatedArgs and ClusterDedicatedOutput values.
@@ -32,13 +146,12 @@ type ClusterDedicatedInput interface {
 }
 
 type ClusterDedicatedArgs struct {
-	DiskIops       pulumi.IntPtrInput     `pulumi:"diskIops"`
-	MachineType    pulumi.StringPtrInput  `pulumi:"machineType"`
-	MemoryGib      pulumi.Float64PtrInput `pulumi:"memoryGib"`
-	NumVirtualCpus pulumi.IntPtrInput     `pulumi:"numVirtualCpus"`
-	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-	PrivateNetworkVisibility pulumi.BoolPtrInput `pulumi:"privateNetworkVisibility"`
-	StorageGib               pulumi.IntPtrInput  `pulumi:"storageGib"`
+	DiskIops                 pulumi.IntPtrInput     `pulumi:"diskIops"`
+	MachineType              pulumi.StringPtrInput  `pulumi:"machineType"`
+	MemoryGib                pulumi.Float64PtrInput `pulumi:"memoryGib"`
+	NumVirtualCpus           pulumi.IntPtrInput     `pulumi:"numVirtualCpus"`
+	PrivateNetworkVisibility pulumi.BoolPtrInput    `pulumi:"privateNetworkVisibility"`
+	StorageGib               pulumi.IntPtrInput     `pulumi:"storageGib"`
 }
 
 func (ClusterDedicatedArgs) ElementType() reflect.Type {
@@ -134,7 +247,6 @@ func (o ClusterDedicatedOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.NumVirtualCpus }).(pulumi.IntPtrOutput)
 }
 
-// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
 func (o ClusterDedicatedOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *bool { return v.PrivateNetworkVisibility }).(pulumi.BoolPtrOutput)
 }
@@ -203,7 +315,6 @@ func (o ClusterDedicatedPtrOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
 func (o ClusterDedicatedPtrOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *bool {
 		if v == nil {
@@ -223,13 +334,12 @@ func (o ClusterDedicatedPtrOutput) StorageGib() pulumi.IntPtrOutput {
 }
 
 type ClusterRegion struct {
-	// Name of cluster
-	Name      string `pulumi:"name"`
-	NodeCount *int   `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-	Primary *bool   `pulumi:"primary"`
-	SqlDns  *string `pulumi:"sqlDns"`
-	UiDns   *string `pulumi:"uiDns"`
+	InternalDns *string `pulumi:"internalDns"`
+	Name        string  `pulumi:"name"`
+	NodeCount   *int    `pulumi:"nodeCount"`
+	Primary     *bool   `pulumi:"primary"`
+	SqlDns      *string `pulumi:"sqlDns"`
+	UiDns       *string `pulumi:"uiDns"`
 }
 
 // ClusterRegionInput is an input type that accepts ClusterRegionArgs and ClusterRegionOutput values.
@@ -244,13 +354,12 @@ type ClusterRegionInput interface {
 }
 
 type ClusterRegionArgs struct {
-	// Name of cluster
-	Name      pulumi.StringInput `pulumi:"name"`
-	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-	Primary pulumi.BoolPtrInput   `pulumi:"primary"`
-	SqlDns  pulumi.StringPtrInput `pulumi:"sqlDns"`
-	UiDns   pulumi.StringPtrInput `pulumi:"uiDns"`
+	InternalDns pulumi.StringPtrInput `pulumi:"internalDns"`
+	Name        pulumi.StringInput    `pulumi:"name"`
+	NodeCount   pulumi.IntPtrInput    `pulumi:"nodeCount"`
+	Primary     pulumi.BoolPtrInput   `pulumi:"primary"`
+	SqlDns      pulumi.StringPtrInput `pulumi:"sqlDns"`
+	UiDns       pulumi.StringPtrInput `pulumi:"uiDns"`
 }
 
 func (ClusterRegionArgs) ElementType() reflect.Type {
@@ -304,7 +413,10 @@ func (o ClusterRegionOutput) ToClusterRegionOutputWithContext(ctx context.Contex
 	return o
 }
 
-// Name of cluster
+func (o ClusterRegionOutput) InternalDns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterRegion) *string { return v.InternalDns }).(pulumi.StringPtrOutput)
+}
+
 func (o ClusterRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterRegion) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -313,7 +425,6 @@ func (o ClusterRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
 
-// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 func (o ClusterRegionOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }
@@ -347,8 +458,7 @@ func (o ClusterRegionArrayOutput) Index(i pulumi.IntInput) ClusterRegionOutput {
 }
 
 type ClusterServerless struct {
-	RoutingId *string `pulumi:"routingId"`
-	// Spend limit in US cents.
+	RoutingId   *string                       `pulumi:"routingId"`
 	SpendLimit  *int                          `pulumi:"spendLimit"`
 	UsageLimits *ClusterServerlessUsageLimits `pulumi:"usageLimits"`
 }
@@ -365,8 +475,7 @@ type ClusterServerlessInput interface {
 }
 
 type ClusterServerlessArgs struct {
-	RoutingId pulumi.StringPtrInput `pulumi:"routingId"`
-	// Spend limit in US cents.
+	RoutingId   pulumi.StringPtrInput                `pulumi:"routingId"`
 	SpendLimit  pulumi.IntPtrInput                   `pulumi:"spendLimit"`
 	UsageLimits ClusterServerlessUsageLimitsPtrInput `pulumi:"usageLimits"`
 }
@@ -452,7 +561,6 @@ func (o ClusterServerlessOutput) RoutingId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterServerless) *string { return v.RoutingId }).(pulumi.StringPtrOutput)
 }
 
-// Spend limit in US cents.
 func (o ClusterServerlessOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterServerless) *int { return v.SpendLimit }).(pulumi.IntPtrOutput)
 }
@@ -494,7 +602,6 @@ func (o ClusterServerlessPtrOutput) RoutingId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Spend limit in US cents.
 func (o ClusterServerlessPtrOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterServerless) *int {
 		if v == nil {
@@ -662,12 +769,12 @@ func (o ClusterServerlessUsageLimitsPtrOutput) StorageMibLimit() pulumi.IntPtrOu
 }
 
 type CmekAdditionalRegion struct {
-	Name      string `pulumi:"name"`
-	NodeCount *int   `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-	Primary *bool   `pulumi:"primary"`
-	SqlDns  *string `pulumi:"sqlDns"`
-	UiDns   *string `pulumi:"uiDns"`
+	InternalDns *string `pulumi:"internalDns"`
+	Name        string  `pulumi:"name"`
+	NodeCount   *int    `pulumi:"nodeCount"`
+	Primary     *bool   `pulumi:"primary"`
+	SqlDns      *string `pulumi:"sqlDns"`
+	UiDns       *string `pulumi:"uiDns"`
 }
 
 // CmekAdditionalRegionInput is an input type that accepts CmekAdditionalRegionArgs and CmekAdditionalRegionOutput values.
@@ -682,12 +789,12 @@ type CmekAdditionalRegionInput interface {
 }
 
 type CmekAdditionalRegionArgs struct {
-	Name      pulumi.StringInput `pulumi:"name"`
-	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-	Primary pulumi.BoolPtrInput   `pulumi:"primary"`
-	SqlDns  pulumi.StringPtrInput `pulumi:"sqlDns"`
-	UiDns   pulumi.StringPtrInput `pulumi:"uiDns"`
+	InternalDns pulumi.StringPtrInput `pulumi:"internalDns"`
+	Name        pulumi.StringInput    `pulumi:"name"`
+	NodeCount   pulumi.IntPtrInput    `pulumi:"nodeCount"`
+	Primary     pulumi.BoolPtrInput   `pulumi:"primary"`
+	SqlDns      pulumi.StringPtrInput `pulumi:"sqlDns"`
+	UiDns       pulumi.StringPtrInput `pulumi:"uiDns"`
 }
 
 func (CmekAdditionalRegionArgs) ElementType() reflect.Type {
@@ -741,6 +848,10 @@ func (o CmekAdditionalRegionOutput) ToCmekAdditionalRegionOutputWithContext(ctx 
 	return o
 }
 
+func (o CmekAdditionalRegionOutput) InternalDns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CmekAdditionalRegion) *string { return v.InternalDns }).(pulumi.StringPtrOutput)
+}
+
 func (o CmekAdditionalRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -749,7 +860,6 @@ func (o CmekAdditionalRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
 
-// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 func (o CmekAdditionalRegionOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }
@@ -785,8 +895,7 @@ func (o CmekAdditionalRegionArrayOutput) Index(i pulumi.IntInput) CmekAdditional
 type CmekRegion struct {
 	Key    CmekRegionKey `pulumi:"key"`
 	Region string        `pulumi:"region"`
-	// Aggregated status of the cluster's encryption key(s)
-	Status *string `pulumi:"status"`
+	Status *string       `pulumi:"status"`
 }
 
 // CmekRegionInput is an input type that accepts CmekRegionArgs and CmekRegionOutput values.
@@ -801,9 +910,8 @@ type CmekRegionInput interface {
 }
 
 type CmekRegionArgs struct {
-	Key    CmekRegionKeyInput `pulumi:"key"`
-	Region pulumi.StringInput `pulumi:"region"`
-	// Aggregated status of the cluster's encryption key(s)
+	Key    CmekRegionKeyInput    `pulumi:"key"`
+	Region pulumi.StringInput    `pulumi:"region"`
 	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
@@ -866,7 +974,6 @@ func (o CmekRegionOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekRegion) string { return v.Region }).(pulumi.StringOutput)
 }
 
-// Aggregated status of the cluster's encryption key(s)
 func (o CmekRegionOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegion) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -894,12 +1001,11 @@ func (o CmekRegionArrayOutput) Index(i pulumi.IntInput) CmekRegionOutput {
 type CmekRegionKey struct {
 	AuthPrincipal string  `pulumi:"authPrincipal"`
 	CreatedAt     *string `pulumi:"createdAt"`
-	// Aggregated status of the cluster's encryption key(s)
-	Status      *string `pulumi:"status"`
-	Type        string  `pulumi:"type"`
-	UpdatedAt   *string `pulumi:"updatedAt"`
-	Uri         string  `pulumi:"uri"`
-	UserMessage *string `pulumi:"userMessage"`
+	Status        *string `pulumi:"status"`
+	Type          string  `pulumi:"type"`
+	UpdatedAt     *string `pulumi:"updatedAt"`
+	Uri           string  `pulumi:"uri"`
+	UserMessage   *string `pulumi:"userMessage"`
 }
 
 // CmekRegionKeyInput is an input type that accepts CmekRegionKeyArgs and CmekRegionKeyOutput values.
@@ -916,12 +1022,11 @@ type CmekRegionKeyInput interface {
 type CmekRegionKeyArgs struct {
 	AuthPrincipal pulumi.StringInput    `pulumi:"authPrincipal"`
 	CreatedAt     pulumi.StringPtrInput `pulumi:"createdAt"`
-	// Aggregated status of the cluster's encryption key(s)
-	Status      pulumi.StringPtrInput `pulumi:"status"`
-	Type        pulumi.StringInput    `pulumi:"type"`
-	UpdatedAt   pulumi.StringPtrInput `pulumi:"updatedAt"`
-	Uri         pulumi.StringInput    `pulumi:"uri"`
-	UserMessage pulumi.StringPtrInput `pulumi:"userMessage"`
+	Status        pulumi.StringPtrInput `pulumi:"status"`
+	Type          pulumi.StringInput    `pulumi:"type"`
+	UpdatedAt     pulumi.StringPtrInput `pulumi:"updatedAt"`
+	Uri           pulumi.StringInput    `pulumi:"uri"`
+	UserMessage   pulumi.StringPtrInput `pulumi:"userMessage"`
 }
 
 func (CmekRegionKeyArgs) ElementType() reflect.Type {
@@ -958,7 +1063,6 @@ func (o CmekRegionKeyOutput) CreatedAt() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.CreatedAt }).(pulumi.StringPtrOutput)
 }
 
-// Aggregated status of the cluster's encryption key(s)
 func (o CmekRegionKeyOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -980,14 +1084,10 @@ func (o CmekRegionKeyOutput) UserMessage() pulumi.StringPtrOutput {
 }
 
 type LogExportConfigGroup struct {
-	// A list of CRDB log channels to include in this group
 	Channels []string `pulumi:"channels"`
-	// The name of the group, reflected in the log sink
-	LogName string `pulumi:"logName"`
-	// The minimum log level to filter to this log group
-	MinLevel *string `pulumi:"minLevel"`
-	// Governs whether this log group should aggregate redacted logs if unset
-	Redact *bool `pulumi:"redact"`
+	LogName  string   `pulumi:"logName"`
+	MinLevel *string  `pulumi:"minLevel"`
+	Redact   *bool    `pulumi:"redact"`
 }
 
 // LogExportConfigGroupInput is an input type that accepts LogExportConfigGroupArgs and LogExportConfigGroupOutput values.
@@ -1002,14 +1102,10 @@ type LogExportConfigGroupInput interface {
 }
 
 type LogExportConfigGroupArgs struct {
-	// A list of CRDB log channels to include in this group
 	Channels pulumi.StringArrayInput `pulumi:"channels"`
-	// The name of the group, reflected in the log sink
-	LogName pulumi.StringInput `pulumi:"logName"`
-	// The minimum log level to filter to this log group
-	MinLevel pulumi.StringPtrInput `pulumi:"minLevel"`
-	// Governs whether this log group should aggregate redacted logs if unset
-	Redact pulumi.BoolPtrInput `pulumi:"redact"`
+	LogName  pulumi.StringInput      `pulumi:"logName"`
+	MinLevel pulumi.StringPtrInput   `pulumi:"minLevel"`
+	Redact   pulumi.BoolPtrInput     `pulumi:"redact"`
 }
 
 func (LogExportConfigGroupArgs) ElementType() reflect.Type {
@@ -1063,22 +1159,18 @@ func (o LogExportConfigGroupOutput) ToLogExportConfigGroupOutputWithContext(ctx 
 	return o
 }
 
-// A list of CRDB log channels to include in this group
 func (o LogExportConfigGroupOutput) Channels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) []string { return v.Channels }).(pulumi.StringArrayOutput)
 }
 
-// The name of the group, reflected in the log sink
 func (o LogExportConfigGroupOutput) LogName() pulumi.StringOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) string { return v.LogName }).(pulumi.StringOutput)
 }
 
-// The minimum log level to filter to this log group
 func (o LogExportConfigGroupOutput) MinLevel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) *string { return v.MinLevel }).(pulumi.StringPtrOutput)
 }
 
-// Governs whether this log group should aggregate redacted logs if unset
 func (o LogExportConfigGroupOutput) Redact() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) *bool { return v.Redact }).(pulumi.BoolPtrOutput)
 }
@@ -1104,10 +1196,13 @@ func (o LogExportConfigGroupArrayOutput) Index(i pulumi.IntInput) LogExportConfi
 }
 
 type PrivateEndpointServicesService struct {
-	Aws           *PrivateEndpointServicesServiceAws `pulumi:"aws"`
-	CloudProvider *string                            `pulumi:"cloudProvider"`
-	RegionName    *string                            `pulumi:"regionName"`
-	Status        *string                            `pulumi:"status"`
+	Aws *PrivateEndpointServicesServiceAws `pulumi:"aws"`
+	// Cloud provider associated with this service.
+	CloudProvider *string `pulumi:"cloudProvider"`
+	// Cloud provider region code associated with this service.
+	RegionName *string `pulumi:"regionName"`
+	// Operation status of the service.
+	Status *string `pulumi:"status"`
 }
 
 // PrivateEndpointServicesServiceInput is an input type that accepts PrivateEndpointServicesServiceArgs and PrivateEndpointServicesServiceOutput values.
@@ -1122,10 +1217,13 @@ type PrivateEndpointServicesServiceInput interface {
 }
 
 type PrivateEndpointServicesServiceArgs struct {
-	Aws           PrivateEndpointServicesServiceAwsPtrInput `pulumi:"aws"`
-	CloudProvider pulumi.StringPtrInput                     `pulumi:"cloudProvider"`
-	RegionName    pulumi.StringPtrInput                     `pulumi:"regionName"`
-	Status        pulumi.StringPtrInput                     `pulumi:"status"`
+	Aws PrivateEndpointServicesServiceAwsPtrInput `pulumi:"aws"`
+	// Cloud provider associated with this service.
+	CloudProvider pulumi.StringPtrInput `pulumi:"cloudProvider"`
+	// Cloud provider region code associated with this service.
+	RegionName pulumi.StringPtrInput `pulumi:"regionName"`
+	// Operation status of the service.
+	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
 func (PrivateEndpointServicesServiceArgs) ElementType() reflect.Type {
@@ -1183,14 +1281,17 @@ func (o PrivateEndpointServicesServiceOutput) Aws() PrivateEndpointServicesServi
 	return o.ApplyT(func(v PrivateEndpointServicesService) *PrivateEndpointServicesServiceAws { return v.Aws }).(PrivateEndpointServicesServiceAwsPtrOutput)
 }
 
+// Cloud provider associated with this service.
 func (o PrivateEndpointServicesServiceOutput) CloudProvider() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesService) *string { return v.CloudProvider }).(pulumi.StringPtrOutput)
 }
 
+// Cloud provider region code associated with this service.
 func (o PrivateEndpointServicesServiceOutput) RegionName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesService) *string { return v.RegionName }).(pulumi.StringPtrOutput)
 }
 
+// Operation status of the service.
 func (o PrivateEndpointServicesServiceOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesService) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -1564,12 +1665,12 @@ func (o GetCockroachClusterDedicatedOutput) StorageGib() pulumi.IntOutput {
 }
 
 type GetCockroachClusterRegion struct {
-	// Name of cluster
-	Name      string `pulumi:"name"`
-	NodeCount int    `pulumi:"nodeCount"`
-	Primary   bool   `pulumi:"primary"`
-	SqlDns    string `pulumi:"sqlDns"`
-	UiDns     string `pulumi:"uiDns"`
+	InternalDns string `pulumi:"internalDns"`
+	Name        string `pulumi:"name"`
+	NodeCount   int    `pulumi:"nodeCount"`
+	Primary     bool   `pulumi:"primary"`
+	SqlDns      string `pulumi:"sqlDns"`
+	UiDns       string `pulumi:"uiDns"`
 }
 
 // GetCockroachClusterRegionInput is an input type that accepts GetCockroachClusterRegionArgs and GetCockroachClusterRegionOutput values.
@@ -1584,12 +1685,12 @@ type GetCockroachClusterRegionInput interface {
 }
 
 type GetCockroachClusterRegionArgs struct {
-	// Name of cluster
-	Name      pulumi.StringInput `pulumi:"name"`
-	NodeCount pulumi.IntInput    `pulumi:"nodeCount"`
-	Primary   pulumi.BoolInput   `pulumi:"primary"`
-	SqlDns    pulumi.StringInput `pulumi:"sqlDns"`
-	UiDns     pulumi.StringInput `pulumi:"uiDns"`
+	InternalDns pulumi.StringInput `pulumi:"internalDns"`
+	Name        pulumi.StringInput `pulumi:"name"`
+	NodeCount   pulumi.IntInput    `pulumi:"nodeCount"`
+	Primary     pulumi.BoolInput   `pulumi:"primary"`
+	SqlDns      pulumi.StringInput `pulumi:"sqlDns"`
+	UiDns       pulumi.StringInput `pulumi:"uiDns"`
 }
 
 func (GetCockroachClusterRegionArgs) ElementType() reflect.Type {
@@ -1643,7 +1744,10 @@ func (o GetCockroachClusterRegionOutput) ToGetCockroachClusterRegionOutputWithCo
 	return o
 }
 
-// Name of cluster
+func (o GetCockroachClusterRegionOutput) InternalDns() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCockroachClusterRegion) string { return v.InternalDns }).(pulumi.StringOutput)
+}
+
 func (o GetCockroachClusterRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -1800,7 +1904,82 @@ func (o GetCockroachClusterServerlessUsageLimitsOutput) StorageMibLimit() pulumi
 	return o.ApplyT(func(v GetCockroachClusterServerlessUsageLimits) int { return v.StorageMibLimit }).(pulumi.IntOutput)
 }
 
+type GetConnectionStringConnectionParams struct {
+	Database string `pulumi:"database"`
+	Host     string `pulumi:"host"`
+	Password string `pulumi:"password"`
+	Port     string `pulumi:"port"`
+	Username string `pulumi:"username"`
+}
+
+// GetConnectionStringConnectionParamsInput is an input type that accepts GetConnectionStringConnectionParamsArgs and GetConnectionStringConnectionParamsOutput values.
+// You can construct a concrete instance of `GetConnectionStringConnectionParamsInput` via:
+//
+//	GetConnectionStringConnectionParamsArgs{...}
+type GetConnectionStringConnectionParamsInput interface {
+	pulumi.Input
+
+	ToGetConnectionStringConnectionParamsOutput() GetConnectionStringConnectionParamsOutput
+	ToGetConnectionStringConnectionParamsOutputWithContext(context.Context) GetConnectionStringConnectionParamsOutput
+}
+
+type GetConnectionStringConnectionParamsArgs struct {
+	Database pulumi.StringInput `pulumi:"database"`
+	Host     pulumi.StringInput `pulumi:"host"`
+	Password pulumi.StringInput `pulumi:"password"`
+	Port     pulumi.StringInput `pulumi:"port"`
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (GetConnectionStringConnectionParamsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConnectionStringConnectionParams)(nil)).Elem()
+}
+
+func (i GetConnectionStringConnectionParamsArgs) ToGetConnectionStringConnectionParamsOutput() GetConnectionStringConnectionParamsOutput {
+	return i.ToGetConnectionStringConnectionParamsOutputWithContext(context.Background())
+}
+
+func (i GetConnectionStringConnectionParamsArgs) ToGetConnectionStringConnectionParamsOutputWithContext(ctx context.Context) GetConnectionStringConnectionParamsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetConnectionStringConnectionParamsOutput)
+}
+
+type GetConnectionStringConnectionParamsOutput struct{ *pulumi.OutputState }
+
+func (GetConnectionStringConnectionParamsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetConnectionStringConnectionParams)(nil)).Elem()
+}
+
+func (o GetConnectionStringConnectionParamsOutput) ToGetConnectionStringConnectionParamsOutput() GetConnectionStringConnectionParamsOutput {
+	return o
+}
+
+func (o GetConnectionStringConnectionParamsOutput) ToGetConnectionStringConnectionParamsOutputWithContext(ctx context.Context) GetConnectionStringConnectionParamsOutput {
+	return o
+}
+
+func (o GetConnectionStringConnectionParamsOutput) Database() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Database }).(pulumi.StringOutput)
+}
+
+func (o GetConnectionStringConnectionParamsOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Host }).(pulumi.StringOutput)
+}
+
+func (o GetConnectionStringConnectionParamsOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Password }).(pulumi.StringOutput)
+}
+
+func (o GetConnectionStringConnectionParamsOutput) Port() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Port }).(pulumi.StringOutput)
+}
+
+func (o GetConnectionStringConnectionParamsOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Username }).(pulumi.StringOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiOidcConfigIdentityMapInput)(nil)).Elem(), ApiOidcConfigIdentityMapArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApiOidcConfigIdentityMapArrayInput)(nil)).Elem(), ApiOidcConfigIdentityMapArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDedicatedInput)(nil)).Elem(), ClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDedicatedPtrInput)(nil)).Elem(), ClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRegionInput)(nil)).Elem(), ClusterRegionArgs{})
@@ -1827,6 +2006,9 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterRegionArrayInput)(nil)).Elem(), GetCockroachClusterRegionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterServerlessInput)(nil)).Elem(), GetCockroachClusterServerlessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterServerlessUsageLimitsInput)(nil)).Elem(), GetCockroachClusterServerlessUsageLimitsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionStringConnectionParamsInput)(nil)).Elem(), GetConnectionStringConnectionParamsArgs{})
+	pulumi.RegisterOutputType(ApiOidcConfigIdentityMapOutput{})
+	pulumi.RegisterOutputType(ApiOidcConfigIdentityMapArrayOutput{})
 	pulumi.RegisterOutputType(ClusterDedicatedOutput{})
 	pulumi.RegisterOutputType(ClusterDedicatedPtrOutput{})
 	pulumi.RegisterOutputType(ClusterRegionOutput{})
@@ -1853,4 +2035,5 @@ func init() {
 	pulumi.RegisterOutputType(GetCockroachClusterRegionArrayOutput{})
 	pulumi.RegisterOutputType(GetCockroachClusterServerlessOutput{})
 	pulumi.RegisterOutputType(GetCockroachClusterServerlessUsageLimitsOutput{})
+	pulumi.RegisterOutputType(GetConnectionStringConnectionParamsOutput{})
 }

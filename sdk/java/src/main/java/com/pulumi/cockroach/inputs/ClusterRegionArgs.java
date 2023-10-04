@@ -17,17 +17,16 @@ public final class ClusterRegionArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ClusterRegionArgs Empty = new ClusterRegionArgs();
 
-    /**
-     * Name of cluster
-     * 
-     */
+    @Import(name="internalDns")
+    private @Nullable Output<String> internalDns;
+
+    public Optional<Output<String>> internalDns() {
+        return Optional.ofNullable(this.internalDns);
+    }
+
     @Import(name="name", required=true)
     private Output<String> name;
 
-    /**
-     * @return Name of cluster
-     * 
-     */
     public Output<String> name() {
         return this.name;
     }
@@ -39,17 +38,9 @@ public final class ClusterRegionArgs extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.nodeCount);
     }
 
-    /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     * 
-     */
     @Import(name="primary")
     private @Nullable Output<Boolean> primary;
 
-    /**
-     * @return Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     * 
-     */
     public Optional<Output<Boolean>> primary() {
         return Optional.ofNullable(this.primary);
     }
@@ -71,6 +62,7 @@ public final class ClusterRegionArgs extends com.pulumi.resources.ResourceArgs {
     private ClusterRegionArgs() {}
 
     private ClusterRegionArgs(ClusterRegionArgs $) {
+        this.internalDns = $.internalDns;
         this.name = $.name;
         this.nodeCount = $.nodeCount;
         this.primary = $.primary;
@@ -96,23 +88,20 @@ public final class ClusterRegionArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ClusterRegionArgs(Objects.requireNonNull(defaults));
         }
 
-        /**
-         * @param name Name of cluster
-         * 
-         * @return builder
-         * 
-         */
+        public Builder internalDns(@Nullable Output<String> internalDns) {
+            $.internalDns = internalDns;
+            return this;
+        }
+
+        public Builder internalDns(String internalDns) {
+            return internalDns(Output.of(internalDns));
+        }
+
         public Builder name(Output<String> name) {
             $.name = name;
             return this;
         }
 
-        /**
-         * @param name Name of cluster
-         * 
-         * @return builder
-         * 
-         */
         public Builder name(String name) {
             return name(Output.of(name));
         }
@@ -126,23 +115,11 @@ public final class ClusterRegionArgs extends com.pulumi.resources.ResourceArgs {
             return nodeCount(Output.of(nodeCount));
         }
 
-        /**
-         * @param primary Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-         * 
-         * @return builder
-         * 
-         */
         public Builder primary(@Nullable Output<Boolean> primary) {
             $.primary = primary;
             return this;
         }
 
-        /**
-         * @param primary Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-         * 
-         * @return builder
-         * 
-         */
         public Builder primary(Boolean primary) {
             return primary(Output.of(primary));
         }

@@ -15,11 +15,11 @@ import (
 type CaCert struct {
 	pulumi.CustomResourceState
 
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	// Status of client CA certs on a cluster
+	// Status of client CA certs on a cluster.
 	Status pulumi.StringOutput `pulumi:"status"`
-	// X509 certificate in PEM format
+	// X509 certificate in PEM format.
 	X509PemCert pulumi.StringOutput `pulumi:"x509PemCert"`
 }
 
@@ -59,20 +59,20 @@ func GetCaCert(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CaCert resources.
 type caCertState struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
-	// Status of client CA certs on a cluster
+	// Status of client CA certs on a cluster.
 	Status *string `pulumi:"status"`
-	// X509 certificate in PEM format
+	// X509 certificate in PEM format.
 	X509PemCert *string `pulumi:"x509PemCert"`
 }
 
 type CaCertState struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
-	// Status of client CA certs on a cluster
+	// Status of client CA certs on a cluster.
 	Status pulumi.StringPtrInput
-	// X509 certificate in PEM format
+	// X509 certificate in PEM format.
 	X509PemCert pulumi.StringPtrInput
 }
 
@@ -81,17 +81,17 @@ func (CaCertState) ElementType() reflect.Type {
 }
 
 type caCertArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId string `pulumi:"clusterId"`
-	// X509 certificate in PEM format
+	// X509 certificate in PEM format.
 	X509PemCert string `pulumi:"x509PemCert"`
 }
 
 // The set of arguments for constructing a CaCert resource.
 type CaCertArgs struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId pulumi.StringInput
-	// X509 certificate in PEM format
+	// X509 certificate in PEM format.
 	X509PemCert pulumi.StringInput
 }
 
@@ -182,17 +182,17 @@ func (o CaCertOutput) ToCaCertOutputWithContext(ctx context.Context) CaCertOutpu
 	return o
 }
 
-// Cluster ID
+// Cluster ID.
 func (o CaCertOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CaCert) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// Status of client CA certs on a cluster
+// Status of client CA certs on a cluster.
 func (o CaCertOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v *CaCert) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
-// X509 certificate in PEM format
+// X509 certificate in PEM format.
 func (o CaCertOutput) X509PemCert() pulumi.StringOutput {
 	return o.ApplyT(func(v *CaCert) pulumi.StringOutput { return v.X509PemCert }).(pulumi.StringOutput)
 }

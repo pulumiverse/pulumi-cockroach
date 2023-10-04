@@ -9,29 +9,53 @@ import java.util.Objects;
 
 @CustomType
 public final class GetOrganizationResult {
+    /**
+     * @return Indicates when the organization was created.
+     * 
+     */
     private String createdAt;
     /**
-     * @return The ID of this resource.
+     * @return Organization ID.
      * 
      */
     private String id;
+    /**
+     * @return A short ID used by CockroachDB Support.
+     * 
+     */
     private String label;
+    /**
+     * @return Name of the organization.
+     * 
+     */
     private String name;
 
     private GetOrganizationResult() {}
+    /**
+     * @return Indicates when the organization was created.
+     * 
+     */
     public String createdAt() {
         return this.createdAt;
     }
     /**
-     * @return The ID of this resource.
+     * @return Organization ID.
      * 
      */
     public String id() {
         return this.id;
     }
+    /**
+     * @return A short ID used by CockroachDB Support.
+     * 
+     */
     public String label() {
         return this.label;
     }
+    /**
+     * @return Name of the organization.
+     * 
+     */
     public String name() {
         return this.name;
     }

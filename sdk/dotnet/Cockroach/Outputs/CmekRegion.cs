@@ -16,9 +16,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     {
         public readonly Outputs.CmekRegionKey Key;
         public readonly string Region;
-        /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
-        /// </summary>
         public readonly string? Status;
 
         [OutputConstructor]

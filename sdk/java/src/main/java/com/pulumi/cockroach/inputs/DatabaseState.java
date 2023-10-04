@@ -16,23 +16,47 @@ public final class DatabaseState extends com.pulumi.resources.ResourceArgs {
 
     public static final DatabaseState Empty = new DatabaseState();
 
+    /**
+     * ID of the cluster the database belongs to.
+     * 
+     */
     @Import(name="clusterId")
     private @Nullable Output<String> clusterId;
 
+    /**
+     * @return ID of the cluster the database belongs to.
+     * 
+     */
     public Optional<Output<String>> clusterId() {
         return Optional.ofNullable(this.clusterId);
     }
 
+    /**
+     * Database name.
+     * 
+     */
     @Import(name="name")
     private @Nullable Output<String> name;
 
+    /**
+     * @return Database name.
+     * 
+     */
     public Optional<Output<String>> name() {
         return Optional.ofNullable(this.name);
     }
 
+    /**
+     * Number of tables in the database.
+     * 
+     */
     @Import(name="tableCount")
     private @Nullable Output<Integer> tableCount;
 
+    /**
+     * @return Number of tables in the database.
+     * 
+     */
     public Optional<Output<Integer>> tableCount() {
         return Optional.ofNullable(this.tableCount);
     }
@@ -63,29 +87,65 @@ public final class DatabaseState extends com.pulumi.resources.ResourceArgs {
             $ = new DatabaseState(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param clusterId ID of the cluster the database belongs to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder clusterId(@Nullable Output<String> clusterId) {
             $.clusterId = clusterId;
             return this;
         }
 
+        /**
+         * @param clusterId ID of the cluster the database belongs to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder clusterId(String clusterId) {
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param name Database name.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(@Nullable Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name Database name.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }
 
+        /**
+         * @param tableCount Number of tables in the database.
+         * 
+         * @return builder
+         * 
+         */
         public Builder tableCount(@Nullable Output<Integer> tableCount) {
             $.tableCount = tableCount;
             return this;
         }
 
+        /**
+         * @param tableCount Number of tables in the database.
+         * 
+         * @return builder
+         * 
+         */
         public Builder tableCount(Integer tableCount) {
             return tableCount(Output.of(tableCount));
         }

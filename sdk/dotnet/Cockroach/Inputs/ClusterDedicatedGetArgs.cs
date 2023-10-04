@@ -25,9 +25,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
         [Input("numVirtualCpus")]
         public Input<int>? NumVirtualCpus { get; set; }
 
-        /// <summary>
-        /// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-        /// </summary>
         [Input("privateNetworkVisibility")]
         public Input<bool>? PrivateNetworkVisibility { get; set; }
 

@@ -20,7 +20,7 @@ class MetricExportCloudwatchConfigArgs:
                  target_region: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a MetricExportCloudwatchConfig resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
@@ -36,7 +36,7 @@ class MetricExportCloudwatchConfigArgs:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -92,10 +92,12 @@ class _MetricExportCloudwatchConfigState:
                  user_message: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering MetricExportCloudwatchConfig resources.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
+        :param pulumi.Input[str] status: Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
+        :param pulumi.Input[str] user_message: Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -114,7 +116,7 @@ class _MetricExportCloudwatchConfigState:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -149,6 +151,9 @@ class _MetricExportCloudwatchConfigState:
     @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        """
         return pulumi.get(self, "status")
 
     @status.setter
@@ -170,6 +175,9 @@ class _MetricExportCloudwatchConfigState:
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> Optional[pulumi.Input[str]]:
+        """
+        Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        """
         return pulumi.get(self, "user_message")
 
     @user_message.setter
@@ -188,11 +196,11 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
                  target_region: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Metric Export CloudWatch Config Resource
+        Amazon CloudWatch metric export configuration for a cluster.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
@@ -204,7 +212,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
                  args: MetricExportCloudwatchConfigArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Metric Export CloudWatch Config Resource
+        Amazon CloudWatch metric export configuration for a cluster.
 
         :param str resource_name: The name of the resource.
         :param MetricExportCloudwatchConfigArgs args: The arguments to use to populate this resource's properties.
@@ -267,10 +275,12 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] log_group_name: The customized AWS CloudWatch log group name.
         :param pulumi.Input[str] role_arn: The IAM role used to upload metric segments to the target AWS account.
+        :param pulumi.Input[str] status: Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
         :param pulumi.Input[str] target_region: The specific AWS region that the metrics will be exported to.
+        :param pulumi.Input[str] user_message: Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -288,7 +298,7 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -311,6 +321,9 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
     @property
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
+        """
+        Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.
+        """
         return pulumi.get(self, "status")
 
     @property
@@ -324,5 +337,8 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> pulumi.Output[str]:
+        """
+        Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.
+        """
         return pulumi.get(self, "user_message")
 

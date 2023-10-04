@@ -19,45 +19,69 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
 
     public static final ClusterState Empty = new ClusterState();
 
+    /**
+     * The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+     * 
+     */
     @Import(name="accountId")
     private @Nullable Output<String> accountId;
 
+    /**
+     * @return The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+     * 
+     */
     public Optional<Output<String>> accountId() {
         return Optional.ofNullable(this.accountId);
     }
 
+    /**
+     * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     * 
+     */
     @Import(name="cloudProvider")
     private @Nullable Output<String> cloudProvider;
 
+    /**
+     * @return Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     * 
+     */
     public Optional<Output<String>> cloudProvider() {
         return Optional.ofNullable(this.cloudProvider);
     }
 
-    /**
-     * The ID of this resource.
-     * 
-     */
     @Import(name="clusterId")
     private @Nullable Output<String> clusterId;
 
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     public Optional<Output<String>> clusterId() {
         return Optional.ofNullable(this.clusterId);
     }
 
+    /**
+     * Major version of CockroachDB running on the cluster.
+     * 
+     */
     @Import(name="cockroachVersion")
     private @Nullable Output<String> cockroachVersion;
 
+    /**
+     * @return Major version of CockroachDB running on the cluster.
+     * 
+     */
     public Optional<Output<String>> cockroachVersion() {
         return Optional.ofNullable(this.cockroachVersion);
     }
 
+    /**
+     * ID of the user who created the cluster.
+     * 
+     */
     @Import(name="creatorId")
     private @Nullable Output<String> creatorId;
 
+    /**
+     * @return ID of the user who created the cluster.
+     * 
+     */
     public Optional<Output<String>> creatorId() {
         return Optional.ofNullable(this.creatorId);
     }
@@ -70,30 +94,61 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Name of cluster
+     * Name of the cluster.
      * 
      */
     @Import(name="name")
     private @Nullable Output<String> name;
 
     /**
-     * @return Name of cluster
+     * @return Name of the cluster.
      * 
      */
     public Optional<Output<String>> name() {
         return Optional.ofNullable(this.name);
     }
 
+    /**
+     * Describes the current long-running operation, if any.
+     * 
+     */
     @Import(name="operationStatus")
     private @Nullable Output<String> operationStatus;
 
+    /**
+     * @return Describes the current long-running operation, if any.
+     * 
+     */
     public Optional<Output<String>> operationStatus() {
         return Optional.ofNullable(this.operationStatus);
     }
 
+    /**
+     * The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+     * 
+     */
+    @Import(name="parentId")
+    private @Nullable Output<String> parentId;
+
+    /**
+     * @return The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+     * 
+     */
+    public Optional<Output<String>> parentId() {
+        return Optional.ofNullable(this.parentId);
+    }
+
+    /**
+     * Denotes cluster deployment type: &#39;DEDICATED&#39; or &#39;SERVERLESS&#39;.
+     * 
+     */
     @Import(name="plan")
     private @Nullable Output<String> plan;
 
+    /**
+     * @return Denotes cluster deployment type: &#39;DEDICATED&#39; or &#39;SERVERLESS&#39;.
+     * 
+     */
     public Optional<Output<String>> plan() {
         return Optional.ofNullable(this.plan);
     }
@@ -112,16 +167,32 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
         return Optional.ofNullable(this.serverless);
     }
 
+    /**
+     * Describes whether the cluster is being created, updated, deleted, etc.
+     * 
+     */
     @Import(name="state")
     private @Nullable Output<String> state;
 
+    /**
+     * @return Describes whether the cluster is being created, updated, deleted, etc.
+     * 
+     */
     public Optional<Output<String>> state() {
         return Optional.ofNullable(this.state);
     }
 
+    /**
+     * Describes the status of any in-progress CockroachDB upgrade or rollback.
+     * 
+     */
     @Import(name="upgradeStatus")
     private @Nullable Output<String> upgradeStatus;
 
+    /**
+     * @return Describes the status of any in-progress CockroachDB upgrade or rollback.
+     * 
+     */
     public Optional<Output<String>> upgradeStatus() {
         return Optional.ofNullable(this.upgradeStatus);
     }
@@ -137,6 +208,7 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
         this.dedicated = $.dedicated;
         this.name = $.name;
         this.operationStatus = $.operationStatus;
+        this.parentId = $.parentId;
         this.plan = $.plan;
         this.regions = $.regions;
         this.serverless = $.serverless;
@@ -162,59 +234,95 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
             $ = new ClusterState(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param accountId The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+         * 
+         * @return builder
+         * 
+         */
         public Builder accountId(@Nullable Output<String> accountId) {
             $.accountId = accountId;
             return this;
         }
 
+        /**
+         * @param accountId The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+         * 
+         * @return builder
+         * 
+         */
         public Builder accountId(String accountId) {
             return accountId(Output.of(accountId));
         }
 
+        /**
+         * @param cloudProvider Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(@Nullable Output<String> cloudProvider) {
             $.cloudProvider = cloudProvider;
             return this;
         }
 
-        public Builder cloudProvider(String cloudProvider) {
-            return cloudProvider(Output.of(cloudProvider));
-        }
-
         /**
-         * @param clusterId The ID of this resource.
+         * @param cloudProvider Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
          * 
          * @return builder
          * 
          */
+        public Builder cloudProvider(String cloudProvider) {
+            return cloudProvider(Output.of(cloudProvider));
+        }
+
         public Builder clusterId(@Nullable Output<String> clusterId) {
             $.clusterId = clusterId;
             return this;
         }
 
-        /**
-         * @param clusterId The ID of this resource.
-         * 
-         * @return builder
-         * 
-         */
         public Builder clusterId(String clusterId) {
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param cockroachVersion Major version of CockroachDB running on the cluster.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cockroachVersion(@Nullable Output<String> cockroachVersion) {
             $.cockroachVersion = cockroachVersion;
             return this;
         }
 
+        /**
+         * @param cockroachVersion Major version of CockroachDB running on the cluster.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cockroachVersion(String cockroachVersion) {
             return cockroachVersion(Output.of(cockroachVersion));
         }
 
+        /**
+         * @param creatorId ID of the user who created the cluster.
+         * 
+         * @return builder
+         * 
+         */
         public Builder creatorId(@Nullable Output<String> creatorId) {
             $.creatorId = creatorId;
             return this;
         }
 
+        /**
+         * @param creatorId ID of the user who created the cluster.
+         * 
+         * @return builder
+         * 
+         */
         public Builder creatorId(String creatorId) {
             return creatorId(Output.of(creatorId));
         }
@@ -229,7 +337,7 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param name Name of cluster
+         * @param name Name of the cluster.
          * 
          * @return builder
          * 
@@ -240,7 +348,7 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param name Name of cluster
+         * @param name Name of the cluster.
          * 
          * @return builder
          * 
@@ -249,20 +357,65 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
             return name(Output.of(name));
         }
 
+        /**
+         * @param operationStatus Describes the current long-running operation, if any.
+         * 
+         * @return builder
+         * 
+         */
         public Builder operationStatus(@Nullable Output<String> operationStatus) {
             $.operationStatus = operationStatus;
             return this;
         }
 
+        /**
+         * @param operationStatus Describes the current long-running operation, if any.
+         * 
+         * @return builder
+         * 
+         */
         public Builder operationStatus(String operationStatus) {
             return operationStatus(Output.of(operationStatus));
         }
 
+        /**
+         * @param parentId The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder parentId(@Nullable Output<String> parentId) {
+            $.parentId = parentId;
+            return this;
+        }
+
+        /**
+         * @param parentId The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder parentId(String parentId) {
+            return parentId(Output.of(parentId));
+        }
+
+        /**
+         * @param plan Denotes cluster deployment type: &#39;DEDICATED&#39; or &#39;SERVERLESS&#39;.
+         * 
+         * @return builder
+         * 
+         */
         public Builder plan(@Nullable Output<String> plan) {
             $.plan = plan;
             return this;
         }
 
+        /**
+         * @param plan Denotes cluster deployment type: &#39;DEDICATED&#39; or &#39;SERVERLESS&#39;.
+         * 
+         * @return builder
+         * 
+         */
         public Builder plan(String plan) {
             return plan(Output.of(plan));
         }
@@ -289,20 +442,44 @@ public final class ClusterState extends com.pulumi.resources.ResourceArgs {
             return serverless(Output.of(serverless));
         }
 
+        /**
+         * @param state Describes whether the cluster is being created, updated, deleted, etc.
+         * 
+         * @return builder
+         * 
+         */
         public Builder state(@Nullable Output<String> state) {
             $.state = state;
             return this;
         }
 
+        /**
+         * @param state Describes whether the cluster is being created, updated, deleted, etc.
+         * 
+         * @return builder
+         * 
+         */
         public Builder state(String state) {
             return state(Output.of(state));
         }
 
+        /**
+         * @param upgradeStatus Describes the status of any in-progress CockroachDB upgrade or rollback.
+         * 
+         * @return builder
+         * 
+         */
         public Builder upgradeStatus(@Nullable Output<String> upgradeStatus) {
             $.upgradeStatus = upgradeStatus;
             return this;
         }
 
+        /**
+         * @param upgradeStatus Describes the status of any in-progress CockroachDB upgrade or rollback.
+         * 
+         * @return builder
+         * 
+         */
         public Builder upgradeStatus(String upgradeStatus) {
             return upgradeStatus(Output.of(upgradeStatus));
         }

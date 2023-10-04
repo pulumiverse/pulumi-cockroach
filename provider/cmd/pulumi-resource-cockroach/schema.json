@@ -65,6 +65,36 @@
         }
     },
     "types": {
+        "cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap": {
+            "properties": {
+                "ccIdentity": {
+                    "type": "string",
+                    "description": "The username (email or service account id) of the CC user that the token should map to.\n"
+                },
+                "isRegex": {
+                    "type": "boolean",
+                    "description": "Indicates that the token_principal field is a regex value.\n"
+                },
+                "tokenIdentity": {
+                    "type": "string",
+                    "description": "The token value that needs to be mapped.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "ccIdentity",
+                "tokenIdentity"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "ccIdentity",
+                        "isRegex",
+                        "tokenIdentity"
+                    ]
+                }
+            }
+        },
         "cockroach:index/ClusterDedicated:ClusterDedicated": {
             "properties": {
                 "diskIops": {
@@ -80,8 +110,7 @@
                     "type": "integer"
                 },
                 "privateNetworkVisibility": {
-                    "type": "boolean",
-                    "description": "Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.\n"
+                    "type": "boolean"
                 },
                 "storageGib": {
                     "type": "integer"
@@ -103,16 +132,17 @@
         },
         "cockroach:index/ClusterRegion:ClusterRegion": {
             "properties": {
+                "internalDns": {
+                    "type": "string"
+                },
                 "name": {
-                    "type": "string",
-                    "description": "Name of cluster\n"
+                    "type": "string"
                 },
                 "nodeCount": {
                     "type": "integer"
                 },
                 "primary": {
-                    "type": "boolean",
-                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
+                    "type": "boolean"
                 },
                 "sqlDns": {
                     "type": "string"
@@ -128,6 +158,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "internalDns",
                         "name",
                         "nodeCount",
                         "primary",
@@ -143,8 +174,7 @@
                     "type": "string"
                 },
                 "spendLimit": {
-                    "type": "integer",
-                    "description": "Spend limit in US cents.\n"
+                    "type": "integer"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits"
@@ -176,6 +206,9 @@
         },
         "cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion": {
             "properties": {
+                "internalDns": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -183,8 +216,7 @@
                     "type": "integer"
                 },
                 "primary": {
-                    "type": "boolean",
-                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
+                    "type": "boolean"
                 },
                 "sqlDns": {
                     "type": "string"
@@ -200,6 +232,7 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
+                        "internalDns",
                         "name",
                         "nodeCount",
                         "primary",
@@ -218,8 +251,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "type": "string",
-                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                    "type": "string"
                 }
             },
             "type": "object",
@@ -246,8 +278,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "type": "string",
-                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                    "type": "string"
                 },
                 "type": {
                     "type": "string"
@@ -288,20 +319,16 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    },
-                    "description": "A list of CRDB log channels to include in this group\n"
+                    }
                 },
                 "logName": {
-                    "type": "string",
-                    "description": "The name of the group, reflected in the log sink\n"
+                    "type": "string"
                 },
                 "minLevel": {
-                    "type": "string",
-                    "description": "The minimum log level to filter to this log group\n"
+                    "type": "string"
                 },
                 "redact": {
-                    "type": "boolean",
-                    "description": "Governs whether this log group should aggregate redacted logs if unset\n"
+                    "type": "boolean"
                 }
             },
             "type": "object",
@@ -325,13 +352,16 @@
                     "$ref": "#/types/cockroach:index/PrivateEndpointServicesServiceAws:PrivateEndpointServicesServiceAws"
                 },
                 "cloudProvider": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider associated with this service.\n"
                 },
                 "regionName": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider region code associated with this service.\n"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Operation status of the service.\n"
                 }
             },
             "type": "object",
@@ -428,9 +458,11 @@
         },
         "cockroach:index/getCockroachClusterRegion:getCockroachClusterRegion": {
             "properties": {
+                "internalDns": {
+                    "type": "string"
+                },
                 "name": {
-                    "type": "string",
-                    "description": "Name of cluster\n"
+                    "type": "string"
                 },
                 "nodeCount": {
                     "type": "integer"
@@ -447,6 +479,7 @@
             },
             "type": "object",
             "required": [
+                "internalDns",
                 "name",
                 "nodeCount",
                 "primary",
@@ -502,6 +535,39 @@
                     "requiredInputs": []
                 }
             }
+        },
+        "cockroach:index/getConnectionStringConnectionParams:getConnectionStringConnectionParams": {
+            "properties": {
+                "database": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "secret": true
+                },
+                "port": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "database",
+                "host",
+                "password",
+                "port",
+                "username"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
         }
     },
     "provider": {
@@ -523,25 +589,30 @@
     },
     "resources": {
         "cockroach:index/allowList:AllowList": {
-            "description": "Allow list of IP range\n",
+            "description": "List of IP ranges allowed to access the cluster.\n",
             "properties": {
                 "cidrIp": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
                 },
                 "cidrMask": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
                 },
                 "clusterId": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of this allowlist entry.\n"
                 },
                 "sql": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to 'true' to allow SQL connections from this CIDR range.\n"
                 },
                 "ui": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to 'true' to allow access to the management console from this CIDR range.\n"
                 }
             },
             "required": [
@@ -553,22 +624,27 @@
             ],
             "inputProperties": {
                 "cidrIp": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
                 },
                 "cidrMask": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
                 },
                 "clusterId": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of this allowlist entry.\n"
                 },
                 "sql": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to 'true' to allow SQL connections from this CIDR range.\n"
                 },
                 "ui": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to 'true' to allow access to the management console from this CIDR range.\n"
                 }
             },
             "requiredInputs": [
@@ -582,22 +658,121 @@
                 "description": "Input properties used for looking up and filtering AllowList resources.\n",
                 "properties": {
                     "cidrIp": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
                     },
                     "cidrMask": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
                     },
                     "clusterId": {
                         "type": "string"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of this allowlist entry.\n"
                     },
                     "sql": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Set to 'true' to allow SQL connections from this CIDR range.\n"
                     },
                     "ui": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Set to 'true' to allow access to the management console from this CIDR range.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/apiOidcConfig:ApiOidcConfig": {
+            "description": "Configuration to allow external OIDC providers to issue tokens for use with CC API.\n",
+            "properties": {
+                "audience": {
+                    "type": "string",
+                    "description": "The audience that CC API should accept for this API OIDC Configuration.\n"
+                },
+                "claim": {
+                    "type": "string",
+                    "description": "The JWT claim that should be used as the user identifier. Defaults to the subject.\n"
+                },
+                "identityMaps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap"
+                    },
+                    "description": "The mapping rules to convert token user identifiers into a new form.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "The issuer of tokens for the API OIDC Configuration. Usually this is a url.\n"
+                },
+                "jwks": {
+                    "type": "string",
+                    "description": "The JSON Web Key Set used to check the signature of the JWTs.\n"
+                }
+            },
+            "required": [
+                "audience",
+                "claim",
+                "identityMaps",
+                "issuer",
+                "jwks"
+            ],
+            "inputProperties": {
+                "audience": {
+                    "type": "string",
+                    "description": "The audience that CC API should accept for this API OIDC Configuration.\n"
+                },
+                "claim": {
+                    "type": "string",
+                    "description": "The JWT claim that should be used as the user identifier. Defaults to the subject.\n"
+                },
+                "identityMaps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap"
+                    },
+                    "description": "The mapping rules to convert token user identifiers into a new form.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "The issuer of tokens for the API OIDC Configuration. Usually this is a url.\n"
+                },
+                "jwks": {
+                    "type": "string",
+                    "description": "The JSON Web Key Set used to check the signature of the JWTs.\n"
+                }
+            },
+            "requiredInputs": [
+                "audience",
+                "issuer",
+                "jwks"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ApiOidcConfig resources.\n",
+                "properties": {
+                    "audience": {
+                        "type": "string",
+                        "description": "The audience that CC API should accept for this API OIDC Configuration.\n"
+                    },
+                    "claim": {
+                        "type": "string",
+                        "description": "The JWT claim that should be used as the user identifier. Defaults to the subject.\n"
+                    },
+                    "identityMaps": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap"
+                        },
+                        "description": "The mapping rules to convert token user identifiers into a new form.\n"
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "description": "The issuer of tokens for the API OIDC Configuration. Usually this is a url.\n"
+                    },
+                    "jwks": {
+                        "type": "string",
+                        "description": "The JSON Web Key Set used to check the signature of the JWTs.\n"
                     }
                 },
                 "type": "object"
@@ -608,15 +783,15 @@
             "properties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "status": {
                     "type": "string",
-                    "description": "Status of client CA certs on a cluster\n"
+                    "description": "Status of client CA certs on a cluster.\n"
                 },
                 "x509PemCert": {
                     "type": "string",
-                    "description": "X509 certificate in PEM format\n"
+                    "description": "X509 certificate in PEM format.\n"
                 }
             },
             "required": [
@@ -627,11 +802,11 @@
             "inputProperties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "x509PemCert": {
                     "type": "string",
-                    "description": "X509 certificate in PEM format\n"
+                    "description": "X509 certificate in PEM format.\n"
                 }
             },
             "requiredInputs": [
@@ -643,51 +818,60 @@
                 "properties": {
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "status": {
                         "type": "string",
-                        "description": "Status of client CA certs on a cluster\n"
+                        "description": "Status of client CA certs on a cluster.\n"
                     },
                     "x509PemCert": {
                         "type": "string",
-                        "description": "X509 certificate in PEM format\n"
+                        "description": "X509 certificate in PEM format.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/cluster:Cluster": {
-            "description": "Cluster Resource\n",
+            "description": "CockroachDB Cloud cluster. Can be Dedicated or Serverless.\n",
             "properties": {
                 "accountId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.\n"
                 },
                 "cloudProvider": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
                 },
                 "clusterId": {
-                    "type": "string",
-                    "description": "The ID of this resource.\n"
+                    "type": "string"
                 },
                 "cockroachVersion": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Major version of CockroachDB running on the cluster.\n"
                 },
                 "creatorId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of the user who created the cluster.\n"
                 },
                 "dedicated": {
                     "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Name of cluster\n"
+                    "description": "Name of the cluster.\n"
                 },
                 "operationStatus": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Describes the current long-running operation, if any.\n"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.\n"
                 },
                 "plan": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.\n"
                 },
                 "regions": {
                     "type": "array",
@@ -699,10 +883,12 @@
                     "$ref": "#/types/cockroach:index/ClusterServerless:ClusterServerless"
                 },
                 "state": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Describes whether the cluster is being created, updated, deleted, etc.\n"
                 },
                 "upgradeStatus": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Describes the status of any in-progress CockroachDB upgrade or rollback.\n"
                 }
             },
             "required": [
@@ -713,6 +899,7 @@
                 "clusterId",
                 "name",
                 "operationStatus",
+                "parentId",
                 "plan",
                 "regions",
                 "state",
@@ -720,17 +907,23 @@
             ],
             "inputProperties": {
                 "cloudProvider": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
                 },
                 "cockroachVersion": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Major version of CockroachDB running on the cluster.\n"
                 },
                 "dedicated": {
                     "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Name of cluster\n"
+                    "description": "Name of the cluster.\n"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.\n"
                 },
                 "regions": {
                     "type": "array",
@@ -751,33 +944,42 @@
                 "description": "Input properties used for looking up and filtering Cluster resources.\n",
                 "properties": {
                     "accountId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.\n"
                     },
                     "cloudProvider": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
                     },
                     "clusterId": {
-                        "type": "string",
-                        "description": "The ID of this resource.\n"
+                        "type": "string"
                     },
                     "cockroachVersion": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Major version of CockroachDB running on the cluster.\n"
                     },
                     "creatorId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "ID of the user who created the cluster.\n"
                     },
                     "dedicated": {
                         "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
                     },
                     "name": {
                         "type": "string",
-                        "description": "Name of cluster\n"
+                        "description": "Name of the cluster.\n"
                     },
                     "operationStatus": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Describes the current long-running operation, if any.\n"
+                    },
+                    "parentId": {
+                        "type": "string",
+                        "description": "The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.\n"
                     },
                     "plan": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.\n"
                     },
                     "regions": {
                         "type": "array",
@@ -789,28 +991,30 @@
                         "$ref": "#/types/cockroach:index/ClusterServerless:ClusterServerless"
                     },
                     "state": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Describes whether the cluster is being created, updated, deleted, etc.\n"
                     },
                     "upgradeStatus": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Describes the status of any in-progress CockroachDB upgrade or rollback.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/cmek:Cmek": {
-            "description": "Customer-managed encryption keys (CMEK) resource for a single cluster\n",
+            "description": "Customer-managed encryption keys (CMEK) resource for a single cluster.\n",
             "properties": {
                 "additionalRegions": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
                     },
-                    "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                    "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key\ninfo stored in the CMEK resource. New regions can be added and maintained here instead.\n"
                 },
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "regions": {
                     "type": "array",
@@ -820,7 +1024,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                    "description": "Aggregated status of the cluster's encryption key(s).\n"
                 }
             },
             "required": [
@@ -834,11 +1038,11 @@
                     "items": {
                         "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
                     },
-                    "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                    "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key\ninfo stored in the CMEK resource. New regions can be added and maintained here instead.\n"
                 },
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "regions": {
                     "type": "array",
@@ -848,7 +1052,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "description": "Aggregated status of the cluster's encryption key(s)\n"
+                    "description": "Aggregated status of the cluster's encryption key(s).\n"
                 }
             },
             "requiredInputs": [
@@ -863,11 +1067,11 @@
                         "items": {
                             "$ref": "#/types/cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion"
                         },
-                        "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key info stored in the CMEK resource. New regions can be added and maintained here instead.\n"
+                        "description": "Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key\ninfo stored in the CMEK resource. New regions can be added and maintained here instead.\n"
                     },
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "regions": {
                         "type": "array",
@@ -877,23 +1081,26 @@
                     },
                     "status": {
                         "type": "string",
-                        "description": "Aggregated status of the cluster's encryption key(s)\n"
+                        "description": "Aggregated status of the cluster's encryption key(s).\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/database:Database": {
-            "description": "Database\n",
+            "description": "CockroachDB database.\n",
             "properties": {
                 "clusterId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of the cluster the database belongs to.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Database name.\n"
                 },
                 "tableCount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of tables in the database.\n"
                 }
             },
             "required": [
@@ -903,10 +1110,12 @@
             ],
             "inputProperties": {
                 "clusterId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of the cluster the database belongs to.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Database name.\n"
                 }
             },
             "requiredInputs": [
@@ -917,13 +1126,16 @@
                 "description": "Input properties used for looking up and filtering Database resources.\n",
                 "properties": {
                     "clusterId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "ID of the cluster the database belongs to.\n"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Database name.\n"
                     },
                     "tableCount": {
-                        "type": "integer"
+                        "type": "integer",
+                        "description": "Number of tables in the database.\n"
                     }
                 },
                 "type": "object"
@@ -934,10 +1146,11 @@
             "properties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "cockroachVersion": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Major version of the cluster to be finalized.\n"
                 }
             },
             "required": [
@@ -947,10 +1160,11 @@
             "inputProperties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "cockroachVersion": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Major version of the cluster to be finalized.\n"
                 }
             },
             "requiredInputs": [
@@ -962,28 +1176,75 @@
                 "properties": {
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "cockroachVersion": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Major version of the cluster to be finalized.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/folder:Folder": {
+            "description": "CockroachDB Cloud folder.\n",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the folder.\n"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "ID of the parent folder. Use 'root' for the root level (no parent folder).\n"
+                }
+            },
+            "required": [
+                "name",
+                "parentId"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the folder.\n"
+                },
+                "parentId": {
+                    "type": "string",
+                    "description": "ID of the parent folder. Use 'root' for the root level (no parent folder).\n"
+                }
+            },
+            "requiredInputs": [
+                "name",
+                "parentId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Folder resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the folder.\n"
+                    },
+                    "parentId": {
+                        "type": "string",
+                        "description": "ID of the parent folder. Use 'root' for the root level (no parent folder).\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/logExportConfig:LogExportConfig": {
-            "description": "Log Export Config Resource\n",
+            "description": "Log Export configuration for a cluster.\n",
             "properties": {
                 "authPrincipal": {
                     "type": "string",
-                    "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                    "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP\nProject ID that the cluster service account has permissions to write to for cloud logging.\n"
                 },
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "createdAt": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Indicates when log export was initially configured.\n"
                 },
                 "groups": {
                     "type": "array",
@@ -993,28 +1254,38 @@
                 },
                 "logName": {
                     "type": "string",
-                    "description": "An identifier for the logs in the customer's log sink\n"
+                    "description": "An identifier for the logs in the customer's log sink.\n"
+                },
+                "omittedChannels": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Controls what CRDB channels do not get exported.\n"
                 },
                 "redact": {
                     "type": "boolean",
-                    "description": "Controls whether logs are redacted before forwarding to customer sinks\n"
+                    "description": "Controls whether logs are redacted before forwarding to customer sinks.\n"
                 },
                 "region": {
                     "type": "string",
-                    "description": "Controls whether all logs are sent to a specific region in the customer sink\n"
+                    "description": "Controls whether all logs are sent to a specific region in the customer sink.\n"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.\n"
                 },
                 "type": {
                     "type": "string",
-                    "description": "The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`\n"
+                    "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING\n"
                 },
                 "updatedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Indicates when the log export configuration was last updated.\n"
                 },
                 "userMessage": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous\noperations.\n"
                 }
             },
             "required": [
@@ -1031,11 +1302,11 @@
             "inputProperties": {
                 "authPrincipal": {
                     "type": "string",
-                    "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                    "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP\nProject ID that the cluster service account has permissions to write to for cloud logging.\n"
                 },
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "groups": {
                     "type": "array",
@@ -1045,19 +1316,26 @@
                 },
                 "logName": {
                     "type": "string",
-                    "description": "An identifier for the logs in the customer's log sink\n"
+                    "description": "An identifier for the logs in the customer's log sink.\n"
+                },
+                "omittedChannels": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Controls what CRDB channels do not get exported.\n"
                 },
                 "redact": {
                     "type": "boolean",
-                    "description": "Controls whether logs are redacted before forwarding to customer sinks\n"
+                    "description": "Controls whether logs are redacted before forwarding to customer sinks.\n"
                 },
                 "region": {
                     "type": "string",
-                    "description": "Controls whether all logs are sent to a specific region in the customer sink\n"
+                    "description": "Controls whether all logs are sent to a specific region in the customer sink.\n"
                 },
                 "type": {
                     "type": "string",
-                    "description": "The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`\n"
+                    "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING\n"
                 }
             },
             "requiredInputs": [
@@ -1071,14 +1349,15 @@
                 "properties": {
                     "authPrincipal": {
                         "type": "string",
-                        "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging\n"
+                        "description": "Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP\nProject ID that the cluster service account has permissions to write to for cloud logging.\n"
                     },
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "createdAt": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Indicates when log export was initially configured.\n"
                     },
                     "groups": {
                         "type": "array",
@@ -1088,47 +1367,57 @@
                     },
                     "logName": {
                         "type": "string",
-                        "description": "An identifier for the logs in the customer's log sink\n"
+                        "description": "An identifier for the logs in the customer's log sink.\n"
+                    },
+                    "omittedChannels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Controls what CRDB channels do not get exported.\n"
                     },
                     "redact": {
                         "type": "boolean",
-                        "description": "Controls whether logs are redacted before forwarding to customer sinks\n"
+                        "description": "Controls whether logs are redacted before forwarding to customer sinks.\n"
                     },
                     "region": {
                         "type": "string",
-                        "description": "Controls whether all logs are sent to a specific region in the customer sink\n"
+                        "description": "Controls whether all logs are sent to a specific region in the customer sink.\n"
                     },
                     "status": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.\n"
                     },
                     "type": {
                         "type": "string",
-                        "description": "The cloud selection that we're exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`\n"
+                        "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING\n"
                     },
                     "updatedAt": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Indicates when the log export configuration was last updated.\n"
                     },
                     "userMessage": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous\noperations.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/maintenanceWindow:MaintenanceWindow": {
-            "description": "Maintenance window resource for a cluster.\n",
+            "description": "Maintenance window configuration for a cluster.\n",
             "properties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "offsetDuration": {
                     "type": "integer",
-                    "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
+                    "description": "Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
                 },
                 "windowDuration": {
                     "type": "integer",
-                    "description": "The window duration is the duration in seconds that the maintenance window will remain active for after it starts.\n"
+                    "description": "Duration in seconds that the maintenance window will remain active for after it starts.\n"
                 }
             },
             "required": [
@@ -1139,15 +1428,15 @@
             "inputProperties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "offsetDuration": {
                     "type": "integer",
-                    "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
+                    "description": "Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
                 },
                 "windowDuration": {
                     "type": "integer",
-                    "description": "The window duration is the duration in seconds that the maintenance window will remain active for after it starts.\n"
+                    "description": "Duration in seconds that the maintenance window will remain active for after it starts.\n"
                 }
             },
             "requiredInputs": [
@@ -1160,26 +1449,26 @@
                 "properties": {
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "offsetDuration": {
                         "type": "integer",
-                        "description": "The offset duration is the duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
+                        "description": "Duration in seconds from the beginning of each Monday (UTC) after which the maintenance window starts.\n"
                     },
                     "windowDuration": {
                         "type": "integer",
-                        "description": "The window duration is the duration in seconds that the maintenance window will remain active for after it starts.\n"
+                        "description": "Duration in seconds that the maintenance window will remain active for after it starts.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig": {
-            "description": "Metric Export CloudWatch Config Resource\n",
+            "description": "Amazon CloudWatch metric export configuration for a cluster.\n",
             "properties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "logGroupName": {
                     "type": "string",
@@ -1190,14 +1479,16 @@
                     "description": "The IAM role used to upload metric segments to the target AWS account.\n"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.\n"
                 },
                 "targetRegion": {
                     "type": "string",
                     "description": "The specific AWS region that the metrics will be exported to.\n"
                 },
                 "userMessage": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.\n"
                 }
             },
             "required": [
@@ -1211,7 +1502,7 @@
             "inputProperties": {
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "logGroupName": {
                     "type": "string",
@@ -1235,7 +1526,7 @@
                 "properties": {
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "logGroupName": {
                         "type": "string",
@@ -1246,40 +1537,44 @@
                         "description": "The IAM role used to upload metric segments to the target AWS account.\n"
                     },
                     "status": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.\n"
                     },
                     "targetRegion": {
                         "type": "string",
                         "description": "The specific AWS region that the metrics will be exported to.\n"
                     },
                     "userMessage": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig": {
-            "description": "Metric Export Datadog Config Resource\n",
+            "description": "DataDog metric export configuration for a cluster.\n",
             "properties": {
                 "apiKey": {
                     "type": "string",
-                    "description": "A Datadog API key\n",
+                    "description": "A Datadog API key.\n",
                     "secret": true
                 },
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "site": {
                     "type": "string",
-                    "description": "The Datadog region to export to\n"
+                    "description": "The Datadog region to export to.\n"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.\n"
                 },
                 "userMessage": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.\n"
                 }
             },
             "required": [
@@ -1292,16 +1587,16 @@
             "inputProperties": {
                 "apiKey": {
                     "type": "string",
-                    "description": "A Datadog API key\n",
+                    "description": "A Datadog API key.\n",
                     "secret": true
                 },
                 "clusterId": {
                     "type": "string",
-                    "description": "Cluster ID\n"
+                    "description": "Cluster ID.\n"
                 },
                 "site": {
                     "type": "string",
-                    "description": "The Datadog region to export to\n"
+                    "description": "The Datadog region to export to.\n"
                 }
             },
             "requiredInputs": [
@@ -1314,44 +1609,50 @@
                 "properties": {
                     "apiKey": {
                         "type": "string",
-                        "description": "A Datadog API key\n",
+                        "description": "A Datadog API key.\n",
                         "secret": true
                     },
                     "clusterId": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     },
                     "site": {
                         "type": "string",
-                        "description": "The Datadog region to export to\n"
+                        "description": "The Datadog region to export to.\n"
                     },
                     "status": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Encodes the possible states that a metric export configuration can be in as it is created, deployed, and disabled.\n"
                     },
                     "userMessage": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Elaborates on the metric export status and hints at how to fix issues that may have occurred during asynchronous operations.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/privateEndpointConnection:PrivateEndpointConnection": {
-            "description": "AWS PrivateLink Endpoint Connection\n",
+            "description": "AWS PrivateLink Endpoint Connection.\n",
             "properties": {
                 "cloudProvider": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider associated with this connection.\n"
                 },
                 "clusterId": {
                     "type": "string"
                 },
                 "endpointId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Client side ID of the PrivateLink connection.\n"
                 },
                 "regionName": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider region code associated with this connection.\n"
                 },
                 "serviceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Server side ID of the PrivateLink connection.\n"
                 }
             },
             "required": [
@@ -1366,7 +1667,8 @@
                     "type": "string"
                 },
                 "endpointId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Client side ID of the PrivateLink connection.\n"
                 }
             },
             "requiredInputs": [
@@ -1377,26 +1679,30 @@
                 "description": "Input properties used for looking up and filtering PrivateEndpointConnection resources.\n",
                 "properties": {
                     "cloudProvider": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Cloud provider associated with this connection.\n"
                     },
                     "clusterId": {
                         "type": "string"
                     },
                     "endpointId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Client side ID of the PrivateLink connection.\n"
                     },
                     "regionName": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Cloud provider region code associated with this connection.\n"
                     },
                     "serviceId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Server side ID of the PrivateLink connection.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cockroach:index/privateEndpointServices:PrivateEndpointServices": {
-            "description": "PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP)\n",
+            "description": "PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).\n",
             "properties": {
                 "clusterId": {
                     "type": "string"
@@ -1436,14 +1742,83 @@
                 "type": "object"
             }
         },
+        "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner": {
+            "description": "Private Endpoint Trusted Owner.\n",
+            "properties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "UUID of the cluster the private endpoint trusted owner entry belongs to.\n"
+                },
+                "externalOwnerId": {
+                    "type": "string",
+                    "description": "Owner ID of the private endpoint connection in the cloud provider.\n"
+                },
+                "ownerId": {
+                    "type": "string",
+                    "description": "UUID of the private endpoint trusted owner entry.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID\n"
+                }
+            },
+            "required": [
+                "clusterId",
+                "externalOwnerId",
+                "ownerId",
+                "type"
+            ],
+            "inputProperties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "UUID of the cluster the private endpoint trusted owner entry belongs to.\n"
+                },
+                "externalOwnerId": {
+                    "type": "string",
+                    "description": "Owner ID of the private endpoint connection in the cloud provider.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID\n"
+                }
+            },
+            "requiredInputs": [
+                "clusterId",
+                "externalOwnerId",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PrivateEndpointTrustedOwner resources.\n",
+                "properties": {
+                    "clusterId": {
+                        "type": "string",
+                        "description": "UUID of the cluster the private endpoint trusted owner entry belongs to.\n"
+                    },
+                    "externalOwnerId": {
+                        "type": "string",
+                        "description": "Owner ID of the private endpoint connection in the cloud provider.\n"
+                    },
+                    "ownerId": {
+                        "type": "string",
+                        "description": "UUID of the private endpoint trusted owner entry.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "cockroach:index/sqlUser:SqlUser": {
-            "description": "SQL user and password\n",
+            "description": "CockroachDB SQL user.\n",
             "properties": {
                 "clusterId": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "SQL user name.\n"
                 },
                 "password": {
                     "type": "string",
@@ -1460,7 +1835,8 @@
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "SQL user name.\n"
                 },
                 "password": {
                     "type": "string",
@@ -1479,7 +1855,8 @@
                         "type": "string"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "SQL user name.\n"
                     },
                     "password": {
                         "type": "string",
@@ -1491,7 +1868,7 @@
             }
         },
         "cockroach:index/userRoleGrants:UserRoleGrants": {
-            "description": "Role grants\n",
+            "description": "Role grants for a single user.\n",
             "properties": {
                 "roles": {
                     "type": "array",
@@ -1500,7 +1877,8 @@
                     }
                 },
                 "userId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of the user to grant these roles to.\n"
                 }
             },
             "required": [
@@ -1515,7 +1893,8 @@
                     }
                 },
                 "userId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of the user to grant these roles to.\n"
                 }
             },
             "requiredInputs": [
@@ -1532,7 +1911,39 @@
                         }
                     },
                     "userId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "ID of the user to grant these roles to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/versionDeferral:VersionDeferral": {
+            "description": "Configure minor version upgrade deferral for a cluster.\n",
+            "properties": {
+                "deferralPolicy": {
+                    "type": "string",
+                    "description": "The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.\n"
+                }
+            },
+            "required": [
+                "deferralPolicy"
+            ],
+            "inputProperties": {
+                "deferralPolicy": {
+                    "type": "string",
+                    "description": "The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.\n"
+                }
+            },
+            "requiredInputs": [
+                "deferralPolicy"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VersionDeferral resources.\n",
+                "properties": {
+                    "deferralPolicy": {
+                        "type": "string",
+                        "description": "The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.\n"
                     }
                 },
                 "type": "object"
@@ -1547,7 +1958,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     }
                 },
                 "type": "object",
@@ -1559,11 +1970,12 @@
                 "description": "A collection of values returned by getClusterCert.\n",
                 "properties": {
                     "cert": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Certificate contents.\n"
                     },
                     "id": {
                         "type": "string",
-                        "description": "Cluster ID\n"
+                        "description": "Cluster ID.\n"
                     }
                 },
                 "type": "object",
@@ -1574,13 +1986,12 @@
             }
         },
         "cockroach:index/getCockroachCluster:getCockroachCluster": {
-            "description": "Cluster Data Source\n",
+            "description": "CockroachDB Cloud cluster. Can be Dedicated or Serverless.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getCockroachCluster.\n",
                 "properties": {
                     "id": {
-                        "type": "string",
-                        "description": "The ID of this resource.\n"
+                        "type": "string"
                     }
                 },
                 "type": "object",
@@ -1607,14 +2018,15 @@
                         "$ref": "#/types/cockroach:index/getCockroachClusterDedicated:getCockroachClusterDedicated"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "The ID of this resource.\n"
+                        "type": "string"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Name of cluster\n"
+                        "type": "string"
                     },
                     "operationStatus": {
+                        "type": "string"
+                    },
+                    "parentId": {
                         "type": "string"
                     },
                     "plan": {
@@ -1646,6 +2058,7 @@
                     "id",
                     "name",
                     "operationStatus",
+                    "parentId",
                     "plan",
                     "regions",
                     "serverless",
@@ -1655,29 +2068,25 @@
             }
         },
         "cockroach:index/getConnectionString:getConnectionString": {
-            "description": "Generic connection string for a given cluster\n",
+            "description": "Generic connection string for a cluster.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getConnectionString.\n",
                 "properties": {
                     "database": {
-                        "type": "string",
-                        "description": "Database to connect to. Defaults to 'defaultdb'.\n"
+                        "type": "string"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "Cluster ID\n"
+                        "type": "string"
                     },
                     "os": {
                         "type": "string"
                     },
                     "password": {
                         "type": "string",
-                        "description": "Database user password. Must also include `sql_user`.\n",
                         "secret": true
                     },
                     "sqlUser": {
-                        "type": "string",
-                        "description": "Database username.\n"
+                        "type": "string"
                     }
                 },
                 "type": "object",
@@ -1689,35 +2098,26 @@
                 "description": "A collection of values returned by getConnectionString.\n",
                 "properties": {
                     "connectionParams": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
-                        },
-                        "description": "List of individual connection string parameters. Can be used to build nonstandard connection strings.\n"
+                        "$ref": "#/types/cockroach:index/getConnectionStringConnectionParams:getConnectionStringConnectionParams"
                     },
                     "connectionString": {
-                        "type": "string",
-                        "description": "Fully formatted connection string. Assumes the cluster certificate is stored in the default location.\n"
+                        "type": "string"
                     },
                     "database": {
-                        "type": "string",
-                        "description": "Database to connect to. Defaults to 'defaultdb'.\n"
+                        "type": "string"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "Cluster ID\n"
+                        "type": "string"
                     },
                     "os": {
                         "type": "string"
                     },
                     "password": {
                         "type": "string",
-                        "description": "Database user password. Must also include `sql_user`.\n",
                         "secret": true
                     },
                     "sqlUser": {
-                        "type": "string",
-                        "description": "Database username.\n"
+                        "type": "string"
                     }
                 },
                 "type": "object",
@@ -1731,22 +2131,25 @@
             }
         },
         "cockroach:index/getOrganization:getOrganization": {
-            "description": "Information about the organization associated with the user's API key\n",
+            "description": "Information about the organization associated with the user's API key.\n",
             "outputs": {
                 "description": "A collection of values returned by getOrganization.\n",
                 "properties": {
                     "createdAt": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Indicates when the organization was created.\n"
                     },
                     "id": {
                         "type": "string",
-                        "description": "The ID of this resource.\n"
+                        "description": "Organization ID.\n"
                     },
                     "label": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "A short ID used by CockroachDB Support.\n"
                     },
                     "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the organization.\n"
                     }
                 },
                 "type": "object",
@@ -1759,7 +2162,7 @@
             }
         },
         "cockroach:index/getPersonUser:getPersonUser": {
-            "description": "Information about a person user\n",
+            "description": "Information about an individual user.\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getPersonUser.\n",
                 "properties": {
@@ -1782,7 +2185,7 @@
                     },
                     "id": {
                         "type": "string",
-                        "description": "User ID\n"
+                        "description": "User ID.\n"
                     }
                 },
                 "type": "object",

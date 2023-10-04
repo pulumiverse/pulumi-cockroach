@@ -18,42 +18,52 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * Log Export Config Resource
+ * Log Export configuration for a cluster.
  * 
  */
 @ResourceType(type="cockroach:index/logExportConfig:LogExportConfig")
 public class LogExportConfig extends com.pulumi.resources.CustomResource {
     /**
-     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      * 
      */
     @Export(name="authPrincipal", type=String.class, parameters={})
     private Output<String> authPrincipal;
 
     /**
-     * @return Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * @return Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      * 
      */
     public Output<String> authPrincipal() {
         return this.authPrincipal;
     }
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
         return this.clusterId;
     }
+    /**
+     * Indicates when log export was initially configured.
+     * 
+     */
     @Export(name="createdAt", type=String.class, parameters={})
     private Output<String> createdAt;
 
+    /**
+     * @return Indicates when log export was initially configured.
+     * 
+     */
     public Output<String> createdAt() {
         return this.createdAt;
     }
@@ -64,76 +74,118 @@ public class LogExportConfig extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.groups);
     }
     /**
-     * An identifier for the logs in the customer&#39;s log sink
+     * An identifier for the logs in the customer&#39;s log sink.
      * 
      */
     @Export(name="logName", type=String.class, parameters={})
     private Output<String> logName;
 
     /**
-     * @return An identifier for the logs in the customer&#39;s log sink
+     * @return An identifier for the logs in the customer&#39;s log sink.
      * 
      */
     public Output<String> logName() {
         return this.logName;
     }
     /**
-     * Controls whether logs are redacted before forwarding to customer sinks
+     * Controls what CRDB channels do not get exported.
+     * 
+     */
+    @Export(name="omittedChannels", type=List.class, parameters={String.class})
+    private Output</* @Nullable */ List<String>> omittedChannels;
+
+    /**
+     * @return Controls what CRDB channels do not get exported.
+     * 
+     */
+    public Output<Optional<List<String>>> omittedChannels() {
+        return Codegen.optional(this.omittedChannels);
+    }
+    /**
+     * Controls whether logs are redacted before forwarding to customer sinks.
      * 
      */
     @Export(name="redact", type=Boolean.class, parameters={})
     private Output</* @Nullable */ Boolean> redact;
 
     /**
-     * @return Controls whether logs are redacted before forwarding to customer sinks
+     * @return Controls whether logs are redacted before forwarding to customer sinks.
      * 
      */
     public Output<Optional<Boolean>> redact() {
         return Codegen.optional(this.redact);
     }
     /**
-     * Controls whether all logs are sent to a specific region in the customer sink
+     * Controls whether all logs are sent to a specific region in the customer sink.
      * 
      */
     @Export(name="region", type=String.class, parameters={})
     private Output<String> region;
 
     /**
-     * @return Controls whether all logs are sent to a specific region in the customer sink
+     * @return Controls whether all logs are sent to a specific region in the customer sink.
      * 
      */
     public Output<String> region() {
         return this.region;
     }
+    /**
+     * Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     @Export(name="status", type=String.class, parameters={})
     private Output<String> status;
 
+    /**
+     * @return Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
+     * 
+     */
     public Output<String> status() {
         return this.status;
     }
     /**
-     * The cloud selection that we&#39;re exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      * 
      */
     @Export(name="type", type=String.class, parameters={})
     private Output<String> type;
 
     /**
-     * @return The cloud selection that we&#39;re exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * @return The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      * 
      */
     public Output<String> type() {
         return this.type;
     }
+    /**
+     * Indicates when the log export configuration was last updated.
+     * 
+     */
     @Export(name="updatedAt", type=String.class, parameters={})
     private Output<String> updatedAt;
 
+    /**
+     * @return Indicates when the log export configuration was last updated.
+     * 
+     */
     public Output<String> updatedAt() {
         return this.updatedAt;
     }
+    /**
+     * Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+     * operations.
+     * 
+     */
     @Export(name="userMessage", type=String.class, parameters={})
     private Output<String> userMessage;
 
+    /**
+     * @return Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
+     * operations.
+     * 
+     */
     public Output<String> userMessage() {
         return this.userMessage;
     }

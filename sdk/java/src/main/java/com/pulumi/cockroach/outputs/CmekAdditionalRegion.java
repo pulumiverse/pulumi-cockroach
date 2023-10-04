@@ -13,27 +13,23 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class CmekAdditionalRegion {
+    private @Nullable String internalDns;
     private String name;
     private @Nullable Integer nodeCount;
-    /**
-     * @return Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     * 
-     */
     private @Nullable Boolean primary;
     private @Nullable String sqlDns;
     private @Nullable String uiDns;
 
     private CmekAdditionalRegion() {}
+    public Optional<String> internalDns() {
+        return Optional.ofNullable(this.internalDns);
+    }
     public String name() {
         return this.name;
     }
     public Optional<Integer> nodeCount() {
         return Optional.ofNullable(this.nodeCount);
     }
-    /**
-     * @return Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-     * 
-     */
     public Optional<Boolean> primary() {
         return Optional.ofNullable(this.primary);
     }
@@ -53,6 +49,7 @@ public final class CmekAdditionalRegion {
     }
     @CustomType.Builder
     public static final class Builder {
+        private @Nullable String internalDns;
         private String name;
         private @Nullable Integer nodeCount;
         private @Nullable Boolean primary;
@@ -61,6 +58,7 @@ public final class CmekAdditionalRegion {
         public Builder() {}
         public Builder(CmekAdditionalRegion defaults) {
     	      Objects.requireNonNull(defaults);
+    	      this.internalDns = defaults.internalDns;
     	      this.name = defaults.name;
     	      this.nodeCount = defaults.nodeCount;
     	      this.primary = defaults.primary;
@@ -68,6 +66,11 @@ public final class CmekAdditionalRegion {
     	      this.uiDns = defaults.uiDns;
         }
 
+        @CustomType.Setter
+        public Builder internalDns(@Nullable String internalDns) {
+            this.internalDns = internalDns;
+            return this;
+        }
         @CustomType.Setter
         public Builder name(String name) {
             this.name = Objects.requireNonNull(name);
@@ -95,6 +98,7 @@ public final class CmekAdditionalRegion {
         }
         public CmekAdditionalRegion build() {
             final var o = new CmekAdditionalRegion();
+            o.internalDns = internalDns;
             o.name = name;
             o.nodeCount = nodeCount;
             o.primary = primary;

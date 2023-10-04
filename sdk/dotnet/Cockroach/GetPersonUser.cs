@@ -13,13 +13,13 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public static class GetPersonUser
     {
         /// <summary>
-        /// Information about a person user
+        /// Information about an individual user.
         /// </summary>
         public static Task<GetPersonUserResult> InvokeAsync(GetPersonUserArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPersonUserResult>("cockroach:index/getPersonUser:getPersonUser", args ?? new GetPersonUserArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Information about a person user
+        /// Information about an individual user.
         /// </summary>
         public static Output<GetPersonUserResult> Invoke(GetPersonUserInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPersonUserResult>("cockroach:index/getPersonUser:getPersonUser", args ?? new GetPersonUserInvokeArgs(), options.WithDefaults());
@@ -63,7 +63,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         /// </summary>
         public readonly string Email;
         /// <summary>
-        /// User ID
+        /// User ID.
         /// </summary>
         public readonly string Id;
 

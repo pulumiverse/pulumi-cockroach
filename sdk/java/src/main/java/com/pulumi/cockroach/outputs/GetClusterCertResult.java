@@ -9,19 +9,27 @@ import java.util.Objects;
 
 @CustomType
 public final class GetClusterCertResult {
+    /**
+     * @return Certificate contents.
+     * 
+     */
     private String cert;
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     private String id;
 
     private GetClusterCertResult() {}
+    /**
+     * @return Certificate contents.
+     * 
+     */
     public String cert() {
         return this.cert;
     }
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public String id() {

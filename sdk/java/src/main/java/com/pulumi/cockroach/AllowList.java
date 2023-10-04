@@ -17,20 +17,36 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * Allow list of IP range
+ * List of IP ranges allowed to access the cluster.
  * 
  */
 @ResourceType(type="cockroach:index/allowList:AllowList")
 public class AllowList extends com.pulumi.resources.CustomResource {
+    /**
+     * IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     @Export(name="cidrIp", type=String.class, parameters={})
     private Output<String> cidrIp;
 
+    /**
+     * @return IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     public Output<String> cidrIp() {
         return this.cidrIp;
     }
+    /**
+     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     @Export(name="cidrMask", type=Integer.class, parameters={})
     private Output<Integer> cidrMask;
 
+    /**
+     * @return Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     public Output<Integer> cidrMask() {
         return this.cidrMask;
     }
@@ -40,21 +56,45 @@ public class AllowList extends com.pulumi.resources.CustomResource {
     public Output<String> clusterId() {
         return this.clusterId;
     }
+    /**
+     * Name of this allowlist entry.
+     * 
+     */
     @Export(name="name", type=String.class, parameters={})
     private Output</* @Nullable */ String> name;
 
+    /**
+     * @return Name of this allowlist entry.
+     * 
+     */
     public Output<Optional<String>> name() {
         return Codegen.optional(this.name);
     }
+    /**
+     * Set to &#39;true&#39; to allow SQL connections from this CIDR range.
+     * 
+     */
     @Export(name="sql", type=Boolean.class, parameters={})
     private Output<Boolean> sql;
 
+    /**
+     * @return Set to &#39;true&#39; to allow SQL connections from this CIDR range.
+     * 
+     */
     public Output<Boolean> sql() {
         return this.sql;
     }
+    /**
+     * Set to &#39;true&#39; to allow access to the management console from this CIDR range.
+     * 
+     */
     @Export(name="ui", type=Boolean.class, parameters={})
     private Output<Boolean> ui;
 
+    /**
+     * @return Set to &#39;true&#39; to allow access to the management console from this CIDR range.
+     * 
+     */
     public Output<Boolean> ui() {
         return this.ui;
     }

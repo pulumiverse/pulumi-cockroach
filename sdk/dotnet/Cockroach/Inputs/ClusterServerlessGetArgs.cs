@@ -16,9 +16,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
         [Input("routingId")]
         public Input<string>? RoutingId { get; set; }
 
-        /// <summary>
-        /// Spend limit in US cents.
-        /// </summary>
         [Input("spendLimit")]
         public Input<int>? SpendLimit { get; set; }
 

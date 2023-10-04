@@ -18,10 +18,6 @@ public final class ClusterDedicated {
     private @Nullable String machineType;
     private @Nullable Double memoryGib;
     private @Nullable Integer numVirtualCpus;
-    /**
-     * @return Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-     * 
-     */
     private @Nullable Boolean privateNetworkVisibility;
     private @Nullable Integer storageGib;
 
@@ -38,10 +34,6 @@ public final class ClusterDedicated {
     public Optional<Integer> numVirtualCpus() {
         return Optional.ofNullable(this.numVirtualCpus);
     }
-    /**
-     * @return Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
-     * 
-     */
     public Optional<Boolean> privateNetworkVisibility() {
         return Optional.ofNullable(this.privateNetworkVisibility);
     }

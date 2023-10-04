@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Cluster Data Source
+ * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
  */
 export function getCockroachCluster(args: GetCockroachClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetCockroachClusterResult> {
 
@@ -21,9 +21,6 @@ export function getCockroachCluster(args: GetCockroachClusterArgs, opts?: pulumi
  * A collection of arguments for invoking getCockroachCluster.
  */
 export interface GetCockroachClusterArgs {
-    /**
-     * The ID of this resource.
-     */
     id: string;
 }
 
@@ -36,15 +33,10 @@ export interface GetCockroachClusterResult {
     readonly cockroachVersion: string;
     readonly creatorId: string;
     readonly dedicated: outputs.GetCockroachClusterDedicated;
-    /**
-     * The ID of this resource.
-     */
     readonly id: string;
-    /**
-     * Name of cluster
-     */
     readonly name: string;
     readonly operationStatus: string;
+    readonly parentId: string;
     readonly plan: string;
     readonly regions: outputs.GetCockroachClusterRegion[];
     readonly serverless: outputs.GetCockroachClusterServerless;
@@ -52,7 +44,7 @@ export interface GetCockroachClusterResult {
     readonly upgradeStatus: string;
 }
 /**
- * Cluster Data Source
+ * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
  */
 export function getCockroachClusterOutput(args: GetCockroachClusterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCockroachClusterResult> {
     return pulumi.output(args).apply((a: any) => getCockroachCluster(a, opts))
@@ -62,8 +54,5 @@ export function getCockroachClusterOutput(args: GetCockroachClusterOutputArgs, o
  * A collection of arguments for invoking getCockroachCluster.
  */
 export interface GetCockroachClusterOutputArgs {
-    /**
-     * The ID of this resource.
-     */
     id: pulumi.Input<string>;
 }

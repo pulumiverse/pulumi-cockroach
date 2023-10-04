@@ -15,9 +15,17 @@ public final class PrivateEndpointConnectionState extends com.pulumi.resources.R
 
     public static final PrivateEndpointConnectionState Empty = new PrivateEndpointConnectionState();
 
+    /**
+     * Cloud provider associated with this connection.
+     * 
+     */
     @Import(name="cloudProvider")
     private @Nullable Output<String> cloudProvider;
 
+    /**
+     * @return Cloud provider associated with this connection.
+     * 
+     */
     public Optional<Output<String>> cloudProvider() {
         return Optional.ofNullable(this.cloudProvider);
     }
@@ -29,23 +37,47 @@ public final class PrivateEndpointConnectionState extends com.pulumi.resources.R
         return Optional.ofNullable(this.clusterId);
     }
 
+    /**
+     * Client side ID of the PrivateLink connection.
+     * 
+     */
     @Import(name="endpointId")
     private @Nullable Output<String> endpointId;
 
+    /**
+     * @return Client side ID of the PrivateLink connection.
+     * 
+     */
     public Optional<Output<String>> endpointId() {
         return Optional.ofNullable(this.endpointId);
     }
 
+    /**
+     * Cloud provider region code associated with this connection.
+     * 
+     */
     @Import(name="regionName")
     private @Nullable Output<String> regionName;
 
+    /**
+     * @return Cloud provider region code associated with this connection.
+     * 
+     */
     public Optional<Output<String>> regionName() {
         return Optional.ofNullable(this.regionName);
     }
 
+    /**
+     * Server side ID of the PrivateLink connection.
+     * 
+     */
     @Import(name="serviceId")
     private @Nullable Output<String> serviceId;
 
+    /**
+     * @return Server side ID of the PrivateLink connection.
+     * 
+     */
     public Optional<Output<String>> serviceId() {
         return Optional.ofNullable(this.serviceId);
     }
@@ -78,11 +110,23 @@ public final class PrivateEndpointConnectionState extends com.pulumi.resources.R
             $ = new PrivateEndpointConnectionState(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param cloudProvider Cloud provider associated with this connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(@Nullable Output<String> cloudProvider) {
             $.cloudProvider = cloudProvider;
             return this;
         }
 
+        /**
+         * @param cloudProvider Cloud provider associated with this connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(String cloudProvider) {
             return cloudProvider(Output.of(cloudProvider));
         }
@@ -96,29 +140,65 @@ public final class PrivateEndpointConnectionState extends com.pulumi.resources.R
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param endpointId Client side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder endpointId(@Nullable Output<String> endpointId) {
             $.endpointId = endpointId;
             return this;
         }
 
+        /**
+         * @param endpointId Client side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder endpointId(String endpointId) {
             return endpointId(Output.of(endpointId));
         }
 
+        /**
+         * @param regionName Cloud provider region code associated with this connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder regionName(@Nullable Output<String> regionName) {
             $.regionName = regionName;
             return this;
         }
 
+        /**
+         * @param regionName Cloud provider region code associated with this connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder regionName(String regionName) {
             return regionName(Output.of(regionName));
         }
 
+        /**
+         * @param serviceId Server side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceId(@Nullable Output<String> serviceId) {
             $.serviceId = serviceId;
             return this;
         }
 
+        /**
+         * @param serviceId Server side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceId(String serviceId) {
             return serviceId(Output.of(serviceId));
         }

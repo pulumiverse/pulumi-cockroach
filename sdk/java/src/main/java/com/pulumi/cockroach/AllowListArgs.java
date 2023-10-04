@@ -17,16 +17,32 @@ public final class AllowListArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final AllowListArgs Empty = new AllowListArgs();
 
+    /**
+     * IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     @Import(name="cidrIp", required=true)
     private Output<String> cidrIp;
 
+    /**
+     * @return IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     public Output<String> cidrIp() {
         return this.cidrIp;
     }
 
+    /**
+     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     @Import(name="cidrMask", required=true)
     private Output<Integer> cidrMask;
 
+    /**
+     * @return Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * 
+     */
     public Output<Integer> cidrMask() {
         return this.cidrMask;
     }
@@ -38,23 +54,47 @@ public final class AllowListArgs extends com.pulumi.resources.ResourceArgs {
         return this.clusterId;
     }
 
+    /**
+     * Name of this allowlist entry.
+     * 
+     */
     @Import(name="name")
     private @Nullable Output<String> name;
 
+    /**
+     * @return Name of this allowlist entry.
+     * 
+     */
     public Optional<Output<String>> name() {
         return Optional.ofNullable(this.name);
     }
 
+    /**
+     * Set to &#39;true&#39; to allow SQL connections from this CIDR range.
+     * 
+     */
     @Import(name="sql", required=true)
     private Output<Boolean> sql;
 
+    /**
+     * @return Set to &#39;true&#39; to allow SQL connections from this CIDR range.
+     * 
+     */
     public Output<Boolean> sql() {
         return this.sql;
     }
 
+    /**
+     * Set to &#39;true&#39; to allow access to the management console from this CIDR range.
+     * 
+     */
     @Import(name="ui", required=true)
     private Output<Boolean> ui;
 
+    /**
+     * @return Set to &#39;true&#39; to allow access to the management console from this CIDR range.
+     * 
+     */
     public Output<Boolean> ui() {
         return this.ui;
     }
@@ -88,20 +128,44 @@ public final class AllowListArgs extends com.pulumi.resources.ResourceArgs {
             $ = new AllowListArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param cidrIp IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cidrIp(Output<String> cidrIp) {
             $.cidrIp = cidrIp;
             return this;
         }
 
+        /**
+         * @param cidrIp IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cidrIp(String cidrIp) {
             return cidrIp(Output.of(cidrIp));
         }
 
+        /**
+         * @param cidrMask Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cidrMask(Output<Integer> cidrMask) {
             $.cidrMask = cidrMask;
             return this;
         }
 
+        /**
+         * @param cidrMask Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cidrMask(Integer cidrMask) {
             return cidrMask(Output.of(cidrMask));
         }
@@ -115,29 +179,65 @@ public final class AllowListArgs extends com.pulumi.resources.ResourceArgs {
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param name Name of this allowlist entry.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(@Nullable Output<String> name) {
             $.name = name;
             return this;
         }
 
+        /**
+         * @param name Name of this allowlist entry.
+         * 
+         * @return builder
+         * 
+         */
         public Builder name(String name) {
             return name(Output.of(name));
         }
 
+        /**
+         * @param sql Set to &#39;true&#39; to allow SQL connections from this CIDR range.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sql(Output<Boolean> sql) {
             $.sql = sql;
             return this;
         }
 
+        /**
+         * @param sql Set to &#39;true&#39; to allow SQL connections from this CIDR range.
+         * 
+         * @return builder
+         * 
+         */
         public Builder sql(Boolean sql) {
             return sql(Output.of(sql));
         }
 
+        /**
+         * @param ui Set to &#39;true&#39; to allow access to the management console from this CIDR range.
+         * 
+         * @return builder
+         * 
+         */
         public Builder ui(Output<Boolean> ui) {
             $.ui = ui;
             return this;
         }
 
+        /**
+         * @param ui Set to &#39;true&#39; to allow access to the management console from this CIDR range.
+         * 
+         * @return builder
+         * 
+         */
         public Builder ui(Boolean ui) {
             return ui(Output.of(ui));
         }

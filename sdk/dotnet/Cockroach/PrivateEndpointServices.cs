@@ -11,7 +11,7 @@ using Pulumi;
 namespace Lbrlabs.PulumiPackage.Cockroach
 {
     /// <summary>
-    /// PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP)
+    /// PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
     /// </summary>
     [CockroachResourceType("cockroach:index/privateEndpointServices:PrivateEndpointServices")]
     public partial class PrivateEndpointServices : global::Pulumi.CustomResource

@@ -19,16 +19,32 @@ public final class ClusterArgs extends com.pulumi.resources.ResourceArgs {
 
     public static final ClusterArgs Empty = new ClusterArgs();
 
+    /**
+     * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     * 
+     */
     @Import(name="cloudProvider", required=true)
     private Output<String> cloudProvider;
 
+    /**
+     * @return Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     * 
+     */
     public Output<String> cloudProvider() {
         return this.cloudProvider;
     }
 
+    /**
+     * Major version of CockroachDB running on the cluster.
+     * 
+     */
     @Import(name="cockroachVersion")
     private @Nullable Output<String> cockroachVersion;
 
+    /**
+     * @return Major version of CockroachDB running on the cluster.
+     * 
+     */
     public Optional<Output<String>> cockroachVersion() {
         return Optional.ofNullable(this.cockroachVersion);
     }
@@ -41,18 +57,33 @@ public final class ClusterArgs extends com.pulumi.resources.ResourceArgs {
     }
 
     /**
-     * Name of cluster
+     * Name of the cluster.
      * 
      */
     @Import(name="name", required=true)
     private Output<String> name;
 
     /**
-     * @return Name of cluster
+     * @return Name of the cluster.
      * 
      */
     public Output<String> name() {
         return this.name;
+    }
+
+    /**
+     * The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+     * 
+     */
+    @Import(name="parentId")
+    private @Nullable Output<String> parentId;
+
+    /**
+     * @return The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+     * 
+     */
+    public Optional<Output<String>> parentId() {
+        return Optional.ofNullable(this.parentId);
     }
 
     @Import(name="regions", required=true)
@@ -76,6 +107,7 @@ public final class ClusterArgs extends com.pulumi.resources.ResourceArgs {
         this.cockroachVersion = $.cockroachVersion;
         this.dedicated = $.dedicated;
         this.name = $.name;
+        this.parentId = $.parentId;
         this.regions = $.regions;
         this.serverless = $.serverless;
     }
@@ -98,20 +130,44 @@ public final class ClusterArgs extends com.pulumi.resources.ResourceArgs {
             $ = new ClusterArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param cloudProvider Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(Output<String> cloudProvider) {
             $.cloudProvider = cloudProvider;
             return this;
         }
 
+        /**
+         * @param cloudProvider Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+         * 
+         * @return builder
+         * 
+         */
         public Builder cloudProvider(String cloudProvider) {
             return cloudProvider(Output.of(cloudProvider));
         }
 
+        /**
+         * @param cockroachVersion Major version of CockroachDB running on the cluster.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cockroachVersion(@Nullable Output<String> cockroachVersion) {
             $.cockroachVersion = cockroachVersion;
             return this;
         }
 
+        /**
+         * @param cockroachVersion Major version of CockroachDB running on the cluster.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cockroachVersion(String cockroachVersion) {
             return cockroachVersion(Output.of(cockroachVersion));
         }
@@ -126,7 +182,7 @@ public final class ClusterArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param name Name of cluster
+         * @param name Name of the cluster.
          * 
          * @return builder
          * 
@@ -137,13 +193,34 @@ public final class ClusterArgs extends com.pulumi.resources.ResourceArgs {
         }
 
         /**
-         * @param name Name of cluster
+         * @param name Name of the cluster.
          * 
          * @return builder
          * 
          */
         public Builder name(String name) {
             return name(Output.of(name));
+        }
+
+        /**
+         * @param parentId The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder parentId(@Nullable Output<String> parentId) {
+            $.parentId = parentId;
+            return this;
+        }
+
+        /**
+         * @param parentId The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder parentId(String parentId) {
+            return parentId(Output.of(parentId));
         }
 
         public Builder regions(Output<List<ClusterRegionArgs>> regions) {

@@ -41,7 +41,7 @@ class GetPersonUserResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        User ID
+        User ID.
         """
         return pulumi.get(self, "id")
 
@@ -59,7 +59,7 @@ class AwaitableGetPersonUserResult(GetPersonUserResult):
 def get_person_user(email: Optional[str] = None,
                     opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetPersonUserResult:
     """
-    Information about a person user
+    Information about an individual user.
 
 
     :param str email: Email address used to find the User ID.
@@ -78,7 +78,7 @@ def get_person_user(email: Optional[str] = None,
 def get_person_user_output(email: Optional[pulumi.Input[str]] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPersonUserResult]:
     """
-    Information about a person user
+    Information about an individual user.
 
 
     :param str email: Email address used to find the User ID.

@@ -32,13 +32,16 @@ class GetClusterCertResult:
     @property
     @pulumi.getter
     def cert(self) -> str:
+        """
+        Certificate contents.
+        """
         return pulumi.get(self, "cert")
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "id")
 
@@ -61,7 +64,7 @@ def get_cluster_cert(id: Optional[str] = None,
     Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\\postgresql\\root.crt` on Windows.
 
 
-    :param str id: Cluster ID
+    :param str id: Cluster ID.
     """
     __args__ = dict()
     __args__['id'] = id
@@ -82,6 +85,6 @@ def get_cluster_cert_output(id: Optional[pulumi.Input[str]] = None,
     Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\\postgresql\\root.crt` on Windows.
 
 
-    :param str id: Cluster ID
+    :param str id: Cluster ID.
     """
     ...

@@ -18,7 +18,8 @@ class FinalizeVersionUpgradeArgs:
                  cockroach_version: pulumi.Input[str]):
         """
         The set of arguments for constructing a FinalizeVersionUpgrade resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] cockroach_version: Major version of the cluster to be finalized.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "cockroach_version", cockroach_version)
@@ -27,7 +28,7 @@ class FinalizeVersionUpgradeArgs:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -38,6 +39,9 @@ class FinalizeVersionUpgradeArgs:
     @property
     @pulumi.getter(name="cockroachVersion")
     def cockroach_version(self) -> pulumi.Input[str]:
+        """
+        Major version of the cluster to be finalized.
+        """
         return pulumi.get(self, "cockroach_version")
 
     @cockroach_version.setter
@@ -52,7 +56,8 @@ class _FinalizeVersionUpgradeState:
                  cockroach_version: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering FinalizeVersionUpgrade resources.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] cockroach_version: Major version of the cluster to be finalized.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -63,7 +68,7 @@ class _FinalizeVersionUpgradeState:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -74,6 +79,9 @@ class _FinalizeVersionUpgradeState:
     @property
     @pulumi.getter(name="cockroachVersion")
     def cockroach_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        Major version of the cluster to be finalized.
+        """
         return pulumi.get(self, "cockroach_version")
 
     @cockroach_version.setter
@@ -94,7 +102,8 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] cockroach_version: Major version of the cluster to be finalized.
         """
         ...
     @overload
@@ -156,7 +165,8 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] cockroach_version: Major version of the cluster to be finalized.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -170,12 +180,15 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="cockroachVersion")
     def cockroach_version(self) -> pulumi.Output[str]:
+        """
+        Major version of the cluster to be finalized.
+        """
         return pulumi.get(self, "cockroach_version")
 

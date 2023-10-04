@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Database
+ * CockroachDB database.
  */
 export class Database extends pulumi.CustomResource {
     /**
@@ -35,8 +35,17 @@ export class Database extends pulumi.CustomResource {
         return obj['__pulumiType'] === Database.__pulumiType;
     }
 
+    /**
+     * ID of the cluster the database belongs to.
+     */
     public readonly clusterId!: pulumi.Output<string>;
+    /**
+     * Database name.
+     */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Number of tables in the database.
+     */
     public /*out*/ readonly tableCount!: pulumi.Output<number>;
 
     /**
@@ -76,8 +85,17 @@ export class Database extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Database resources.
  */
 export interface DatabaseState {
+    /**
+     * ID of the cluster the database belongs to.
+     */
     clusterId?: pulumi.Input<string>;
+    /**
+     * Database name.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Number of tables in the database.
+     */
     tableCount?: pulumi.Input<number>;
 }
 
@@ -85,6 +103,12 @@ export interface DatabaseState {
  * The set of arguments for constructing a Database resource.
  */
 export interface DatabaseArgs {
+    /**
+     * ID of the cluster the database belongs to.
+     */
     clusterId: pulumi.Input<string>;
+    /**
+     * Database name.
+     */
     name: pulumi.Input<string>;
 }

@@ -14,14 +14,14 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
     public static final MetricExportDatadogConfigArgs Empty = new MetricExportDatadogConfigArgs();
 
     /**
-     * A Datadog API key
+     * A Datadog API key.
      * 
      */
     @Import(name="apiKey", required=true)
     private Output<String> apiKey;
 
     /**
-     * @return A Datadog API key
+     * @return A Datadog API key.
      * 
      */
     public Output<String> apiKey() {
@@ -29,14 +29,14 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -44,14 +44,14 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
     }
 
     /**
-     * The Datadog region to export to
+     * The Datadog region to export to.
      * 
      */
     @Import(name="site", required=true)
     private Output<String> site;
 
     /**
-     * @return The Datadog region to export to
+     * @return The Datadog region to export to.
      * 
      */
     public Output<String> site() {
@@ -85,7 +85,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
-         * @param apiKey A Datadog API key
+         * @param apiKey A Datadog API key.
          * 
          * @return builder
          * 
@@ -96,7 +96,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
-         * @param apiKey A Datadog API key
+         * @param apiKey A Datadog API key.
          * 
          * @return builder
          * 
@@ -106,7 +106,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -117,7 +117,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -127,7 +127,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
-         * @param site The Datadog region to export to
+         * @param site The Datadog region to export to.
          * 
          * @return builder
          * 
@@ -138,7 +138,7 @@ public final class MetricExportDatadogConfigArgs extends com.pulumi.resources.Re
         }
 
         /**
-         * @param site The Datadog region to export to
+         * @param site The Datadog region to export to.
          * 
          * @return builder
          * 

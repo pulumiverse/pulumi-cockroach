@@ -8,6 +8,7 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from . import outputs
 
 __all__ = [
     'GetConnectionStringResult',
@@ -46,34 +47,22 @@ class GetConnectionStringResult:
 
     @property
     @pulumi.getter(name="connectionParams")
-    def connection_params(self) -> Mapping[str, str]:
-        """
-        List of individual connection string parameters. Can be used to build nonstandard connection strings.
-        """
+    def connection_params(self) -> 'outputs.GetConnectionStringConnectionParamsResult':
         return pulumi.get(self, "connection_params")
 
     @property
     @pulumi.getter(name="connectionString")
     def connection_string(self) -> str:
-        """
-        Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
-        """
         return pulumi.get(self, "connection_string")
 
     @property
     @pulumi.getter
     def database(self) -> str:
-        """
-        Database to connect to. Defaults to 'defaultdb'.
-        """
         return pulumi.get(self, "database")
 
     @property
     @pulumi.getter
     def id(self) -> str:
-        """
-        Cluster ID
-        """
         return pulumi.get(self, "id")
 
     @property
@@ -84,17 +73,11 @@ class GetConnectionStringResult:
     @property
     @pulumi.getter
     def password(self) -> Optional[str]:
-        """
-        Database user password. Must also include `sql_user`.
-        """
         return pulumi.get(self, "password")
 
     @property
     @pulumi.getter(name="sqlUser")
     def sql_user(self) -> Optional[str]:
-        """
-        Database username.
-        """
         return pulumi.get(self, "sql_user")
 
 
@@ -120,13 +103,7 @@ def get_connection_string(database: Optional[str] = None,
                           sql_user: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConnectionStringResult:
     """
-    Generic connection string for a given cluster
-
-
-    :param str database: Database to connect to. Defaults to 'defaultdb'.
-    :param str id: Cluster ID
-    :param str password: Database user password. Must also include `sql_user`.
-    :param str sql_user: Database username.
+    Generic connection string for a cluster.
     """
     __args__ = dict()
     __args__['database'] = database
@@ -155,12 +132,6 @@ def get_connection_string_output(database: Optional[pulumi.Input[Optional[str]]]
                                  sql_user: Optional[pulumi.Input[Optional[str]]] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConnectionStringResult]:
     """
-    Generic connection string for a given cluster
-
-
-    :param str database: Database to connect to. Defaults to 'defaultdb'.
-    :param str id: Cluster ID
-    :param str password: Database user password. Must also include `sql_user`.
-    :param str sql_user: Database username.
+    Generic connection string for a cluster.
     """
     ...

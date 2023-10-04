@@ -14,23 +14,31 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
     public static final FinalizeVersionUpgradeArgs Empty = new FinalizeVersionUpgradeArgs();
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
         return this.clusterId;
     }
 
+    /**
+     * Major version of the cluster to be finalized.
+     * 
+     */
     @Import(name="cockroachVersion", required=true)
     private Output<String> cockroachVersion;
 
+    /**
+     * @return Major version of the cluster to be finalized.
+     * 
+     */
     public Output<String> cockroachVersion() {
         return this.cockroachVersion;
     }
@@ -61,7 +69,7 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -72,7 +80,7 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -81,11 +89,23 @@ public final class FinalizeVersionUpgradeArgs extends com.pulumi.resources.Resou
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param cockroachVersion Major version of the cluster to be finalized.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cockroachVersion(Output<String> cockroachVersion) {
             $.cockroachVersion = cockroachVersion;
             return this;
         }
 
+        /**
+         * @param cockroachVersion Major version of the cluster to be finalized.
+         * 
+         * @return builder
+         * 
+         */
         public Builder cockroachVersion(String cockroachVersion) {
             return cockroachVersion(Output.of(cockroachVersion));
         }

@@ -18,6 +18,8 @@ class DatabaseArgs:
                  name: pulumi.Input[str]):
         """
         The set of arguments for constructing a Database resource.
+        :param pulumi.Input[str] cluster_id: ID of the cluster the database belongs to.
+        :param pulumi.Input[str] name: Database name.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "name", name)
@@ -25,6 +27,9 @@ class DatabaseArgs:
     @property
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
+        """
+        ID of the cluster the database belongs to.
+        """
         return pulumi.get(self, "cluster_id")
 
     @cluster_id.setter
@@ -34,6 +39,9 @@ class DatabaseArgs:
     @property
     @pulumi.getter
     def name(self) -> pulumi.Input[str]:
+        """
+        Database name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -49,6 +57,9 @@ class _DatabaseState:
                  table_count: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Database resources.
+        :param pulumi.Input[str] cluster_id: ID of the cluster the database belongs to.
+        :param pulumi.Input[str] name: Database name.
+        :param pulumi.Input[int] table_count: Number of tables in the database.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -60,6 +71,9 @@ class _DatabaseState:
     @property
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the cluster the database belongs to.
+        """
         return pulumi.get(self, "cluster_id")
 
     @cluster_id.setter
@@ -69,6 +83,9 @@ class _DatabaseState:
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database name.
+        """
         return pulumi.get(self, "name")
 
     @name.setter
@@ -78,6 +95,9 @@ class _DatabaseState:
     @property
     @pulumi.getter(name="tableCount")
     def table_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        Number of tables in the database.
+        """
         return pulumi.get(self, "table_count")
 
     @table_count.setter
@@ -94,10 +114,12 @@ class Database(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Database
+        CockroachDB database.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: ID of the cluster the database belongs to.
+        :param pulumi.Input[str] name: Database name.
         """
         ...
     @overload
@@ -106,7 +128,7 @@ class Database(pulumi.CustomResource):
                  args: DatabaseArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Database
+        CockroachDB database.
 
         :param str resource_name: The name of the resource.
         :param DatabaseArgs args: The arguments to use to populate this resource's properties.
@@ -161,6 +183,9 @@ class Database(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: ID of the cluster the database belongs to.
+        :param pulumi.Input[str] name: Database name.
+        :param pulumi.Input[int] table_count: Number of tables in the database.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -174,15 +199,24 @@ class Database(pulumi.CustomResource):
     @property
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
+        """
+        ID of the cluster the database belongs to.
+        """
         return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
+        """
+        Database name.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="tableCount")
     def table_count(self) -> pulumi.Output[int]:
+        """
+        Number of tables in the database.
+        """
         return pulumi.get(self, "table_count")
 

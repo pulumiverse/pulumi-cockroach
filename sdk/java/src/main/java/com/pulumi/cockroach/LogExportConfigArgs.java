@@ -19,14 +19,16 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
     public static final LogExportConfigArgs Empty = new LogExportConfigArgs();
 
     /**
-     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      * 
      */
     @Import(name="authPrincipal", required=true)
     private Output<String> authPrincipal;
 
     /**
-     * @return Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+     * @return Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+     * Project ID that the cluster service account has permissions to write to for cloud logging.
      * 
      */
     public Output<String> authPrincipal() {
@@ -34,14 +36,14 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * Cluster ID
+     * Cluster ID.
      * 
      */
     @Import(name="clusterId", required=true)
     private Output<String> clusterId;
 
     /**
-     * @return Cluster ID
+     * @return Cluster ID.
      * 
      */
     public Output<String> clusterId() {
@@ -56,14 +58,14 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * An identifier for the logs in the customer&#39;s log sink
+     * An identifier for the logs in the customer&#39;s log sink.
      * 
      */
     @Import(name="logName", required=true)
     private Output<String> logName;
 
     /**
-     * @return An identifier for the logs in the customer&#39;s log sink
+     * @return An identifier for the logs in the customer&#39;s log sink.
      * 
      */
     public Output<String> logName() {
@@ -71,14 +73,29 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * Controls whether logs are redacted before forwarding to customer sinks
+     * Controls what CRDB channels do not get exported.
+     * 
+     */
+    @Import(name="omittedChannels")
+    private @Nullable Output<List<String>> omittedChannels;
+
+    /**
+     * @return Controls what CRDB channels do not get exported.
+     * 
+     */
+    public Optional<Output<List<String>>> omittedChannels() {
+        return Optional.ofNullable(this.omittedChannels);
+    }
+
+    /**
+     * Controls whether logs are redacted before forwarding to customer sinks.
      * 
      */
     @Import(name="redact")
     private @Nullable Output<Boolean> redact;
 
     /**
-     * @return Controls whether logs are redacted before forwarding to customer sinks
+     * @return Controls whether logs are redacted before forwarding to customer sinks.
      * 
      */
     public Optional<Output<Boolean>> redact() {
@@ -86,14 +103,14 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * Controls whether all logs are sent to a specific region in the customer sink
+     * Controls whether all logs are sent to a specific region in the customer sink.
      * 
      */
     @Import(name="region")
     private @Nullable Output<String> region;
 
     /**
-     * @return Controls whether all logs are sent to a specific region in the customer sink
+     * @return Controls whether all logs are sent to a specific region in the customer sink.
      * 
      */
     public Optional<Output<String>> region() {
@@ -101,14 +118,16 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
     }
 
     /**
-     * The cloud selection that we&#39;re exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      * 
      */
     @Import(name="type", required=true)
     private Output<String> type;
 
     /**
-     * @return The cloud selection that we&#39;re exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+     * @return The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+     * GCP_CLOUD_LOGGING
      * 
      */
     public Output<String> type() {
@@ -122,6 +141,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         this.clusterId = $.clusterId;
         this.groups = $.groups;
         this.logName = $.logName;
+        this.omittedChannels = $.omittedChannels;
         this.redact = $.redact;
         this.region = $.region;
         this.type = $.type;
@@ -146,7 +166,8 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param authPrincipal Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+         * @param authPrincipal Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+         * Project ID that the cluster service account has permissions to write to for cloud logging.
          * 
          * @return builder
          * 
@@ -157,7 +178,8 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param authPrincipal Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP Project ID that the cluster service account has permissions to write to for cloud logging
+         * @param authPrincipal Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
+         * Project ID that the cluster service account has permissions to write to for cloud logging.
          * 
          * @return builder
          * 
@@ -167,7 +189,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -178,7 +200,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param clusterId Cluster ID
+         * @param clusterId Cluster ID.
          * 
          * @return builder
          * 
@@ -201,7 +223,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param logName An identifier for the logs in the customer&#39;s log sink
+         * @param logName An identifier for the logs in the customer&#39;s log sink.
          * 
          * @return builder
          * 
@@ -212,7 +234,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param logName An identifier for the logs in the customer&#39;s log sink
+         * @param logName An identifier for the logs in the customer&#39;s log sink.
          * 
          * @return builder
          * 
@@ -222,7 +244,38 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param redact Controls whether logs are redacted before forwarding to customer sinks
+         * @param omittedChannels Controls what CRDB channels do not get exported.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder omittedChannels(@Nullable Output<List<String>> omittedChannels) {
+            $.omittedChannels = omittedChannels;
+            return this;
+        }
+
+        /**
+         * @param omittedChannels Controls what CRDB channels do not get exported.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder omittedChannels(List<String> omittedChannels) {
+            return omittedChannels(Output.of(omittedChannels));
+        }
+
+        /**
+         * @param omittedChannels Controls what CRDB channels do not get exported.
+         * 
+         * @return builder
+         * 
+         */
+        public Builder omittedChannels(String... omittedChannels) {
+            return omittedChannels(List.of(omittedChannels));
+        }
+
+        /**
+         * @param redact Controls whether logs are redacted before forwarding to customer sinks.
          * 
          * @return builder
          * 
@@ -233,7 +286,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param redact Controls whether logs are redacted before forwarding to customer sinks
+         * @param redact Controls whether logs are redacted before forwarding to customer sinks.
          * 
          * @return builder
          * 
@@ -243,7 +296,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param region Controls whether all logs are sent to a specific region in the customer sink
+         * @param region Controls whether all logs are sent to a specific region in the customer sink.
          * 
          * @return builder
          * 
@@ -254,7 +307,7 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param region Controls whether all logs are sent to a specific region in the customer sink
+         * @param region Controls whether all logs are sent to a specific region in the customer sink.
          * 
          * @return builder
          * 
@@ -264,7 +317,8 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param type The cloud selection that we&#39;re exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+         * @param type The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+         * GCP_CLOUD_LOGGING
          * 
          * @return builder
          * 
@@ -275,7 +329,8 @@ public final class LogExportConfigArgs extends com.pulumi.resources.ResourceArgs
         }
 
         /**
-         * @param type The cloud selection that we&#39;re exporting to along with the cloud logging platform. Possible values are `GCP_CLOUD_LOGGING` or `AWS_CLOUDWATCH`
+         * @param type The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
+         * GCP_CLOUD_LOGGING
          * 
          * @return builder
          * 

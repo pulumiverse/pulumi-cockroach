@@ -37,24 +37,33 @@ class GetOrganizationResult:
     @property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> str:
+        """
+        Indicates when the organization was created.
+        """
         return pulumi.get(self, "created_at")
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        The ID of this resource.
+        Organization ID.
         """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
     def label(self) -> str:
+        """
+        A short ID used by CockroachDB Support.
+        """
         return pulumi.get(self, "label")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the organization.
+        """
         return pulumi.get(self, "name")
 
 
@@ -72,7 +81,7 @@ class AwaitableGetOrganizationResult(GetOrganizationResult):
 
 def get_organization(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetOrganizationResult:
     """
-    Information about the organization associated with the user's API key
+    Information about the organization associated with the user's API key.
     """
     __args__ = dict()
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)

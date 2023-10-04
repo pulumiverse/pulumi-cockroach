@@ -16,12 +16,21 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
         [Input("aws")]
         public Input<Inputs.PrivateEndpointServicesServiceAwsGetArgs>? Aws { get; set; }
 
+        /// <summary>
+        /// Cloud provider associated with this service.
+        /// </summary>
         [Input("cloudProvider")]
         public Input<string>? CloudProvider { get; set; }
 
+        /// <summary>
+        /// Cloud provider region code associated with this service.
+        /// </summary>
         [Input("regionName")]
         public Input<string>? RegionName { get; set; }
 
+        /// <summary>
+        /// Operation status of the service.
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 

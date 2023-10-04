@@ -14,6 +14,7 @@
     },
     "files": [
         "allowList.ts",
+        "apiOidcConfig.ts",
         "caCert.ts",
         "cluster.ts",
         "cmek.ts",
@@ -21,6 +22,7 @@
         "config/vars.ts",
         "database.ts",
         "finalizeVersionUpgrade.ts",
+        "folder.ts",
         "getClusterCert.ts",
         "getCockroachCluster.ts",
         "getConnectionString.ts",
@@ -33,12 +35,14 @@
         "metricExportDatadogConfig.ts",
         "privateEndpointConnection.ts",
         "privateEndpointServices.ts",
+        "privateEndpointTrustedOwner.ts",
         "provider.ts",
         "sqlUser.ts",
         "types/index.ts",
         "types/input.ts",
         "types/output.ts",
         "userRoleGrants.ts",
-        "utilities.ts"
+        "utilities.ts",
+        "versionDeferral.ts"
     ]
 }

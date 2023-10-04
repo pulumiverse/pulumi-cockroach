@@ -18,8 +18,8 @@ class CaCertArgs:
                  x509_pem_cert: pulumi.Input[str]):
         """
         The set of arguments for constructing a CaCert resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "x509_pem_cert", x509_pem_cert)
@@ -28,7 +28,7 @@ class CaCertArgs:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Input[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -40,7 +40,7 @@ class CaCertArgs:
     @pulumi.getter(name="x509PemCert")
     def x509_pem_cert(self) -> pulumi.Input[str]:
         """
-        X509 certificate in PEM format
+        X509 certificate in PEM format.
         """
         return pulumi.get(self, "x509_pem_cert")
 
@@ -57,9 +57,9 @@ class _CaCertState:
                  x509_pem_cert: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CaCert resources.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] status: Status of client CA certs on a cluster
-        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] status: Status of client CA certs on a cluster.
+        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -72,7 +72,7 @@ class _CaCertState:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -84,7 +84,7 @@ class _CaCertState:
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
-        Status of client CA certs on a cluster
+        Status of client CA certs on a cluster.
         """
         return pulumi.get(self, "status")
 
@@ -96,7 +96,7 @@ class _CaCertState:
     @pulumi.getter(name="x509PemCert")
     def x509_pem_cert(self) -> Optional[pulumi.Input[str]]:
         """
-        X509 certificate in PEM format
+        X509 certificate in PEM format.
         """
         return pulumi.get(self, "x509_pem_cert")
 
@@ -118,8 +118,8 @@ class CaCert(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format.
         """
         ...
     @overload
@@ -183,9 +183,9 @@ class CaCert(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] cluster_id: Cluster ID
-        :param pulumi.Input[str] status: Status of client CA certs on a cluster
-        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format
+        :param pulumi.Input[str] cluster_id: Cluster ID.
+        :param pulumi.Input[str] status: Status of client CA certs on a cluster.
+        :param pulumi.Input[str] x509_pem_cert: X509 certificate in PEM format.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -200,7 +200,7 @@ class CaCert(pulumi.CustomResource):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> pulumi.Output[str]:
         """
-        Cluster ID
+        Cluster ID.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -208,7 +208,7 @@ class CaCert(pulumi.CustomResource):
     @pulumi.getter
     def status(self) -> pulumi.Output[str]:
         """
-        Status of client CA certs on a cluster
+        Status of client CA certs on a cluster.
         """
         return pulumi.get(self, "status")
 
@@ -216,7 +216,7 @@ class CaCert(pulumi.CustomResource):
     @pulumi.getter(name="x509PemCert")
     def x509_pem_cert(self) -> pulumi.Output[str]:
         """
-        X509 certificate in PEM format
+        X509 certificate in PEM format.
         """
         return pulumi.get(self, "x509_pem_cert")
 

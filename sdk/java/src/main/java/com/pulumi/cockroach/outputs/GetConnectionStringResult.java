@@ -3,90 +3,42 @@
 
 package com.pulumi.cockroach.outputs;
 
+import com.pulumi.cockroach.outputs.GetConnectionStringConnectionParams;
 import com.pulumi.core.annotations.CustomType;
 import java.lang.String;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
 @CustomType
 public final class GetConnectionStringResult {
-    /**
-     * @return List of individual connection string parameters. Can be used to build nonstandard connection strings.
-     * 
-     */
-    private Map<String,String> connectionParams;
-    /**
-     * @return Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
-     * 
-     */
+    private GetConnectionStringConnectionParams connectionParams;
     private String connectionString;
-    /**
-     * @return Database to connect to. Defaults to &#39;defaultdb&#39;.
-     * 
-     */
     private String database;
-    /**
-     * @return Cluster ID
-     * 
-     */
     private String id;
     private String os;
-    /**
-     * @return Database user password. Must also include `sql_user`.
-     * 
-     */
     private @Nullable String password;
-    /**
-     * @return Database username.
-     * 
-     */
     private @Nullable String sqlUser;
 
     private GetConnectionStringResult() {}
-    /**
-     * @return List of individual connection string parameters. Can be used to build nonstandard connection strings.
-     * 
-     */
-    public Map<String,String> connectionParams() {
+    public GetConnectionStringConnectionParams connectionParams() {
         return this.connectionParams;
     }
-    /**
-     * @return Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
-     * 
-     */
     public String connectionString() {
         return this.connectionString;
     }
-    /**
-     * @return Database to connect to. Defaults to &#39;defaultdb&#39;.
-     * 
-     */
     public String database() {
         return this.database;
     }
-    /**
-     * @return Cluster ID
-     * 
-     */
     public String id() {
         return this.id;
     }
     public String os() {
         return this.os;
     }
-    /**
-     * @return Database user password. Must also include `sql_user`.
-     * 
-     */
     public Optional<String> password() {
         return Optional.ofNullable(this.password);
     }
-    /**
-     * @return Database username.
-     * 
-     */
     public Optional<String> sqlUser() {
         return Optional.ofNullable(this.sqlUser);
     }
@@ -100,7 +52,7 @@ public final class GetConnectionStringResult {
     }
     @CustomType.Builder
     public static final class Builder {
-        private Map<String,String> connectionParams;
+        private GetConnectionStringConnectionParams connectionParams;
         private String connectionString;
         private String database;
         private String id;
@@ -120,7 +72,7 @@ public final class GetConnectionStringResult {
         }
 
         @CustomType.Setter
-        public Builder connectionParams(Map<String,String> connectionParams) {
+        public Builder connectionParams(GetConnectionStringConnectionParams connectionParams) {
             this.connectionParams = Objects.requireNonNull(connectionParams);
             return this;
         }

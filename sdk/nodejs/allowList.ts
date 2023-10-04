@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Allow list of IP range
+ * List of IP ranges allowed to access the cluster.
  */
 export class AllowList extends pulumi.CustomResource {
     /**
@@ -35,11 +35,26 @@ export class AllowList extends pulumi.CustomResource {
         return obj['__pulumiType'] === AllowList.__pulumiType;
     }
 
+    /**
+     * IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     */
     public readonly cidrIp!: pulumi.Output<string>;
+    /**
+     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     */
     public readonly cidrMask!: pulumi.Output<number>;
     public readonly clusterId!: pulumi.Output<string>;
+    /**
+     * Name of this allowlist entry.
+     */
     public readonly name!: pulumi.Output<string | undefined>;
+    /**
+     * Set to 'true' to allow SQL connections from this CIDR range.
+     */
     public readonly sql!: pulumi.Output<boolean>;
+    /**
+     * Set to 'true' to allow access to the management console from this CIDR range.
+     */
     public readonly ui!: pulumi.Output<boolean>;
 
     /**
@@ -94,11 +109,26 @@ export class AllowList extends pulumi.CustomResource {
  * Input properties used for looking up and filtering AllowList resources.
  */
 export interface AllowListState {
+    /**
+     * IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     */
     cidrIp?: pulumi.Input<string>;
+    /**
+     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     */
     cidrMask?: pulumi.Input<number>;
     clusterId?: pulumi.Input<string>;
+    /**
+     * Name of this allowlist entry.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Set to 'true' to allow SQL connections from this CIDR range.
+     */
     sql?: pulumi.Input<boolean>;
+    /**
+     * Set to 'true' to allow access to the management console from this CIDR range.
+     */
     ui?: pulumi.Input<boolean>;
 }
 
@@ -106,10 +136,25 @@ export interface AllowListState {
  * The set of arguments for constructing a AllowList resource.
  */
 export interface AllowListArgs {
+    /**
+     * IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     */
     cidrIp: pulumi.Input<string>;
+    /**
+     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     */
     cidrMask: pulumi.Input<number>;
     clusterId: pulumi.Input<string>;
+    /**
+     * Name of this allowlist entry.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Set to 'true' to allow SQL connections from this CIDR range.
+     */
     sql: pulumi.Input<boolean>;
+    /**
+     * Set to 'true' to allow access to the management console from this CIDR range.
+     */
     ui: pulumi.Input<boolean>;
 }

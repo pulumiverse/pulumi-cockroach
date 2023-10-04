@@ -16,9 +16,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     {
         public readonly string AuthPrincipal;
         public readonly string? CreatedAt;
-        /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
-        /// </summary>
         public readonly string? Status;
         public readonly string Type;
         public readonly string? UpdatedAt;

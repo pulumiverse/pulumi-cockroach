@@ -14,20 +14,17 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     [OutputType]
     public sealed class ClusterRegion
     {
-        /// <summary>
-        /// Name of cluster
-        /// </summary>
+        public readonly string? InternalDns;
         public readonly string Name;
         public readonly int? NodeCount;
-        /// <summary>
-        /// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
-        /// </summary>
         public readonly bool? Primary;
         public readonly string? SqlDns;
         public readonly string? UiDns;
 
         [OutputConstructor]
         private ClusterRegion(
+            string? internalDns,
+
             string name,
 
             int? nodeCount,
@@ -38,6 +35,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
 
             string? uiDns)
         {
+            InternalDns = internalDns;
             Name = name;
             NodeCount = nodeCount;
             Primary = primary;

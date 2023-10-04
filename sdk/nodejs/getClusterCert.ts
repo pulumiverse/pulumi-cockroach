@@ -22,7 +22,7 @@ export function getClusterCert(args: GetClusterCertArgs, opts?: pulumi.InvokeOpt
  */
 export interface GetClusterCertArgs {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     id: string;
 }
@@ -31,9 +31,12 @@ export interface GetClusterCertArgs {
  * A collection of values returned by getClusterCert.
  */
 export interface GetClusterCertResult {
+    /**
+     * Certificate contents.
+     */
     readonly cert: string;
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     readonly id: string;
 }
@@ -51,7 +54,7 @@ export function getClusterCertOutput(args: GetClusterCertOutputArgs, opts?: pulu
  */
 export interface GetClusterCertOutputArgs {
     /**
-     * Cluster ID
+     * Cluster ID.
      */
     id: pulumi.Input<string>;
 }

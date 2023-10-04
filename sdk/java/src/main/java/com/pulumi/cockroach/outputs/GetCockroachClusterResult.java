@@ -18,17 +18,10 @@ public final class GetCockroachClusterResult {
     private String cockroachVersion;
     private String creatorId;
     private GetCockroachClusterDedicated dedicated;
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     private String id;
-    /**
-     * @return Name of cluster
-     * 
-     */
     private String name;
     private String operationStatus;
+    private String parentId;
     private String plan;
     private List<GetCockroachClusterRegion> regions;
     private GetCockroachClusterServerless serverless;
@@ -51,22 +44,17 @@ public final class GetCockroachClusterResult {
     public GetCockroachClusterDedicated dedicated() {
         return this.dedicated;
     }
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     public String id() {
         return this.id;
     }
-    /**
-     * @return Name of cluster
-     * 
-     */
     public String name() {
         return this.name;
     }
     public String operationStatus() {
         return this.operationStatus;
+    }
+    public String parentId() {
+        return this.parentId;
     }
     public String plan() {
         return this.plan;
@@ -101,6 +89,7 @@ public final class GetCockroachClusterResult {
         private String id;
         private String name;
         private String operationStatus;
+        private String parentId;
         private String plan;
         private List<GetCockroachClusterRegion> regions;
         private GetCockroachClusterServerless serverless;
@@ -117,6 +106,7 @@ public final class GetCockroachClusterResult {
     	      this.id = defaults.id;
     	      this.name = defaults.name;
     	      this.operationStatus = defaults.operationStatus;
+    	      this.parentId = defaults.parentId;
     	      this.plan = defaults.plan;
     	      this.regions = defaults.regions;
     	      this.serverless = defaults.serverless;
@@ -165,6 +155,11 @@ public final class GetCockroachClusterResult {
             return this;
         }
         @CustomType.Setter
+        public Builder parentId(String parentId) {
+            this.parentId = Objects.requireNonNull(parentId);
+            return this;
+        }
+        @CustomType.Setter
         public Builder plan(String plan) {
             this.plan = Objects.requireNonNull(plan);
             return this;
@@ -202,6 +197,7 @@ public final class GetCockroachClusterResult {
             o.id = id;
             o.name = name;
             o.operationStatus = operationStatus;
+            o.parentId = parentId;
             o.plan = plan;
             o.regions = regions;
             o.serverless = serverless;

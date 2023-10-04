@@ -14,14 +14,22 @@ import java.lang.String;
 import javax.annotation.Nullable;
 
 /**
- * AWS PrivateLink Endpoint Connection
+ * AWS PrivateLink Endpoint Connection.
  * 
  */
 @ResourceType(type="cockroach:index/privateEndpointConnection:PrivateEndpointConnection")
 public class PrivateEndpointConnection extends com.pulumi.resources.CustomResource {
+    /**
+     * Cloud provider associated with this connection.
+     * 
+     */
     @Export(name="cloudProvider", type=String.class, parameters={})
     private Output<String> cloudProvider;
 
+    /**
+     * @return Cloud provider associated with this connection.
+     * 
+     */
     public Output<String> cloudProvider() {
         return this.cloudProvider;
     }
@@ -31,21 +39,45 @@ public class PrivateEndpointConnection extends com.pulumi.resources.CustomResour
     public Output<String> clusterId() {
         return this.clusterId;
     }
+    /**
+     * Client side ID of the PrivateLink connection.
+     * 
+     */
     @Export(name="endpointId", type=String.class, parameters={})
     private Output<String> endpointId;
 
+    /**
+     * @return Client side ID of the PrivateLink connection.
+     * 
+     */
     public Output<String> endpointId() {
         return this.endpointId;
     }
+    /**
+     * Cloud provider region code associated with this connection.
+     * 
+     */
     @Export(name="regionName", type=String.class, parameters={})
     private Output<String> regionName;
 
+    /**
+     * @return Cloud provider region code associated with this connection.
+     * 
+     */
     public Output<String> regionName() {
         return this.regionName;
     }
+    /**
+     * Server side ID of the PrivateLink connection.
+     * 
+     */
     @Export(name="serviceId", type=String.class, parameters={})
     private Output<String> serviceId;
 
+    /**
+     * @return Server side ID of the PrivateLink connection.
+     * 
+     */
     public Output<String> serviceId() {
         return this.serviceId;
     }

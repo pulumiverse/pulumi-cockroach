@@ -15,8 +15,9 @@ import (
 type FinalizeVersionUpgrade struct {
 	pulumi.CustomResourceState
 
-	// Cluster ID
-	ClusterId        pulumi.StringOutput `pulumi:"clusterId"`
+	// Cluster ID.
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
+	// Major version of the cluster to be finalized.
 	CockroachVersion pulumi.StringOutput `pulumi:"cockroachVersion"`
 }
 
@@ -56,14 +57,16 @@ func GetFinalizeVersionUpgrade(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FinalizeVersionUpgrade resources.
 type finalizeVersionUpgradeState struct {
-	// Cluster ID
-	ClusterId        *string `pulumi:"clusterId"`
+	// Cluster ID.
+	ClusterId *string `pulumi:"clusterId"`
+	// Major version of the cluster to be finalized.
 	CockroachVersion *string `pulumi:"cockroachVersion"`
 }
 
 type FinalizeVersionUpgradeState struct {
-	// Cluster ID
-	ClusterId        pulumi.StringPtrInput
+	// Cluster ID.
+	ClusterId pulumi.StringPtrInput
+	// Major version of the cluster to be finalized.
 	CockroachVersion pulumi.StringPtrInput
 }
 
@@ -72,15 +75,17 @@ func (FinalizeVersionUpgradeState) ElementType() reflect.Type {
 }
 
 type finalizeVersionUpgradeArgs struct {
-	// Cluster ID
-	ClusterId        string `pulumi:"clusterId"`
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Major version of the cluster to be finalized.
 	CockroachVersion string `pulumi:"cockroachVersion"`
 }
 
 // The set of arguments for constructing a FinalizeVersionUpgrade resource.
 type FinalizeVersionUpgradeArgs struct {
-	// Cluster ID
-	ClusterId        pulumi.StringInput
+	// Cluster ID.
+	ClusterId pulumi.StringInput
+	// Major version of the cluster to be finalized.
 	CockroachVersion pulumi.StringInput
 }
 
@@ -171,11 +176,12 @@ func (o FinalizeVersionUpgradeOutput) ToFinalizeVersionUpgradeOutputWithContext(
 	return o
 }
 
-// Cluster ID
+// Cluster ID.
 func (o FinalizeVersionUpgradeOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *FinalizeVersionUpgrade) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Major version of the cluster to be finalized.
 func (o FinalizeVersionUpgradeOutput) CockroachVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *FinalizeVersionUpgrade) pulumi.StringOutput { return v.CockroachVersion }).(pulumi.StringOutput)
 }

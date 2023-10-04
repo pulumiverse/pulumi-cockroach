@@ -20,9 +20,17 @@ public final class PrivateEndpointConnectionArgs extends com.pulumi.resources.Re
         return this.clusterId;
     }
 
+    /**
+     * Client side ID of the PrivateLink connection.
+     * 
+     */
     @Import(name="endpointId", required=true)
     private Output<String> endpointId;
 
+    /**
+     * @return Client side ID of the PrivateLink connection.
+     * 
+     */
     public Output<String> endpointId() {
         return this.endpointId;
     }
@@ -61,11 +69,23 @@ public final class PrivateEndpointConnectionArgs extends com.pulumi.resources.Re
             return clusterId(Output.of(clusterId));
         }
 
+        /**
+         * @param endpointId Client side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder endpointId(Output<String> endpointId) {
             $.endpointId = endpointId;
             return this;
         }
 
+        /**
+         * @param endpointId Client side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder endpointId(String endpointId) {
             return endpointId(Output.of(endpointId));
         }

@@ -14,9 +14,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     [OutputType]
     public sealed class GetCockroachClusterRegionResult
     {
-        /// <summary>
-        /// Name of cluster
-        /// </summary>
+        public readonly string InternalDns;
         public readonly string Name;
         public readonly int NodeCount;
         public readonly bool Primary;
@@ -25,6 +23,8 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
 
         [OutputConstructor]
         private GetCockroachClusterRegionResult(
+            string internalDns,
+
             string name,
 
             int nodeCount,
@@ -35,6 +35,7 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
 
             string uiDns)
         {
+            InternalDns = internalDns;
             Name = name;
             NodeCount = nodeCount;
             Primary = primary;

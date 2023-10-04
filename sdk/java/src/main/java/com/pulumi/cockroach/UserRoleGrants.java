@@ -16,7 +16,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 /**
- * Role grants
+ * Role grants for a single user.
  * 
  */
 @ResourceType(type="cockroach:index/userRoleGrants:UserRoleGrants")
@@ -27,9 +27,17 @@ public class UserRoleGrants extends com.pulumi.resources.CustomResource {
     public Output<List<UserRoleGrantsRole>> roles() {
         return this.roles;
     }
+    /**
+     * ID of the user to grant these roles to.
+     * 
+     */
     @Export(name="userId", type=String.class, parameters={})
     private Output<String> userId;
 
+    /**
+     * @return ID of the user to grant these roles to.
+     * 
+     */
     public Output<String> userId() {
         return this.userId;
     }

@@ -24,17 +24,9 @@ public final class ClusterServerlessArgs extends com.pulumi.resources.ResourceAr
         return Optional.ofNullable(this.routingId);
     }
 
-    /**
-     * Spend limit in US cents.
-     * 
-     */
     @Import(name="spendLimit")
     private @Nullable Output<Integer> spendLimit;
 
-    /**
-     * @return Spend limit in US cents.
-     * 
-     */
     public Optional<Output<Integer>> spendLimit() {
         return Optional.ofNullable(this.spendLimit);
     }
@@ -81,23 +73,11 @@ public final class ClusterServerlessArgs extends com.pulumi.resources.ResourceAr
             return routingId(Output.of(routingId));
         }
 
-        /**
-         * @param spendLimit Spend limit in US cents.
-         * 
-         * @return builder
-         * 
-         */
         public Builder spendLimit(@Nullable Output<Integer> spendLimit) {
             $.spendLimit = spendLimit;
             return this;
         }
 
-        /**
-         * @param spendLimit Spend limit in US cents.
-         * 
-         * @return builder
-         * 
-         */
         public Builder spendLimit(Integer spendLimit) {
             return spendLimit(Output.of(spendLimit));
         }

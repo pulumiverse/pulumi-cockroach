@@ -19,46 +19,70 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 /**
- * Cluster Resource
+ * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
  * 
  */
 @ResourceType(type="cockroach:index/cluster:Cluster")
 public class Cluster extends com.pulumi.resources.CustomResource {
+    /**
+     * The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+     * 
+     */
     @Export(name="accountId", type=String.class, parameters={})
     private Output<String> accountId;
 
+    /**
+     * @return The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+     * 
+     */
     public Output<String> accountId() {
         return this.accountId;
     }
+    /**
+     * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     * 
+     */
     @Export(name="cloudProvider", type=String.class, parameters={})
     private Output<String> cloudProvider;
 
+    /**
+     * @return Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+     * 
+     */
     public Output<String> cloudProvider() {
         return this.cloudProvider;
     }
-    /**
-     * The ID of this resource.
-     * 
-     */
     @Export(name="clusterId", type=String.class, parameters={})
     private Output<String> clusterId;
 
-    /**
-     * @return The ID of this resource.
-     * 
-     */
     public Output<String> clusterId() {
         return this.clusterId;
     }
+    /**
+     * Major version of CockroachDB running on the cluster.
+     * 
+     */
     @Export(name="cockroachVersion", type=String.class, parameters={})
     private Output<String> cockroachVersion;
 
+    /**
+     * @return Major version of CockroachDB running on the cluster.
+     * 
+     */
     public Output<String> cockroachVersion() {
         return this.cockroachVersion;
     }
+    /**
+     * ID of the user who created the cluster.
+     * 
+     */
     @Export(name="creatorId", type=String.class, parameters={})
     private Output<String> creatorId;
 
+    /**
+     * @return ID of the user who created the cluster.
+     * 
+     */
     public Output<String> creatorId() {
         return this.creatorId;
     }
@@ -69,28 +93,58 @@ public class Cluster extends com.pulumi.resources.CustomResource {
         return Codegen.optional(this.dedicated);
     }
     /**
-     * Name of cluster
+     * Name of the cluster.
      * 
      */
     @Export(name="name", type=String.class, parameters={})
     private Output<String> name;
 
     /**
-     * @return Name of cluster
+     * @return Name of the cluster.
      * 
      */
     public Output<String> name() {
         return this.name;
     }
+    /**
+     * Describes the current long-running operation, if any.
+     * 
+     */
     @Export(name="operationStatus", type=String.class, parameters={})
     private Output<String> operationStatus;
 
+    /**
+     * @return Describes the current long-running operation, if any.
+     * 
+     */
     public Output<String> operationStatus() {
         return this.operationStatus;
     }
+    /**
+     * The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+     * 
+     */
+    @Export(name="parentId", type=String.class, parameters={})
+    private Output<String> parentId;
+
+    /**
+     * @return The ID of the cluster&#39;s parent folder. &#39;root&#39; is used for a cluster at the root level.
+     * 
+     */
+    public Output<String> parentId() {
+        return this.parentId;
+    }
+    /**
+     * Denotes cluster deployment type: &#39;DEDICATED&#39; or &#39;SERVERLESS&#39;.
+     * 
+     */
     @Export(name="plan", type=String.class, parameters={})
     private Output<String> plan;
 
+    /**
+     * @return Denotes cluster deployment type: &#39;DEDICATED&#39; or &#39;SERVERLESS&#39;.
+     * 
+     */
     public Output<String> plan() {
         return this.plan;
     }
@@ -106,15 +160,31 @@ public class Cluster extends com.pulumi.resources.CustomResource {
     public Output<Optional<ClusterServerless>> serverless() {
         return Codegen.optional(this.serverless);
     }
+    /**
+     * Describes whether the cluster is being created, updated, deleted, etc.
+     * 
+     */
     @Export(name="state", type=String.class, parameters={})
     private Output<String> state;
 
+    /**
+     * @return Describes whether the cluster is being created, updated, deleted, etc.
+     * 
+     */
     public Output<String> state() {
         return this.state;
     }
+    /**
+     * Describes the status of any in-progress CockroachDB upgrade or rollback.
+     * 
+     */
     @Export(name="upgradeStatus", type=String.class, parameters={})
     private Output<String> upgradeStatus;
 
+    /**
+     * @return Describes the status of any in-progress CockroachDB upgrade or rollback.
+     * 
+     */
     public Output<String> upgradeStatus() {
         return this.upgradeStatus;
     }

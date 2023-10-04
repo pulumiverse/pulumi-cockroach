@@ -19,9 +19,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
         [Input("createdAt")]
         public Input<string>? CreatedAt { get; set; }
 
-        /// <summary>
-        /// Aggregated status of the cluster's encryption key(s)
-        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 

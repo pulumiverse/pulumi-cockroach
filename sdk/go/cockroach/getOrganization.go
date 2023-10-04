@@ -7,7 +7,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Information about the organization associated with the user's API key
+// Information about the organization associated with the user's API key.
 func GetOrganization(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetOrganizationResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetOrganizationResult
@@ -20,9 +20,12 @@ func GetOrganization(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetOrga
 
 // A collection of values returned by getOrganization.
 type GetOrganizationResult struct {
+	// Indicates when the organization was created.
 	CreatedAt string `pulumi:"createdAt"`
-	// The ID of this resource.
-	Id    string `pulumi:"id"`
+	// Organization ID.
+	Id string `pulumi:"id"`
+	// A short ID used by CockroachDB Support.
 	Label string `pulumi:"label"`
-	Name  string `pulumi:"name"`
+	// Name of the organization.
+	Name string `pulumi:"name"`
 }

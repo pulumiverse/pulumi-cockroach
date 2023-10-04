@@ -13,13 +13,13 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     public static class GetConnectionString
     {
         /// <summary>
-        /// Generic connection string for a given cluster
+        /// Generic connection string for a cluster.
         /// </summary>
         public static Task<GetConnectionStringResult> InvokeAsync(GetConnectionStringArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectionStringResult>("cockroach:index/getConnectionString:getConnectionString", args ?? new GetConnectionStringArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Generic connection string for a given cluster
+        /// Generic connection string for a cluster.
         /// </summary>
         public static Output<GetConnectionStringResult> Invoke(GetConnectionStringInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectionStringResult>("cockroach:index/getConnectionString:getConnectionString", args ?? new GetConnectionStringInvokeArgs(), options.WithDefaults());
@@ -28,15 +28,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class GetConnectionStringArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Database to connect to. Defaults to 'defaultdb'.
-        /// </summary>
         [Input("database")]
         public string? Database { get; set; }
 
-        /// <summary>
-        /// Cluster ID
-        /// </summary>
         [Input("id", required: true)]
         public string Id { get; set; } = null!;
 
@@ -45,19 +39,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
         [Input("password")]
         private string? _password;
-
-        /// <summary>
-        /// Database user password. Must also include `sql_user`.
-        /// </summary>
         public string? Password
         {
             get => _password;
             set => _password = value;
         }
 
-        /// <summary>
-        /// Database username.
-        /// </summary>
         [Input("sqlUser")]
         public string? SqlUser { get; set; }
 
@@ -69,15 +56,9 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
     public sealed class GetConnectionStringInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Database to connect to. Defaults to 'defaultdb'.
-        /// </summary>
         [Input("database")]
         public Input<string>? Database { get; set; }
 
-        /// <summary>
-        /// Cluster ID
-        /// </summary>
         [Input("id", required: true)]
         public Input<string> Id { get; set; } = null!;
 
@@ -86,10 +67,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach
 
         [Input("password")]
         private Input<string>? _password;
-
-        /// <summary>
-        /// Database user password. Must also include `sql_user`.
-        /// </summary>
         public Input<string>? Password
         {
             get => _password;
@@ -100,9 +77,6 @@ namespace Lbrlabs.PulumiPackage.Cockroach
             }
         }
 
-        /// <summary>
-        /// Database username.
-        /// </summary>
         [Input("sqlUser")]
         public Input<string>? SqlUser { get; set; }
 
@@ -116,35 +90,17 @@ namespace Lbrlabs.PulumiPackage.Cockroach
     [OutputType]
     public sealed class GetConnectionStringResult
     {
-        /// <summary>
-        /// List of individual connection string parameters. Can be used to build nonstandard connection strings.
-        /// </summary>
-        public readonly ImmutableDictionary<string, string> ConnectionParams;
-        /// <summary>
-        /// Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
-        /// </summary>
+        public readonly Outputs.GetConnectionStringConnectionParamsResult ConnectionParams;
         public readonly string ConnectionString;
-        /// <summary>
-        /// Database to connect to. Defaults to 'defaultdb'.
-        /// </summary>
         public readonly string Database;
-        /// <summary>
-        /// Cluster ID
-        /// </summary>
         public readonly string Id;
         public readonly string Os;
-        /// <summary>
-        /// Database user password. Must also include `sql_user`.
-        /// </summary>
         public readonly string? Password;
-        /// <summary>
-        /// Database username.
-        /// </summary>
         public readonly string? SqlUser;
 
         [OutputConstructor]
         private GetConnectionStringResult(
-            ImmutableDictionary<string, string> connectionParams,
+            Outputs.GetConnectionStringConnectionParamsResult connectionParams,
 
             string connectionString,
 

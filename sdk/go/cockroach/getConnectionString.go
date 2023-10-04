@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Generic connection string for a given cluster
+// Generic connection string for a cluster.
 func GetConnectionString(ctx *pulumi.Context, args *GetConnectionStringArgs, opts ...pulumi.InvokeOption) (*GetConnectionStringResult, error) {
 	opts = pkgInvokeDefaultOpts(opts)
 	var rv GetConnectionStringResult
@@ -23,32 +23,22 @@ func GetConnectionString(ctx *pulumi.Context, args *GetConnectionStringArgs, opt
 
 // A collection of arguments for invoking getConnectionString.
 type GetConnectionStringArgs struct {
-	// Database to connect to. Defaults to 'defaultdb'.
 	Database *string `pulumi:"database"`
-	// Cluster ID
-	Id string  `pulumi:"id"`
-	Os *string `pulumi:"os"`
-	// Database user password. Must also include `sqlUser`.
+	Id       string  `pulumi:"id"`
+	Os       *string `pulumi:"os"`
 	Password *string `pulumi:"password"`
-	// Database username.
-	SqlUser *string `pulumi:"sqlUser"`
+	SqlUser  *string `pulumi:"sqlUser"`
 }
 
 // A collection of values returned by getConnectionString.
 type GetConnectionStringResult struct {
-	// List of individual connection string parameters. Can be used to build nonstandard connection strings.
-	ConnectionParams map[string]string `pulumi:"connectionParams"`
-	// Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
-	ConnectionString string `pulumi:"connectionString"`
-	// Database to connect to. Defaults to 'defaultdb'.
-	Database string `pulumi:"database"`
-	// Cluster ID
-	Id string `pulumi:"id"`
-	Os string `pulumi:"os"`
-	// Database user password. Must also include `sqlUser`.
-	Password *string `pulumi:"password"`
-	// Database username.
-	SqlUser *string `pulumi:"sqlUser"`
+	ConnectionParams GetConnectionStringConnectionParams `pulumi:"connectionParams"`
+	ConnectionString string                              `pulumi:"connectionString"`
+	Database         string                              `pulumi:"database"`
+	Id               string                              `pulumi:"id"`
+	Os               string                              `pulumi:"os"`
+	Password         *string                             `pulumi:"password"`
+	SqlUser          *string                             `pulumi:"sqlUser"`
 }
 
 func GetConnectionStringOutput(ctx *pulumi.Context, args GetConnectionStringOutputArgs, opts ...pulumi.InvokeOption) GetConnectionStringResultOutput {
@@ -66,15 +56,11 @@ func GetConnectionStringOutput(ctx *pulumi.Context, args GetConnectionStringOutp
 
 // A collection of arguments for invoking getConnectionString.
 type GetConnectionStringOutputArgs struct {
-	// Database to connect to. Defaults to 'defaultdb'.
 	Database pulumi.StringPtrInput `pulumi:"database"`
-	// Cluster ID
-	Id pulumi.StringInput    `pulumi:"id"`
-	Os pulumi.StringPtrInput `pulumi:"os"`
-	// Database user password. Must also include `sqlUser`.
+	Id       pulumi.StringInput    `pulumi:"id"`
+	Os       pulumi.StringPtrInput `pulumi:"os"`
 	Password pulumi.StringPtrInput `pulumi:"password"`
-	// Database username.
-	SqlUser pulumi.StringPtrInput `pulumi:"sqlUser"`
+	SqlUser  pulumi.StringPtrInput `pulumi:"sqlUser"`
 }
 
 func (GetConnectionStringOutputArgs) ElementType() reflect.Type {
@@ -96,22 +82,18 @@ func (o GetConnectionStringResultOutput) ToGetConnectionStringResultOutputWithCo
 	return o
 }
 
-// List of individual connection string parameters. Can be used to build nonstandard connection strings.
-func (o GetConnectionStringResultOutput) ConnectionParams() pulumi.StringMapOutput {
-	return o.ApplyT(func(v GetConnectionStringResult) map[string]string { return v.ConnectionParams }).(pulumi.StringMapOutput)
+func (o GetConnectionStringResultOutput) ConnectionParams() GetConnectionStringConnectionParamsOutput {
+	return o.ApplyT(func(v GetConnectionStringResult) GetConnectionStringConnectionParams { return v.ConnectionParams }).(GetConnectionStringConnectionParamsOutput)
 }
 
-// Fully formatted connection string. Assumes the cluster certificate is stored in the default location.
 func (o GetConnectionStringResultOutput) ConnectionString() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringResult) string { return v.ConnectionString }).(pulumi.StringOutput)
 }
 
-// Database to connect to. Defaults to 'defaultdb'.
 func (o GetConnectionStringResultOutput) Database() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringResult) string { return v.Database }).(pulumi.StringOutput)
 }
 
-// Cluster ID
 func (o GetConnectionStringResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringResult) string { return v.Id }).(pulumi.StringOutput)
 }
@@ -120,12 +102,10 @@ func (o GetConnectionStringResultOutput) Os() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringResult) string { return v.Os }).(pulumi.StringOutput)
 }
 
-// Database user password. Must also include `sqlUser`.
 func (o GetConnectionStringResultOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetConnectionStringResult) *string { return v.Password }).(pulumi.StringPtrOutput)
 }
 
-// Database username.
 func (o GetConnectionStringResultOutput) SqlUser() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetConnectionStringResult) *string { return v.SqlUser }).(pulumi.StringPtrOutput)
 }

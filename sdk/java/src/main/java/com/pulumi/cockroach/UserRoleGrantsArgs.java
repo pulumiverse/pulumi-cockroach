@@ -22,9 +22,17 @@ public final class UserRoleGrantsArgs extends com.pulumi.resources.ResourceArgs 
         return this.roles;
     }
 
+    /**
+     * ID of the user to grant these roles to.
+     * 
+     */
     @Import(name="userId", required=true)
     private Output<String> userId;
 
+    /**
+     * @return ID of the user to grant these roles to.
+     * 
+     */
     public Output<String> userId() {
         return this.userId;
     }
@@ -67,11 +75,23 @@ public final class UserRoleGrantsArgs extends com.pulumi.resources.ResourceArgs 
             return roles(List.of(roles));
         }
 
+        /**
+         * @param userId ID of the user to grant these roles to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder userId(Output<String> userId) {
             $.userId = userId;
             return this;
         }
 
+        /**
+         * @param userId ID of the user to grant these roles to.
+         * 
+         * @return builder
+         * 
+         */
         public Builder userId(String userId) {
             return userId(Output.of(userId));
         }
