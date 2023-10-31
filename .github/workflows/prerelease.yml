@@ -298,7 +298,8 @@ jobs:
         - "3.7"
   publish_java_sdk:
     name: publish_java_sdk
-    needs: publish
+    # TODO: Switch back to publish after testing. This speeds things up.
+    needs: build_sdk
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
