@@ -115,13 +115,13 @@ def get_connection_string(database: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('cockroach:index/getConnectionString:getConnectionString', __args__, opts=opts, typ=GetConnectionStringResult).value
 
     return AwaitableGetConnectionStringResult(
-        connection_params=__ret__.connection_params,
-        connection_string=__ret__.connection_string,
-        database=__ret__.database,
-        id=__ret__.id,
-        os=__ret__.os,
-        password=__ret__.password,
-        sql_user=__ret__.sql_user)
+        connection_params=pulumi.get(__ret__, 'connection_params'),
+        connection_string=pulumi.get(__ret__, 'connection_string'),
+        database=pulumi.get(__ret__, 'database'),
+        id=pulumi.get(__ret__, 'id'),
+        os=pulumi.get(__ret__, 'os'),
+        password=pulumi.get(__ret__, 'password'),
+        sql_user=pulumi.get(__ret__, 'sql_user'))
 
 
 @_utilities.lift_output_func(get_connection_string)

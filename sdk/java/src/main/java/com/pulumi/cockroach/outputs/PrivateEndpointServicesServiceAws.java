@@ -12,17 +12,41 @@ import javax.annotation.Nullable;
 
 @CustomType
 public final class PrivateEndpointServicesServiceAws {
+    /**
+     * @return AZ IDs users should create their VPCs in to minimize their cost.
+     * 
+     */
     private @Nullable List<String> availabilityZoneIds;
+    /**
+     * @return Server side ID of the PrivateLink connection.
+     * 
+     */
     private @Nullable String serviceId;
+    /**
+     * @return AWS service name used to create endpoints.
+     * 
+     */
     private @Nullable String serviceName;
 
     private PrivateEndpointServicesServiceAws() {}
+    /**
+     * @return AZ IDs users should create their VPCs in to minimize their cost.
+     * 
+     */
     public List<String> availabilityZoneIds() {
         return this.availabilityZoneIds == null ? List.of() : this.availabilityZoneIds;
     }
+    /**
+     * @return Server side ID of the PrivateLink connection.
+     * 
+     */
     public Optional<String> serviceId() {
         return Optional.ofNullable(this.serviceId);
     }
+    /**
+     * @return AWS service name used to create endpoints.
+     * 
+     */
     public Optional<String> serviceName() {
         return Optional.ofNullable(this.serviceName);
     }

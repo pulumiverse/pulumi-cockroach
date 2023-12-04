@@ -17,6 +17,12 @@ namespace Lbrlabs.PulumiPackage.Cockroach
         /// </summary>
         public static Task<GetOrganizationResult> InvokeAsync(InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrganizationResult>("cockroach:index/getOrganization:getOrganization", InvokeArgs.Empty, options.WithDefaults());
+
+        /// <summary>
+        /// Information about the organization associated with the user's API key.
+        /// </summary>
+        public static Output<GetOrganizationResult> Invoke(InvokeOptions? options = null)
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationResult>("cockroach:index/getOrganization:getOrganization", InvokeArgs.Empty, options.WithDefaults());
     }
 
 

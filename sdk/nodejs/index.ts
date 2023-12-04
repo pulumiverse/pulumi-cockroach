@@ -62,7 +62,8 @@ utilities.lazyLoad(exports, ["getConnectionString","getConnectionStringOutput"],
 
 export { GetOrganizationResult } from "./getOrganization";
 export const getOrganization: typeof import("./getOrganization").getOrganization = null as any;
-utilities.lazyLoad(exports, ["getOrganization"], () => require("./getOrganization"));
+export const getOrganizationOutput: typeof import("./getOrganization").getOrganizationOutput = null as any;
+utilities.lazyLoad(exports, ["getOrganization","getOrganizationOutput"], () => require("./getOrganization"));
 
 export { GetPersonUserArgs, GetPersonUserResult, GetPersonUserOutputArgs } from "./getPersonUser";
 export const getPersonUser: typeof import("./getPersonUser").getPersonUser = null as any;

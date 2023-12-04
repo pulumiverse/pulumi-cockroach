@@ -72,8 +72,8 @@ def get_cluster_cert(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('cockroach:index/getClusterCert:getClusterCert', __args__, opts=opts, typ=GetClusterCertResult).value
 
     return AwaitableGetClusterCertResult(
-        cert=__ret__.cert,
-        id=__ret__.id)
+        cert=pulumi.get(__ret__, 'cert'),
+        id=pulumi.get(__ret__, 'id'))
 
 
 @_utilities.lift_output_func(get_cluster_cert)

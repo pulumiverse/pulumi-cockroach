@@ -170,20 +170,20 @@ def get_cockroach_cluster(id: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('cockroach:index/getCockroachCluster:getCockroachCluster', __args__, opts=opts, typ=GetCockroachClusterResult).value
 
     return AwaitableGetCockroachClusterResult(
-        account_id=__ret__.account_id,
-        cloud_provider=__ret__.cloud_provider,
-        cockroach_version=__ret__.cockroach_version,
-        creator_id=__ret__.creator_id,
-        dedicated=__ret__.dedicated,
-        id=__ret__.id,
-        name=__ret__.name,
-        operation_status=__ret__.operation_status,
-        parent_id=__ret__.parent_id,
-        plan=__ret__.plan,
-        regions=__ret__.regions,
-        serverless=__ret__.serverless,
-        state=__ret__.state,
-        upgrade_status=__ret__.upgrade_status)
+        account_id=pulumi.get(__ret__, 'account_id'),
+        cloud_provider=pulumi.get(__ret__, 'cloud_provider'),
+        cockroach_version=pulumi.get(__ret__, 'cockroach_version'),
+        creator_id=pulumi.get(__ret__, 'creator_id'),
+        dedicated=pulumi.get(__ret__, 'dedicated'),
+        id=pulumi.get(__ret__, 'id'),
+        name=pulumi.get(__ret__, 'name'),
+        operation_status=pulumi.get(__ret__, 'operation_status'),
+        parent_id=pulumi.get(__ret__, 'parent_id'),
+        plan=pulumi.get(__ret__, 'plan'),
+        regions=pulumi.get(__ret__, 'regions'),
+        serverless=pulumi.get(__ret__, 'serverless'),
+        state=pulumi.get(__ret__, 'state'),
+        upgrade_status=pulumi.get(__ret__, 'upgrade_status'))
 
 
 @_utilities.lift_output_func(get_cockroach_cluster)

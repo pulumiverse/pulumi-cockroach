@@ -35,3 +35,9 @@ export interface GetOrganizationResult {
      */
     readonly name: string;
 }
+/**
+ * Information about the organization associated with the user's API key.
+ */
+export function getOrganizationOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetOrganizationResult> {
+    return pulumi.output(getOrganization(opts))
+}

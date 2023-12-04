@@ -4,9 +4,12 @@
 package config
 
 import (
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
+
+var _ = internal.GetEnvOrDefault
 
 // apikey to access cockroach cloud
 func GetApikey(ctx *pulumi.Context) string {

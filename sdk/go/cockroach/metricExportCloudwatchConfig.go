@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -42,7 +43,7 @@ func NewMetricExportCloudwatchConfig(ctx *pulumi.Context,
 	if args.RoleArn == nil {
 		return nil, errors.New("invalid value for required argument 'RoleArn'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MetricExportCloudwatchConfig
 	err := ctx.RegisterResource("cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig", name, args, &resource, opts...)
 	if err != nil {

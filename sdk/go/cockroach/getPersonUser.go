@@ -7,12 +7,13 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Information about an individual user.
 func GetPersonUser(ctx *pulumi.Context, args *GetPersonUserArgs, opts ...pulumi.InvokeOption) (*GetPersonUserResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPersonUserResult
 	err := ctx.Invoke("cockroach:index/getPersonUser:getPersonUser", args, &rv, opts...)
 	if err != nil {

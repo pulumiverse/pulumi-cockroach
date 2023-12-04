@@ -49,8 +49,9 @@ func cockroachResource(mod string, res string) tokens.Type {
 var bridgeMetadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the tls package.
-func Provider() tfpfbridge.ProviderInfo {
+func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
+		P:                 tfpfbridge.ShimProvider(shim.NewProvider()),
 		Name:              "cockroach",
 		DisplayName:       "CockroachDB",
 		Publisher:         "lbrlabs",
@@ -191,8 +192,5 @@ func Provider() tfpfbridge.ProviderInfo {
 		},
 	}
 
-	return tfpfbridge.ProviderInfo{
-		ProviderInfo: info,
-		NewProvider:  shim.NewProvider,
-	}
+	return info
 }

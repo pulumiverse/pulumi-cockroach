@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -43,7 +44,7 @@ func NewApiOidcConfig(ctx *pulumi.Context,
 	if args.Jwks == nil {
 		return nil, errors.New("invalid value for required argument 'Jwks'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApiOidcConfig
 	err := ctx.RegisterResource("cockroach:index/apiOidcConfig:ApiOidcConfig", name, args, &resource, opts...)
 	if err != nil {

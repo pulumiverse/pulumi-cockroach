@@ -7,12 +7,13 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // CockroachDB Cloud cluster. Can be Dedicated or Serverless.
 func GetCockroachCluster(ctx *pulumi.Context, args *GetCockroachClusterArgs, opts ...pulumi.InvokeOption) (*GetCockroachClusterResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCockroachClusterResult
 	err := ctx.Invoke("cockroach:index/getCockroachCluster:getCockroachCluster", args, &rv, opts...)
 	if err != nil {
