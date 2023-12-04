@@ -335,16 +335,7 @@
             "required": [
                 "channels",
                 "logName"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "channels",
-                        "logName",
-                        "redact"
-                    ]
-                }
-            }
+            ]
         },
         "cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService": {
             "properties": {

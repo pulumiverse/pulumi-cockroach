@@ -17,8 +17,8 @@ github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5/go.mod h1:wHh0iHkY
 github.com/cloudflare/circl v1.3.3 h1:fE/Qz0QdIGqeWfnwq0RE0R7MI51s0M2E4Ga9kq5AEMs=
 github.com/cockroachdb/cockroach-cloud-sdk-go v1.7.0 h1:KKokmhXa5nzHXrP8kc81BZ6ciOewcT8FKqofS2yoR1s=
 github.com/cockroachdb/cockroach-cloud-sdk-go v1.7.0/go.mod h1:oG9ylbcVGOF7IbVAW2nx5F6ry9a2dZD1H9rd+qd4P60=
-github.com/cockroachdb/terraform-provider-cockroach v1.3.0 h1:BbuboRydDJDH/DZ9SLmwguXZJY0IUyka9qRTmeMSSsI=
-github.com/cockroachdb/terraform-provider-cockroach v1.3.0/go.mod h1:iAzk6Np9leV3h502RAj+lBAxWON7e9uKePE4lECf2JU=
+github.com/cockroachdb/terraform-provider-cockroach v1.3.1 h1:MlK5eF0MdYvSDxp/YJlt+itttBmN11iEx0C/wDj4pgo=
+github.com/cockroachdb/terraform-provider-cockroach v1.3.1/go.mod h1:iAzk6Np9leV3h502RAj+lBAxWON7e9uKePE4lECf2JU=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

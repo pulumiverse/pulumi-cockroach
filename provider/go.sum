@@ -521,8 +521,8 @@ github.com/cockroachdb/datadriven v0.0.0-20190809214429-80d97fb3cbaa/go.mod h1:z
 github.com/cockroachdb/datadriven v0.0.0-20200714090401-bf6692d28da5/go.mod h1:h6jFvWxBdQXxjopDMZyH2UVceIRfR84bdzbkoKrsWNo=
 github.com/cockroachdb/errors v1.2.4/go.mod h1:rQD95gz6FARkaKkQXUksEje/d9a6wBJoCr5oaCLELYA=
 github.com/cockroachdb/logtags v0.0.0-20190617123548-eb05cc24525f/go.mod h1:i/u985jwjWRlyHXQbwatDASoW0RMlZ/3i9yJHE2xLkI=
-github.com/cockroachdb/terraform-provider-cockroach v1.3.0 h1:BbuboRydDJDH/DZ9SLmwguXZJY0IUyka9qRTmeMSSsI=
-github.com/cockroachdb/terraform-provider-cockroach v1.3.0/go.mod h1:iAzk6Np9leV3h502RAj+lBAxWON7e9uKePE4lECf2JU=
+github.com/cockroachdb/terraform-provider-cockroach v1.3.1 h1:MlK5eF0MdYvSDxp/YJlt+itttBmN11iEx0C/wDj4pgo=
+github.com/cockroachdb/terraform-provider-cockroach v1.3.1/go.mod h1:iAzk6Np9leV3h502RAj+lBAxWON7e9uKePE4lECf2JU=
 github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd/go.mod h1:sE/e/2PUdi/liOCUjSTXgM1o87ZssimdTWN964YiIeI=
 github.com/containerd/aufs v0.0.0-20200908144142-dab0cbea06f4/go.mod h1:nukgQABAEopAHvB6j7cnP5zJ+/3aVcE7hCYqvIwAHyE=
 github.com/containerd/aufs v0.0.0-20201003224125-76a6863f2989/go.mod h1:AkGGQs9NM2vtYHaUen+NljV0/baGCAPELGm2q9ZXpWU=

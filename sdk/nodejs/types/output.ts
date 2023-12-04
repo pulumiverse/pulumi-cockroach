@@ -115,7 +115,7 @@ export interface LogExportConfigGroup {
     channels: string[];
     logName: string;
     minLevel?: string;
-    redact: boolean;
+    redact?: boolean;
 }
 
 export interface PrivateEndpointServicesService {

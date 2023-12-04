@@ -80,7 +80,7 @@ require (
 	github.com/cheggaaa/pb v1.0.29 // indirect
 	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/cockroachdb/cockroach-cloud-sdk-go v1.7.0 // indirect
-	github.com/cockroachdb/terraform-provider-cockroach v1.3.0 // indirect
+	github.com/cockroachdb/terraform-provider-cockroach v1.3.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dimchansky/utfbom v1.1.1 // indirect
 	github.com/djherbis/times v1.5.0 // indirect
