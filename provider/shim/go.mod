@@ -3,7 +3,7 @@ module github.com/cockroachdb/terraform-provider-cockroach/shim
 go 1.20
 
 require (
-	github.com/cockroachdb/terraform-provider-cockroach v1.3.0
+	github.com/cockroachdb/terraform-provider-cockroach v1.3.1
 	github.com/hashicorp/terraform-plugin-framework v1.3.3
 	github.com/lbrlabs/pulumi-cockroach/provider v0.0.0-20230712160315-5beb4e6c232a
 )
