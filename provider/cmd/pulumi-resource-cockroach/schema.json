@@ -18,41 +18,41 @@
     },
     "language": {
         "csharp": {
-            "compatibility": "tfbridge20",
-            "namespaces": {
-                "cockroach": "Cockroach"
-            },
             "packageReferences": {
                 "Pulumi": "3.*"
             },
+            "namespaces": {
+                "cockroach": "Cockroach"
+            },
+            "compatibility": "tfbridge20",
             "rootNamespace": "Lbrlabs.PulumiPackage"
         },
         "go": {
-            "generateExtraInputTypes": true,
+            "importBasePath": "github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach",
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach"
+            "generateExtraInputTypes": true
         },
         "nodejs": {
-            "compatibility": "tfbridge20",
+            "packageName": "@lbrlabs/pulumi-cockroach",
+            "packageDescription": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
             },
             "devDependencies": {
                 "@types/node": "^10.0.0"
             },
-            "disableUnionOutputTypes": true,
-            "packageDescription": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
-            "packageName": "@lbrlabs/pulumi-cockroach",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
-            "typescriptVersion": ""
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
         },
         "python": {
-            "compatibility": "tfbridge20",
             "packageName": "lbrlabs_pulumi_cockroach",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
-            }
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
         }
     },
     "config": {
@@ -335,16 +335,7 @@
             "required": [
                 "channels",
                 "logName"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "channels",
-                        "logName",
-                        "redact"
-                    ]
-                }
-            }
+            ]
         },
         "cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService": {
             "properties": {
@@ -382,13 +373,16 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "AZ IDs users should create their VPCs in to minimize their cost.\n"
                 },
                 "serviceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Server side ID of the PrivateLink connection.\n"
                 },
                 "serviceName": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "AWS service name used to create endpoints.\n"
                 }
             },
             "type": "object",

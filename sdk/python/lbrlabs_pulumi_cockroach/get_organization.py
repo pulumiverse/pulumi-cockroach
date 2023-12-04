@@ -13,6 +13,7 @@ __all__ = [
     'GetOrganizationResult',
     'AwaitableGetOrganizationResult',
     'get_organization',
+    'get_organization_output',
 ]
 
 @pulumi.output_type
@@ -88,7 +89,15 @@ def get_organization(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGe
     __ret__ = pulumi.runtime.invoke('cockroach:index/getOrganization:getOrganization', __args__, opts=opts, typ=GetOrganizationResult).value
 
     return AwaitableGetOrganizationResult(
-        created_at=__ret__.created_at,
-        id=__ret__.id,
-        label=__ret__.label,
-        name=__ret__.name)
+        created_at=pulumi.get(__ret__, 'created_at'),
+        id=pulumi.get(__ret__, 'id'),
+        label=pulumi.get(__ret__, 'label'),
+        name=pulumi.get(__ret__, 'name'))
+
+
+@_utilities.lift_output_func(get_organization)
+def get_organization_output(opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrganizationResult]:
+    """
+    Information about the organization associated with the user's API key.
+    """
+    ...

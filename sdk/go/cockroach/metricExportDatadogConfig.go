@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -50,7 +51,7 @@ func NewMetricExportDatadogConfig(ctx *pulumi.Context,
 		"apiKey",
 	})
 	opts = append(opts, secrets)
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MetricExportDatadogConfig
 	err := ctx.RegisterResource("cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig", name, args, &resource, opts...)
 	if err != nil {

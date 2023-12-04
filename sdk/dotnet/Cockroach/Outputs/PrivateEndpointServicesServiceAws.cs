@@ -14,8 +14,17 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Outputs
     [OutputType]
     public sealed class PrivateEndpointServicesServiceAws
     {
+        /// <summary>
+        /// AZ IDs users should create their VPCs in to minimize their cost.
+        /// </summary>
         public readonly ImmutableArray<string> AvailabilityZoneIds;
+        /// <summary>
+        /// Server side ID of the PrivateLink connection.
+        /// </summary>
         public readonly string? ServiceId;
+        /// <summary>
+        /// AWS service name used to create endpoints.
+        /// </summary>
         public readonly string? ServiceName;
 
         [OutputConstructor]

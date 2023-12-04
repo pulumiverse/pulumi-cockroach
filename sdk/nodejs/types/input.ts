@@ -98,8 +98,17 @@ export interface PrivateEndpointServicesService {
 }
 
 export interface PrivateEndpointServicesServiceAws {
+    /**
+     * AZ IDs users should create their VPCs in to minimize their cost.
+     */
     availabilityZoneIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Server side ID of the PrivateLink connection.
+     */
     serviceId?: pulumi.Input<string>;
+    /**
+     * AWS service name used to create endpoints.
+     */
     serviceName?: pulumi.Input<string>;
 }
 

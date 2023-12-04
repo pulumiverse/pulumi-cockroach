@@ -7,12 +7,13 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Generic connection string for a cluster.
 func GetConnectionString(ctx *pulumi.Context, args *GetConnectionStringArgs, opts ...pulumi.InvokeOption) (*GetConnectionStringResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetConnectionStringResult
 	err := ctx.Invoke("cockroach:index/getConnectionString:getConnectionString", args, &rv, opts...)
 	if err != nil {

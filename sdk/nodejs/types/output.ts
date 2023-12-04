@@ -115,7 +115,7 @@ export interface LogExportConfigGroup {
     channels: string[];
     logName: string;
     minLevel?: string;
-    redact: boolean;
+    redact?: boolean;
 }
 
 export interface PrivateEndpointServicesService {
@@ -135,8 +135,17 @@ export interface PrivateEndpointServicesService {
 }
 
 export interface PrivateEndpointServicesServiceAws {
+    /**
+     * AZ IDs users should create their VPCs in to minimize their cost.
+     */
     availabilityZoneIds: string[];
+    /**
+     * Server side ID of the PrivateLink connection.
+     */
     serviceId: string;
+    /**
+     * AWS service name used to create endpoints.
+     */
     serviceName: string;
 }
 

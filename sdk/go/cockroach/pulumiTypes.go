@@ -7,8 +7,11 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ApiOidcConfigIdentityMap struct {
 	// The username (email or service account id) of the CC user that the token should map to.
@@ -1317,9 +1320,12 @@ func (o PrivateEndpointServicesServiceArrayOutput) Index(i pulumi.IntInput) Priv
 }
 
 type PrivateEndpointServicesServiceAws struct {
+	// AZ IDs users should create their VPCs in to minimize their cost.
 	AvailabilityZoneIds []string `pulumi:"availabilityZoneIds"`
-	ServiceId           *string  `pulumi:"serviceId"`
-	ServiceName         *string  `pulumi:"serviceName"`
+	// Server side ID of the PrivateLink connection.
+	ServiceId *string `pulumi:"serviceId"`
+	// AWS service name used to create endpoints.
+	ServiceName *string `pulumi:"serviceName"`
 }
 
 // PrivateEndpointServicesServiceAwsInput is an input type that accepts PrivateEndpointServicesServiceAwsArgs and PrivateEndpointServicesServiceAwsOutput values.
@@ -1334,9 +1340,12 @@ type PrivateEndpointServicesServiceAwsInput interface {
 }
 
 type PrivateEndpointServicesServiceAwsArgs struct {
+	// AZ IDs users should create their VPCs in to minimize their cost.
 	AvailabilityZoneIds pulumi.StringArrayInput `pulumi:"availabilityZoneIds"`
-	ServiceId           pulumi.StringPtrInput   `pulumi:"serviceId"`
-	ServiceName         pulumi.StringPtrInput   `pulumi:"serviceName"`
+	// Server side ID of the PrivateLink connection.
+	ServiceId pulumi.StringPtrInput `pulumi:"serviceId"`
+	// AWS service name used to create endpoints.
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
 }
 
 func (PrivateEndpointServicesServiceAwsArgs) ElementType() reflect.Type {
@@ -1416,14 +1425,17 @@ func (o PrivateEndpointServicesServiceAwsOutput) ToPrivateEndpointServicesServic
 	}).(PrivateEndpointServicesServiceAwsPtrOutput)
 }
 
+// AZ IDs users should create their VPCs in to minimize their cost.
 func (o PrivateEndpointServicesServiceAwsOutput) AvailabilityZoneIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesServiceAws) []string { return v.AvailabilityZoneIds }).(pulumi.StringArrayOutput)
 }
 
+// Server side ID of the PrivateLink connection.
 func (o PrivateEndpointServicesServiceAwsOutput) ServiceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesServiceAws) *string { return v.ServiceId }).(pulumi.StringPtrOutput)
 }
 
+// AWS service name used to create endpoints.
 func (o PrivateEndpointServicesServiceAwsOutput) ServiceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesServiceAws) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
 }
@@ -1452,6 +1464,7 @@ func (o PrivateEndpointServicesServiceAwsPtrOutput) Elem() PrivateEndpointServic
 	}).(PrivateEndpointServicesServiceAwsOutput)
 }
 
+// AZ IDs users should create their VPCs in to minimize their cost.
 func (o PrivateEndpointServicesServiceAwsPtrOutput) AvailabilityZoneIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *PrivateEndpointServicesServiceAws) []string {
 		if v == nil {
@@ -1461,6 +1474,7 @@ func (o PrivateEndpointServicesServiceAwsPtrOutput) AvailabilityZoneIds() pulumi
 	}).(pulumi.StringArrayOutput)
 }
 
+// Server side ID of the PrivateLink connection.
 func (o PrivateEndpointServicesServiceAwsPtrOutput) ServiceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PrivateEndpointServicesServiceAws) *string {
 		if v == nil {
@@ -1470,6 +1484,7 @@ func (o PrivateEndpointServicesServiceAwsPtrOutput) ServiceId() pulumi.StringPtr
 	}).(pulumi.StringPtrOutput)
 }
 
+// AWS service name used to create endpoints.
 func (o PrivateEndpointServicesServiceAwsPtrOutput) ServiceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PrivateEndpointServicesServiceAws) *string {
 		if v == nil {

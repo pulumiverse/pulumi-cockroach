@@ -70,8 +70,8 @@ def get_person_user(email: Optional[str] = None,
     __ret__ = pulumi.runtime.invoke('cockroach:index/getPersonUser:getPersonUser', __args__, opts=opts, typ=GetPersonUserResult).value
 
     return AwaitableGetPersonUserResult(
-        email=__ret__.email,
-        id=__ret__.id)
+        email=pulumi.get(__ret__, 'email'),
+        id=pulumi.get(__ret__, 'id'))
 
 
 @_utilities.lift_output_func(get_person_user)

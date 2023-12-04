@@ -623,6 +623,11 @@ class PrivateEndpointServicesServiceAwsArgs:
                  availability_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,
                  service_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_ids: AZ IDs users should create their VPCs in to minimize their cost.
+        :param pulumi.Input[str] service_id: Server side ID of the PrivateLink connection.
+        :param pulumi.Input[str] service_name: AWS service name used to create endpoints.
+        """
         if availability_zone_ids is not None:
             pulumi.set(__self__, "availability_zone_ids", availability_zone_ids)
         if service_id is not None:
@@ -633,6 +638,9 @@ class PrivateEndpointServicesServiceAwsArgs:
     @property
     @pulumi.getter(name="availabilityZoneIds")
     def availability_zone_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        AZ IDs users should create their VPCs in to minimize their cost.
+        """
         return pulumi.get(self, "availability_zone_ids")
 
     @availability_zone_ids.setter
@@ -642,6 +650,9 @@ class PrivateEndpointServicesServiceAwsArgs:
     @property
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server side ID of the PrivateLink connection.
+        """
         return pulumi.get(self, "service_id")
 
     @service_id.setter
@@ -651,6 +662,9 @@ class PrivateEndpointServicesServiceAwsArgs:
     @property
     @pulumi.getter(name="serviceName")
     def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        AWS service name used to create endpoints.
+        """
         return pulumi.get(self, "service_name")
 
     @service_name.setter

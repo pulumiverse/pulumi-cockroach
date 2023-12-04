@@ -16,23 +16,47 @@ public final class PrivateEndpointServicesServiceAwsArgs extends com.pulumi.reso
 
     public static final PrivateEndpointServicesServiceAwsArgs Empty = new PrivateEndpointServicesServiceAwsArgs();
 
+    /**
+     * AZ IDs users should create their VPCs in to minimize their cost.
+     * 
+     */
     @Import(name="availabilityZoneIds")
     private @Nullable Output<List<String>> availabilityZoneIds;
 
+    /**
+     * @return AZ IDs users should create their VPCs in to minimize their cost.
+     * 
+     */
     public Optional<Output<List<String>>> availabilityZoneIds() {
         return Optional.ofNullable(this.availabilityZoneIds);
     }
 
+    /**
+     * Server side ID of the PrivateLink connection.
+     * 
+     */
     @Import(name="serviceId")
     private @Nullable Output<String> serviceId;
 
+    /**
+     * @return Server side ID of the PrivateLink connection.
+     * 
+     */
     public Optional<Output<String>> serviceId() {
         return Optional.ofNullable(this.serviceId);
     }
 
+    /**
+     * AWS service name used to create endpoints.
+     * 
+     */
     @Import(name="serviceName")
     private @Nullable Output<String> serviceName;
 
+    /**
+     * @return AWS service name used to create endpoints.
+     * 
+     */
     public Optional<Output<String>> serviceName() {
         return Optional.ofNullable(this.serviceName);
     }
@@ -63,33 +87,75 @@ public final class PrivateEndpointServicesServiceAwsArgs extends com.pulumi.reso
             $ = new PrivateEndpointServicesServiceAwsArgs(Objects.requireNonNull(defaults));
         }
 
+        /**
+         * @param availabilityZoneIds AZ IDs users should create their VPCs in to minimize their cost.
+         * 
+         * @return builder
+         * 
+         */
         public Builder availabilityZoneIds(@Nullable Output<List<String>> availabilityZoneIds) {
             $.availabilityZoneIds = availabilityZoneIds;
             return this;
         }
 
+        /**
+         * @param availabilityZoneIds AZ IDs users should create their VPCs in to minimize their cost.
+         * 
+         * @return builder
+         * 
+         */
         public Builder availabilityZoneIds(List<String> availabilityZoneIds) {
             return availabilityZoneIds(Output.of(availabilityZoneIds));
         }
 
+        /**
+         * @param availabilityZoneIds AZ IDs users should create their VPCs in to minimize their cost.
+         * 
+         * @return builder
+         * 
+         */
         public Builder availabilityZoneIds(String... availabilityZoneIds) {
             return availabilityZoneIds(List.of(availabilityZoneIds));
         }
 
+        /**
+         * @param serviceId Server side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceId(@Nullable Output<String> serviceId) {
             $.serviceId = serviceId;
             return this;
         }
 
+        /**
+         * @param serviceId Server side ID of the PrivateLink connection.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceId(String serviceId) {
             return serviceId(Output.of(serviceId));
         }
 
+        /**
+         * @param serviceName AWS service name used to create endpoints.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceName(@Nullable Output<String> serviceName) {
             $.serviceName = serviceName;
             return this;
         }
 
+        /**
+         * @param serviceName AWS service name used to create endpoints.
+         * 
+         * @return builder
+         * 
+         */
         public Builder serviceName(String serviceName) {
             return serviceName(Output.of(serviceName));
         }

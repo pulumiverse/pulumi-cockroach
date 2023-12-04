@@ -15,15 +15,25 @@ namespace Lbrlabs.PulumiPackage.Cockroach.Inputs
     {
         [Input("availabilityZoneIds")]
         private InputList<string>? _availabilityZoneIds;
+
+        /// <summary>
+        /// AZ IDs users should create their VPCs in to minimize their cost.
+        /// </summary>
         public InputList<string> AvailabilityZoneIds
         {
             get => _availabilityZoneIds ?? (_availabilityZoneIds = new InputList<string>());
             set => _availabilityZoneIds = value;
         }
 
+        /// <summary>
+        /// Server side ID of the PrivateLink connection.
+        /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }
 
+        /// <summary>
+        /// AWS service name used to create endpoints.
+        /// </summary>
         [Input("serviceName")]
         public Input<string>? ServiceName { get; set; }
 
