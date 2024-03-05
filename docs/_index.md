@@ -53,3 +53,9 @@ cluster = cockroach.Cluster(
 
 {{% /choosable %}}
 {{< /chooser >}}
+
+## Issues
+
+This is a community maintained provider. Please file issues and feature requests here:
+
+[pulumiverse/pulumi-cockroach](https://github.com/pulumiverse/pulumi-cockroach/issues)

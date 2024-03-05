@@ -23,6 +23,22 @@ pulumi plugin install resource cockroach <version> --server github://api.github.
 
 Replace the version string with your desired version.
 
+### Migrating from the LbrLabs package
+
+The maintenance of this provider has been transferred from LbrLabs to Pulumiverse.
+LbrLabs published up to v0.2.0, where Pulumiverse picks up with an initial v0.2.1
+containing the renamed packages.
+
+If you were using the LbrLabs edition, please update your dependencies to the
+Pulumiverse edition:
+
+| Programming Language | LbrLabs name | Pulumiverse name |
+| -- | -- | -- |
+| JavaScript/TypeScript | `@lbrlabs/pulumi-cockroach` | `@pulumiverse/cockroach` |
+| Python | `lbrlabs_pulumi_cockroach` | `pulumiverse_cockroach` |
+| Go | `github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach` | `github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach` |
+| .NET | `Lbrlabs.PulumiPackage.Cockroach` | `Pulumiverse.Cockroach` |
+
 ## Setup
 
 To provision resources with the Pulumi Cockroach provider, you need to have Cockroach credentials. 
