@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Lbrlabs.PulumiPackage.Cockroach
+namespace Pulumiverse.Cockroach
 {
     public static class Config
     {

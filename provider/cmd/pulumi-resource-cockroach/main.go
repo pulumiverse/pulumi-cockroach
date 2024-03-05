@@ -14,7 +14,7 @@ import (
 
 	tfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 
-	cockroach "github.com/lbrlabs/pulumi-cockroach/provider"
+	cockroach "github.com/pulumiverse/pulumi-cockroach/provider"
 )
 
 //go:embed schema-embed.json

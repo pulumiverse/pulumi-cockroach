@@ -1,5 +1,5 @@
 PACK := cockroach
-ORG := lbrlabs
+ORG := pulumiverse
 PROJECT := github.com/$(ORG)/pulumi-$(PACK)
 PROVIDER_PATH := provider
 VERSION_PATH := $(PROVIDER_PATH)/pkg/version.Version
@@ -15,7 +15,7 @@ development: install_plugins provider build_sdks install_sdks
 
 build: install_plugins provider build_sdks install_sdks
 
-build_sdks: build_nodejs build_python build_go build_dotnet build_java
+build_sdks: build_nodejs build_python build_go build_dotnet # build_java
 
 install_go_sdk:
 

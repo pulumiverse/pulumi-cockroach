@@ -13,13 +13,13 @@ This package is available in many languages in the standard packaging formats.
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```
-$ npm install @lbrlabs/pulumi-cockroach
+$ npm install @pulumiverse/cockroach
 ```
 
 or `yarn`:
 
 ```
-$ yarn add @lbrlabs/pulumi-cockroach
+$ yarn add @pulumiverse/cockroach
 ```
 
 ### Python
@@ -27,7 +27,7 @@ $ yarn add @lbrlabs/pulumi-cockroach
 To use from Python, install using `pip`:
 
 ```
-$ pip install lbrlabs_pulumi_cockroach
+$ pip install pulumiverse_cockroach
 ```
 
 ### Go
@@ -35,7 +35,7 @@ $ pip install lbrlabs_pulumi_cockroach
 To use from Go, use `go get` to grab the latest version of the library
 
 ```
-$ go get github.com/lbrlabs/pulumi-cockroach/sdk/go/...
+$ go get github.com/pulumiverse/pulumi-cockroach/sdk/go/...
 ```
 
 ### .NET
@@ -44,7 +44,7 @@ To use from Dotnet, use `dotnet add package` to install into your project. You m
 
 
 ```
-$ dotnet add package Lbrlabs.PulumiPackage.Cockroach
+$ dotnet add package Pulumiverse.Cockroach
 ```
 
 ## Reference

@@ -8,8 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
 // DataDog metric export configuration for a cluster.

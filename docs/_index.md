@@ -14,7 +14,7 @@ The Cockroach provider must be configured with credentials to deploy and update 
 {{% choosable language typescript %}}
 
 ```typescript
-import * as cockroach from "@lbrlabs/pulumi-cockroach";
+import * as cockroach from "@pulumiverse/cockroach";
 
 const cluster = new cockroach.Cluster("example", {
     cloudProvider: "AWS",
@@ -34,7 +34,7 @@ const cluster = new cockroach.Cluster("example", {
 {{% choosable language python %}}
 
 ```python
-import lbrlabs_pulumi_cockroach as cockroach
+import pulumiverse_cockroach as cockroach
 
 cluster = cockroach.Cluster(
     "example",

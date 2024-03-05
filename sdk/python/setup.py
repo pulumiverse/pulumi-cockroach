@@ -17,21 +17,21 @@ def readme():
         return "cockroach Pulumi Package - Development Version"
 
 
-setup(name='lbrlabs_pulumi_cockroach',
+setup(name='pulumiverse_cockroach',
       python_requires='>=3.7',
       version=VERSION,
-      description="A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
+      description="A Pulumi package to create and managed Cockroach DB resources in Pulumi programs.",
       long_description=readme(),
       long_description_content_type='text/markdown',
-      keywords='pulumi cockroach',
-      url='https://lbrlabs.com',
+      keywords='pulumi cockroach pulumiverse',
+      url='https://www.cockroachlabs.com/',
       project_urls={
-          'Repository': 'https://github.com/lbrlabs/pulumi-cockroach'
+          'Repository': 'https://github.com/pulumiverse/pulumi-cockroach'
       },
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'lbrlabs_pulumi_cockroach': [
+          'pulumiverse_cockroach': [
               'py.typed',
               'pulumi-plugin.json',
           ]

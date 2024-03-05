@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as cockroach from "@lbrlabs/pulumi-cockroach";
+import * as cockroach from "@pulumiverse/cockroach";
 
 const cluster = new cockroach.Cluster("cluster", {
   cloudProvider: "aws",

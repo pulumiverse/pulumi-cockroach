@@ -8,17 +8,17 @@ layout: package
 
 The Pulumi Cockroach provider is available as a package in all Pulumi languages:
 
-* JavaScript/TypeScript: [`@lbrlabs/pulumi-cockroach`](https://www.npmjs.com/package/@lbrlabs/pulumi-cockroach)
-* Python: [`lbrlabs_pulumi_cockroach`](https://pypi.org/project/lbrlabs-pulumi-cockroach/)
-* Go: [`github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach`](https://github.com/lbrlabs/pulumi-cockroach)
-* .NET: [`Lbrlabs.PulumiPackage.Cockroach`](https://www.nuget.org/packages/Lbrlabs.PulumiPackage.Cockroach)
+* JavaScript/TypeScript: [`@pulumiverse/cockroach`](https://www.npmjs.com/package/@pulumiverse/cockroach)
+* Python: [`pulumiverse_cockroach`](https://pypi.org/project/pulumiverse-cockroach/)
+* Go: [`github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach`](https://github.com/pulumiverse/pulumi-cockroach)
+* .NET: [`Pulumiverse.Cockroach`](https://www.nuget.org/packages/Pulumiverse.Cockroach)
 
 ### Provider Binary
 
 The Cockroach provider binary is a third party binary. It can be installed using the `pulumi plugin` command.
 
 ```bash
-pulumi plugin install resource cockroach <version> --server github://api.github.com/lbrlabs
+pulumi plugin install resource cockroach <version> --server github://api.github.com/pulumiverse
 ```
 
 Replace the version string with your desired version.

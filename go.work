@@ -4,4 +4,5 @@ use (
 	./examples
 	./provider
 	./provider/shim
+	./sdk
 )

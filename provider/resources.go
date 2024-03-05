@@ -7,10 +7,10 @@ import (
 	"unicode"
 
 	"github.com/cockroachdb/terraform-provider-cockroach/shim"
-	"github.com/lbrlabs/pulumi-cockroach/provider/pkg/version"
 	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"github.com/pulumiverse/pulumi-cockroach/provider/pkg/version"
 )
 
 // all of the tls token components used below.
@@ -51,17 +51,17 @@ var bridgeMetadata []byte
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
-		P:                 tfpfbridge.ShimProvider(shim.NewProvider()),
+		P:                 tfpfbridge.ShimProvider(shim.NewProvider(version.Version)),
 		Name:              "cockroach",
 		DisplayName:       "CockroachDB",
-		Publisher:         "lbrlabs",
-		PluginDownloadURL: "github://api.github.com/lbrlabs",
-		Description:       "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
-		Keywords:          []string{"pulumi", "cockroach"},
+		Publisher:         "pulumiverse",
+		PluginDownloadURL: "github://api.github.com/pulumiverse",
+		Description:       "A Pulumi package to create and managed Cockroach DB resources in Pulumi programs.",
+		Keywords:          []string{"pulumi", "cockroach", "pulumiverse"},
 		License:           "Apache-2.0",
-		LogoURL:           "https://raw.githubusercontent.com/lbrlabs/pulumi-cockroach/main/assets/logo.png",
-		Homepage:          "https://lbrlabs.com",
-		Repository:        "https://github.com/lbrlabs/pulumi-cockroach",
+		LogoURL:           "https://raw.githubusercontent.com/pulumiverse/pulumi-cockroach/main/assets/logo.png",
+		Homepage:          "https://www.cockroachlabs.com/",
+		Repository:        "https://github.com/pulumiverse/pulumi-cockroach",
 		Version:           version.Version,
 		GitHubOrg:         "cockroachdb",
 		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
@@ -158,7 +158,7 @@ func Provider() tfbridge.ProviderInfo {
 			"cockroach_person_user":       {Tok: cockroachDataSource(cockroachMod, "getPersonUser")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "@lbrlabs/pulumi-cockroach",
+			PackageName: "@pulumiverse/cockroach",
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},
@@ -167,14 +167,14 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		Python: &tfbridge.PythonInfo{
-			PackageName: "lbrlabs_pulumi_cockroach",
+			PackageName: "pulumiverse_cockroach",
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/lbrlabs/pulumi-%[1]s/sdk/", cockroachPkg),
+				fmt.Sprintf("github.com/pulumiverse/pulumi-%[1]s/sdk/", cockroachPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				cockroachPkg,
@@ -182,7 +182,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
-			RootNamespace: "Lbrlabs.PulumiPackage",
+			RootNamespace: "Pulumiverse",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},

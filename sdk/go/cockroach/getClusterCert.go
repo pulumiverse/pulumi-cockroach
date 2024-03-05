@@ -7,8 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
 // TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/<cluster name>-ca.crt` on MacOS or Linux, or `$env:appdata\CockroachCloud\certs\<cluster name>-ca.crt` on Windows.

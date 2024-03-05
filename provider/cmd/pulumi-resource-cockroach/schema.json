@@ -1,18 +1,19 @@
 {
     "name": "cockroach",
     "displayName": "CockroachDB",
-    "description": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
+    "description": "A Pulumi package to create and managed Cockroach DB resources in Pulumi programs.",
     "keywords": [
         "pulumi",
-        "cockroach"
+        "cockroach",
+        "pulumiverse"
     ],
-    "homepage": "https://lbrlabs.com",
+    "homepage": "https://www.cockroachlabs.com/",
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`cockroach` Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach).",
-    "repository": "https://github.com/lbrlabs/pulumi-cockroach",
-    "logoUrl": "https://raw.githubusercontent.com/lbrlabs/pulumi-cockroach/main/assets/logo.png",
-    "pluginDownloadURL": "github://api.github.com/lbrlabs",
-    "publisher": "lbrlabs",
+    "repository": "https://github.com/pulumiverse/pulumi-cockroach",
+    "logoUrl": "https://raw.githubusercontent.com/pulumiverse/pulumi-cockroach/main/assets/logo.png",
+    "pluginDownloadURL": "github://api.github.com/pulumiverse",
+    "publisher": "pulumiverse",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
@@ -25,17 +26,17 @@
                 "cockroach": "Cockroach"
             },
             "compatibility": "tfbridge20",
-            "rootNamespace": "Lbrlabs.PulumiPackage"
+            "rootNamespace": "Pulumiverse"
         },
         "go": {
-            "importBasePath": "github.com/lbrlabs/pulumi-cockroach/sdk/go/cockroach",
+            "importBasePath": "github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach",
             "generateResourceContainerTypes": true,
             "generateExtraInputTypes": true
         },
         "nodejs": {
-            "packageName": "@lbrlabs/pulumi-cockroach",
-            "packageDescription": "A Pulumi package to create and managed cockroach db resources in Pulumi programs.",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
+            "packageName": "@pulumiverse/cockroach",
+            "packageDescription": "A Pulumi package to create and managed Cockroach DB resources in Pulumi programs.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/pulumiverse/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
             },
@@ -46,11 +47,11 @@
             "disableUnionOutputTypes": true
         },
         "python": {
-            "packageName": "lbrlabs_pulumi_cockroach",
+            "packageName": "pulumiverse_cockroach",
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             },
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/lbrlabs/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/pulumiverse/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
             "compatibility": "tfbridge20",
             "pyproject": {}
         }
