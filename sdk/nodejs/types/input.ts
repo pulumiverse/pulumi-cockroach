@@ -21,63 +21,171 @@ export interface ApiOidcConfigIdentityMap {
 }
 
 export interface ClusterDedicated {
+    /**
+     * Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+     */
     diskIops?: pulumi.Input<number>;
+    /**
+     * Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+     */
     machineType?: pulumi.Input<string>;
+    /**
+     * Memory per node in GiB.
+     */
     memoryGib?: pulumi.Input<number>;
+    /**
+     * Number of virtual CPUs per node in the cluster.
+     */
     numVirtualCpus?: pulumi.Input<number>;
+    /**
+     * Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+     */
     privateNetworkVisibility?: pulumi.Input<boolean>;
+    /**
+     * Storage amount per node in GiB.
+     */
     storageGib?: pulumi.Input<number>;
 }
 
 export interface ClusterRegion {
+    /**
+     * Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+     */
     internalDns?: pulumi.Input<string>;
+    /**
+     * Name of the region. Should match the region code used by the cluster's cloud provider.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Number of nodes in the region. Will always be 0 for serverless clusters.
+     */
     nodeCount?: pulumi.Input<number>;
+    /**
+     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+     */
     primary?: pulumi.Input<boolean>;
+    /**
+     * DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+     */
     sqlDns?: pulumi.Input<string>;
+    /**
+     * DNS name used when connecting to the DB Console for the cluster.
+     */
     uiDns?: pulumi.Input<string>;
 }
 
 export interface ClusterServerless {
+    /**
+     * Cluster identifier in a connection string.
+     */
     routingId?: pulumi.Input<string>;
+    /**
+     * Spend limit in US cents.
+     */
     spendLimit?: pulumi.Input<number>;
     usageLimits?: pulumi.Input<inputs.ClusterServerlessUsageLimits>;
 }
 
 export interface ClusterServerlessUsageLimits {
+    /**
+     * Maximum number of Request Units that the cluster can consume during the month.
+     */
     requestUnitLimit: pulumi.Input<number>;
+    /**
+     * Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+     */
     storageMibLimit: pulumi.Input<number>;
 }
 
 export interface CmekAdditionalRegion {
+    /**
+     * Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+     */
     internalDns?: pulumi.Input<string>;
+    /**
+     * Name of the region. Should match the region code used by the cluster's cloud provider.
+     */
     name: pulumi.Input<string>;
+    /**
+     * Number of nodes in the region. Will always be 0 for serverless clusters.
+     */
     nodeCount?: pulumi.Input<number>;
+    /**
+     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+     */
     primary?: pulumi.Input<boolean>;
+    /**
+     * DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+     */
     sqlDns?: pulumi.Input<string>;
+    /**
+     * DNS name used when connecting to the DB Console for the cluster.
+     */
     uiDns?: pulumi.Input<string>;
 }
 
 export interface CmekRegion {
     key: pulumi.Input<inputs.CmekRegionKey>;
+    /**
+     * Cloud provider region code.
+     */
     region: pulumi.Input<string>;
+    /**
+     * Describes the status of the current encryption key within the region.
+     */
     status?: pulumi.Input<string>;
 }
 
 export interface CmekRegionKey {
+    /**
+     * Principal to authenticate as in order to access the key.
+     */
     authPrincipal: pulumi.Input<string>;
+    /**
+     * Indicates when the key was created.
+     */
     createdAt?: pulumi.Input<string>;
+    /**
+     * Current status of this key.
+     */
     status?: pulumi.Input<string>;
+    /**
+     * Type of encryption key. Current allowed values are:
+     *   * AWS_KMS
+     *   * GCP_CLOUD_KMS
+     *   * NULL_KMS
+     */
     type: pulumi.Input<string>;
+    /**
+     * Indicates when the key was last updated.
+     */
     updatedAt?: pulumi.Input<string>;
+    /**
+     * Provider-specific URI pointing to the encryption key.
+     */
     uri: pulumi.Input<string>;
+    /**
+     * Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
+     */
     userMessage?: pulumi.Input<string>;
 }
 
 export interface LogExportConfigGroup {
+    /**
+     * A list of CockroachDB log channels to include in this group.
+     */
     channels: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The name of the group, reflected in the log sink.
+     */
     logName: pulumi.Input<string>;
+    /**
+     * The minimum log level to filter to this log group.
+     */
     minLevel?: pulumi.Input<string>;
+    /**
+     * Governs whether this log group should aggregate redacted logs if unset.
+     */
     redact?: pulumi.Input<boolean>;
 }
 
@@ -113,7 +221,30 @@ export interface PrivateEndpointServicesServiceAws {
 }
 
 export interface UserRoleGrantsRole {
+    /**
+     * ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+     */
     resourceId?: pulumi.Input<string>;
+    /**
+     * Type of resource. Allowed values are: 
+     *   * ORGANIZATION
+     *   * CLUSTER
+     *   * FOLDER
+     */
     resourceType: pulumi.Input<string>;
+    /**
+     * Name of the role to grant. Allowed values are:
+     *   * DEVELOPER
+     *   * ADMIN
+     *   * BILLING_COORDINATOR
+     *   * ORG_ADMIN
+     *   * ORG_MEMBER
+     *   * CLUSTER_ADMIN
+     *   * CLUSTER_OPERATOR_WRITER
+     *   * CLUSTER_DEVELOPER
+     *   * CLUSTER_CREATOR
+     *   * FOLDER_ADMIN
+     *   * FOLDER_MOVER
+     */
     roleName: pulumi.Input<string>;
 }

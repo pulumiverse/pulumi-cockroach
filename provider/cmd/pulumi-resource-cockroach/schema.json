@@ -99,22 +99,28 @@
         "cockroach:index/ClusterDedicated:ClusterDedicated": {
             "properties": {
                 "diskIops": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.\n"
                 },
                 "machineType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.\n"
                 },
                 "memoryGib": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Memory per node in GiB.\n"
                 },
                 "numVirtualCpus": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of virtual CPUs per node in the cluster.\n"
                 },
                 "privateNetworkVisibility": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.\n"
                 },
                 "storageGib": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Storage amount per node in GiB.\n"
                 }
             },
             "type": "object",
@@ -134,22 +140,28 @@
         "cockroach:index/ClusterRegion:ClusterRegion": {
             "properties": {
                 "internalDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the region. Should match the region code used by the cluster's cloud provider.\n"
                 },
                 "nodeCount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of nodes in the region. Will always be 0 for serverless clusters.\n"
                 },
                 "primary": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
                 },
                 "sqlDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.\n"
                 },
                 "uiDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "DNS name used when connecting to the DB Console for the cluster.\n"
                 }
             },
             "type": "object",
@@ -172,10 +184,12 @@
         "cockroach:index/ClusterServerless:ClusterServerless": {
             "properties": {
                 "routingId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cluster identifier in a connection string.\n"
                 },
                 "spendLimit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Spend limit in US cents.\n"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits"
@@ -193,10 +207,12 @@
         "cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits": {
             "properties": {
                 "requestUnitLimit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Maximum number of Request Units that the cluster can consume during the month.\n"
                 },
                 "storageMibLimit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Maximum amount of storage (in MiB) that the cluster can have at any time during the month.\n"
                 }
             },
             "type": "object",
@@ -208,22 +224,28 @@
         "cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion": {
             "properties": {
                 "internalDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the region. Should match the region code used by the cluster's cloud provider.\n"
                 },
                 "nodeCount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of nodes in the region. Will always be 0 for serverless clusters.\n"
                 },
                 "primary": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
                 },
                 "sqlDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.\n"
                 },
                 "uiDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "DNS name used when connecting to the DB Console for the cluster.\n"
                 }
             },
             "type": "object",
@@ -249,10 +271,12 @@
                     "$ref": "#/types/cockroach:index/CmekRegionKey:CmekRegionKey"
                 },
                 "region": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cloud provider region code.\n"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Describes the status of the current encryption key within the region.\n"
                 }
             },
             "type": "object",
@@ -273,25 +297,32 @@
         "cockroach:index/CmekRegionKey:CmekRegionKey": {
             "properties": {
                 "authPrincipal": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Principal to authenticate as in order to access the key.\n"
                 },
                 "createdAt": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Indicates when the key was created.\n"
                 },
                 "status": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Current status of this key.\n"
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of encryption key. Current allowed values are:\n  * AWS_KMS\n  * GCP_CLOUD_KMS\n  * NULL_KMS\n"
                 },
                 "updatedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Indicates when the key was last updated.\n"
                 },
                 "uri": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Provider-specific URI pointing to the encryption key.\n"
                 },
                 "userMessage": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.\n"
                 }
             },
             "type": "object",
@@ -320,16 +351,20 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
+                    "description": "A list of CockroachDB log channels to include in this group.\n"
                 },
                 "logName": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The name of the group, reflected in the log sink.\n"
                 },
                 "minLevel": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The minimum log level to filter to this log group.\n"
                 },
                 "redact": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Governs whether this log group should aggregate redacted logs if unset.\n"
                 }
             },
             "type": "object",
@@ -400,13 +435,16 @@
         "cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole": {
             "properties": {
                 "resourceId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "ID of the resource. Omit if resource_type is 'ORGANIZATION'.\n"
                 },
                 "resourceType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Type of resource. Allowed values are: \n  * ORGANIZATION\n  * CLUSTER\n  * FOLDER\n"
                 },
                 "roleName": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the role to grant. Allowed values are:\n  * DEVELOPER\n  * ADMIN\n  * BILLING_COORDINATOR\n  * ORG_ADMIN\n  * ORG_MEMBER\n  * CLUSTER_ADMIN\n  * CLUSTER_OPERATOR_WRITER\n  * CLUSTER_DEVELOPER\n  * CLUSTER_CREATOR\n  * FOLDER_ADMIN\n  * FOLDER_MOVER\n"
                 }
             },
             "type": "object",
@@ -418,22 +456,28 @@
         "cockroach:index/getCockroachClusterDedicated:getCockroachClusterDedicated": {
             "properties": {
                 "diskIops": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.\n"
                 },
                 "machineType": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.\n"
                 },
                 "memoryGib": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Memory per node in GiB.\n"
                 },
                 "numVirtualCpus": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of virtual CPUs per node in the cluster.\n"
                 },
                 "privateNetworkVisibility": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.\n"
                 },
                 "storageGib": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Storage amount per node in GiB.\n"
                 }
             },
             "type": "object",
@@ -454,22 +498,28 @@
         "cockroach:index/getCockroachClusterRegion:getCockroachClusterRegion": {
             "properties": {
                 "internalDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.\n"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Region code used by the cluster's cloud provider.\n"
                 },
                 "nodeCount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Number of nodes in the region. Will always be 0 for serverless clusters.\n"
                 },
                 "primary": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Denotes whether this is the primary region in a serverless cluster. Dedicated clusters don't have a primary region.\n"
                 },
                 "sqlDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.\n"
                 },
                 "uiDns": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "DNS name used when connecting to the DB Console for the cluster.\n"
                 }
             },
             "type": "object",
@@ -490,10 +540,12 @@
         "cockroach:index/getCockroachClusterServerless:getCockroachClusterServerless": {
             "properties": {
                 "routingId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Cluster identifier in a connection string.\n"
                 },
                 "spendLimit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Spend limit in US cents.\n"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits"
@@ -514,10 +566,12 @@
         "cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits": {
             "properties": {
                 "requestUnitLimit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Maximum number of Request Units that the cluster can consume during the month.\n"
                 },
                 "storageMibLimit": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Maximum amount of storage (in MiB) that the cluster can have at any time during the month.\n"
                 }
             },
             "type": "object",
@@ -534,20 +588,25 @@
         "cockroach:index/getConnectionStringConnectionParams:getConnectionStringConnectionParams": {
             "properties": {
                 "database": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Database value to use in a connection URL.\n"
                 },
                 "host": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Host value to use in a connection URL.\n"
                 },
                 "password": {
                     "type": "string",
+                    "description": "Password value to use in a connection URL.\n",
                     "secret": true
                 },
                 "port": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Port value to use in a connection URL.\n"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Username value to use in a connection URL.\n"
                 }
             },
             "type": "object",

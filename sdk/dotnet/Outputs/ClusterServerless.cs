@@ -14,7 +14,13 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class ClusterServerless
     {
+        /// <summary>
+        /// Cluster identifier in a connection string.
+        /// </summary>
         public readonly string? RoutingId;
+        /// <summary>
+        /// Spend limit in US cents.
+        /// </summary>
         public readonly int? SpendLimit;
         public readonly Outputs.ClusterServerlessUsageLimits? UsageLimits;
 

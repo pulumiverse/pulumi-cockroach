@@ -14,10 +14,25 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class GetConnectionStringConnectionParamsResult
     {
+        /// <summary>
+        /// Database value to use in a connection URL.
+        /// </summary>
         public readonly string Database;
+        /// <summary>
+        /// Host value to use in a connection URL.
+        /// </summary>
         public readonly string Host;
+        /// <summary>
+        /// Password value to use in a connection URL.
+        /// </summary>
         public readonly string Password;
+        /// <summary>
+        /// Port value to use in a connection URL.
+        /// </summary>
         public readonly string Port;
+        /// <summary>
+        /// Username value to use in a connection URL.
+        /// </summary>
         public readonly string Username;
 
         [OutputConstructor]

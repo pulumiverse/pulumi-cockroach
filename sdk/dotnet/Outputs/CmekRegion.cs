@@ -15,7 +15,13 @@ namespace Pulumiverse.Cockroach.Outputs
     public sealed class CmekRegion
     {
         public readonly Outputs.CmekRegionKey Key;
+        /// <summary>
+        /// Cloud provider region code.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// Describes the status of the current encryption key within the region.
+        /// </summary>
         public readonly string? Status;
 
         [OutputConstructor]

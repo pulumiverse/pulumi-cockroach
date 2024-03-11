@@ -14,9 +14,21 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class LogExportConfigGroup
     {
+        /// <summary>
+        /// A list of CockroachDB log channels to include in this group.
+        /// </summary>
         public readonly ImmutableArray<string> Channels;
+        /// <summary>
+        /// The name of the group, reflected in the log sink.
+        /// </summary>
         public readonly string LogName;
+        /// <summary>
+        /// The minimum log level to filter to this log group.
+        /// </summary>
         public readonly string? MinLevel;
+        /// <summary>
+        /// Governs whether this log group should aggregate redacted logs if unset.
+        /// </summary>
         public readonly bool? Redact;
 
         [OutputConstructor]

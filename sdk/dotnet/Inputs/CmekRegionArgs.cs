@@ -16,9 +16,15 @@ namespace Pulumiverse.Cockroach.Inputs
         [Input("key", required: true)]
         public Input<Inputs.CmekRegionKeyArgs> Key { get; set; } = null!;
 
+        /// <summary>
+        /// Cloud provider region code.
+        /// </summary>
         [Input("region", required: true)]
         public Input<string> Region { get; set; } = null!;
 
+        /// <summary>
+        /// Describes the status of the current encryption key within the region.
+        /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
 
