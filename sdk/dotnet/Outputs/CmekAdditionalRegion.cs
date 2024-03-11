@@ -14,11 +14,29 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class CmekAdditionalRegion
     {
+        /// <summary>
+        /// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        /// </summary>
         public readonly string? InternalDns;
+        /// <summary>
+        /// Name of the region. Should match the region code used by the cluster's cloud provider.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Number of nodes in the region. Will always be 0 for serverless clusters.
+        /// </summary>
         public readonly int? NodeCount;
+        /// <summary>
+        /// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        /// </summary>
         public readonly bool? Primary;
+        /// <summary>
+        /// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        /// </summary>
         public readonly string? SqlDns;
+        /// <summary>
+        /// DNS name used when connecting to the DB Console for the cluster.
+        /// </summary>
         public readonly string? UiDns;
 
         [OutputConstructor]

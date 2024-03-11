@@ -13,9 +13,15 @@ namespace Pulumiverse.Cockroach.Inputs
 
     public sealed class ClusterServerlessArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster identifier in a connection string.
+        /// </summary>
         [Input("routingId")]
         public Input<string>? RoutingId { get; set; }
 
+        /// <summary>
+        /// Spend limit in US cents.
+        /// </summary>
         [Input("spendLimit")]
         public Input<int>? SpendLimit { get; set; }
 

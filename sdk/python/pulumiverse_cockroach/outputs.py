@@ -128,6 +128,14 @@ class ClusterDedicated(dict):
                  num_virtual_cpus: Optional[int] = None,
                  private_network_visibility: Optional[bool] = None,
                  storage_gib: Optional[int] = None):
+        """
+        :param int disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        :param str machine_type: Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        :param float memory_gib: Memory per node in GiB.
+        :param int num_virtual_cpus: Number of virtual CPUs per node in the cluster.
+        :param bool private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+        :param int storage_gib: Storage amount per node in GiB.
+        """
         if disk_iops is not None:
             pulumi.set(__self__, "disk_iops", disk_iops)
         if machine_type is not None:
@@ -144,31 +152,49 @@ class ClusterDedicated(dict):
     @property
     @pulumi.getter(name="diskIops")
     def disk_iops(self) -> Optional[int]:
+        """
+        Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        """
         return pulumi.get(self, "disk_iops")
 
     @property
     @pulumi.getter(name="machineType")
     def machine_type(self) -> Optional[str]:
+        """
+        Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        """
         return pulumi.get(self, "machine_type")
 
     @property
     @pulumi.getter(name="memoryGib")
     def memory_gib(self) -> Optional[float]:
+        """
+        Memory per node in GiB.
+        """
         return pulumi.get(self, "memory_gib")
 
     @property
     @pulumi.getter(name="numVirtualCpus")
     def num_virtual_cpus(self) -> Optional[int]:
+        """
+        Number of virtual CPUs per node in the cluster.
+        """
         return pulumi.get(self, "num_virtual_cpus")
 
     @property
     @pulumi.getter(name="privateNetworkVisibility")
     def private_network_visibility(self) -> Optional[bool]:
+        """
+        Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+        """
         return pulumi.get(self, "private_network_visibility")
 
     @property
     @pulumi.getter(name="storageGib")
     def storage_gib(self) -> Optional[int]:
+        """
+        Storage amount per node in GiB.
+        """
         return pulumi.get(self, "storage_gib")
 
 
@@ -204,6 +230,14 @@ class ClusterRegion(dict):
                  primary: Optional[bool] = None,
                  sql_dns: Optional[str] = None,
                  ui_dns: Optional[str] = None):
+        """
+        :param str name: Name of the region. Should match the region code used by the cluster's cloud provider.
+        :param str internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        :param int node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
+        :param bool primary: Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        :param str sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        :param str ui_dns: DNS name used when connecting to the DB Console for the cluster.
+        """
         pulumi.set(__self__, "name", name)
         if internal_dns is not None:
             pulumi.set(__self__, "internal_dns", internal_dns)
@@ -219,31 +253,49 @@ class ClusterRegion(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the region. Should match the region code used by the cluster's cloud provider.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="internalDns")
     def internal_dns(self) -> Optional[str]:
+        """
+        Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        """
         return pulumi.get(self, "internal_dns")
 
     @property
     @pulumi.getter(name="nodeCount")
     def node_count(self) -> Optional[int]:
+        """
+        Number of nodes in the region. Will always be 0 for serverless clusters.
+        """
         return pulumi.get(self, "node_count")
 
     @property
     @pulumi.getter
     def primary(self) -> Optional[bool]:
+        """
+        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        """
         return pulumi.get(self, "primary")
 
     @property
     @pulumi.getter(name="sqlDns")
     def sql_dns(self) -> Optional[str]:
+        """
+        DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        """
         return pulumi.get(self, "sql_dns")
 
     @property
     @pulumi.getter(name="uiDns")
     def ui_dns(self) -> Optional[str]:
+        """
+        DNS name used when connecting to the DB Console for the cluster.
+        """
         return pulumi.get(self, "ui_dns")
 
 
@@ -274,6 +326,10 @@ class ClusterServerless(dict):
                  routing_id: Optional[str] = None,
                  spend_limit: Optional[int] = None,
                  usage_limits: Optional['outputs.ClusterServerlessUsageLimits'] = None):
+        """
+        :param str routing_id: Cluster identifier in a connection string.
+        :param int spend_limit: Spend limit in US cents.
+        """
         if routing_id is not None:
             pulumi.set(__self__, "routing_id", routing_id)
         if spend_limit is not None:
@@ -284,11 +340,17 @@ class ClusterServerless(dict):
     @property
     @pulumi.getter(name="routingId")
     def routing_id(self) -> Optional[str]:
+        """
+        Cluster identifier in a connection string.
+        """
         return pulumi.get(self, "routing_id")
 
     @property
     @pulumi.getter(name="spendLimit")
     def spend_limit(self) -> Optional[int]:
+        """
+        Spend limit in US cents.
+        """
         return pulumi.get(self, "spend_limit")
 
     @property
@@ -321,17 +383,27 @@ class ClusterServerlessUsageLimits(dict):
     def __init__(__self__, *,
                  request_unit_limit: int,
                  storage_mib_limit: int):
+        """
+        :param int request_unit_limit: Maximum number of Request Units that the cluster can consume during the month.
+        :param int storage_mib_limit: Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+        """
         pulumi.set(__self__, "request_unit_limit", request_unit_limit)
         pulumi.set(__self__, "storage_mib_limit", storage_mib_limit)
 
     @property
     @pulumi.getter(name="requestUnitLimit")
     def request_unit_limit(self) -> int:
+        """
+        Maximum number of Request Units that the cluster can consume during the month.
+        """
         return pulumi.get(self, "request_unit_limit")
 
     @property
     @pulumi.getter(name="storageMibLimit")
     def storage_mib_limit(self) -> int:
+        """
+        Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+        """
         return pulumi.get(self, "storage_mib_limit")
 
 
@@ -367,6 +439,14 @@ class CmekAdditionalRegion(dict):
                  primary: Optional[bool] = None,
                  sql_dns: Optional[str] = None,
                  ui_dns: Optional[str] = None):
+        """
+        :param str name: Name of the region. Should match the region code used by the cluster's cloud provider.
+        :param str internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        :param int node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
+        :param bool primary: Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        :param str sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        :param str ui_dns: DNS name used when connecting to the DB Console for the cluster.
+        """
         pulumi.set(__self__, "name", name)
         if internal_dns is not None:
             pulumi.set(__self__, "internal_dns", internal_dns)
@@ -382,31 +462,49 @@ class CmekAdditionalRegion(dict):
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Name of the region. Should match the region code used by the cluster's cloud provider.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="internalDns")
     def internal_dns(self) -> Optional[str]:
+        """
+        Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        """
         return pulumi.get(self, "internal_dns")
 
     @property
     @pulumi.getter(name="nodeCount")
     def node_count(self) -> Optional[int]:
+        """
+        Number of nodes in the region. Will always be 0 for serverless clusters.
+        """
         return pulumi.get(self, "node_count")
 
     @property
     @pulumi.getter
     def primary(self) -> Optional[bool]:
+        """
+        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        """
         return pulumi.get(self, "primary")
 
     @property
     @pulumi.getter(name="sqlDns")
     def sql_dns(self) -> Optional[str]:
+        """
+        DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        """
         return pulumi.get(self, "sql_dns")
 
     @property
     @pulumi.getter(name="uiDns")
     def ui_dns(self) -> Optional[str]:
+        """
+        DNS name used when connecting to the DB Console for the cluster.
+        """
         return pulumi.get(self, "ui_dns")
 
 
@@ -416,6 +514,10 @@ class CmekRegion(dict):
                  key: 'outputs.CmekRegionKey',
                  region: str,
                  status: Optional[str] = None):
+        """
+        :param str region: Cloud provider region code.
+        :param str status: Describes the status of the current encryption key within the region.
+        """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "region", region)
         if status is not None:
@@ -429,11 +531,17 @@ class CmekRegion(dict):
     @property
     @pulumi.getter
     def region(self) -> str:
+        """
+        Cloud provider region code.
+        """
         return pulumi.get(self, "region")
 
     @property
     @pulumi.getter
     def status(self) -> Optional[str]:
+        """
+        Describes the status of the current encryption key within the region.
+        """
         return pulumi.get(self, "status")
 
 
@@ -470,6 +578,18 @@ class CmekRegionKey(dict):
                  status: Optional[str] = None,
                  updated_at: Optional[str] = None,
                  user_message: Optional[str] = None):
+        """
+        :param str auth_principal: Principal to authenticate as in order to access the key.
+        :param str type: Type of encryption key. Current allowed values are:
+                 * AWS_KMS
+                 * GCP_CLOUD_KMS
+                 * NULL_KMS
+        :param str uri: Provider-specific URI pointing to the encryption key.
+        :param str created_at: Indicates when the key was created.
+        :param str status: Current status of this key.
+        :param str updated_at: Indicates when the key was last updated.
+        :param str user_message: Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
+        """
         pulumi.set(__self__, "auth_principal", auth_principal)
         pulumi.set(__self__, "type", type)
         pulumi.set(__self__, "uri", uri)
@@ -485,36 +605,60 @@ class CmekRegionKey(dict):
     @property
     @pulumi.getter(name="authPrincipal")
     def auth_principal(self) -> str:
+        """
+        Principal to authenticate as in order to access the key.
+        """
         return pulumi.get(self, "auth_principal")
 
     @property
     @pulumi.getter
     def type(self) -> str:
+        """
+        Type of encryption key. Current allowed values are:
+          * AWS_KMS
+          * GCP_CLOUD_KMS
+          * NULL_KMS
+        """
         return pulumi.get(self, "type")
 
     @property
     @pulumi.getter
     def uri(self) -> str:
+        """
+        Provider-specific URI pointing to the encryption key.
+        """
         return pulumi.get(self, "uri")
 
     @property
     @pulumi.getter(name="createdAt")
     def created_at(self) -> Optional[str]:
+        """
+        Indicates when the key was created.
+        """
         return pulumi.get(self, "created_at")
 
     @property
     @pulumi.getter
     def status(self) -> Optional[str]:
+        """
+        Current status of this key.
+        """
         return pulumi.get(self, "status")
 
     @property
     @pulumi.getter(name="updatedAt")
     def updated_at(self) -> Optional[str]:
+        """
+        Indicates when the key was last updated.
+        """
         return pulumi.get(self, "updated_at")
 
     @property
     @pulumi.getter(name="userMessage")
     def user_message(self) -> Optional[str]:
+        """
+        Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
+        """
         return pulumi.get(self, "user_message")
 
 
@@ -544,6 +688,12 @@ class LogExportConfigGroup(dict):
                  log_name: str,
                  min_level: Optional[str] = None,
                  redact: Optional[bool] = None):
+        """
+        :param Sequence[str] channels: A list of CockroachDB log channels to include in this group.
+        :param str log_name: The name of the group, reflected in the log sink.
+        :param str min_level: The minimum log level to filter to this log group.
+        :param bool redact: Governs whether this log group should aggregate redacted logs if unset.
+        """
         pulumi.set(__self__, "channels", channels)
         pulumi.set(__self__, "log_name", log_name)
         if min_level is not None:
@@ -554,21 +704,33 @@ class LogExportConfigGroup(dict):
     @property
     @pulumi.getter
     def channels(self) -> Sequence[str]:
+        """
+        A list of CockroachDB log channels to include in this group.
+        """
         return pulumi.get(self, "channels")
 
     @property
     @pulumi.getter(name="logName")
     def log_name(self) -> str:
+        """
+        The name of the group, reflected in the log sink.
+        """
         return pulumi.get(self, "log_name")
 
     @property
     @pulumi.getter(name="minLevel")
     def min_level(self) -> Optional[str]:
+        """
+        The minimum log level to filter to this log group.
+        """
         return pulumi.get(self, "min_level")
 
     @property
     @pulumi.getter
     def redact(self) -> Optional[bool]:
+        """
+        Governs whether this log group should aggregate redacted logs if unset.
+        """
         return pulumi.get(self, "redact")
 
 
@@ -733,6 +895,25 @@ class UserRoleGrantsRole(dict):
                  resource_type: str,
                  role_name: str,
                  resource_id: Optional[str] = None):
+        """
+        :param str resource_type: Type of resource. Allowed values are: 
+                 * ORGANIZATION
+                 * CLUSTER
+                 * FOLDER
+        :param str role_name: Name of the role to grant. Allowed values are:
+                 * DEVELOPER
+                 * ADMIN
+                 * BILLING_COORDINATOR
+                 * ORG_ADMIN
+                 * ORG_MEMBER
+                 * CLUSTER_ADMIN
+                 * CLUSTER_OPERATOR_WRITER
+                 * CLUSTER_DEVELOPER
+                 * CLUSTER_CREATOR
+                 * FOLDER_ADMIN
+                 * FOLDER_MOVER
+        :param str resource_id: ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        """
         pulumi.set(__self__, "resource_type", resource_type)
         pulumi.set(__self__, "role_name", role_name)
         if resource_id is not None:
@@ -741,16 +922,39 @@ class UserRoleGrantsRole(dict):
     @property
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> str:
+        """
+        Type of resource. Allowed values are: 
+          * ORGANIZATION
+          * CLUSTER
+          * FOLDER
+        """
         return pulumi.get(self, "resource_type")
 
     @property
     @pulumi.getter(name="roleName")
     def role_name(self) -> str:
+        """
+        Name of the role to grant. Allowed values are:
+          * DEVELOPER
+          * ADMIN
+          * BILLING_COORDINATOR
+          * ORG_ADMIN
+          * ORG_MEMBER
+          * CLUSTER_ADMIN
+          * CLUSTER_OPERATOR_WRITER
+          * CLUSTER_DEVELOPER
+          * CLUSTER_CREATOR
+          * FOLDER_ADMIN
+          * FOLDER_MOVER
+        """
         return pulumi.get(self, "role_name")
 
     @property
     @pulumi.getter(name="resourceId")
     def resource_id(self) -> Optional[str]:
+        """
+        ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        """
         return pulumi.get(self, "resource_id")
 
 
@@ -763,6 +967,14 @@ class GetCockroachClusterDedicatedResult(dict):
                  num_virtual_cpus: int,
                  private_network_visibility: bool,
                  storage_gib: int):
+        """
+        :param int disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        :param str machine_type: Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
+        :param float memory_gib: Memory per node in GiB.
+        :param int num_virtual_cpus: Number of virtual CPUs per node in the cluster.
+        :param bool private_network_visibility: Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
+        :param int storage_gib: Storage amount per node in GiB.
+        """
         pulumi.set(__self__, "disk_iops", disk_iops)
         pulumi.set(__self__, "machine_type", machine_type)
         pulumi.set(__self__, "memory_gib", memory_gib)
@@ -773,31 +985,49 @@ class GetCockroachClusterDedicatedResult(dict):
     @property
     @pulumi.getter(name="diskIops")
     def disk_iops(self) -> int:
+        """
+        Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        """
         return pulumi.get(self, "disk_iops")
 
     @property
     @pulumi.getter(name="machineType")
     def machine_type(self) -> str:
+        """
+        Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
+        """
         return pulumi.get(self, "machine_type")
 
     @property
     @pulumi.getter(name="memoryGib")
     def memory_gib(self) -> float:
+        """
+        Memory per node in GiB.
+        """
         return pulumi.get(self, "memory_gib")
 
     @property
     @pulumi.getter(name="numVirtualCpus")
     def num_virtual_cpus(self) -> int:
+        """
+        Number of virtual CPUs per node in the cluster.
+        """
         return pulumi.get(self, "num_virtual_cpus")
 
     @property
     @pulumi.getter(name="privateNetworkVisibility")
     def private_network_visibility(self) -> bool:
+        """
+        Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
+        """
         return pulumi.get(self, "private_network_visibility")
 
     @property
     @pulumi.getter(name="storageGib")
     def storage_gib(self) -> int:
+        """
+        Storage amount per node in GiB.
+        """
         return pulumi.get(self, "storage_gib")
 
 
@@ -810,6 +1040,14 @@ class GetCockroachClusterRegionResult(dict):
                  primary: bool,
                  sql_dns: str,
                  ui_dns: str):
+        """
+        :param str internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        :param str name: Region code used by the cluster's cloud provider.
+        :param int node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
+        :param bool primary: Denotes whether this is the primary region in a serverless cluster. Dedicated clusters don't have a primary region.
+        :param str sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        :param str ui_dns: DNS name used when connecting to the DB Console for the cluster.
+        """
         pulumi.set(__self__, "internal_dns", internal_dns)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "node_count", node_count)
@@ -820,31 +1058,49 @@ class GetCockroachClusterRegionResult(dict):
     @property
     @pulumi.getter(name="internalDns")
     def internal_dns(self) -> str:
+        """
+        Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        """
         return pulumi.get(self, "internal_dns")
 
     @property
     @pulumi.getter
     def name(self) -> str:
+        """
+        Region code used by the cluster's cloud provider.
+        """
         return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="nodeCount")
     def node_count(self) -> int:
+        """
+        Number of nodes in the region. Will always be 0 for serverless clusters.
+        """
         return pulumi.get(self, "node_count")
 
     @property
     @pulumi.getter
     def primary(self) -> bool:
+        """
+        Denotes whether this is the primary region in a serverless cluster. Dedicated clusters don't have a primary region.
+        """
         return pulumi.get(self, "primary")
 
     @property
     @pulumi.getter(name="sqlDns")
     def sql_dns(self) -> str:
+        """
+        DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        """
         return pulumi.get(self, "sql_dns")
 
     @property
     @pulumi.getter(name="uiDns")
     def ui_dns(self) -> str:
+        """
+        DNS name used when connecting to the DB Console for the cluster.
+        """
         return pulumi.get(self, "ui_dns")
 
 
@@ -854,6 +1110,10 @@ class GetCockroachClusterServerlessResult(dict):
                  routing_id: str,
                  spend_limit: int,
                  usage_limits: 'outputs.GetCockroachClusterServerlessUsageLimitsResult'):
+        """
+        :param str routing_id: Cluster identifier in a connection string.
+        :param int spend_limit: Spend limit in US cents.
+        """
         pulumi.set(__self__, "routing_id", routing_id)
         pulumi.set(__self__, "spend_limit", spend_limit)
         pulumi.set(__self__, "usage_limits", usage_limits)
@@ -861,11 +1121,17 @@ class GetCockroachClusterServerlessResult(dict):
     @property
     @pulumi.getter(name="routingId")
     def routing_id(self) -> str:
+        """
+        Cluster identifier in a connection string.
+        """
         return pulumi.get(self, "routing_id")
 
     @property
     @pulumi.getter(name="spendLimit")
     def spend_limit(self) -> int:
+        """
+        Spend limit in US cents.
+        """
         return pulumi.get(self, "spend_limit")
 
     @property
@@ -879,17 +1145,27 @@ class GetCockroachClusterServerlessUsageLimitsResult(dict):
     def __init__(__self__, *,
                  request_unit_limit: int,
                  storage_mib_limit: int):
+        """
+        :param int request_unit_limit: Maximum number of Request Units that the cluster can consume during the month.
+        :param int storage_mib_limit: Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+        """
         pulumi.set(__self__, "request_unit_limit", request_unit_limit)
         pulumi.set(__self__, "storage_mib_limit", storage_mib_limit)
 
     @property
     @pulumi.getter(name="requestUnitLimit")
     def request_unit_limit(self) -> int:
+        """
+        Maximum number of Request Units that the cluster can consume during the month.
+        """
         return pulumi.get(self, "request_unit_limit")
 
     @property
     @pulumi.getter(name="storageMibLimit")
     def storage_mib_limit(self) -> int:
+        """
+        Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+        """
         return pulumi.get(self, "storage_mib_limit")
 
 
@@ -901,6 +1177,13 @@ class GetConnectionStringConnectionParamsResult(dict):
                  password: str,
                  port: str,
                  username: str):
+        """
+        :param str database: Database value to use in a connection URL.
+        :param str host: Host value to use in a connection URL.
+        :param str password: Password value to use in a connection URL.
+        :param str port: Port value to use in a connection URL.
+        :param str username: Username value to use in a connection URL.
+        """
         pulumi.set(__self__, "database", database)
         pulumi.set(__self__, "host", host)
         pulumi.set(__self__, "password", password)
@@ -910,26 +1193,41 @@ class GetConnectionStringConnectionParamsResult(dict):
     @property
     @pulumi.getter
     def database(self) -> str:
+        """
+        Database value to use in a connection URL.
+        """
         return pulumi.get(self, "database")
 
     @property
     @pulumi.getter
     def host(self) -> str:
+        """
+        Host value to use in a connection URL.
+        """
         return pulumi.get(self, "host")
 
     @property
     @pulumi.getter
     def password(self) -> str:
+        """
+        Password value to use in a connection URL.
+        """
         return pulumi.get(self, "password")
 
     @property
     @pulumi.getter
     def port(self) -> str:
+        """
+        Port value to use in a connection URL.
+        """
         return pulumi.get(self, "port")
 
     @property
     @pulumi.getter
     def username(self) -> str:
+        """
+        Username value to use in a connection URL.
+        """
         return pulumi.get(self, "username")
 
 

@@ -14,7 +14,13 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class GetCockroachClusterServerlessUsageLimitsResult
     {
+        /// <summary>
+        /// Maximum number of Request Units that the cluster can consume during the month.
+        /// </summary>
         public readonly int RequestUnitLimit;
+        /// <summary>
+        /// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+        /// </summary>
         public readonly int StorageMibLimit;
 
         [OutputConstructor]

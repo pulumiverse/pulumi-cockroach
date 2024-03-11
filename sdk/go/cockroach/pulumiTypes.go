@@ -129,12 +129,18 @@ func (o ApiOidcConfigIdentityMapArrayOutput) Index(i pulumi.IntInput) ApiOidcCon
 }
 
 type ClusterDedicated struct {
-	DiskIops                 *int     `pulumi:"diskIops"`
-	MachineType              *string  `pulumi:"machineType"`
-	MemoryGib                *float64 `pulumi:"memoryGib"`
-	NumVirtualCpus           *int     `pulumi:"numVirtualCpus"`
-	PrivateNetworkVisibility *bool    `pulumi:"privateNetworkVisibility"`
-	StorageGib               *int     `pulumi:"storageGib"`
+	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+	DiskIops *int `pulumi:"diskIops"`
+	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+	MachineType *string `pulumi:"machineType"`
+	// Memory per node in GiB.
+	MemoryGib *float64 `pulumi:"memoryGib"`
+	// Number of virtual CPUs per node in the cluster.
+	NumVirtualCpus *int `pulumi:"numVirtualCpus"`
+	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+	PrivateNetworkVisibility *bool `pulumi:"privateNetworkVisibility"`
+	// Storage amount per node in GiB.
+	StorageGib *int `pulumi:"storageGib"`
 }
 
 // ClusterDedicatedInput is an input type that accepts ClusterDedicatedArgs and ClusterDedicatedOutput values.
@@ -149,12 +155,18 @@ type ClusterDedicatedInput interface {
 }
 
 type ClusterDedicatedArgs struct {
-	DiskIops                 pulumi.IntPtrInput     `pulumi:"diskIops"`
-	MachineType              pulumi.StringPtrInput  `pulumi:"machineType"`
-	MemoryGib                pulumi.Float64PtrInput `pulumi:"memoryGib"`
-	NumVirtualCpus           pulumi.IntPtrInput     `pulumi:"numVirtualCpus"`
-	PrivateNetworkVisibility pulumi.BoolPtrInput    `pulumi:"privateNetworkVisibility"`
-	StorageGib               pulumi.IntPtrInput     `pulumi:"storageGib"`
+	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+	DiskIops pulumi.IntPtrInput `pulumi:"diskIops"`
+	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+	MachineType pulumi.StringPtrInput `pulumi:"machineType"`
+	// Memory per node in GiB.
+	MemoryGib pulumi.Float64PtrInput `pulumi:"memoryGib"`
+	// Number of virtual CPUs per node in the cluster.
+	NumVirtualCpus pulumi.IntPtrInput `pulumi:"numVirtualCpus"`
+	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+	PrivateNetworkVisibility pulumi.BoolPtrInput `pulumi:"privateNetworkVisibility"`
+	// Storage amount per node in GiB.
+	StorageGib pulumi.IntPtrInput `pulumi:"storageGib"`
 }
 
 func (ClusterDedicatedArgs) ElementType() reflect.Type {
@@ -234,26 +246,32 @@ func (o ClusterDedicatedOutput) ToClusterDedicatedPtrOutputWithContext(ctx conte
 	}).(ClusterDedicatedPtrOutput)
 }
 
+// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 func (o ClusterDedicatedOutput) DiskIops() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.DiskIops }).(pulumi.IntPtrOutput)
 }
 
+// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
 func (o ClusterDedicatedOutput) MachineType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *string { return v.MachineType }).(pulumi.StringPtrOutput)
 }
 
+// Memory per node in GiB.
 func (o ClusterDedicatedOutput) MemoryGib() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *float64 { return v.MemoryGib }).(pulumi.Float64PtrOutput)
 }
 
+// Number of virtual CPUs per node in the cluster.
 func (o ClusterDedicatedOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.NumVirtualCpus }).(pulumi.IntPtrOutput)
 }
 
+// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
 func (o ClusterDedicatedOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *bool { return v.PrivateNetworkVisibility }).(pulumi.BoolPtrOutput)
 }
 
+// Storage amount per node in GiB.
 func (o ClusterDedicatedOutput) StorageGib() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.StorageGib }).(pulumi.IntPtrOutput)
 }
@@ -282,6 +300,7 @@ func (o ClusterDedicatedPtrOutput) Elem() ClusterDedicatedOutput {
 	}).(ClusterDedicatedOutput)
 }
 
+// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 func (o ClusterDedicatedPtrOutput) DiskIops() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *int {
 		if v == nil {
@@ -291,6 +310,7 @@ func (o ClusterDedicatedPtrOutput) DiskIops() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
 func (o ClusterDedicatedPtrOutput) MachineType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *string {
 		if v == nil {
@@ -300,6 +320,7 @@ func (o ClusterDedicatedPtrOutput) MachineType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Memory per node in GiB.
 func (o ClusterDedicatedPtrOutput) MemoryGib() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *float64 {
 		if v == nil {
@@ -309,6 +330,7 @@ func (o ClusterDedicatedPtrOutput) MemoryGib() pulumi.Float64PtrOutput {
 	}).(pulumi.Float64PtrOutput)
 }
 
+// Number of virtual CPUs per node in the cluster.
 func (o ClusterDedicatedPtrOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *int {
 		if v == nil {
@@ -318,6 +340,7 @@ func (o ClusterDedicatedPtrOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
 func (o ClusterDedicatedPtrOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *bool {
 		if v == nil {
@@ -327,6 +350,7 @@ func (o ClusterDedicatedPtrOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutp
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Storage amount per node in GiB.
 func (o ClusterDedicatedPtrOutput) StorageGib() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *int {
 		if v == nil {
@@ -337,12 +361,18 @@ func (o ClusterDedicatedPtrOutput) StorageGib() pulumi.IntPtrOutput {
 }
 
 type ClusterRegion struct {
+	// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 	InternalDns *string `pulumi:"internalDns"`
-	Name        string  `pulumi:"name"`
-	NodeCount   *int    `pulumi:"nodeCount"`
-	Primary     *bool   `pulumi:"primary"`
-	SqlDns      *string `pulumi:"sqlDns"`
-	UiDns       *string `pulumi:"uiDns"`
+	// Name of the region. Should match the region code used by the cluster's cloud provider.
+	Name string `pulumi:"name"`
+	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	NodeCount *int `pulumi:"nodeCount"`
+	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	Primary *bool `pulumi:"primary"`
+	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+	SqlDns *string `pulumi:"sqlDns"`
+	// DNS name used when connecting to the DB Console for the cluster.
+	UiDns *string `pulumi:"uiDns"`
 }
 
 // ClusterRegionInput is an input type that accepts ClusterRegionArgs and ClusterRegionOutput values.
@@ -357,12 +387,18 @@ type ClusterRegionInput interface {
 }
 
 type ClusterRegionArgs struct {
+	// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 	InternalDns pulumi.StringPtrInput `pulumi:"internalDns"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	NodeCount   pulumi.IntPtrInput    `pulumi:"nodeCount"`
-	Primary     pulumi.BoolPtrInput   `pulumi:"primary"`
-	SqlDns      pulumi.StringPtrInput `pulumi:"sqlDns"`
-	UiDns       pulumi.StringPtrInput `pulumi:"uiDns"`
+	// Name of the region. Should match the region code used by the cluster's cloud provider.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
+	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	Primary pulumi.BoolPtrInput `pulumi:"primary"`
+	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+	SqlDns pulumi.StringPtrInput `pulumi:"sqlDns"`
+	// DNS name used when connecting to the DB Console for the cluster.
+	UiDns pulumi.StringPtrInput `pulumi:"uiDns"`
 }
 
 func (ClusterRegionArgs) ElementType() reflect.Type {
@@ -416,26 +452,32 @@ func (o ClusterRegionOutput) ToClusterRegionOutputWithContext(ctx context.Contex
 	return o
 }
 
+// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 func (o ClusterRegionOutput) InternalDns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *string { return v.InternalDns }).(pulumi.StringPtrOutput)
 }
 
+// Name of the region. Should match the region code used by the cluster's cloud provider.
 func (o ClusterRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterRegion) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Number of nodes in the region. Will always be 0 for serverless clusters.
 func (o ClusterRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
 
+// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 func (o ClusterRegionOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }
 
+// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 func (o ClusterRegionOutput) SqlDns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *string { return v.SqlDns }).(pulumi.StringPtrOutput)
 }
 
+// DNS name used when connecting to the DB Console for the cluster.
 func (o ClusterRegionOutput) UiDns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *string { return v.UiDns }).(pulumi.StringPtrOutput)
 }
@@ -461,7 +503,9 @@ func (o ClusterRegionArrayOutput) Index(i pulumi.IntInput) ClusterRegionOutput {
 }
 
 type ClusterServerless struct {
-	RoutingId   *string                       `pulumi:"routingId"`
+	// Cluster identifier in a connection string.
+	RoutingId *string `pulumi:"routingId"`
+	// Spend limit in US cents.
 	SpendLimit  *int                          `pulumi:"spendLimit"`
 	UsageLimits *ClusterServerlessUsageLimits `pulumi:"usageLimits"`
 }
@@ -478,7 +522,9 @@ type ClusterServerlessInput interface {
 }
 
 type ClusterServerlessArgs struct {
-	RoutingId   pulumi.StringPtrInput                `pulumi:"routingId"`
+	// Cluster identifier in a connection string.
+	RoutingId pulumi.StringPtrInput `pulumi:"routingId"`
+	// Spend limit in US cents.
 	SpendLimit  pulumi.IntPtrInput                   `pulumi:"spendLimit"`
 	UsageLimits ClusterServerlessUsageLimitsPtrInput `pulumi:"usageLimits"`
 }
@@ -560,10 +606,12 @@ func (o ClusterServerlessOutput) ToClusterServerlessPtrOutputWithContext(ctx con
 	}).(ClusterServerlessPtrOutput)
 }
 
+// Cluster identifier in a connection string.
 func (o ClusterServerlessOutput) RoutingId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterServerless) *string { return v.RoutingId }).(pulumi.StringPtrOutput)
 }
 
+// Spend limit in US cents.
 func (o ClusterServerlessOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterServerless) *int { return v.SpendLimit }).(pulumi.IntPtrOutput)
 }
@@ -596,6 +644,7 @@ func (o ClusterServerlessPtrOutput) Elem() ClusterServerlessOutput {
 	}).(ClusterServerlessOutput)
 }
 
+// Cluster identifier in a connection string.
 func (o ClusterServerlessPtrOutput) RoutingId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterServerless) *string {
 		if v == nil {
@@ -605,6 +654,7 @@ func (o ClusterServerlessPtrOutput) RoutingId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Spend limit in US cents.
 func (o ClusterServerlessPtrOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterServerless) *int {
 		if v == nil {
@@ -624,8 +674,10 @@ func (o ClusterServerlessPtrOutput) UsageLimits() ClusterServerlessUsageLimitsPt
 }
 
 type ClusterServerlessUsageLimits struct {
+	// Maximum number of Request Units that the cluster can consume during the month.
 	RequestUnitLimit int `pulumi:"requestUnitLimit"`
-	StorageMibLimit  int `pulumi:"storageMibLimit"`
+	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+	StorageMibLimit int `pulumi:"storageMibLimit"`
 }
 
 // ClusterServerlessUsageLimitsInput is an input type that accepts ClusterServerlessUsageLimitsArgs and ClusterServerlessUsageLimitsOutput values.
@@ -640,8 +692,10 @@ type ClusterServerlessUsageLimitsInput interface {
 }
 
 type ClusterServerlessUsageLimitsArgs struct {
+	// Maximum number of Request Units that the cluster can consume during the month.
 	RequestUnitLimit pulumi.IntInput `pulumi:"requestUnitLimit"`
-	StorageMibLimit  pulumi.IntInput `pulumi:"storageMibLimit"`
+	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+	StorageMibLimit pulumi.IntInput `pulumi:"storageMibLimit"`
 }
 
 func (ClusterServerlessUsageLimitsArgs) ElementType() reflect.Type {
@@ -721,10 +775,12 @@ func (o ClusterServerlessUsageLimitsOutput) ToClusterServerlessUsageLimitsPtrOut
 	}).(ClusterServerlessUsageLimitsPtrOutput)
 }
 
+// Maximum number of Request Units that the cluster can consume during the month.
 func (o ClusterServerlessUsageLimitsOutput) RequestUnitLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v ClusterServerlessUsageLimits) int { return v.RequestUnitLimit }).(pulumi.IntOutput)
 }
 
+// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
 func (o ClusterServerlessUsageLimitsOutput) StorageMibLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v ClusterServerlessUsageLimits) int { return v.StorageMibLimit }).(pulumi.IntOutput)
 }
@@ -753,6 +809,7 @@ func (o ClusterServerlessUsageLimitsPtrOutput) Elem() ClusterServerlessUsageLimi
 	}).(ClusterServerlessUsageLimitsOutput)
 }
 
+// Maximum number of Request Units that the cluster can consume during the month.
 func (o ClusterServerlessUsageLimitsPtrOutput) RequestUnitLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterServerlessUsageLimits) *int {
 		if v == nil {
@@ -762,6 +819,7 @@ func (o ClusterServerlessUsageLimitsPtrOutput) RequestUnitLimit() pulumi.IntPtrO
 	}).(pulumi.IntPtrOutput)
 }
 
+// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
 func (o ClusterServerlessUsageLimitsPtrOutput) StorageMibLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterServerlessUsageLimits) *int {
 		if v == nil {
@@ -772,12 +830,18 @@ func (o ClusterServerlessUsageLimitsPtrOutput) StorageMibLimit() pulumi.IntPtrOu
 }
 
 type CmekAdditionalRegion struct {
+	// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 	InternalDns *string `pulumi:"internalDns"`
-	Name        string  `pulumi:"name"`
-	NodeCount   *int    `pulumi:"nodeCount"`
-	Primary     *bool   `pulumi:"primary"`
-	SqlDns      *string `pulumi:"sqlDns"`
-	UiDns       *string `pulumi:"uiDns"`
+	// Name of the region. Should match the region code used by the cluster's cloud provider.
+	Name string `pulumi:"name"`
+	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	NodeCount *int `pulumi:"nodeCount"`
+	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	Primary *bool `pulumi:"primary"`
+	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+	SqlDns *string `pulumi:"sqlDns"`
+	// DNS name used when connecting to the DB Console for the cluster.
+	UiDns *string `pulumi:"uiDns"`
 }
 
 // CmekAdditionalRegionInput is an input type that accepts CmekAdditionalRegionArgs and CmekAdditionalRegionOutput values.
@@ -792,12 +856,18 @@ type CmekAdditionalRegionInput interface {
 }
 
 type CmekAdditionalRegionArgs struct {
+	// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 	InternalDns pulumi.StringPtrInput `pulumi:"internalDns"`
-	Name        pulumi.StringInput    `pulumi:"name"`
-	NodeCount   pulumi.IntPtrInput    `pulumi:"nodeCount"`
-	Primary     pulumi.BoolPtrInput   `pulumi:"primary"`
-	SqlDns      pulumi.StringPtrInput `pulumi:"sqlDns"`
-	UiDns       pulumi.StringPtrInput `pulumi:"uiDns"`
+	// Name of the region. Should match the region code used by the cluster's cloud provider.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
+	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	Primary pulumi.BoolPtrInput `pulumi:"primary"`
+	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+	SqlDns pulumi.StringPtrInput `pulumi:"sqlDns"`
+	// DNS name used when connecting to the DB Console for the cluster.
+	UiDns pulumi.StringPtrInput `pulumi:"uiDns"`
 }
 
 func (CmekAdditionalRegionArgs) ElementType() reflect.Type {
@@ -851,26 +921,32 @@ func (o CmekAdditionalRegionOutput) ToCmekAdditionalRegionOutputWithContext(ctx 
 	return o
 }
 
+// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 func (o CmekAdditionalRegionOutput) InternalDns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *string { return v.InternalDns }).(pulumi.StringPtrOutput)
 }
 
+// Name of the region. Should match the region code used by the cluster's cloud provider.
 func (o CmekAdditionalRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Number of nodes in the region. Will always be 0 for serverless clusters.
 func (o CmekAdditionalRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
 
+// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 func (o CmekAdditionalRegionOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }
 
+// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 func (o CmekAdditionalRegionOutput) SqlDns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *string { return v.SqlDns }).(pulumi.StringPtrOutput)
 }
 
+// DNS name used when connecting to the DB Console for the cluster.
 func (o CmekAdditionalRegionOutput) UiDns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *string { return v.UiDns }).(pulumi.StringPtrOutput)
 }
@@ -896,9 +972,11 @@ func (o CmekAdditionalRegionArrayOutput) Index(i pulumi.IntInput) CmekAdditional
 }
 
 type CmekRegion struct {
-	Key    CmekRegionKey `pulumi:"key"`
-	Region string        `pulumi:"region"`
-	Status *string       `pulumi:"status"`
+	Key CmekRegionKey `pulumi:"key"`
+	// Cloud provider region code.
+	Region string `pulumi:"region"`
+	// Describes the status of the current encryption key within the region.
+	Status *string `pulumi:"status"`
 }
 
 // CmekRegionInput is an input type that accepts CmekRegionArgs and CmekRegionOutput values.
@@ -913,8 +991,10 @@ type CmekRegionInput interface {
 }
 
 type CmekRegionArgs struct {
-	Key    CmekRegionKeyInput    `pulumi:"key"`
-	Region pulumi.StringInput    `pulumi:"region"`
+	Key CmekRegionKeyInput `pulumi:"key"`
+	// Cloud provider region code.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Describes the status of the current encryption key within the region.
 	Status pulumi.StringPtrInput `pulumi:"status"`
 }
 
@@ -973,10 +1053,12 @@ func (o CmekRegionOutput) Key() CmekRegionKeyOutput {
 	return o.ApplyT(func(v CmekRegion) CmekRegionKey { return v.Key }).(CmekRegionKeyOutput)
 }
 
+// Cloud provider region code.
 func (o CmekRegionOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekRegion) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// Describes the status of the current encryption key within the region.
 func (o CmekRegionOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegion) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
@@ -1002,13 +1084,23 @@ func (o CmekRegionArrayOutput) Index(i pulumi.IntInput) CmekRegionOutput {
 }
 
 type CmekRegionKey struct {
-	AuthPrincipal string  `pulumi:"authPrincipal"`
-	CreatedAt     *string `pulumi:"createdAt"`
-	Status        *string `pulumi:"status"`
-	Type          string  `pulumi:"type"`
-	UpdatedAt     *string `pulumi:"updatedAt"`
-	Uri           string  `pulumi:"uri"`
-	UserMessage   *string `pulumi:"userMessage"`
+	// Principal to authenticate as in order to access the key.
+	AuthPrincipal string `pulumi:"authPrincipal"`
+	// Indicates when the key was created.
+	CreatedAt *string `pulumi:"createdAt"`
+	// Current status of this key.
+	Status *string `pulumi:"status"`
+	// Type of encryption key. Current allowed values are:
+	//   * AWS_KMS
+	//   * GCP_CLOUD_KMS
+	//   * NULL_KMS
+	Type string `pulumi:"type"`
+	// Indicates when the key was last updated.
+	UpdatedAt *string `pulumi:"updatedAt"`
+	// Provider-specific URI pointing to the encryption key.
+	Uri string `pulumi:"uri"`
+	// Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
+	UserMessage *string `pulumi:"userMessage"`
 }
 
 // CmekRegionKeyInput is an input type that accepts CmekRegionKeyArgs and CmekRegionKeyOutput values.
@@ -1023,13 +1115,23 @@ type CmekRegionKeyInput interface {
 }
 
 type CmekRegionKeyArgs struct {
-	AuthPrincipal pulumi.StringInput    `pulumi:"authPrincipal"`
-	CreatedAt     pulumi.StringPtrInput `pulumi:"createdAt"`
-	Status        pulumi.StringPtrInput `pulumi:"status"`
-	Type          pulumi.StringInput    `pulumi:"type"`
-	UpdatedAt     pulumi.StringPtrInput `pulumi:"updatedAt"`
-	Uri           pulumi.StringInput    `pulumi:"uri"`
-	UserMessage   pulumi.StringPtrInput `pulumi:"userMessage"`
+	// Principal to authenticate as in order to access the key.
+	AuthPrincipal pulumi.StringInput `pulumi:"authPrincipal"`
+	// Indicates when the key was created.
+	CreatedAt pulumi.StringPtrInput `pulumi:"createdAt"`
+	// Current status of this key.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+	// Type of encryption key. Current allowed values are:
+	//   * AWS_KMS
+	//   * GCP_CLOUD_KMS
+	//   * NULL_KMS
+	Type pulumi.StringInput `pulumi:"type"`
+	// Indicates when the key was last updated.
+	UpdatedAt pulumi.StringPtrInput `pulumi:"updatedAt"`
+	// Provider-specific URI pointing to the encryption key.
+	Uri pulumi.StringInput `pulumi:"uri"`
+	// Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
+	UserMessage pulumi.StringPtrInput `pulumi:"userMessage"`
 }
 
 func (CmekRegionKeyArgs) ElementType() reflect.Type {
@@ -1058,39 +1160,53 @@ func (o CmekRegionKeyOutput) ToCmekRegionKeyOutputWithContext(ctx context.Contex
 	return o
 }
 
+// Principal to authenticate as in order to access the key.
 func (o CmekRegionKeyOutput) AuthPrincipal() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekRegionKey) string { return v.AuthPrincipal }).(pulumi.StringOutput)
 }
 
+// Indicates when the key was created.
 func (o CmekRegionKeyOutput) CreatedAt() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.CreatedAt }).(pulumi.StringPtrOutput)
 }
 
+// Current status of this key.
 func (o CmekRegionKeyOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
+// Type of encryption key. Current allowed values are:
+//   - AWS_KMS
+//   - GCP_CLOUD_KMS
+//   - NULL_KMS
 func (o CmekRegionKeyOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekRegionKey) string { return v.Type }).(pulumi.StringOutput)
 }
 
+// Indicates when the key was last updated.
 func (o CmekRegionKeyOutput) UpdatedAt() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.UpdatedAt }).(pulumi.StringPtrOutput)
 }
 
+// Provider-specific URI pointing to the encryption key.
 func (o CmekRegionKeyOutput) Uri() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekRegionKey) string { return v.Uri }).(pulumi.StringOutput)
 }
 
+// Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
 func (o CmekRegionKeyOutput) UserMessage() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.UserMessage }).(pulumi.StringPtrOutput)
 }
 
 type LogExportConfigGroup struct {
+	// A list of CockroachDB log channels to include in this group.
 	Channels []string `pulumi:"channels"`
-	LogName  string   `pulumi:"logName"`
-	MinLevel *string  `pulumi:"minLevel"`
-	Redact   *bool    `pulumi:"redact"`
+	// The name of the group, reflected in the log sink.
+	LogName string `pulumi:"logName"`
+	// The minimum log level to filter to this log group.
+	MinLevel *string `pulumi:"minLevel"`
+	// Governs whether this log group should aggregate redacted logs if unset.
+	Redact *bool `pulumi:"redact"`
 }
 
 // LogExportConfigGroupInput is an input type that accepts LogExportConfigGroupArgs and LogExportConfigGroupOutput values.
@@ -1105,10 +1221,14 @@ type LogExportConfigGroupInput interface {
 }
 
 type LogExportConfigGroupArgs struct {
+	// A list of CockroachDB log channels to include in this group.
 	Channels pulumi.StringArrayInput `pulumi:"channels"`
-	LogName  pulumi.StringInput      `pulumi:"logName"`
-	MinLevel pulumi.StringPtrInput   `pulumi:"minLevel"`
-	Redact   pulumi.BoolPtrInput     `pulumi:"redact"`
+	// The name of the group, reflected in the log sink.
+	LogName pulumi.StringInput `pulumi:"logName"`
+	// The minimum log level to filter to this log group.
+	MinLevel pulumi.StringPtrInput `pulumi:"minLevel"`
+	// Governs whether this log group should aggregate redacted logs if unset.
+	Redact pulumi.BoolPtrInput `pulumi:"redact"`
 }
 
 func (LogExportConfigGroupArgs) ElementType() reflect.Type {
@@ -1162,18 +1282,22 @@ func (o LogExportConfigGroupOutput) ToLogExportConfigGroupOutputWithContext(ctx 
 	return o
 }
 
+// A list of CockroachDB log channels to include in this group.
 func (o LogExportConfigGroupOutput) Channels() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) []string { return v.Channels }).(pulumi.StringArrayOutput)
 }
 
+// The name of the group, reflected in the log sink.
 func (o LogExportConfigGroupOutput) LogName() pulumi.StringOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) string { return v.LogName }).(pulumi.StringOutput)
 }
 
+// The minimum log level to filter to this log group.
 func (o LogExportConfigGroupOutput) MinLevel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) *string { return v.MinLevel }).(pulumi.StringPtrOutput)
 }
 
+// Governs whether this log group should aggregate redacted logs if unset.
 func (o LogExportConfigGroupOutput) Redact() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v LogExportConfigGroup) *bool { return v.Redact }).(pulumi.BoolPtrOutput)
 }
@@ -1495,9 +1619,26 @@ func (o PrivateEndpointServicesServiceAwsPtrOutput) ServiceName() pulumi.StringP
 }
 
 type UserRoleGrantsRole struct {
-	ResourceId   *string `pulumi:"resourceId"`
-	ResourceType string  `pulumi:"resourceType"`
-	RoleName     string  `pulumi:"roleName"`
+	// ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+	ResourceId *string `pulumi:"resourceId"`
+	// Type of resource. Allowed values are:
+	//   * ORGANIZATION
+	//   * CLUSTER
+	//   * FOLDER
+	ResourceType string `pulumi:"resourceType"`
+	// Name of the role to grant. Allowed values are:
+	//   * DEVELOPER
+	//   * ADMIN
+	//   * BILLING_COORDINATOR
+	//   * ORG_ADMIN
+	//   * ORG_MEMBER
+	//   * CLUSTER_ADMIN
+	//   * CLUSTER_OPERATOR_WRITER
+	//   * CLUSTER_DEVELOPER
+	//   * CLUSTER_CREATOR
+	//   * FOLDER_ADMIN
+	//   * FOLDER_MOVER
+	RoleName string `pulumi:"roleName"`
 }
 
 // UserRoleGrantsRoleInput is an input type that accepts UserRoleGrantsRoleArgs and UserRoleGrantsRoleOutput values.
@@ -1512,9 +1653,26 @@ type UserRoleGrantsRoleInput interface {
 }
 
 type UserRoleGrantsRoleArgs struct {
-	ResourceId   pulumi.StringPtrInput `pulumi:"resourceId"`
-	ResourceType pulumi.StringInput    `pulumi:"resourceType"`
-	RoleName     pulumi.StringInput    `pulumi:"roleName"`
+	// ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Type of resource. Allowed values are:
+	//   * ORGANIZATION
+	//   * CLUSTER
+	//   * FOLDER
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Name of the role to grant. Allowed values are:
+	//   * DEVELOPER
+	//   * ADMIN
+	//   * BILLING_COORDINATOR
+	//   * ORG_ADMIN
+	//   * ORG_MEMBER
+	//   * CLUSTER_ADMIN
+	//   * CLUSTER_OPERATOR_WRITER
+	//   * CLUSTER_DEVELOPER
+	//   * CLUSTER_CREATOR
+	//   * FOLDER_ADMIN
+	//   * FOLDER_MOVER
+	RoleName pulumi.StringInput `pulumi:"roleName"`
 }
 
 func (UserRoleGrantsRoleArgs) ElementType() reflect.Type {
@@ -1568,14 +1726,31 @@ func (o UserRoleGrantsRoleOutput) ToUserRoleGrantsRoleOutputWithContext(ctx cont
 	return o
 }
 
+// ID of the resource. Omit if resourceType is 'ORGANIZATION'.
 func (o UserRoleGrantsRoleOutput) ResourceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UserRoleGrantsRole) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
 }
 
+// Type of resource. Allowed values are:
+//   - ORGANIZATION
+//   - CLUSTER
+//   - FOLDER
 func (o UserRoleGrantsRoleOutput) ResourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v UserRoleGrantsRole) string { return v.ResourceType }).(pulumi.StringOutput)
 }
 
+// Name of the role to grant. Allowed values are:
+//   - DEVELOPER
+//   - ADMIN
+//   - BILLING_COORDINATOR
+//   - ORG_ADMIN
+//   - ORG_MEMBER
+//   - CLUSTER_ADMIN
+//   - CLUSTER_OPERATOR_WRITER
+//   - CLUSTER_DEVELOPER
+//   - CLUSTER_CREATOR
+//   - FOLDER_ADMIN
+//   - FOLDER_MOVER
 func (o UserRoleGrantsRoleOutput) RoleName() pulumi.StringOutput {
 	return o.ApplyT(func(v UserRoleGrantsRole) string { return v.RoleName }).(pulumi.StringOutput)
 }
@@ -1601,12 +1776,18 @@ func (o UserRoleGrantsRoleArrayOutput) Index(i pulumi.IntInput) UserRoleGrantsRo
 }
 
 type GetCockroachClusterDedicated struct {
-	DiskIops                 int     `pulumi:"diskIops"`
-	MachineType              string  `pulumi:"machineType"`
-	MemoryGib                float64 `pulumi:"memoryGib"`
-	NumVirtualCpus           int     `pulumi:"numVirtualCpus"`
-	PrivateNetworkVisibility bool    `pulumi:"privateNetworkVisibility"`
-	StorageGib               int     `pulumi:"storageGib"`
+	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+	DiskIops int `pulumi:"diskIops"`
+	// Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
+	MachineType string `pulumi:"machineType"`
+	// Memory per node in GiB.
+	MemoryGib float64 `pulumi:"memoryGib"`
+	// Number of virtual CPUs per node in the cluster.
+	NumVirtualCpus int `pulumi:"numVirtualCpus"`
+	// Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
+	PrivateNetworkVisibility bool `pulumi:"privateNetworkVisibility"`
+	// Storage amount per node in GiB.
+	StorageGib int `pulumi:"storageGib"`
 }
 
 // GetCockroachClusterDedicatedInput is an input type that accepts GetCockroachClusterDedicatedArgs and GetCockroachClusterDedicatedOutput values.
@@ -1621,12 +1802,18 @@ type GetCockroachClusterDedicatedInput interface {
 }
 
 type GetCockroachClusterDedicatedArgs struct {
-	DiskIops                 pulumi.IntInput     `pulumi:"diskIops"`
-	MachineType              pulumi.StringInput  `pulumi:"machineType"`
-	MemoryGib                pulumi.Float64Input `pulumi:"memoryGib"`
-	NumVirtualCpus           pulumi.IntInput     `pulumi:"numVirtualCpus"`
-	PrivateNetworkVisibility pulumi.BoolInput    `pulumi:"privateNetworkVisibility"`
-	StorageGib               pulumi.IntInput     `pulumi:"storageGib"`
+	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+	DiskIops pulumi.IntInput `pulumi:"diskIops"`
+	// Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
+	MachineType pulumi.StringInput `pulumi:"machineType"`
+	// Memory per node in GiB.
+	MemoryGib pulumi.Float64Input `pulumi:"memoryGib"`
+	// Number of virtual CPUs per node in the cluster.
+	NumVirtualCpus pulumi.IntInput `pulumi:"numVirtualCpus"`
+	// Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
+	PrivateNetworkVisibility pulumi.BoolInput `pulumi:"privateNetworkVisibility"`
+	// Storage amount per node in GiB.
+	StorageGib pulumi.IntInput `pulumi:"storageGib"`
 }
 
 func (GetCockroachClusterDedicatedArgs) ElementType() reflect.Type {
@@ -1655,37 +1842,49 @@ func (o GetCockroachClusterDedicatedOutput) ToGetCockroachClusterDedicatedOutput
 	return o
 }
 
+// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 func (o GetCockroachClusterDedicatedOutput) DiskIops() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterDedicated) int { return v.DiskIops }).(pulumi.IntOutput)
 }
 
+// Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
 func (o GetCockroachClusterDedicatedOutput) MachineType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterDedicated) string { return v.MachineType }).(pulumi.StringOutput)
 }
 
+// Memory per node in GiB.
 func (o GetCockroachClusterDedicatedOutput) MemoryGib() pulumi.Float64Output {
 	return o.ApplyT(func(v GetCockroachClusterDedicated) float64 { return v.MemoryGib }).(pulumi.Float64Output)
 }
 
+// Number of virtual CPUs per node in the cluster.
 func (o GetCockroachClusterDedicatedOutput) NumVirtualCpus() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterDedicated) int { return v.NumVirtualCpus }).(pulumi.IntOutput)
 }
 
+// Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
 func (o GetCockroachClusterDedicatedOutput) PrivateNetworkVisibility() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetCockroachClusterDedicated) bool { return v.PrivateNetworkVisibility }).(pulumi.BoolOutput)
 }
 
+// Storage amount per node in GiB.
 func (o GetCockroachClusterDedicatedOutput) StorageGib() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterDedicated) int { return v.StorageGib }).(pulumi.IntOutput)
 }
 
 type GetCockroachClusterRegion struct {
+	// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 	InternalDns string `pulumi:"internalDns"`
-	Name        string `pulumi:"name"`
-	NodeCount   int    `pulumi:"nodeCount"`
-	Primary     bool   `pulumi:"primary"`
-	SqlDns      string `pulumi:"sqlDns"`
-	UiDns       string `pulumi:"uiDns"`
+	// Region code used by the cluster's cloud provider.
+	Name string `pulumi:"name"`
+	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	NodeCount int `pulumi:"nodeCount"`
+	// Denotes whether this is the primary region in a serverless cluster. Dedicated clusters don't have a primary region.
+	Primary bool `pulumi:"primary"`
+	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+	SqlDns string `pulumi:"sqlDns"`
+	// DNS name used when connecting to the DB Console for the cluster.
+	UiDns string `pulumi:"uiDns"`
 }
 
 // GetCockroachClusterRegionInput is an input type that accepts GetCockroachClusterRegionArgs and GetCockroachClusterRegionOutput values.
@@ -1700,12 +1899,18 @@ type GetCockroachClusterRegionInput interface {
 }
 
 type GetCockroachClusterRegionArgs struct {
+	// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 	InternalDns pulumi.StringInput `pulumi:"internalDns"`
-	Name        pulumi.StringInput `pulumi:"name"`
-	NodeCount   pulumi.IntInput    `pulumi:"nodeCount"`
-	Primary     pulumi.BoolInput   `pulumi:"primary"`
-	SqlDns      pulumi.StringInput `pulumi:"sqlDns"`
-	UiDns       pulumi.StringInput `pulumi:"uiDns"`
+	// Region code used by the cluster's cloud provider.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	NodeCount pulumi.IntInput `pulumi:"nodeCount"`
+	// Denotes whether this is the primary region in a serverless cluster. Dedicated clusters don't have a primary region.
+	Primary pulumi.BoolInput `pulumi:"primary"`
+	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+	SqlDns pulumi.StringInput `pulumi:"sqlDns"`
+	// DNS name used when connecting to the DB Console for the cluster.
+	UiDns pulumi.StringInput `pulumi:"uiDns"`
 }
 
 func (GetCockroachClusterRegionArgs) ElementType() reflect.Type {
@@ -1759,26 +1964,32 @@ func (o GetCockroachClusterRegionOutput) ToGetCockroachClusterRegionOutputWithCo
 	return o
 }
 
+// Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
 func (o GetCockroachClusterRegionOutput) InternalDns() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) string { return v.InternalDns }).(pulumi.StringOutput)
 }
 
+// Region code used by the cluster's cloud provider.
 func (o GetCockroachClusterRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Number of nodes in the region. Will always be 0 for serverless clusters.
 func (o GetCockroachClusterRegionOutput) NodeCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) int { return v.NodeCount }).(pulumi.IntOutput)
 }
 
+// Denotes whether this is the primary region in a serverless cluster. Dedicated clusters don't have a primary region.
 func (o GetCockroachClusterRegionOutput) Primary() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) bool { return v.Primary }).(pulumi.BoolOutput)
 }
 
+// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 func (o GetCockroachClusterRegionOutput) SqlDns() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) string { return v.SqlDns }).(pulumi.StringOutput)
 }
 
+// DNS name used when connecting to the DB Console for the cluster.
 func (o GetCockroachClusterRegionOutput) UiDns() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterRegion) string { return v.UiDns }).(pulumi.StringOutput)
 }
@@ -1804,7 +2015,9 @@ func (o GetCockroachClusterRegionArrayOutput) Index(i pulumi.IntInput) GetCockro
 }
 
 type GetCockroachClusterServerless struct {
-	RoutingId   string                                   `pulumi:"routingId"`
+	// Cluster identifier in a connection string.
+	RoutingId string `pulumi:"routingId"`
+	// Spend limit in US cents.
 	SpendLimit  int                                      `pulumi:"spendLimit"`
 	UsageLimits GetCockroachClusterServerlessUsageLimits `pulumi:"usageLimits"`
 }
@@ -1821,7 +2034,9 @@ type GetCockroachClusterServerlessInput interface {
 }
 
 type GetCockroachClusterServerlessArgs struct {
-	RoutingId   pulumi.StringInput                            `pulumi:"routingId"`
+	// Cluster identifier in a connection string.
+	RoutingId pulumi.StringInput `pulumi:"routingId"`
+	// Spend limit in US cents.
 	SpendLimit  pulumi.IntInput                               `pulumi:"spendLimit"`
 	UsageLimits GetCockroachClusterServerlessUsageLimitsInput `pulumi:"usageLimits"`
 }
@@ -1852,10 +2067,12 @@ func (o GetCockroachClusterServerlessOutput) ToGetCockroachClusterServerlessOutp
 	return o
 }
 
+// Cluster identifier in a connection string.
 func (o GetCockroachClusterServerlessOutput) RoutingId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerless) string { return v.RoutingId }).(pulumi.StringOutput)
 }
 
+// Spend limit in US cents.
 func (o GetCockroachClusterServerlessOutput) SpendLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerless) int { return v.SpendLimit }).(pulumi.IntOutput)
 }
@@ -1865,8 +2082,10 @@ func (o GetCockroachClusterServerlessOutput) UsageLimits() GetCockroachClusterSe
 }
 
 type GetCockroachClusterServerlessUsageLimits struct {
+	// Maximum number of Request Units that the cluster can consume during the month.
 	RequestUnitLimit int `pulumi:"requestUnitLimit"`
-	StorageMibLimit  int `pulumi:"storageMibLimit"`
+	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+	StorageMibLimit int `pulumi:"storageMibLimit"`
 }
 
 // GetCockroachClusterServerlessUsageLimitsInput is an input type that accepts GetCockroachClusterServerlessUsageLimitsArgs and GetCockroachClusterServerlessUsageLimitsOutput values.
@@ -1881,8 +2100,10 @@ type GetCockroachClusterServerlessUsageLimitsInput interface {
 }
 
 type GetCockroachClusterServerlessUsageLimitsArgs struct {
+	// Maximum number of Request Units that the cluster can consume during the month.
 	RequestUnitLimit pulumi.IntInput `pulumi:"requestUnitLimit"`
-	StorageMibLimit  pulumi.IntInput `pulumi:"storageMibLimit"`
+	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+	StorageMibLimit pulumi.IntInput `pulumi:"storageMibLimit"`
 }
 
 func (GetCockroachClusterServerlessUsageLimitsArgs) ElementType() reflect.Type {
@@ -1911,19 +2132,26 @@ func (o GetCockroachClusterServerlessUsageLimitsOutput) ToGetCockroachClusterSer
 	return o
 }
 
+// Maximum number of Request Units that the cluster can consume during the month.
 func (o GetCockroachClusterServerlessUsageLimitsOutput) RequestUnitLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerlessUsageLimits) int { return v.RequestUnitLimit }).(pulumi.IntOutput)
 }
 
+// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
 func (o GetCockroachClusterServerlessUsageLimitsOutput) StorageMibLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerlessUsageLimits) int { return v.StorageMibLimit }).(pulumi.IntOutput)
 }
 
 type GetConnectionStringConnectionParams struct {
+	// Database value to use in a connection URL.
 	Database string `pulumi:"database"`
-	Host     string `pulumi:"host"`
+	// Host value to use in a connection URL.
+	Host string `pulumi:"host"`
+	// Password value to use in a connection URL.
 	Password string `pulumi:"password"`
-	Port     string `pulumi:"port"`
+	// Port value to use in a connection URL.
+	Port string `pulumi:"port"`
+	// Username value to use in a connection URL.
 	Username string `pulumi:"username"`
 }
 
@@ -1939,10 +2167,15 @@ type GetConnectionStringConnectionParamsInput interface {
 }
 
 type GetConnectionStringConnectionParamsArgs struct {
+	// Database value to use in a connection URL.
 	Database pulumi.StringInput `pulumi:"database"`
-	Host     pulumi.StringInput `pulumi:"host"`
+	// Host value to use in a connection URL.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Password value to use in a connection URL.
 	Password pulumi.StringInput `pulumi:"password"`
-	Port     pulumi.StringInput `pulumi:"port"`
+	// Port value to use in a connection URL.
+	Port pulumi.StringInput `pulumi:"port"`
+	// Username value to use in a connection URL.
 	Username pulumi.StringInput `pulumi:"username"`
 }
 
@@ -1972,22 +2205,27 @@ func (o GetConnectionStringConnectionParamsOutput) ToGetConnectionStringConnecti
 	return o
 }
 
+// Database value to use in a connection URL.
 func (o GetConnectionStringConnectionParamsOutput) Database() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Database }).(pulumi.StringOutput)
 }
 
+// Host value to use in a connection URL.
 func (o GetConnectionStringConnectionParamsOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Host }).(pulumi.StringOutput)
 }
 
+// Password value to use in a connection URL.
 func (o GetConnectionStringConnectionParamsOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Password }).(pulumi.StringOutput)
 }
 
+// Port value to use in a connection URL.
 func (o GetConnectionStringConnectionParamsOutput) Port() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Port }).(pulumi.StringOutput)
 }
 
+// Username value to use in a connection URL.
 func (o GetConnectionStringConnectionParamsOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v GetConnectionStringConnectionParams) string { return v.Username }).(pulumi.StringOutput)
 }

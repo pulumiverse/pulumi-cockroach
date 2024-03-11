@@ -14,11 +14,29 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class GetCockroachClusterDedicatedResult
     {
+        /// <summary>
+        /// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        /// </summary>
         public readonly int DiskIops;
+        /// <summary>
+        /// Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
+        /// </summary>
         public readonly string MachineType;
+        /// <summary>
+        /// Memory per node in GiB.
+        /// </summary>
         public readonly double MemoryGib;
+        /// <summary>
+        /// Number of virtual CPUs per node in the cluster.
+        /// </summary>
         public readonly int NumVirtualCpus;
+        /// <summary>
+        /// Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
+        /// </summary>
         public readonly bool PrivateNetworkVisibility;
+        /// <summary>
+        /// Storage amount per node in GiB.
+        /// </summary>
         public readonly int StorageGib;
 
         [OutputConstructor]
