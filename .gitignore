@@ -22,3 +22,5 @@ provider/**/schema-embed.json
 **/nuget
 **/dist
 **/.gradle
+
+go.work.sum
