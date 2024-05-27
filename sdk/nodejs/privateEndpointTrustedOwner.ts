@@ -48,7 +48,7 @@ export class PrivateEndpointTrustedOwner extends pulumi.CustomResource {
      */
     public /*out*/ readonly ownerId!: pulumi.Output<string>;
     /**
-     * Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+     * Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
      */
     public readonly type!: pulumi.Output<string>;
 
@@ -107,7 +107,7 @@ export interface PrivateEndpointTrustedOwnerState {
      */
     ownerId?: pulumi.Input<string>;
     /**
-     * Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+     * Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
      */
     type?: pulumi.Input<string>;
 }
@@ -125,7 +125,7 @@ export interface PrivateEndpointTrustedOwnerArgs {
      */
     externalOwnerId: pulumi.Input<string>;
     /**
-     * Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+     * Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
      */
     type: pulumi.Input<string>;
 }

@@ -40,10 +40,6 @@ export class SqlUser extends pulumi.CustomResource {
      * SQL user name.
      */
     public readonly name!: pulumi.Output<string>;
-    /**
-     * If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-     * not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-     */
     public readonly password!: pulumi.Output<string | undefined>;
 
     /**
@@ -90,10 +86,6 @@ export interface SqlUserState {
      * SQL user name.
      */
     name?: pulumi.Input<string>;
-    /**
-     * If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-     * not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-     */
     password?: pulumi.Input<string>;
 }
 
@@ -106,9 +98,5 @@ export interface SqlUserArgs {
      * SQL user name.
      */
     name: pulumi.Input<string>;
-    /**
-     * If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-     * not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-     */
     password?: pulumi.Input<string>;
 }

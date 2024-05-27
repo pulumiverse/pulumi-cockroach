@@ -20,8 +20,6 @@ class SqlUserArgs:
         """
         The set of arguments for constructing a SqlUser resource.
         :param pulumi.Input[str] name: SQL user name.
-        :param pulumi.Input[str] password: If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-               not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "name", name)
@@ -52,10 +50,6 @@ class SqlUserArgs:
     @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
-        """
-        If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-        not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -72,8 +66,6 @@ class _SqlUserState:
         """
         Input properties used for looking up and filtering SqlUser resources.
         :param pulumi.Input[str] name: SQL user name.
-        :param pulumi.Input[str] password: If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-               not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
@@ -106,10 +98,6 @@ class _SqlUserState:
     @property
     @pulumi.getter
     def password(self) -> Optional[pulumi.Input[str]]:
-        """
-        If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-        not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-        """
         return pulumi.get(self, "password")
 
     @password.setter
@@ -132,8 +120,6 @@ class SqlUser(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: SQL user name.
-        :param pulumi.Input[str] password: If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-               not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
         """
         ...
     @overload
@@ -201,8 +187,6 @@ class SqlUser(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: SQL user name.
-        :param pulumi.Input[str] password: If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-               not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -229,9 +213,5 @@ class SqlUser(pulumi.CustomResource):
     @property
     @pulumi.getter
     def password(self) -> pulumi.Output[Optional[str]]:
-        """
-        If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-        not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-        """
         return pulumi.get(self, "password")
 

@@ -25,10 +25,6 @@ namespace Pulumiverse.Cockroach
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
-        /// <summary>
-        /// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-        /// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-        /// </summary>
         [Output("password")]
         public Output<string?> Password { get; private set; } = null!;
 
@@ -94,11 +90,6 @@ namespace Pulumiverse.Cockroach
 
         [Input("password")]
         private Input<string>? _password;
-
-        /// <summary>
-        /// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-        /// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-        /// </summary>
         public Input<string>? Password
         {
             get => _password;
@@ -128,11 +119,6 @@ namespace Pulumiverse.Cockroach
 
         [Input("password")]
         private Input<string>? _password;
-
-        /// <summary>
-        /// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-        /// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
-        /// </summary>
         public Input<string>? Password
         {
             get => _password;

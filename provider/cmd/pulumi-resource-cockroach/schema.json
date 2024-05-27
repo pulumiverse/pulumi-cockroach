@@ -1876,7 +1876,6 @@
                 },
                 "password": {
                     "type": "string",
-                    "description": "If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but\nnot saved to Terraform state. The password must be changed via the CockroachDB cloud console.\n",
                     "secret": true
                 }
             },
@@ -1894,7 +1893,6 @@
                 },
                 "password": {
                     "type": "string",
-                    "description": "If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but\nnot saved to Terraform state. The password must be changed via the CockroachDB cloud console.\n",
                     "secret": true
                 }
             },
@@ -1914,7 +1912,6 @@
                     },
                     "password": {
                         "type": "string",
-                        "description": "If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but\nnot saved to Terraform state. The password must be changed via the CockroachDB cloud console.\n",
                         "secret": true
                     }
                 },
