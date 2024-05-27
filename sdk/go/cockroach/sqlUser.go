@@ -18,9 +18,7 @@ type SqlUser struct {
 
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// SQL user name.
-	Name pulumi.StringOutput `pulumi:"name"`
-	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
+	Name     pulumi.StringOutput    `pulumi:"name"`
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 }
 
@@ -69,18 +67,14 @@ func GetSqlUser(ctx *pulumi.Context,
 type sqlUserState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// SQL user name.
-	Name *string `pulumi:"name"`
-	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
+	Name     *string `pulumi:"name"`
 	Password *string `pulumi:"password"`
 }
 
 type SqlUserState struct {
 	ClusterId pulumi.StringPtrInput
 	// SQL user name.
-	Name pulumi.StringPtrInput
-	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
+	Name     pulumi.StringPtrInput
 	Password pulumi.StringPtrInput
 }
 
@@ -91,9 +85,7 @@ func (SqlUserState) ElementType() reflect.Type {
 type sqlUserArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// SQL user name.
-	Name string `pulumi:"name"`
-	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
+	Name     string  `pulumi:"name"`
 	Password *string `pulumi:"password"`
 }
 
@@ -101,9 +93,7 @@ type sqlUserArgs struct {
 type SqlUserArgs struct {
 	ClusterId pulumi.StringInput
 	// SQL user name.
-	Name pulumi.StringInput
-	// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-	// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
+	Name     pulumi.StringInput
 	Password pulumi.StringPtrInput
 }
 
@@ -203,8 +193,6 @@ func (o SqlUserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SqlUser) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// If provided, this field sets the password of the SQL user when created. If omitted, a random password is generated, but
-// not saved to Terraform state. The password must be changed via the CockroachDB cloud console.
 func (o SqlUserOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SqlUser) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }

@@ -22,7 +22,7 @@ type PrivateEndpointTrustedOwner struct {
 	ExternalOwnerId pulumi.StringOutput `pulumi:"externalOwnerId"`
 	// UUID of the private endpoint trusted owner entry.
 	OwnerId pulumi.StringOutput `pulumi:"ownerId"`
-	// Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+	// Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
 	Type pulumi.StringOutput `pulumi:"type"`
 }
 
@@ -71,7 +71,7 @@ type privateEndpointTrustedOwnerState struct {
 	ExternalOwnerId *string `pulumi:"externalOwnerId"`
 	// UUID of the private endpoint trusted owner entry.
 	OwnerId *string `pulumi:"ownerId"`
-	// Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+	// Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
 	Type *string `pulumi:"type"`
 }
 
@@ -82,7 +82,7 @@ type PrivateEndpointTrustedOwnerState struct {
 	ExternalOwnerId pulumi.StringPtrInput
 	// UUID of the private endpoint trusted owner entry.
 	OwnerId pulumi.StringPtrInput
-	// Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+	// Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
 	Type pulumi.StringPtrInput
 }
 
@@ -95,7 +95,7 @@ type privateEndpointTrustedOwnerArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// Owner ID of the private endpoint connection in the cloud provider.
 	ExternalOwnerId string `pulumi:"externalOwnerId"`
-	// Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+	// Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
 	Type string `pulumi:"type"`
 }
 
@@ -105,7 +105,7 @@ type PrivateEndpointTrustedOwnerArgs struct {
 	ClusterId pulumi.StringInput
 	// Owner ID of the private endpoint connection in the cloud provider.
 	ExternalOwnerId pulumi.StringInput
-	// Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+	// Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
 	Type pulumi.StringInput
 }
 
@@ -211,7 +211,7 @@ func (o PrivateEndpointTrustedOwnerOutput) OwnerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateEndpointTrustedOwner) pulumi.StringOutput { return v.OwnerId }).(pulumi.StringOutput)
 }
 
-// Representation of the external_owner_id field. Allowed values are: * AWS_ACCOUNT_ID
+// Representation of the externalOwnerId field. Allowed values are: * AWS_ACCOUNT_ID
 func (o PrivateEndpointTrustedOwnerOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateEndpointTrustedOwner) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
