@@ -24,3 +24,8 @@ provider/**/schema-embed.json
 **/.gradle
 
 go.work.sum
+
+__pycache__
+venv
+sdk/python/build
+sdk/python/*.egg-info

@@ -1,8 +1,6 @@
 module github.com/pulumiverse/pulumi-cockroach/provider
 
-go 1.21.12
-
-toolchain go1.22.1
+go 1.21
 
 require (
 	github.com/cockroachdb/terraform-provider-cockroach/shim v0.0.0
