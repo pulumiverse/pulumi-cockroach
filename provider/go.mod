@@ -5,7 +5,7 @@ go 1.21.12
 toolchain go1.21.13
 
 require (
-	github.com/cockroachdb/terraform-provider-cockroach/shim v0.0.0
+	github.com/cockroachdb/terraform-provider-cockroach/shim v0.7.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.42.1
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.89.1
 	github.com/pulumi/pulumi/sdk/v3 v3.129.0
