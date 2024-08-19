@@ -193,7 +193,7 @@ class ApiOidcConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  audience: Optional[pulumi.Input[str]] = None,
                  claim: Optional[pulumi.Input[str]] = None,
-                 identity_maps: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiOidcConfigIdentityMapArgs']]]]] = None,
+                 identity_maps: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApiOidcConfigIdentityMapArgs', 'ApiOidcConfigIdentityMapArgsDict']]]]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -204,7 +204,7 @@ class ApiOidcConfig(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] audience: The audience that CC API should accept for this API OIDC Configuration.
         :param pulumi.Input[str] claim: The JWT claim that should be used as the user identifier. Defaults to the subject.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiOidcConfigIdentityMapArgs']]]] identity_maps: The mapping rules to convert token user identifiers into a new form.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ApiOidcConfigIdentityMapArgs', 'ApiOidcConfigIdentityMapArgsDict']]]] identity_maps: The mapping rules to convert token user identifiers into a new form.
         :param pulumi.Input[str] issuer: The issuer of tokens for the API OIDC Configuration. Usually this is a url.
         :param pulumi.Input[str] jwks: The JSON Web Key Set used to check the signature of the JWTs.
         """
@@ -234,7 +234,7 @@ class ApiOidcConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  audience: Optional[pulumi.Input[str]] = None,
                  claim: Optional[pulumi.Input[str]] = None,
-                 identity_maps: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiOidcConfigIdentityMapArgs']]]]] = None,
+                 identity_maps: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApiOidcConfigIdentityMapArgs', 'ApiOidcConfigIdentityMapArgsDict']]]]] = None,
                  issuer: Optional[pulumi.Input[str]] = None,
                  jwks: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -269,7 +269,7 @@ class ApiOidcConfig(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             audience: Optional[pulumi.Input[str]] = None,
             claim: Optional[pulumi.Input[str]] = None,
-            identity_maps: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiOidcConfigIdentityMapArgs']]]]] = None,
+            identity_maps: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApiOidcConfigIdentityMapArgs', 'ApiOidcConfigIdentityMapArgsDict']]]]] = None,
             issuer: Optional[pulumi.Input[str]] = None,
             jwks: Optional[pulumi.Input[str]] = None) -> 'ApiOidcConfig':
         """
@@ -281,7 +281,7 @@ class ApiOidcConfig(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] audience: The audience that CC API should accept for this API OIDC Configuration.
         :param pulumi.Input[str] claim: The JWT claim that should be used as the user identifier. Defaults to the subject.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApiOidcConfigIdentityMapArgs']]]] identity_maps: The mapping rules to convert token user identifiers into a new form.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ApiOidcConfigIdentityMapArgs', 'ApiOidcConfigIdentityMapArgsDict']]]] identity_maps: The mapping rules to convert token user identifiers into a new form.
         :param pulumi.Input[str] issuer: The issuer of tokens for the API OIDC Configuration. Usually this is a url.
         :param pulumi.Input[str] jwks: The JSON Web Key Set used to check the signature of the JWTs.
         """

@@ -341,11 +341,11 @@ class Cluster(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
-                 dedicated: Optional[pulumi.Input[pulumi.InputType['ClusterDedicatedArgs']]] = None,
+                 dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
-                 regions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRegionArgs']]]]] = None,
-                 serverless: Optional[pulumi.Input[pulumi.InputType['ClusterServerlessArgs']]] = None,
+                 regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
+                 serverless: Optional[pulumi.Input[Union['ClusterServerlessArgs', 'ClusterServerlessArgsDict']]] = None,
                  __props__=None):
         """
         CockroachDB Cloud cluster. Can be Dedicated or Serverless.
@@ -383,11 +383,11 @@ class Cluster(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
-                 dedicated: Optional[pulumi.Input[pulumi.InputType['ClusterDedicatedArgs']]] = None,
+                 dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
-                 regions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRegionArgs']]]]] = None,
-                 serverless: Optional[pulumi.Input[pulumi.InputType['ClusterServerlessArgs']]] = None,
+                 regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
+                 serverless: Optional[pulumi.Input[Union['ClusterServerlessArgs', 'ClusterServerlessArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -432,13 +432,13 @@ class Cluster(pulumi.CustomResource):
             cluster_id: Optional[pulumi.Input[str]] = None,
             cockroach_version: Optional[pulumi.Input[str]] = None,
             creator_id: Optional[pulumi.Input[str]] = None,
-            dedicated: Optional[pulumi.Input[pulumi.InputType['ClusterDedicatedArgs']]] = None,
+            dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
             name: Optional[pulumi.Input[str]] = None,
             operation_status: Optional[pulumi.Input[str]] = None,
             parent_id: Optional[pulumi.Input[str]] = None,
             plan: Optional[pulumi.Input[str]] = None,
-            regions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRegionArgs']]]]] = None,
-            serverless: Optional[pulumi.Input[pulumi.InputType['ClusterServerlessArgs']]] = None,
+            regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
+            serverless: Optional[pulumi.Input[Union['ClusterServerlessArgs', 'ClusterServerlessArgsDict']]] = None,
             state: Optional[pulumi.Input[str]] = None,
             upgrade_status: Optional[pulumi.Input[str]] = None) -> 'Cluster':
         """
