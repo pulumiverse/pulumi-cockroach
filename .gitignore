@@ -23,7 +23,7 @@ provider/**/schema-embed.json
 **/dist
 **/.gradle
 
-go.work.sum
+go.work*
 
 __pycache__
 venv
