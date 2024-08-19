@@ -126,7 +126,7 @@ class PrivateEndpointServices(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
-            services: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['PrivateEndpointServicesServiceArgs']]]]] = None) -> 'PrivateEndpointServices':
+            services: Optional[pulumi.Input[Sequence[pulumi.Input[Union['PrivateEndpointServicesServiceArgs', 'PrivateEndpointServicesServiceArgsDict']]]]] = None) -> 'PrivateEndpointServices':
         """
         Get an existing PrivateEndpointServices resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
