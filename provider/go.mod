@@ -13,7 +13,7 @@ require (
 
 replace (
 	github.com/cockroachdb/terraform-provider-cockroach/shim => ./shim
-	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240520223432-0c0bf0d65f10
+	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 7ac578ce47fc
 )
 
 require (
