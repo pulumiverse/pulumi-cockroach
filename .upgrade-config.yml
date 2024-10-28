@@ -3,5 +3,5 @@
 ---
 upstream-provider-name: terraform-provider-cockroach
 upstream-provider-org: cockroachdb
-pulumi-infer-version: true
 remove-plugins: true
+pr-assign: ringods

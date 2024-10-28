@@ -12,6 +12,7 @@ import (
 
 	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
 	"github.com/pulumiverse/pulumi-cockroach/provider/pkg/version"
@@ -52,6 +53,10 @@ func cockroachResource(mod string, res string) tokens.Type {
 //go:embed cmd/pulumi-resource-cockroach/bridge-metadata.json
 var bridgeMetadata []byte
 
+func computeIDField(field resource.PropertyKey) tfbridge.ComputeID {
+	return tfbridge.DelegateIDField(field, "cockroach", "https://github.com/pulumiverse/pulumi-cockroach")
+}
+
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
@@ -80,6 +85,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_cluster": {
 				Tok: cockroachResource(cockroachMod, "Cluster"),
@@ -89,6 +95,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_cmek": {
 				Tok: cockroachResource(cockroachMod, "Cmek"),
@@ -98,6 +105,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_database": {Tok: cockroachResource(cockroachMod, "Database")},
 			"cockroach_folder":   {Tok: cockroachResource(cockroachMod, "Folder")},
@@ -109,6 +117,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_log_export_config": {
 				Tok: cockroachResource(cockroachMod, "LogExportConfig"),
@@ -118,6 +127,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_maintenance_window": {
 				Tok: cockroachResource(cockroachMod, "MaintenanceWindow"),
@@ -127,6 +137,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_metric_export_cloudwatch_config": {
 				Tok: cockroachResource(cockroachMod, "MetricExportCloudwatchConfig"),
@@ -136,6 +147,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 			"cockroach_metric_export_datadog_config": {
 				Tok: cockroachResource(cockroachMod, "MetricExportDatadogConfig"),
@@ -145,14 +157,28 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
+				ComputeID: computeIDField("id"),
 			},
 
 			"cockroach_private_endpoint_connection":    {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
 			"cockroach_private_endpoint_services":      {Tok: cockroachResource(cockroachMod, "PrivateEndpointServices")},
 			"cockroach_private_endpoint_trusted_owner": {Tok: cockroachResource(cockroachMod, "PrivateEndpointTrustedOwner")},
 			"cockroach_sql_user":                       {Tok: cockroachResource(cockroachMod, "SqlUser")},
-			"cockroach_user_role_grants":               {Tok: cockroachResource(cockroachMod, "UserRoleGrants")},
-			"cockroach_version_deferral":               {Tok: cockroachResource(cockroachMod, "VersionDeferral")},
+			"cockroach_user_role_grant": {
+				Tok:       cockroachResource(cockroachMod, "UserRoleGrant"),
+				ComputeID: computeIDField("id"),
+			},
+			"cockroach_user_role_grants": {Tok: cockroachResource(cockroachMod, "UserRoleGrants")},
+			"cockroach_version_deferral": {
+				Tok: cockroachResource(cockroachMod, "VersionDeferral"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+				ComputeID: computeIDField("id"),
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"cockroach_cluster":           {Tok: cockroachDataSource(cockroachMod, "getCockroachCluster")},
@@ -160,6 +186,7 @@ func Provider() tfbridge.ProviderInfo {
 			"cockroach_connection_string": {Tok: cockroachDataSource(cockroachMod, "getConnectionString")},
 			"cockroach_organization":      {Tok: cockroachDataSource(cockroachMod, "getOrganization")},
 			"cockroach_person_user":       {Tok: cockroachDataSource(cockroachMod, "getPersonUser")},
+			"cockroach_folder":            {Tok: cockroachDataSource(cockroachMod, "getFolder")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/cockroach",
