@@ -26,12 +26,14 @@
                 "cockroach": "Cockroach"
             },
             "compatibility": "tfbridge20",
-            "rootNamespace": "Pulumiverse"
+            "rootNamespace": "Pulumiverse",
+            "respectSchemaVersion": true
         },
         "go": {
             "importBasePath": "github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach",
             "generateResourceContainerTypes": true,
-            "generateExtraInputTypes": true
+            "generateExtraInputTypes": true,
+            "respectSchemaVersion": true
         },
         "nodejs": {
             "packageName": "@pulumiverse/cockroach",
@@ -44,7 +46,8 @@
                 "@types/node": "^10.0.0"
             },
             "compatibility": "tfbridge20",
-            "disableUnionOutputTypes": true
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
         },
         "python": {
             "packageName": "pulumiverse_cockroach",
@@ -53,6 +56,7 @@
             },
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/cockroachdb/terraform-provider-cockroach)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cockroach` repo](https://github.com/pulumiverse/pulumi-cockroach/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cockroach` repo](https://github.com/cockroachdb/terraform-provider-cockroach/issues).",
             "compatibility": "tfbridge20",
+            "respectSchemaVersion": true,
             "pyproject": {
                 "enabled": true
             }
@@ -2023,19 +2027,19 @@
                 "description": "A collection of values returned by getClusterCert.\n",
                 "properties": {
                     "cert": {
-                        "type": "string",
-                        "description": "Certificate contents.\n"
+                        "description": "Certificate contents.\n",
+                        "type": "string"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "Cluster ID.\n"
+                        "description": "Cluster ID.\n",
+                        "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "cert",
                     "id"
-                ]
+                ],
+                "type": "object"
             }
         },
         "cockroach:index/getCockroachCluster:getCockroachCluster": {
@@ -2086,10 +2090,10 @@
                         "type": "string"
                     },
                     "regions": {
-                        "type": "array",
                         "items": {
                             "$ref": "#/types/cockroach:index/getCockroachClusterRegion:getCockroachClusterRegion"
-                        }
+                        },
+                        "type": "array"
                     },
                     "serverless": {
                         "$ref": "#/types/cockroach:index/getCockroachClusterServerless:getCockroachClusterServerless"
@@ -2101,7 +2105,6 @@
                         "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "accountId",
                     "cloudProvider",
@@ -2117,7 +2120,8 @@
                     "serverless",
                     "state",
                     "upgradeStatus"
-                ]
+                ],
+                "type": "object"
             }
         },
         "cockroach:index/getConnectionString:getConnectionString": {
@@ -2166,21 +2170,21 @@
                         "type": "string"
                     },
                     "password": {
-                        "type": "string",
-                        "secret": true
+                        "secret": true,
+                        "type": "string"
                     },
                     "sqlUser": {
                         "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "connectionParams",
                     "connectionString",
                     "database",
                     "id",
                     "os"
-                ]
+                ],
+                "type": "object"
             }
         },
         "cockroach:index/getOrganization:getOrganization": {
@@ -2189,29 +2193,29 @@
                 "description": "A collection of values returned by getOrganization.\n",
                 "properties": {
                     "createdAt": {
-                        "type": "string",
-                        "description": "Indicates when the organization was created.\n"
+                        "description": "Indicates when the organization was created.\n",
+                        "type": "string"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "Organization ID.\n"
+                        "description": "Organization ID.\n",
+                        "type": "string"
                     },
                     "label": {
-                        "type": "string",
-                        "description": "A short ID used by CockroachDB Support.\n"
+                        "description": "A short ID used by CockroachDB Support.\n",
+                        "type": "string"
                     },
                     "name": {
-                        "type": "string",
-                        "description": "Name of the organization.\n"
+                        "description": "Name of the organization.\n",
+                        "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "createdAt",
                     "id",
                     "label",
                     "name"
-                ]
+                ],
+                "type": "object"
             }
         },
         "cockroach:index/getPersonUser:getPersonUser": {
@@ -2233,19 +2237,19 @@
                 "description": "A collection of values returned by getPersonUser.\n",
                 "properties": {
                     "email": {
-                        "type": "string",
-                        "description": "Email address used to find the User ID.\n"
+                        "description": "Email address used to find the User ID.\n",
+                        "type": "string"
                     },
                     "id": {
-                        "type": "string",
-                        "description": "User ID.\n"
+                        "description": "User ID.\n",
+                        "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
                     "email",
                     "id"
-                ]
+                ],
+                "type": "object"
             }
         }
     }

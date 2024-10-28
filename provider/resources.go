@@ -1,15 +1,18 @@
 package cockroach
 
 import (
-	_ "embed"
 	"fmt"
 	"path/filepath"
 	"unicode"
 
+	_ "embed"
+
 	"github.com/cockroachdb/terraform-provider-cockroach/shim"
+
 	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+
 	"github.com/pulumiverse/pulumi-cockroach/provider/pkg/version"
 )
 
@@ -165,13 +168,15 @@ func Provider() tfbridge.ProviderInfo {
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 			},
+			RespectSchemaVersion: true,
 		},
 		Python: &tfbridge.PythonInfo{
 			PackageName: "pulumiverse_cockroach",
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
-			PyProject: struct{ Enabled bool }{true},
+			PyProject:            struct{ Enabled bool }{true},
+			RespectSchemaVersion: true,
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
@@ -181,6 +186,7 @@ func Provider() tfbridge.ProviderInfo {
 				cockroachPkg,
 			),
 			GenerateResourceContainerTypes: true,
+			RespectSchemaVersion:           true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
 			RootNamespace: "Pulumiverse",
@@ -190,6 +196,7 @@ func Provider() tfbridge.ProviderInfo {
 			Namespaces: map[string]string{
 				"cockroach": "Cockroach",
 			},
+			RespectSchemaVersion: true,
 		},
 	}
 
