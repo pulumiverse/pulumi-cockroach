@@ -12,6 +12,31 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// CockroachDB Cloud folder.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var aTeam = new Cockroach.Folder("a_team", new()
+    ///     {
+    ///         Name = "a-team",
+    ///         ParentId = "root",
+    ///     });
+    /// 
+    ///     var aTeamDev = new Cockroach.Folder("a_team_dev", new()
+    ///     {
+    ///         Name = "dev",
+    ///         ParentId = aTeam.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/folder:Folder")]
     public partial class Folder : global::Pulumi.CustomResource

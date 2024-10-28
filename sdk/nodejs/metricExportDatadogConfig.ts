@@ -6,6 +6,23 @@ import * as utilities from "./utilities";
 
 /**
  * DataDog metric export configuration for a cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const datadogSite = config.require("datadogSite");
+ * const datadogApiKey = config.require("datadogApiKey");
+ * const example = new cockroach.MetricExportDatadogConfig("example", {
+ *     clusterId: clusterId,
+ *     site: datadogSite,
+ *     apiKey: datadogApiKey,
+ * });
+ * ```
  */
 export class MetricExportDatadogConfig extends pulumi.CustomResource {
     /**

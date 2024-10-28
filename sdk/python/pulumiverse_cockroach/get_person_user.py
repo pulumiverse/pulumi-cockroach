@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
@@ -61,6 +66,17 @@ def get_person_user(email: Optional[str] = None,
     """
     Information about an individual user.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    email_address = config.require("emailAddress")
+    cockroach = cockroach.get_person_user(email=email_address)
+    ```
+
 
     :param str email: Email address used to find the User ID.
     """
@@ -72,15 +88,29 @@ def get_person_user(email: Optional[str] = None,
     return AwaitableGetPersonUserResult(
         email=pulumi.get(__ret__, 'email'),
         id=pulumi.get(__ret__, 'id'))
-
-
-@_utilities.lift_output_func(get_person_user)
 def get_person_user_output(email: Optional[pulumi.Input[str]] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPersonUserResult]:
     """
     Information about an individual user.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    email_address = config.require("emailAddress")
+    cockroach = cockroach.get_person_user(email=email_address)
+    ```
+
 
     :param str email: Email address used to find the User ID.
     """
-    ...
+    __args__ = dict()
+    __args__['email'] = email
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('cockroach:index/getPersonUser:getPersonUser', __args__, opts=opts, typ=GetPersonUserResult)
+    return __ret__.apply(lambda __response__: GetPersonUserResult(
+        email=pulumi.get(__response__, 'email'),
+        id=pulumi.get(__response__, 'id')))

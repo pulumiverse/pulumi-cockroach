@@ -13,9 +13,45 @@ import (
 )
 
 // Configure minor version upgrade deferral for a cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			offsetDuration := "FIXED_DEFERRAL"
+//			if param := cfg.Get("offsetDuration"); param != "" {
+//				offsetDuration = param
+//			}
+//			_, err := cockroach.NewVersionDeferral(ctx, "example", &cockroach.VersionDeferralArgs{
+//				ClusterId:      pulumi.String(clusterId),
+//				DeferralPolicy: pulumi.String(offsetDuration),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type VersionDeferral struct {
 	pulumi.CustomResourceState
 
+	// Cluster ID.
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
 	DeferralPolicy pulumi.StringOutput `pulumi:"deferralPolicy"`
 }
@@ -27,6 +63,9 @@ func NewVersionDeferral(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.ClusterId == nil {
+		return nil, errors.New("invalid value for required argument 'ClusterId'")
+	}
 	if args.DeferralPolicy == nil {
 		return nil, errors.New("invalid value for required argument 'DeferralPolicy'")
 	}
@@ -53,11 +92,15 @@ func GetVersionDeferral(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering VersionDeferral resources.
 type versionDeferralState struct {
+	// Cluster ID.
+	ClusterId *string `pulumi:"clusterId"`
 	// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
 	DeferralPolicy *string `pulumi:"deferralPolicy"`
 }
 
 type VersionDeferralState struct {
+	// Cluster ID.
+	ClusterId pulumi.StringPtrInput
 	// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
 	DeferralPolicy pulumi.StringPtrInput
 }
@@ -67,12 +110,16 @@ func (VersionDeferralState) ElementType() reflect.Type {
 }
 
 type versionDeferralArgs struct {
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
 	// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
 	DeferralPolicy string `pulumi:"deferralPolicy"`
 }
 
 // The set of arguments for constructing a VersionDeferral resource.
 type VersionDeferralArgs struct {
+	// Cluster ID.
+	ClusterId pulumi.StringInput
 	// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
 	DeferralPolicy pulumi.StringInput
 }
@@ -162,6 +209,11 @@ func (o VersionDeferralOutput) ToVersionDeferralOutput() VersionDeferralOutput {
 
 func (o VersionDeferralOutput) ToVersionDeferralOutputWithContext(ctx context.Context) VersionDeferralOutput {
 	return o
+}
+
+// Cluster ID.
+func (o VersionDeferralOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *VersionDeferral) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 // The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.

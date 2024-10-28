@@ -15,7 +15,7 @@ namespace Pulumiverse.Cockroach.Outputs
     public sealed class UserRoleGrantsRole
     {
         /// <summary>
-        /// ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        /// ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
         /// </summary>
         public readonly string? ResourceId;
         /// <summary>
@@ -27,8 +27,6 @@ namespace Pulumiverse.Cockroach.Outputs
         public readonly string ResourceType;
         /// <summary>
         /// Name of the role to grant. Allowed values are:
-        ///   * DEVELOPER
-        ///   * ADMIN
         ///   * BILLING_COORDINATOR
         ///   * ORG_ADMIN
         ///   * ORG_MEMBER

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -164,6 +169,24 @@ class Cmek(pulumi.CustomResource):
         """
         Customer-managed encryption keys (CMEK) resource for a single cluster.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        dedicated = cockroach.Cmek("dedicated",
+            cluster_id=dedicated_cockroach_cluster["id"],
+            regions=[{
+                "region": "us-central-1",
+                "key": {
+                    "auth_principal": "arn:aws:iam::account:role/role-name-with-path",
+                    "type": "AWS_KMS",
+                    "uri": "arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key",
+                },
+            }])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CmekAdditionalRegionArgs', 'CmekAdditionalRegionArgsDict']]]] additional_regions: Once CMEK is enabled for a cluster, no new regions can be added to the cluster resource, since they need encryption key
@@ -179,6 +202,24 @@ class Cmek(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Customer-managed encryption keys (CMEK) resource for a single cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        dedicated = cockroach.Cmek("dedicated",
+            cluster_id=dedicated_cockroach_cluster["id"],
+            regions=[{
+                "region": "us-central-1",
+                "key": {
+                    "auth_principal": "arn:aws:iam::account:role/role-name-with-path",
+                    "type": "AWS_KMS",
+                    "uri": "arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key",
+                },
+            }])
+        ```
 
         :param str resource_name: The name of the resource.
         :param CmekArgs args: The arguments to use to populate this resource's properties.

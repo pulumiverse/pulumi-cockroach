@@ -14,7 +14,7 @@ namespace Pulumiverse.Cockroach.Inputs
     public sealed class UserRoleGrantsRoleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        /// ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
         /// </summary>
         [Input("resourceId")]
         public Input<string>? ResourceId { get; set; }
@@ -30,8 +30,6 @@ namespace Pulumiverse.Cockroach.Inputs
 
         /// <summary>
         /// Name of the role to grant. Allowed values are:
-        ///   * DEVELOPER
-        ///   * ADMIN
         ///   * BILLING_COORDINATOR
         ///   * ORG_ADMIN
         ///   * ORG_MEMBER

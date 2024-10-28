@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['FinalizeVersionUpgradeArgs', 'FinalizeVersionUpgrade']
@@ -100,6 +105,20 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
         """
         Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        cockroach_version = config.require("cockroachVersion")
+        cockroach = cockroach.FinalizeVersionUpgrade("cockroach",
+            cluster_id=cluster_id,
+            cockroach_version=cockroach_version)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -113,6 +132,20 @@ class FinalizeVersionUpgrade(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        cockroach_version = config.require("cockroachVersion")
+        cockroach = cockroach.FinalizeVersionUpgrade("cockroach",
+            cluster_id=cluster_id,
+            cockroach_version=cockroach_version)
+        ```
 
         :param str resource_name: The name of the resource.
         :param FinalizeVersionUpgradeArgs args: The arguments to use to populate this resource's properties.

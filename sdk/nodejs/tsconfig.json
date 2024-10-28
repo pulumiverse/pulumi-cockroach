@@ -26,6 +26,7 @@
         "getClusterCert.ts",
         "getCockroachCluster.ts",
         "getConnectionString.ts",
+        "getFolder.ts",
         "getOrganization.ts",
         "getPersonUser.ts",
         "index.ts",
@@ -41,6 +42,7 @@
         "types/index.ts",
         "types/input.ts",
         "types/output.ts",
+        "userRoleGrant.ts",
         "userRoleGrants.ts",
         "utilities.ts",
         "versionDeferral.ts"

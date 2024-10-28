@@ -7,7 +7,26 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
+ * PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroach = new cockroach.PrivateEndpointServices("cockroach", {clusterId: clusterId});
+ * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+ * ```
  */
 export class PrivateEndpointServices extends pulumi.CustomResource {
     /**

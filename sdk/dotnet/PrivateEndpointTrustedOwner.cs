@@ -12,6 +12,36 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Private Endpoint Trusted Owner.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var example = new Cockroach.PrivateEndpointTrustedOwner("example", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///         Type = "AWS_ACCOUNT_ID",
+    ///         ExternalOwnerId = "012345678901",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;:&lt;owner id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:e50aa10d-1a16-4be8-85e6-4c18221daa49
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner")]
     public partial class PrivateEndpointTrustedOwner : global::Pulumi.CustomResource

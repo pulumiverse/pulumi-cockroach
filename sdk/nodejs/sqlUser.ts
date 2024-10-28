@@ -6,6 +6,30 @@ import * as utilities from "./utilities";
 
 /**
  * CockroachDB SQL user.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const sqlUserPassword = config.require("sqlUserPassword");
+ * const cockroach = new cockroach.SqlUser("cockroach", {
+ *     name: "example-sql-user",
+ *     password: sqlUserPassword,
+ *     clusterId: clusterId,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>:<sql user name>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/sqlUser:SqlUser bill 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:bill
+ * ```
  */
 export class SqlUser extends pulumi.CustomResource {
     /**

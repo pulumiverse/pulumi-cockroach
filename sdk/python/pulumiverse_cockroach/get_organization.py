@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
@@ -83,6 +88,15 @@ class AwaitableGetOrganizationResult(GetOrganizationResult):
 def get_organization(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetOrganizationResult:
     """
     Information about the organization associated with the user's API key.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    prod = cockroach.get_organization()
+    ```
     """
     __args__ = dict()
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
@@ -93,11 +107,24 @@ def get_organization(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGe
         id=pulumi.get(__ret__, 'id'),
         label=pulumi.get(__ret__, 'label'),
         name=pulumi.get(__ret__, 'name'))
-
-
-@_utilities.lift_output_func(get_organization)
 def get_organization_output(opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetOrganizationResult]:
     """
     Information about the organization associated with the user's API key.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    prod = cockroach.get_organization()
+    ```
     """
-    ...
+    __args__ = dict()
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('cockroach:index/getOrganization:getOrganization', __args__, opts=opts, typ=GetOrganizationResult)
+    return __ret__.apply(lambda __response__: GetOrganizationResult(
+        created_at=pulumi.get(__response__, 'created_at'),
+        id=pulumi.get(__response__, 'id'),
+        label=pulumi.get(__response__, 'label'),
+        name=pulumi.get(__response__, 'name')))

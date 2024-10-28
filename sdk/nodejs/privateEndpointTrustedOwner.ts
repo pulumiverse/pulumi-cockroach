@@ -6,6 +6,29 @@ import * as utilities from "./utilities";
 
 /**
  * Private Endpoint Trusted Owner.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const example = new cockroach.PrivateEndpointTrustedOwner("example", {
+ *     clusterId: clusterId,
+ *     type: "AWS_ACCOUNT_ID",
+ *     externalOwnerId: "012345678901",
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>:<owner id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:e50aa10d-1a16-4be8-85e6-4c18221daa49
+ * ```
  */
 export class PrivateEndpointTrustedOwner extends pulumi.CustomResource {
     /**

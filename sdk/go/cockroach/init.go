@@ -53,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PrivateEndpointTrustedOwner{}
 	case "cockroach:index/sqlUser:SqlUser":
 		r = &SqlUser{}
+	case "cockroach:index/userRoleGrant:UserRoleGrant":
+		r = &UserRoleGrant{}
 	case "cockroach:index/userRoleGrants:UserRoleGrants":
 		r = &UserRoleGrants{}
 	case "cockroach:index/versionDeferral:VersionDeferral":
@@ -166,6 +168,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/sqlUser",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/userRoleGrant",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

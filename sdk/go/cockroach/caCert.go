@@ -13,6 +13,37 @@ import (
 )
 
 // Manages client CA certs.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			// The X509 certificate in PEM format.
+//			clientCertificate := cfg.Require("clientCertificate")
+//			_, err := cockroach.NewCaCert(ctx, "prod", &cockroach.CaCertArgs{
+//				ClusterId:   pulumi.Any(prodCockroachCluster.Id),
+//				X509PemCert: pulumi.String(clientCertificate),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type CaCert struct {
 	pulumi.CustomResourceState
 

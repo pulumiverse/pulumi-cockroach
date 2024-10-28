@@ -13,6 +13,37 @@ import (
 )
 
 // Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			cockroachVersion := cfg.Require("cockroachVersion")
+//			_, err := cockroach.NewFinalizeVersionUpgrade(ctx, "cockroach", &cockroach.FinalizeVersionUpgradeArgs{
+//				ClusterId:        pulumi.String(clusterId),
+//				CockroachVersion: pulumi.String(cockroachVersion),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type FinalizeVersionUpgrade struct {
 	pulumi.CustomResourceState
 

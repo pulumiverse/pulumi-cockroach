@@ -13,6 +13,18 @@ namespace Pulumiverse.Cockroach.Inputs
 
     public sealed class PrivateEndpointServicesServiceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("availabilityZoneIds")]
+        private InputList<string>? _availabilityZoneIds;
+
+        /// <summary>
+        /// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        /// </summary>
+        public InputList<string> AvailabilityZoneIds
+        {
+            get => _availabilityZoneIds ?? (_availabilityZoneIds = new InputList<string>());
+            set => _availabilityZoneIds = value;
+        }
+
         [Input("aws")]
         public Input<Inputs.PrivateEndpointServicesServiceAwsArgs>? Aws { get; set; }
 
@@ -21,6 +33,18 @@ namespace Pulumiverse.Cockroach.Inputs
         /// </summary>
         [Input("cloudProvider")]
         public Input<string>? CloudProvider { get; set; }
+
+        /// <summary>
+        /// Server side ID of the private endpoint connection.
+        /// </summary>
+        [Input("endpointServiceId")]
+        public Input<string>? EndpointServiceId { get; set; }
+
+        /// <summary>
+        /// Name of the endpoint service.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         /// <summary>
         /// Cloud provider region code associated with this service.

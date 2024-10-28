@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['MetricExportCloudwatchConfigArgs', 'MetricExportCloudwatchConfig']
@@ -198,6 +203,24 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
         """
         Amazon CloudWatch metric export configuration for a cluster.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        role_arn = config.require("roleArn")
+        log_group_name = config.require("logGroupName")
+        aws_region = config.require("awsRegion")
+        example = cockroach.MetricExportCloudwatchConfig("example",
+            cluster_id=cluster_id,
+            role_arn=role_arn,
+            log_group_name=log_group_name,
+            target_region=aws_region)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -213,6 +236,24 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Amazon CloudWatch metric export configuration for a cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        role_arn = config.require("roleArn")
+        log_group_name = config.require("logGroupName")
+        aws_region = config.require("awsRegion")
+        example = cockroach.MetricExportCloudwatchConfig("example",
+            cluster_id=cluster_id,
+            role_arn=role_arn,
+            log_group_name=log_group_name,
+            target_region=aws_region)
+        ```
 
         :param str resource_name: The name of the resource.
         :param MetricExportCloudwatchConfigArgs args: The arguments to use to populate this resource's properties.

@@ -8,9 +8,29 @@ import * as utilities from "./utilities";
 
 /**
  * Generic connection string for a cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const sqlUserName = config.require("sqlUserName");
+ * const sqlUserPassword = config.require("sqlUserPassword");
+ * const database = config.require("database");
+ * const os = config.require("os");
+ * const cockroach = cockroach.getConnectionString({
+ *     id: clusterId,
+ *     sqlUser: sqlUserName,
+ *     password: sqlUserPassword,
+ *     database: database,
+ *     os: os,
+ * });
+ * ```
  */
 export function getConnectionString(args: GetConnectionStringArgs, opts?: pulumi.InvokeOptions): Promise<GetConnectionStringResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cockroach:index/getConnectionString:getConnectionString", {
         "database": args.database,
@@ -46,9 +66,37 @@ export interface GetConnectionStringResult {
 }
 /**
  * Generic connection string for a cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const sqlUserName = config.require("sqlUserName");
+ * const sqlUserPassword = config.require("sqlUserPassword");
+ * const database = config.require("database");
+ * const os = config.require("os");
+ * const cockroach = cockroach.getConnectionString({
+ *     id: clusterId,
+ *     sqlUser: sqlUserName,
+ *     password: sqlUserPassword,
+ *     database: database,
+ *     os: os,
+ * });
+ * ```
  */
 export function getConnectionStringOutput(args: GetConnectionStringOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConnectionStringResult> {
-    return pulumi.output(args).apply((a: any) => getConnectionString(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("cockroach:index/getConnectionString:getConnectionString", {
+        "database": args.database,
+        "id": args.id,
+        "os": args.os,
+        "password": args.password,
+        "sqlUser": args.sqlUser,
+    }, opts);
 }
 
 /**

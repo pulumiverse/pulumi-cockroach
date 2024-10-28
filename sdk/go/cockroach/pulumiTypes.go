@@ -1323,9 +1323,16 @@ func (o LogExportConfigGroupArrayOutput) Index(i pulumi.IntInput) LogExportConfi
 }
 
 type PrivateEndpointServicesService struct {
+	// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+	AvailabilityZoneIds []string `pulumi:"availabilityZoneIds"`
+	// Deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version
 	Aws *PrivateEndpointServicesServiceAws `pulumi:"aws"`
 	// Cloud provider associated with this service.
 	CloudProvider *string `pulumi:"cloudProvider"`
+	// Server side ID of the private endpoint connection.
+	EndpointServiceId *string `pulumi:"endpointServiceId"`
+	// Name of the endpoint service.
+	Name *string `pulumi:"name"`
 	// Cloud provider region code associated with this service.
 	RegionName *string `pulumi:"regionName"`
 	// Operation status of the service.
@@ -1344,9 +1351,16 @@ type PrivateEndpointServicesServiceInput interface {
 }
 
 type PrivateEndpointServicesServiceArgs struct {
+	// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+	AvailabilityZoneIds pulumi.StringArrayInput `pulumi:"availabilityZoneIds"`
+	// Deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version
 	Aws PrivateEndpointServicesServiceAwsPtrInput `pulumi:"aws"`
 	// Cloud provider associated with this service.
 	CloudProvider pulumi.StringPtrInput `pulumi:"cloudProvider"`
+	// Server side ID of the private endpoint connection.
+	EndpointServiceId pulumi.StringPtrInput `pulumi:"endpointServiceId"`
+	// Name of the endpoint service.
+	Name pulumi.StringPtrInput `pulumi:"name"`
 	// Cloud provider region code associated with this service.
 	RegionName pulumi.StringPtrInput `pulumi:"regionName"`
 	// Operation status of the service.
@@ -1404,6 +1418,12 @@ func (o PrivateEndpointServicesServiceOutput) ToPrivateEndpointServicesServiceOu
 	return o
 }
 
+// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+func (o PrivateEndpointServicesServiceOutput) AvailabilityZoneIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesService) []string { return v.AvailabilityZoneIds }).(pulumi.StringArrayOutput)
+}
+
+// Deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version
 func (o PrivateEndpointServicesServiceOutput) Aws() PrivateEndpointServicesServiceAwsPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesService) *PrivateEndpointServicesServiceAws { return v.Aws }).(PrivateEndpointServicesServiceAwsPtrOutput)
 }
@@ -1411,6 +1431,16 @@ func (o PrivateEndpointServicesServiceOutput) Aws() PrivateEndpointServicesServi
 // Cloud provider associated with this service.
 func (o PrivateEndpointServicesServiceOutput) CloudProvider() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PrivateEndpointServicesService) *string { return v.CloudProvider }).(pulumi.StringPtrOutput)
+}
+
+// Server side ID of the private endpoint connection.
+func (o PrivateEndpointServicesServiceOutput) EndpointServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesService) *string { return v.EndpointServiceId }).(pulumi.StringPtrOutput)
+}
+
+// Name of the endpoint service.
+func (o PrivateEndpointServicesServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesService) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
 // Cloud provider region code associated with this service.
@@ -1618,8 +1648,8 @@ func (o PrivateEndpointServicesServiceAwsPtrOutput) ServiceName() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
-type UserRoleGrantsRole struct {
-	// ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+type UserRoleGrantRole struct {
+	// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
 	ResourceId *string `pulumi:"resourceId"`
 	// Type of resource. Allowed values are:
 	//   * ORGANIZATION
@@ -1627,8 +1657,229 @@ type UserRoleGrantsRole struct {
 	//   * FOLDER
 	ResourceType string `pulumi:"resourceType"`
 	// Name of the role to grant. Allowed values are:
-	//   * DEVELOPER
-	//   * ADMIN
+	//   * BILLING_COORDINATOR
+	//   * ORG_ADMIN
+	//   * ORG_MEMBER
+	//   * CLUSTER_ADMIN
+	//   * CLUSTER_OPERATOR_WRITER
+	//   * CLUSTER_DEVELOPER
+	//   * CLUSTER_CREATOR
+	//   * FOLDER_ADMIN
+	//   * FOLDER_MOVER
+	RoleName string `pulumi:"roleName"`
+}
+
+// UserRoleGrantRoleInput is an input type that accepts UserRoleGrantRoleArgs and UserRoleGrantRoleOutput values.
+// You can construct a concrete instance of `UserRoleGrantRoleInput` via:
+//
+//	UserRoleGrantRoleArgs{...}
+type UserRoleGrantRoleInput interface {
+	pulumi.Input
+
+	ToUserRoleGrantRoleOutput() UserRoleGrantRoleOutput
+	ToUserRoleGrantRoleOutputWithContext(context.Context) UserRoleGrantRoleOutput
+}
+
+type UserRoleGrantRoleArgs struct {
+	// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
+	// Type of resource. Allowed values are:
+	//   * ORGANIZATION
+	//   * CLUSTER
+	//   * FOLDER
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Name of the role to grant. Allowed values are:
+	//   * BILLING_COORDINATOR
+	//   * ORG_ADMIN
+	//   * ORG_MEMBER
+	//   * CLUSTER_ADMIN
+	//   * CLUSTER_OPERATOR_WRITER
+	//   * CLUSTER_DEVELOPER
+	//   * CLUSTER_CREATOR
+	//   * FOLDER_ADMIN
+	//   * FOLDER_MOVER
+	RoleName pulumi.StringInput `pulumi:"roleName"`
+}
+
+func (UserRoleGrantRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserRoleGrantRole)(nil)).Elem()
+}
+
+func (i UserRoleGrantRoleArgs) ToUserRoleGrantRoleOutput() UserRoleGrantRoleOutput {
+	return i.ToUserRoleGrantRoleOutputWithContext(context.Background())
+}
+
+func (i UserRoleGrantRoleArgs) ToUserRoleGrantRoleOutputWithContext(ctx context.Context) UserRoleGrantRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserRoleGrantRoleOutput)
+}
+
+func (i UserRoleGrantRoleArgs) ToUserRoleGrantRolePtrOutput() UserRoleGrantRolePtrOutput {
+	return i.ToUserRoleGrantRolePtrOutputWithContext(context.Background())
+}
+
+func (i UserRoleGrantRoleArgs) ToUserRoleGrantRolePtrOutputWithContext(ctx context.Context) UserRoleGrantRolePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserRoleGrantRoleOutput).ToUserRoleGrantRolePtrOutputWithContext(ctx)
+}
+
+// UserRoleGrantRolePtrInput is an input type that accepts UserRoleGrantRoleArgs, UserRoleGrantRolePtr and UserRoleGrantRolePtrOutput values.
+// You can construct a concrete instance of `UserRoleGrantRolePtrInput` via:
+//
+//	        UserRoleGrantRoleArgs{...}
+//
+//	or:
+//
+//	        nil
+type UserRoleGrantRolePtrInput interface {
+	pulumi.Input
+
+	ToUserRoleGrantRolePtrOutput() UserRoleGrantRolePtrOutput
+	ToUserRoleGrantRolePtrOutputWithContext(context.Context) UserRoleGrantRolePtrOutput
+}
+
+type userRoleGrantRolePtrType UserRoleGrantRoleArgs
+
+func UserRoleGrantRolePtr(v *UserRoleGrantRoleArgs) UserRoleGrantRolePtrInput {
+	return (*userRoleGrantRolePtrType)(v)
+}
+
+func (*userRoleGrantRolePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**UserRoleGrantRole)(nil)).Elem()
+}
+
+func (i *userRoleGrantRolePtrType) ToUserRoleGrantRolePtrOutput() UserRoleGrantRolePtrOutput {
+	return i.ToUserRoleGrantRolePtrOutputWithContext(context.Background())
+}
+
+func (i *userRoleGrantRolePtrType) ToUserRoleGrantRolePtrOutputWithContext(ctx context.Context) UserRoleGrantRolePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserRoleGrantRolePtrOutput)
+}
+
+type UserRoleGrantRoleOutput struct{ *pulumi.OutputState }
+
+func (UserRoleGrantRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserRoleGrantRole)(nil)).Elem()
+}
+
+func (o UserRoleGrantRoleOutput) ToUserRoleGrantRoleOutput() UserRoleGrantRoleOutput {
+	return o
+}
+
+func (o UserRoleGrantRoleOutput) ToUserRoleGrantRoleOutputWithContext(ctx context.Context) UserRoleGrantRoleOutput {
+	return o
+}
+
+func (o UserRoleGrantRoleOutput) ToUserRoleGrantRolePtrOutput() UserRoleGrantRolePtrOutput {
+	return o.ToUserRoleGrantRolePtrOutputWithContext(context.Background())
+}
+
+func (o UserRoleGrantRoleOutput) ToUserRoleGrantRolePtrOutputWithContext(ctx context.Context) UserRoleGrantRolePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v UserRoleGrantRole) *UserRoleGrantRole {
+		return &v
+	}).(UserRoleGrantRolePtrOutput)
+}
+
+// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+func (o UserRoleGrantRoleOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UserRoleGrantRole) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
+}
+
+// Type of resource. Allowed values are:
+//   - ORGANIZATION
+//   - CLUSTER
+//   - FOLDER
+func (o UserRoleGrantRoleOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v UserRoleGrantRole) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Name of the role to grant. Allowed values are:
+//   - BILLING_COORDINATOR
+//   - ORG_ADMIN
+//   - ORG_MEMBER
+//   - CLUSTER_ADMIN
+//   - CLUSTER_OPERATOR_WRITER
+//   - CLUSTER_DEVELOPER
+//   - CLUSTER_CREATOR
+//   - FOLDER_ADMIN
+//   - FOLDER_MOVER
+func (o UserRoleGrantRoleOutput) RoleName() pulumi.StringOutput {
+	return o.ApplyT(func(v UserRoleGrantRole) string { return v.RoleName }).(pulumi.StringOutput)
+}
+
+type UserRoleGrantRolePtrOutput struct{ *pulumi.OutputState }
+
+func (UserRoleGrantRolePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**UserRoleGrantRole)(nil)).Elem()
+}
+
+func (o UserRoleGrantRolePtrOutput) ToUserRoleGrantRolePtrOutput() UserRoleGrantRolePtrOutput {
+	return o
+}
+
+func (o UserRoleGrantRolePtrOutput) ToUserRoleGrantRolePtrOutputWithContext(ctx context.Context) UserRoleGrantRolePtrOutput {
+	return o
+}
+
+func (o UserRoleGrantRolePtrOutput) Elem() UserRoleGrantRoleOutput {
+	return o.ApplyT(func(v *UserRoleGrantRole) UserRoleGrantRole {
+		if v != nil {
+			return *v
+		}
+		var ret UserRoleGrantRole
+		return ret
+	}).(UserRoleGrantRoleOutput)
+}
+
+// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+func (o UserRoleGrantRolePtrOutput) ResourceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *UserRoleGrantRole) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Type of resource. Allowed values are:
+//   - ORGANIZATION
+//   - CLUSTER
+//   - FOLDER
+func (o UserRoleGrantRolePtrOutput) ResourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *UserRoleGrantRole) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ResourceType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Name of the role to grant. Allowed values are:
+//   - BILLING_COORDINATOR
+//   - ORG_ADMIN
+//   - ORG_MEMBER
+//   - CLUSTER_ADMIN
+//   - CLUSTER_OPERATOR_WRITER
+//   - CLUSTER_DEVELOPER
+//   - CLUSTER_CREATOR
+//   - FOLDER_ADMIN
+//   - FOLDER_MOVER
+func (o UserRoleGrantRolePtrOutput) RoleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *UserRoleGrantRole) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RoleName
+	}).(pulumi.StringPtrOutput)
+}
+
+type UserRoleGrantsRole struct {
+	// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+	ResourceId *string `pulumi:"resourceId"`
+	// Type of resource. Allowed values are:
+	//   * ORGANIZATION
+	//   * CLUSTER
+	//   * FOLDER
+	ResourceType string `pulumi:"resourceType"`
+	// Name of the role to grant. Allowed values are:
 	//   * BILLING_COORDINATOR
 	//   * ORG_ADMIN
 	//   * ORG_MEMBER
@@ -1653,7 +1904,7 @@ type UserRoleGrantsRoleInput interface {
 }
 
 type UserRoleGrantsRoleArgs struct {
-	// ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+	// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
 	ResourceId pulumi.StringPtrInput `pulumi:"resourceId"`
 	// Type of resource. Allowed values are:
 	//   * ORGANIZATION
@@ -1661,8 +1912,6 @@ type UserRoleGrantsRoleArgs struct {
 	//   * FOLDER
 	ResourceType pulumi.StringInput `pulumi:"resourceType"`
 	// Name of the role to grant. Allowed values are:
-	//   * DEVELOPER
-	//   * ADMIN
 	//   * BILLING_COORDINATOR
 	//   * ORG_ADMIN
 	//   * ORG_MEMBER
@@ -1726,7 +1975,7 @@ func (o UserRoleGrantsRoleOutput) ToUserRoleGrantsRoleOutputWithContext(ctx cont
 	return o
 }
 
-// ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
 func (o UserRoleGrantsRoleOutput) ResourceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v UserRoleGrantsRole) *string { return v.ResourceId }).(pulumi.StringPtrOutput)
 }
@@ -1740,8 +1989,6 @@ func (o UserRoleGrantsRoleOutput) ResourceType() pulumi.StringOutput {
 }
 
 // Name of the role to grant. Allowed values are:
-//   - DEVELOPER
-//   - ADMIN
 //   - BILLING_COORDINATOR
 //   - ORG_ADMIN
 //   - ORG_MEMBER
@@ -2252,6 +2499,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceArrayInput)(nil)).Elem(), PrivateEndpointServicesServiceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceAwsInput)(nil)).Elem(), PrivateEndpointServicesServiceAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceAwsPtrInput)(nil)).Elem(), PrivateEndpointServicesServiceAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantRoleInput)(nil)).Elem(), UserRoleGrantRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantRolePtrInput)(nil)).Elem(), UserRoleGrantRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantsRoleInput)(nil)).Elem(), UserRoleGrantsRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantsRoleArrayInput)(nil)).Elem(), UserRoleGrantsRoleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterDedicatedInput)(nil)).Elem(), GetCockroachClusterDedicatedArgs{})
@@ -2281,6 +2530,8 @@ func init() {
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceArrayOutput{})
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceAwsOutput{})
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceAwsPtrOutput{})
+	pulumi.RegisterOutputType(UserRoleGrantRoleOutput{})
+	pulumi.RegisterOutputType(UserRoleGrantRolePtrOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantsRoleOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantsRoleArrayOutput{})
 	pulumi.RegisterOutputType(GetCockroachClusterDedicatedOutput{})

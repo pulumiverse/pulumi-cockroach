@@ -12,18 +12,26 @@ import (
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
-// AWS PrivateLink Endpoint Connection.
+// Private endpoint connections allow customer applications to connect to a CockroachDB Cloud cluster without traversing the public internet. All application-database traffic remains within the cloud-provider network.
+//
+// ## Import
+//
+// format: <cluster id>:<connection id>
+//
+// ```sh
+// $ pulumi import cockroach:index/privateEndpointConnection:PrivateEndpointConnection resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:vpce-0c1308d7312217abc
+// ```
 type PrivateEndpointConnection struct {
 	pulumi.CustomResourceState
 
 	// Cloud provider associated with this connection.
 	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
 	ClusterId     pulumi.StringOutput `pulumi:"clusterId"`
-	// Client side ID of the PrivateLink connection.
+	// Client side ID of the Private Endpoint Connection.
 	EndpointId pulumi.StringOutput `pulumi:"endpointId"`
 	// Cloud provider region code associated with this connection.
 	RegionName pulumi.StringOutput `pulumi:"regionName"`
-	// Server side ID of the PrivateLink connection.
+	// Server side ID of the Private Endpoint Connection.
 	ServiceId pulumi.StringOutput `pulumi:"serviceId"`
 }
 
@@ -66,11 +74,11 @@ type privateEndpointConnectionState struct {
 	// Cloud provider associated with this connection.
 	CloudProvider *string `pulumi:"cloudProvider"`
 	ClusterId     *string `pulumi:"clusterId"`
-	// Client side ID of the PrivateLink connection.
+	// Client side ID of the Private Endpoint Connection.
 	EndpointId *string `pulumi:"endpointId"`
 	// Cloud provider region code associated with this connection.
 	RegionName *string `pulumi:"regionName"`
-	// Server side ID of the PrivateLink connection.
+	// Server side ID of the Private Endpoint Connection.
 	ServiceId *string `pulumi:"serviceId"`
 }
 
@@ -78,11 +86,11 @@ type PrivateEndpointConnectionState struct {
 	// Cloud provider associated with this connection.
 	CloudProvider pulumi.StringPtrInput
 	ClusterId     pulumi.StringPtrInput
-	// Client side ID of the PrivateLink connection.
+	// Client side ID of the Private Endpoint Connection.
 	EndpointId pulumi.StringPtrInput
 	// Cloud provider region code associated with this connection.
 	RegionName pulumi.StringPtrInput
-	// Server side ID of the PrivateLink connection.
+	// Server side ID of the Private Endpoint Connection.
 	ServiceId pulumi.StringPtrInput
 }
 
@@ -92,14 +100,14 @@ func (PrivateEndpointConnectionState) ElementType() reflect.Type {
 
 type privateEndpointConnectionArgs struct {
 	ClusterId string `pulumi:"clusterId"`
-	// Client side ID of the PrivateLink connection.
+	// Client side ID of the Private Endpoint Connection.
 	EndpointId string `pulumi:"endpointId"`
 }
 
 // The set of arguments for constructing a PrivateEndpointConnection resource.
 type PrivateEndpointConnectionArgs struct {
 	ClusterId pulumi.StringInput
-	// Client side ID of the PrivateLink connection.
+	// Client side ID of the Private Endpoint Connection.
 	EndpointId pulumi.StringInput
 }
 
@@ -199,7 +207,7 @@ func (o PrivateEndpointConnectionOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateEndpointConnection) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// Client side ID of the PrivateLink connection.
+// Client side ID of the Private Endpoint Connection.
 func (o PrivateEndpointConnectionOutput) EndpointId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateEndpointConnection) pulumi.StringOutput { return v.EndpointId }).(pulumi.StringOutput)
 }
@@ -209,7 +217,7 @@ func (o PrivateEndpointConnectionOutput) RegionName() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateEndpointConnection) pulumi.StringOutput { return v.RegionName }).(pulumi.StringOutput)
 }
 
-// Server side ID of the PrivateLink connection.
+// Server side ID of the Private Endpoint Connection.
 func (o PrivateEndpointConnectionOutput) ServiceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateEndpointConnection) pulumi.StringOutput { return v.ServiceId }).(pulumi.StringOutput)
 }

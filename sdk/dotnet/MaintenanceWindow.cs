@@ -12,6 +12,30 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Maintenance window configuration for a cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var offsetDuration = config.GetDouble("offsetDuration") ?? 172800;
+    ///     var windowDuration = config.GetDouble("windowDuration") ?? 21600;
+    ///     var example = new Cockroach.MaintenanceWindow("example", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///         OffsetDuration = offsetDuration,
+    ///         WindowDuration = windowDuration,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/maintenanceWindow:MaintenanceWindow")]
     public partial class MaintenanceWindow : global::Pulumi.CustomResource

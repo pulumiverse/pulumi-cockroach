@@ -6,6 +6,30 @@ import * as utilities from "./utilities";
 
 /**
  * List of IP ranges allowed to access the cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const vpn = new cockroach.AllowList("vpn", {
+ *     name: "vpn",
+ *     cidrIp: "123.123.1.1",
+ *     cidrMask: 32,
+ *     ui: true,
+ *     sql: true,
+ *     clusterId: staging.id,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>:<cidr ip>/<cidr mask>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/allowList:AllowList home_office 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:123.123.1.1/32
+ * ```
  */
 export class AllowList extends pulumi.CustomResource {
     /**

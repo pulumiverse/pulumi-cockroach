@@ -8,9 +8,21 @@ import * as utilities from "./utilities";
 
 /**
  * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroach = cockroach.getCockroachCluster({
+ *     id: clusterId,
+ * });
+ * ```
  */
 export function getCockroachCluster(args: GetCockroachClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetCockroachClusterResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cockroach:index/getCockroachCluster:getCockroachCluster", {
         "id": args.id,
@@ -45,9 +57,25 @@ export interface GetCockroachClusterResult {
 }
 /**
  * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroach = cockroach.getCockroachCluster({
+ *     id: clusterId,
+ * });
+ * ```
  */
 export function getCockroachClusterOutput(args: GetCockroachClusterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCockroachClusterResult> {
-    return pulumi.output(args).apply((a: any) => getCockroachCluster(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("cockroach:index/getCockroachCluster:getCockroachCluster", {
+        "id": args.id,
+    }, opts);
 }
 
 /**

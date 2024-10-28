@@ -12,7 +12,44 @@ import (
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
-// PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
+// PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			_, err := cockroach.NewPrivateEndpointServices(ctx, "cockroach", &cockroach.PrivateEndpointServicesArgs{
+//				ClusterId: pulumi.String(clusterId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// format: <cluster id>
+//
+// ```sh
+// $ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type PrivateEndpointServices struct {
 	pulumi.CustomResourceState
 

@@ -8,9 +8,21 @@ import * as utilities from "./utilities";
  * TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/<cluster name>-ca.crt` on MacOS or Linux, or `$env:appdata\CockroachCloud\certs\<cluster name>-ca.crt` on Windows.
  *
  * Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\postgresql\root.crt` on Windows.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroach = cockroach.getClusterCert({
+ *     id: clusterId,
+ * });
+ * ```
  */
 export function getClusterCert(args: GetClusterCertArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterCertResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cockroach:index/getClusterCert:getClusterCert", {
         "id": args.id,
@@ -44,9 +56,25 @@ export interface GetClusterCertResult {
  * TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/<cluster name>-ca.crt` on MacOS or Linux, or `$env:appdata\CockroachCloud\certs\<cluster name>-ca.crt` on Windows.
  *
  * Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\postgresql\root.crt` on Windows.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroach = cockroach.getClusterCert({
+ *     id: clusterId,
+ * });
+ * ```
  */
 export function getClusterCertOutput(args: GetClusterCertOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterCertResult> {
-    return pulumi.output(args).apply((a: any) => getClusterCert(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("cockroach:index/getClusterCert:getClusterCert", {
+        "id": args.id,
+    }, opts);
 }
 
 /**

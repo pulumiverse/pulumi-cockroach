@@ -14,12 +14,52 @@ namespace Pulumiverse.Cockroach
     {
         /// <summary>
         /// Information about an individual user.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var emailAddress = config.Require("emailAddress");
+        ///     var cockroach = Cockroach.GetPersonUser.Invoke(new()
+        ///     {
+        ///         Email = emailAddress,
+        ///     });
+        /// 
+        /// });
+        /// ```
         /// </summary>
         public static Task<GetPersonUserResult> InvokeAsync(GetPersonUserArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPersonUserResult>("cockroach:index/getPersonUser:getPersonUser", args ?? new GetPersonUserArgs(), options.WithDefaults());
 
         /// <summary>
         /// Information about an individual user.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var emailAddress = config.Require("emailAddress");
+        ///     var cockroach = Cockroach.GetPersonUser.Invoke(new()
+        ///     {
+        ///         Email = emailAddress,
+        ///     });
+        /// 
+        /// });
+        /// ```
         /// </summary>
         public static Output<GetPersonUserResult> Invoke(GetPersonUserInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPersonUserResult>("cockroach:index/getPersonUser:getPersonUser", args ?? new GetPersonUserInvokeArgs(), options.WithDefaults());

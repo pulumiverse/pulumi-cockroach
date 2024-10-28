@@ -12,6 +12,28 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var cockroachVersion = config.Require("cockroachVersion");
+    ///     var cockroach = new Cockroach.FinalizeVersionUpgrade("cockroach", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///         CockroachVersion = cockroachVersion,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade")]
     public partial class FinalizeVersionUpgrade : global::Pulumi.CustomResource

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['AllowListArgs', 'AllowList']
@@ -221,6 +226,29 @@ class AllowList(pulumi.CustomResource):
         """
         List of IP ranges allowed to access the cluster.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        vpn = cockroach.AllowList("vpn",
+            name="vpn",
+            cidr_ip="123.123.1.1",
+            cidr_mask=32,
+            ui=True,
+            sql=True,
+            cluster_id=staging["id"])
+        ```
+
+        ## Import
+
+        format: <cluster id>:<cidr ip>/<cidr mask>
+
+        ```sh
+        $ pulumi import cockroach:index/allowList:AllowList home_office 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:123.123.1.1/32
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
@@ -237,6 +265,29 @@ class AllowList(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         List of IP ranges allowed to access the cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        vpn = cockroach.AllowList("vpn",
+            name="vpn",
+            cidr_ip="123.123.1.1",
+            cidr_mask=32,
+            ui=True,
+            sql=True,
+            cluster_id=staging["id"])
+        ```
+
+        ## Import
+
+        format: <cluster id>:<cidr ip>/<cidr mask>
+
+        ```sh
+        $ pulumi import cockroach:index/allowList:AllowList home_office 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:123.123.1.1/32
+        ```
 
         :param str resource_name: The name of the resource.
         :param AllowListArgs args: The arguments to use to populate this resource's properties.

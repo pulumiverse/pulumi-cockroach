@@ -13,6 +13,39 @@ import (
 )
 
 // DataDog metric export configuration for a cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			datadogSite := cfg.Require("datadogSite")
+//			datadogApiKey := cfg.Require("datadogApiKey")
+//			_, err := cockroach.NewMetricExportDatadogConfig(ctx, "example", &cockroach.MetricExportDatadogConfigArgs{
+//				ClusterId: pulumi.String(clusterId),
+//				Site:      pulumi.String(datadogSite),
+//				ApiKey:    pulumi.String(datadogApiKey),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type MetricExportDatadogConfig struct {
 	pulumi.CustomResourceState
 

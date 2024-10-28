@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -163,6 +168,17 @@ def get_cockroach_cluster(id: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetCockroachClusterResult:
     """
     CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    cluster_id = config.require("clusterId")
+    cockroach = cockroach.get_cockroach_cluster(id=cluster_id)
+    ```
     """
     __args__ = dict()
     __args__['id'] = id
@@ -184,12 +200,38 @@ def get_cockroach_cluster(id: Optional[str] = None,
         serverless=pulumi.get(__ret__, 'serverless'),
         state=pulumi.get(__ret__, 'state'),
         upgrade_status=pulumi.get(__ret__, 'upgrade_status'))
-
-
-@_utilities.lift_output_func(get_cockroach_cluster)
 def get_cockroach_cluster_output(id: Optional[pulumi.Input[str]] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCockroachClusterResult]:
     """
     CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    cluster_id = config.require("clusterId")
+    cockroach = cockroach.get_cockroach_cluster(id=cluster_id)
+    ```
     """
-    ...
+    __args__ = dict()
+    __args__['id'] = id
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('cockroach:index/getCockroachCluster:getCockroachCluster', __args__, opts=opts, typ=GetCockroachClusterResult)
+    return __ret__.apply(lambda __response__: GetCockroachClusterResult(
+        account_id=pulumi.get(__response__, 'account_id'),
+        cloud_provider=pulumi.get(__response__, 'cloud_provider'),
+        cockroach_version=pulumi.get(__response__, 'cockroach_version'),
+        creator_id=pulumi.get(__response__, 'creator_id'),
+        dedicated=pulumi.get(__response__, 'dedicated'),
+        id=pulumi.get(__response__, 'id'),
+        name=pulumi.get(__response__, 'name'),
+        operation_status=pulumi.get(__response__, 'operation_status'),
+        parent_id=pulumi.get(__response__, 'parent_id'),
+        plan=pulumi.get(__response__, 'plan'),
+        regions=pulumi.get(__response__, 'regions'),
+        serverless=pulumi.get(__response__, 'serverless'),
+        state=pulumi.get(__response__, 'state'),
+        upgrade_status=pulumi.get(__response__, 'upgrade_status')))

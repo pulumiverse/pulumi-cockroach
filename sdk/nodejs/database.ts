@@ -6,6 +6,28 @@ import * as utilities from "./utilities";
 
 /**
  * CockroachDB database.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroach = new cockroach.Database("cockroach", {
+ *     name: "example-database",
+ *     clusterId: clusterId,
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>:<database name>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/database:Database my_database 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:mydatabase
+ * ```
  */
 export class Database extends pulumi.CustomResource {
     /**

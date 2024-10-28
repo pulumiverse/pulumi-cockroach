@@ -12,6 +12,37 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// List of IP ranges allowed to access the cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var vpn = new Cockroach.AllowList("vpn", new()
+    ///     {
+    ///         Name = "vpn",
+    ///         CidrIp = "123.123.1.1",
+    ///         CidrMask = 32,
+    ///         Ui = true,
+    ///         Sql = true,
+    ///         ClusterId = staging.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;:&lt;cidr ip&gt;/&lt;cidr mask&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/allowList:AllowList home_office 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:123.123.1.1/32
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/allowList:AllowList")]
     public partial class AllowList : global::Pulumi.CustomResource

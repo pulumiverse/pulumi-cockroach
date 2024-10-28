@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['MetricExportDatadogConfigArgs', 'MetricExportDatadogConfig']
@@ -164,6 +169,22 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
         """
         DataDog metric export configuration for a cluster.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        datadog_site = config.require("datadogSite")
+        datadog_api_key = config.require("datadogApiKey")
+        example = cockroach.MetricExportDatadogConfig("example",
+            cluster_id=cluster_id,
+            site=datadog_site,
+            api_key=datadog_api_key)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_key: A Datadog API key.
@@ -178,6 +199,22 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         DataDog metric export configuration for a cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        datadog_site = config.require("datadogSite")
+        datadog_api_key = config.require("datadogApiKey")
+        example = cockroach.MetricExportDatadogConfig("example",
+            cluster_id=cluster_id,
+            site=datadog_site,
+            api_key=datadog_api_key)
+        ```
 
         :param str resource_name: The name of the resource.
         :param MetricExportDatadogConfigArgs args: The arguments to use to populate this resource's properties.

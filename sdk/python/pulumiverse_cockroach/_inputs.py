@@ -4,25 +4,63 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'ApiOidcConfigIdentityMapArgs',
+    'ApiOidcConfigIdentityMapArgsDict',
     'ClusterDedicatedArgs',
+    'ClusterDedicatedArgsDict',
     'ClusterRegionArgs',
+    'ClusterRegionArgsDict',
     'ClusterServerlessArgs',
+    'ClusterServerlessArgsDict',
     'ClusterServerlessUsageLimitsArgs',
+    'ClusterServerlessUsageLimitsArgsDict',
     'CmekAdditionalRegionArgs',
+    'CmekAdditionalRegionArgsDict',
     'CmekRegionArgs',
+    'CmekRegionArgsDict',
     'CmekRegionKeyArgs',
+    'CmekRegionKeyArgsDict',
     'LogExportConfigGroupArgs',
+    'LogExportConfigGroupArgsDict',
     'PrivateEndpointServicesServiceArgs',
+    'PrivateEndpointServicesServiceArgsDict',
     'PrivateEndpointServicesServiceAwsArgs',
+    'PrivateEndpointServicesServiceAwsArgsDict',
+    'UserRoleGrantRoleArgs',
+    'UserRoleGrantRoleArgsDict',
     'UserRoleGrantsRoleArgs',
+    'UserRoleGrantsRoleArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class ApiOidcConfigIdentityMapArgsDict(TypedDict):
+        cc_identity: pulumi.Input[str]
+        """
+        The username (email or service account id) of the CC user that the token should map to.
+        """
+        token_identity: pulumi.Input[str]
+        """
+        The token value that needs to be mapped.
+        """
+        is_regex: NotRequired[pulumi.Input[bool]]
+        """
+        Indicates that the token_principal field is a regex value.
+        """
+elif False:
+    ApiOidcConfigIdentityMapArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ApiOidcConfigIdentityMapArgs:
@@ -76,6 +114,35 @@ class ApiOidcConfigIdentityMapArgs:
     def is_regex(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "is_regex", value)
 
+
+if not MYPY:
+    class ClusterDedicatedArgsDict(TypedDict):
+        disk_iops: NotRequired[pulumi.Input[int]]
+        """
+        Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        """
+        machine_type: NotRequired[pulumi.Input[str]]
+        """
+        Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        """
+        memory_gib: NotRequired[pulumi.Input[float]]
+        """
+        Memory per node in GiB.
+        """
+        num_virtual_cpus: NotRequired[pulumi.Input[int]]
+        """
+        Number of virtual CPUs per node in the cluster.
+        """
+        private_network_visibility: NotRequired[pulumi.Input[bool]]
+        """
+        Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+        """
+        storage_gib: NotRequired[pulumi.Input[int]]
+        """
+        Storage amount per node in GiB.
+        """
+elif False:
+    ClusterDedicatedArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ClusterDedicatedArgs:
@@ -180,6 +247,35 @@ class ClusterDedicatedArgs:
         pulumi.set(self, "storage_gib", value)
 
 
+if not MYPY:
+    class ClusterRegionArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        Name of the region. Should match the region code used by the cluster's cloud provider.
+        """
+        internal_dns: NotRequired[pulumi.Input[str]]
+        """
+        Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        """
+        node_count: NotRequired[pulumi.Input[int]]
+        """
+        Number of nodes in the region. Will always be 0 for serverless clusters.
+        """
+        primary: NotRequired[pulumi.Input[bool]]
+        """
+        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        """
+        sql_dns: NotRequired[pulumi.Input[str]]
+        """
+        DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        """
+        ui_dns: NotRequired[pulumi.Input[str]]
+        """
+        DNS name used when connecting to the DB Console for the cluster.
+        """
+elif False:
+    ClusterRegionArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ClusterRegionArgs:
     def __init__(__self__, *,
@@ -282,6 +378,20 @@ class ClusterRegionArgs:
         pulumi.set(self, "ui_dns", value)
 
 
+if not MYPY:
+    class ClusterServerlessArgsDict(TypedDict):
+        routing_id: NotRequired[pulumi.Input[str]]
+        """
+        Cluster identifier in a connection string.
+        """
+        spend_limit: NotRequired[pulumi.Input[int]]
+        """
+        Spend limit in US cents.
+        """
+        usage_limits: NotRequired[pulumi.Input['ClusterServerlessUsageLimitsArgsDict']]
+elif False:
+    ClusterServerlessArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ClusterServerlessArgs:
     def __init__(__self__, *,
@@ -333,6 +443,19 @@ class ClusterServerlessArgs:
         pulumi.set(self, "usage_limits", value)
 
 
+if not MYPY:
+    class ClusterServerlessUsageLimitsArgsDict(TypedDict):
+        request_unit_limit: pulumi.Input[int]
+        """
+        Maximum number of Request Units that the cluster can consume during the month.
+        """
+        storage_mib_limit: pulumi.Input[int]
+        """
+        Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
+        """
+elif False:
+    ClusterServerlessUsageLimitsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class ClusterServerlessUsageLimitsArgs:
     def __init__(__self__, *,
@@ -369,6 +492,35 @@ class ClusterServerlessUsageLimitsArgs:
     def storage_mib_limit(self, value: pulumi.Input[int]):
         pulumi.set(self, "storage_mib_limit", value)
 
+
+if not MYPY:
+    class CmekAdditionalRegionArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        Name of the region. Should match the region code used by the cluster's cloud provider.
+        """
+        internal_dns: NotRequired[pulumi.Input[str]]
+        """
+        Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
+        """
+        node_count: NotRequired[pulumi.Input[int]]
+        """
+        Number of nodes in the region. Will always be 0 for serverless clusters.
+        """
+        primary: NotRequired[pulumi.Input[bool]]
+        """
+        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        """
+        sql_dns: NotRequired[pulumi.Input[str]]
+        """
+        DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
+        """
+        ui_dns: NotRequired[pulumi.Input[str]]
+        """
+        DNS name used when connecting to the DB Console for the cluster.
+        """
+elif False:
+    CmekAdditionalRegionArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class CmekAdditionalRegionArgs:
@@ -472,6 +624,20 @@ class CmekAdditionalRegionArgs:
         pulumi.set(self, "ui_dns", value)
 
 
+if not MYPY:
+    class CmekRegionArgsDict(TypedDict):
+        key: pulumi.Input['CmekRegionKeyArgsDict']
+        region: pulumi.Input[str]
+        """
+        Cloud provider region code.
+        """
+        status: NotRequired[pulumi.Input[str]]
+        """
+        Describes the status of the current encryption key within the region.
+        """
+elif False:
+    CmekRegionArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CmekRegionArgs:
     def __init__(__self__, *,
@@ -520,6 +686,42 @@ class CmekRegionArgs:
     def status(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "status", value)
 
+
+if not MYPY:
+    class CmekRegionKeyArgsDict(TypedDict):
+        auth_principal: pulumi.Input[str]
+        """
+        Principal to authenticate as in order to access the key.
+        """
+        type: pulumi.Input[str]
+        """
+        Type of encryption key. Current allowed values are:
+          * AWS_KMS
+          * GCP_CLOUD_KMS
+          * NULL_KMS
+        """
+        uri: pulumi.Input[str]
+        """
+        Provider-specific URI pointing to the encryption key.
+        """
+        created_at: NotRequired[pulumi.Input[str]]
+        """
+        Indicates when the key was created.
+        """
+        status: NotRequired[pulumi.Input[str]]
+        """
+        Current status of this key.
+        """
+        updated_at: NotRequired[pulumi.Input[str]]
+        """
+        Indicates when the key was last updated.
+        """
+        user_message: NotRequired[pulumi.Input[str]]
+        """
+        Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
+        """
+elif False:
+    CmekRegionKeyArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class CmekRegionKeyArgs:
@@ -643,6 +845,27 @@ class CmekRegionKeyArgs:
         pulumi.set(self, "user_message", value)
 
 
+if not MYPY:
+    class LogExportConfigGroupArgsDict(TypedDict):
+        channels: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        A list of CockroachDB log channels to include in this group.
+        """
+        log_name: pulumi.Input[str]
+        """
+        The name of the group, reflected in the log sink.
+        """
+        min_level: NotRequired[pulumi.Input[str]]
+        """
+        The minimum log level to filter to this log group.
+        """
+        redact: NotRequired[pulumi.Input[bool]]
+        """
+        Governs whether this log group should aggregate redacted logs if unset.
+        """
+elif False:
+    LogExportConfigGroupArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class LogExportConfigGroupArgs:
     def __init__(__self__, *,
@@ -712,29 +935,87 @@ class LogExportConfigGroupArgs:
         pulumi.set(self, "redact", value)
 
 
+if not MYPY:
+    class PrivateEndpointServicesServiceArgsDict(TypedDict):
+        availability_zone_ids: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        """
+        aws: NotRequired[pulumi.Input['PrivateEndpointServicesServiceAwsArgsDict']]
+        cloud_provider: NotRequired[pulumi.Input[str]]
+        """
+        Cloud provider associated with this service.
+        """
+        endpoint_service_id: NotRequired[pulumi.Input[str]]
+        """
+        Server side ID of the private endpoint connection.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        """
+        Name of the endpoint service.
+        """
+        region_name: NotRequired[pulumi.Input[str]]
+        """
+        Cloud provider region code associated with this service.
+        """
+        status: NotRequired[pulumi.Input[str]]
+        """
+        Operation status of the service.
+        """
+elif False:
+    PrivateEndpointServicesServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class PrivateEndpointServicesServiceArgs:
     def __init__(__self__, *,
+                 availability_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  aws: Optional[pulumi.Input['PrivateEndpointServicesServiceAwsArgs']] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
+                 endpoint_service_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
                  region_name: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_ids: Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
         :param pulumi.Input[str] cloud_provider: Cloud provider associated with this service.
+        :param pulumi.Input[str] endpoint_service_id: Server side ID of the private endpoint connection.
+        :param pulumi.Input[str] name: Name of the endpoint service.
         :param pulumi.Input[str] region_name: Cloud provider region code associated with this service.
         :param pulumi.Input[str] status: Operation status of the service.
         """
+        if availability_zone_ids is not None:
+            pulumi.set(__self__, "availability_zone_ids", availability_zone_ids)
+        if aws is not None:
+            warnings.warn("""nested aws fields have been moved one level up. These fields will be removed in a future version""", DeprecationWarning)
+            pulumi.log.warn("""aws is deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version""")
         if aws is not None:
             pulumi.set(__self__, "aws", aws)
         if cloud_provider is not None:
             pulumi.set(__self__, "cloud_provider", cloud_provider)
+        if endpoint_service_id is not None:
+            pulumi.set(__self__, "endpoint_service_id", endpoint_service_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if region_name is not None:
             pulumi.set(__self__, "region_name", region_name)
         if status is not None:
             pulumi.set(__self__, "status", status)
 
     @property
+    @pulumi.getter(name="availabilityZoneIds")
+    def availability_zone_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        """
+        return pulumi.get(self, "availability_zone_ids")
+
+    @availability_zone_ids.setter
+    def availability_zone_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "availability_zone_ids", value)
+
+    @property
     @pulumi.getter
+    @_utilities.deprecated("""nested aws fields have been moved one level up. These fields will be removed in a future version""")
     def aws(self) -> Optional[pulumi.Input['PrivateEndpointServicesServiceAwsArgs']]:
         return pulumi.get(self, "aws")
 
@@ -753,6 +1034,30 @@ class PrivateEndpointServicesServiceArgs:
     @cloud_provider.setter
     def cloud_provider(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cloud_provider", value)
+
+    @property
+    @pulumi.getter(name="endpointServiceId")
+    def endpoint_service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server side ID of the private endpoint connection.
+        """
+        return pulumi.get(self, "endpoint_service_id")
+
+    @endpoint_service_id.setter
+    def endpoint_service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "endpoint_service_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the endpoint service.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="regionName")
@@ -778,6 +1083,23 @@ class PrivateEndpointServicesServiceArgs:
     def status(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "status", value)
 
+
+if not MYPY:
+    class PrivateEndpointServicesServiceAwsArgsDict(TypedDict):
+        availability_zone_ids: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        AZ IDs users should create their VPCs in to minimize their cost.
+        """
+        service_id: NotRequired[pulumi.Input[str]]
+        """
+        Server side ID of the PrivateLink connection.
+        """
+        service_name: NotRequired[pulumi.Input[str]]
+        """
+        AWS service name used to create endpoints.
+        """
+elif False:
+    PrivateEndpointServicesServiceAwsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class PrivateEndpointServicesServiceAwsArgs:
@@ -834,6 +1156,141 @@ class PrivateEndpointServicesServiceAwsArgs:
         pulumi.set(self, "service_name", value)
 
 
+if not MYPY:
+    class UserRoleGrantRoleArgsDict(TypedDict):
+        resource_type: pulumi.Input[str]
+        """
+        Type of resource. Allowed values are:
+          * ORGANIZATION
+          * CLUSTER
+          * FOLDER
+        """
+        role_name: pulumi.Input[str]
+        """
+        Name of the role to grant. Allowed values are:
+          * BILLING_COORDINATOR
+          * ORG_ADMIN
+          * ORG_MEMBER
+          * CLUSTER_ADMIN
+          * CLUSTER_OPERATOR_WRITER
+          * CLUSTER_DEVELOPER
+          * CLUSTER_CREATOR
+          * FOLDER_ADMIN
+          * FOLDER_MOVER
+        """
+        resource_id: NotRequired[pulumi.Input[str]]
+        """
+        ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+        """
+elif False:
+    UserRoleGrantRoleArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class UserRoleGrantRoleArgs:
+    def __init__(__self__, *,
+                 resource_type: pulumi.Input[str],
+                 role_name: pulumi.Input[str],
+                 resource_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] resource_type: Type of resource. Allowed values are:
+                 * ORGANIZATION
+                 * CLUSTER
+                 * FOLDER
+        :param pulumi.Input[str] role_name: Name of the role to grant. Allowed values are:
+                 * BILLING_COORDINATOR
+                 * ORG_ADMIN
+                 * ORG_MEMBER
+                 * CLUSTER_ADMIN
+                 * CLUSTER_OPERATOR_WRITER
+                 * CLUSTER_DEVELOPER
+                 * CLUSTER_CREATOR
+                 * FOLDER_ADMIN
+                 * FOLDER_MOVER
+        :param pulumi.Input[str] resource_id: ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+        """
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "role_name", role_name)
+        if resource_id is not None:
+            pulumi.set(__self__, "resource_id", resource_id)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> pulumi.Input[str]:
+        """
+        Type of resource. Allowed values are:
+          * ORGANIZATION
+          * CLUSTER
+          * FOLDER
+        """
+        return pulumi.get(self, "resource_type")
+
+    @resource_type.setter
+    def resource_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "resource_type", value)
+
+    @property
+    @pulumi.getter(name="roleName")
+    def role_name(self) -> pulumi.Input[str]:
+        """
+        Name of the role to grant. Allowed values are:
+          * BILLING_COORDINATOR
+          * ORG_ADMIN
+          * ORG_MEMBER
+          * CLUSTER_ADMIN
+          * CLUSTER_OPERATOR_WRITER
+          * CLUSTER_DEVELOPER
+          * CLUSTER_CREATOR
+          * FOLDER_ADMIN
+          * FOLDER_MOVER
+        """
+        return pulumi.get(self, "role_name")
+
+    @role_name.setter
+    def role_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "role_name", value)
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @resource_id.setter
+    def resource_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_id", value)
+
+
+if not MYPY:
+    class UserRoleGrantsRoleArgsDict(TypedDict):
+        resource_type: pulumi.Input[str]
+        """
+        Type of resource. Allowed values are: 
+          * ORGANIZATION
+          * CLUSTER
+          * FOLDER
+        """
+        role_name: pulumi.Input[str]
+        """
+        Name of the role to grant. Allowed values are:
+          * BILLING_COORDINATOR
+          * ORG_ADMIN
+          * ORG_MEMBER
+          * CLUSTER_ADMIN
+          * CLUSTER_OPERATOR_WRITER
+          * CLUSTER_DEVELOPER
+          * CLUSTER_CREATOR
+          * FOLDER_ADMIN
+          * FOLDER_MOVER
+        """
+        resource_id: NotRequired[pulumi.Input[str]]
+        """
+        ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+        """
+elif False:
+    UserRoleGrantsRoleArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class UserRoleGrantsRoleArgs:
     def __init__(__self__, *,
@@ -846,8 +1303,6 @@ class UserRoleGrantsRoleArgs:
                  * CLUSTER
                  * FOLDER
         :param pulumi.Input[str] role_name: Name of the role to grant. Allowed values are:
-                 * DEVELOPER
-                 * ADMIN
                  * BILLING_COORDINATOR
                  * ORG_ADMIN
                  * ORG_MEMBER
@@ -857,7 +1312,7 @@ class UserRoleGrantsRoleArgs:
                  * CLUSTER_CREATOR
                  * FOLDER_ADMIN
                  * FOLDER_MOVER
-        :param pulumi.Input[str] resource_id: ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        :param pulumi.Input[str] resource_id: ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
         """
         pulumi.set(__self__, "resource_type", resource_type)
         pulumi.set(__self__, "role_name", role_name)
@@ -884,8 +1339,6 @@ class UserRoleGrantsRoleArgs:
     def role_name(self) -> pulumi.Input[str]:
         """
         Name of the role to grant. Allowed values are:
-          * DEVELOPER
-          * ADMIN
           * BILLING_COORDINATOR
           * ORG_ADMIN
           * ORG_MEMBER
@@ -906,7 +1359,7 @@ class UserRoleGrantsRoleArgs:
     @pulumi.getter(name="resourceId")
     def resource_id(self) -> Optional[pulumi.Input[str]]:
         """
-        ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
         """
         return pulumi.get(self, "resource_id")
 

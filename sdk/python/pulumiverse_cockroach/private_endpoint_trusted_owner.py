@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['PrivateEndpointTrustedOwnerArgs', 'PrivateEndpointTrustedOwner']
@@ -148,6 +153,28 @@ class PrivateEndpointTrustedOwner(pulumi.CustomResource):
         """
         Private Endpoint Trusted Owner.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        example = cockroach.PrivateEndpointTrustedOwner("example",
+            cluster_id=cluster_id,
+            type="AWS_ACCOUNT_ID",
+            external_owner_id="012345678901")
+        ```
+
+        ## Import
+
+        format: <cluster id>:<owner id>
+
+        ```sh
+        $ pulumi import cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:e50aa10d-1a16-4be8-85e6-4c18221daa49
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: UUID of the cluster the private endpoint trusted owner entry belongs to.
@@ -162,6 +189,28 @@ class PrivateEndpointTrustedOwner(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Private Endpoint Trusted Owner.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        example = cockroach.PrivateEndpointTrustedOwner("example",
+            cluster_id=cluster_id,
+            type="AWS_ACCOUNT_ID",
+            external_owner_id="012345678901")
+        ```
+
+        ## Import
+
+        format: <cluster id>:<owner id>
+
+        ```sh
+        $ pulumi import cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:e50aa10d-1a16-4be8-85e6-4c18221daa49
+        ```
 
         :param str resource_name: The name of the resource.
         :param PrivateEndpointTrustedOwnerArgs args: The arguments to use to populate this resource's properties.

@@ -14,12 +14,68 @@ namespace Pulumiverse.Cockroach
     {
         /// <summary>
         /// Generic connection string for a cluster.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var clusterId = config.Require("clusterId");
+        ///     var sqlUserName = config.Require("sqlUserName");
+        ///     var sqlUserPassword = config.Require("sqlUserPassword");
+        ///     var database = config.Require("database");
+        ///     var os = config.Require("os");
+        ///     var cockroach = Cockroach.GetConnectionString.Invoke(new()
+        ///     {
+        ///         Id = clusterId,
+        ///         SqlUser = sqlUserName,
+        ///         Password = sqlUserPassword,
+        ///         Database = database,
+        ///         Os = os,
+        ///     });
+        /// 
+        /// });
+        /// ```
         /// </summary>
         public static Task<GetConnectionStringResult> InvokeAsync(GetConnectionStringArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectionStringResult>("cockroach:index/getConnectionString:getConnectionString", args ?? new GetConnectionStringArgs(), options.WithDefaults());
 
         /// <summary>
         /// Generic connection string for a cluster.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var clusterId = config.Require("clusterId");
+        ///     var sqlUserName = config.Require("sqlUserName");
+        ///     var sqlUserPassword = config.Require("sqlUserPassword");
+        ///     var database = config.Require("database");
+        ///     var os = config.Require("os");
+        ///     var cockroach = Cockroach.GetConnectionString.Invoke(new()
+        ///     {
+        ///         Id = clusterId,
+        ///         SqlUser = sqlUserName,
+        ///         Password = sqlUserPassword,
+        ///         Database = database,
+        ///         Os = os,
+        ///     });
+        /// 
+        /// });
+        /// ```
         /// </summary>
         public static Output<GetConnectionStringResult> Invoke(GetConnectionStringInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConnectionStringResult>("cockroach:index/getConnectionString:getConnectionString", args ?? new GetConnectionStringInvokeArgs(), options.WithDefaults());

@@ -12,10 +12,38 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Configure minor version upgrade deferral for a cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var offsetDuration = config.Get("offsetDuration") ?? "FIXED_DEFERRAL";
+    ///     var example = new Cockroach.VersionDeferral("example", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///         DeferralPolicy = offsetDuration,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/versionDeferral:VersionDeferral")]
     public partial class VersionDeferral : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Cluster ID.
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
         /// <summary>
         /// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         /// </summary>
@@ -70,6 +98,12 @@ namespace Pulumiverse.Cockroach
     public sealed class VersionDeferralArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Cluster ID.
+        /// </summary>
+        [Input("clusterId", required: true)]
+        public Input<string> ClusterId { get; set; } = null!;
+
+        /// <summary>
         /// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         /// </summary>
         [Input("deferralPolicy", required: true)]
@@ -83,6 +117,12 @@ namespace Pulumiverse.Cockroach
 
     public sealed class VersionDeferralState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Cluster ID.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
         /// <summary>
         /// The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         /// </summary>

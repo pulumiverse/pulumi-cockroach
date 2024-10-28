@@ -12,6 +12,35 @@ import (
 )
 
 // CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			_, err := cockroach.GetCockroachCluster(ctx, &cockroach.GetCockroachClusterArgs{
+//				Id: clusterId,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetCockroachCluster(ctx *pulumi.Context, args *GetCockroachClusterArgs, opts ...pulumi.InvokeOption) (*GetCockroachClusterResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCockroachClusterResult
@@ -47,14 +76,20 @@ type GetCockroachClusterResult struct {
 
 func GetCockroachClusterOutput(ctx *pulumi.Context, args GetCockroachClusterOutputArgs, opts ...pulumi.InvokeOption) GetCockroachClusterResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetCockroachClusterResult, error) {
+		ApplyT(func(v interface{}) (GetCockroachClusterResultOutput, error) {
 			args := v.(GetCockroachClusterArgs)
-			r, err := GetCockroachCluster(ctx, &args, opts...)
-			var s GetCockroachClusterResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetCockroachClusterResult
+			secret, err := ctx.InvokePackageRaw("cockroach:index/getCockroachCluster:getCockroachCluster", args, &rv, "", opts...)
+			if err != nil {
+				return GetCockroachClusterResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetCockroachClusterResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetCockroachClusterResultOutput), nil
+			}
+			return output, nil
 		}).(GetCockroachClusterResultOutput)
 }
 

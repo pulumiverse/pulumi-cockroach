@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -104,6 +109,25 @@ def get_connection_string(database: Optional[str] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetConnectionStringResult:
     """
     Generic connection string for a cluster.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    cluster_id = config.require("clusterId")
+    sql_user_name = config.require("sqlUserName")
+    sql_user_password = config.require("sqlUserPassword")
+    database = config.require("database")
+    os = config.require("os")
+    cockroach = cockroach.get_connection_string(id=cluster_id,
+        sql_user=sql_user_name,
+        password=sql_user_password,
+        database=database,
+        os=os)
+    ```
     """
     __args__ = dict()
     __args__['database'] = database
@@ -122,9 +146,6 @@ def get_connection_string(database: Optional[str] = None,
         os=pulumi.get(__ret__, 'os'),
         password=pulumi.get(__ret__, 'password'),
         sql_user=pulumi.get(__ret__, 'sql_user'))
-
-
-@_utilities.lift_output_func(get_connection_string)
 def get_connection_string_output(database: Optional[pulumi.Input[Optional[str]]] = None,
                                  id: Optional[pulumi.Input[str]] = None,
                                  os: Optional[pulumi.Input[Optional[str]]] = None,
@@ -133,5 +154,39 @@ def get_connection_string_output(database: Optional[pulumi.Input[Optional[str]]]
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConnectionStringResult]:
     """
     Generic connection string for a cluster.
+
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    cluster_id = config.require("clusterId")
+    sql_user_name = config.require("sqlUserName")
+    sql_user_password = config.require("sqlUserPassword")
+    database = config.require("database")
+    os = config.require("os")
+    cockroach = cockroach.get_connection_string(id=cluster_id,
+        sql_user=sql_user_name,
+        password=sql_user_password,
+        database=database,
+        os=os)
+    ```
     """
-    ...
+    __args__ = dict()
+    __args__['database'] = database
+    __args__['id'] = id
+    __args__['os'] = os
+    __args__['password'] = password
+    __args__['sqlUser'] = sql_user
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('cockroach:index/getConnectionString:getConnectionString', __args__, opts=opts, typ=GetConnectionStringResult)
+    return __ret__.apply(lambda __response__: GetConnectionStringResult(
+        connection_params=pulumi.get(__response__, 'connection_params'),
+        connection_string=pulumi.get(__response__, 'connection_string'),
+        database=pulumi.get(__response__, 'database'),
+        id=pulumi.get(__response__, 'id'),
+        os=pulumi.get(__response__, 'os'),
+        password=pulumi.get(__response__, 'password'),
+        sql_user=pulumi.get(__response__, 'sql_user')))

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['VersionDeferralArgs', 'VersionDeferral']
@@ -14,12 +19,27 @@ __all__ = ['VersionDeferralArgs', 'VersionDeferral']
 @pulumi.input_type
 class VersionDeferralArgs:
     def __init__(__self__, *,
+                 cluster_id: pulumi.Input[str],
                  deferral_policy: pulumi.Input[str]):
         """
         The set of arguments for constructing a VersionDeferral resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] deferral_policy: The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         """
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "deferral_policy", deferral_policy)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[str]:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="deferralPolicy")
@@ -37,13 +57,29 @@ class VersionDeferralArgs:
 @pulumi.input_type
 class _VersionDeferralState:
     def __init__(__self__, *,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  deferral_policy: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering VersionDeferral resources.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] deferral_policy: The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         """
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if deferral_policy is not None:
             pulumi.set(__self__, "deferral_policy", deferral_policy)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="deferralPolicy")
@@ -63,13 +99,31 @@ class VersionDeferral(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  deferral_policy: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Configure minor version upgrade deferral for a cluster.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        offset_duration = config.get("offsetDuration")
+        if offset_duration is None:
+            offset_duration = "FIXED_DEFERRAL"
+        example = cockroach.VersionDeferral("example",
+            cluster_id=cluster_id,
+            deferral_policy=offset_duration)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] deferral_policy: The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         """
         ...
@@ -80,6 +134,22 @@ class VersionDeferral(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Configure minor version upgrade deferral for a cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        offset_duration = config.get("offsetDuration")
+        if offset_duration is None:
+            offset_duration = "FIXED_DEFERRAL"
+        example = cockroach.VersionDeferral("example",
+            cluster_id=cluster_id,
+            deferral_policy=offset_duration)
+        ```
 
         :param str resource_name: The name of the resource.
         :param VersionDeferralArgs args: The arguments to use to populate this resource's properties.
@@ -96,6 +166,7 @@ class VersionDeferral(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 cluster_id: Optional[pulumi.Input[str]] = None,
                  deferral_policy: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -106,6 +177,9 @@ class VersionDeferral(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = VersionDeferralArgs.__new__(VersionDeferralArgs)
 
+            if cluster_id is None and not opts.urn:
+                raise TypeError("Missing required property 'cluster_id'")
+            __props__.__dict__["cluster_id"] = cluster_id
             if deferral_policy is None and not opts.urn:
                 raise TypeError("Missing required property 'deferral_policy'")
             __props__.__dict__["deferral_policy"] = deferral_policy
@@ -119,6 +193,7 @@ class VersionDeferral(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            cluster_id: Optional[pulumi.Input[str]] = None,
             deferral_policy: Optional[pulumi.Input[str]] = None) -> 'VersionDeferral':
         """
         Get an existing VersionDeferral resource's state with the given name, id, and optional extra
@@ -127,14 +202,24 @@ class VersionDeferral(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] deferral_policy: The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _VersionDeferralState.__new__(_VersionDeferralState)
 
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["deferral_policy"] = deferral_policy
         return VersionDeferral(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[str]:
+        """
+        Cluster ID.
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="deferralPolicy")

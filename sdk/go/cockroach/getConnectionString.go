@@ -12,6 +12,43 @@ import (
 )
 
 // Generic connection string for a cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			sqlUserName := cfg.Require("sqlUserName")
+//			sqlUserPassword := cfg.Require("sqlUserPassword")
+//			database := cfg.Require("database")
+//			os := cfg.Require("os")
+//			_, err := cockroach.GetConnectionString(ctx, &cockroach.GetConnectionStringArgs{
+//				Id:       clusterId,
+//				SqlUser:  pulumi.StringRef(sqlUserName),
+//				Password: pulumi.StringRef(sqlUserPassword),
+//				Database: pulumi.StringRef(database),
+//				Os:       pulumi.StringRef(os),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetConnectionString(ctx *pulumi.Context, args *GetConnectionStringArgs, opts ...pulumi.InvokeOption) (*GetConnectionStringResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetConnectionStringResult
@@ -44,14 +81,20 @@ type GetConnectionStringResult struct {
 
 func GetConnectionStringOutput(ctx *pulumi.Context, args GetConnectionStringOutputArgs, opts ...pulumi.InvokeOption) GetConnectionStringResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetConnectionStringResult, error) {
+		ApplyT(func(v interface{}) (GetConnectionStringResultOutput, error) {
 			args := v.(GetConnectionStringArgs)
-			r, err := GetConnectionString(ctx, &args, opts...)
-			var s GetConnectionStringResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetConnectionStringResult
+			secret, err := ctx.InvokePackageRaw("cockroach:index/getConnectionString:getConnectionString", args, &rv, "", opts...)
+			if err != nil {
+				return GetConnectionStringResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetConnectionStringResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetConnectionStringResultOutput), nil
+			}
+			return output, nil
 		}).(GetConnectionStringResultOutput)
 }
 

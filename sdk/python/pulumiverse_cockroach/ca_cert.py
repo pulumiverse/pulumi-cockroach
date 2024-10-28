@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['CaCertArgs', 'CaCert']
@@ -116,6 +121,20 @@ class CaCert(pulumi.CustomResource):
         """
         Manages client CA certs.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        # The X509 certificate in PEM format.
+        client_certificate = config.require("clientCertificate")
+        prod = cockroach.CaCert("prod",
+            cluster_id=prod_cockroach_cluster["id"],
+            x509_pem_cert=client_certificate)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -129,6 +148,20 @@ class CaCert(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Manages client CA certs.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        # The X509 certificate in PEM format.
+        client_certificate = config.require("clientCertificate")
+        prod = cockroach.CaCert("prod",
+            cluster_id=prod_cockroach_cluster["id"],
+            x509_pem_cert=client_certificate)
+        ```
 
         :param str resource_name: The name of the resource.
         :param CaCertArgs args: The arguments to use to populate this resource's properties.

@@ -8,6 +8,25 @@ import * as utilities from "./utilities";
 
 /**
  * Customer-managed encryption keys (CMEK) resource for a single cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const dedicated = new cockroach.Cmek("dedicated", {
+ *     clusterId: dedicatedCockroachCluster.id,
+ *     regions: [{
+ *         region: "us-central-1",
+ *         key: {
+ *             authPrincipal: "arn:aws:iam::account:role/role-name-with-path",
+ *             type: "AWS_KMS",
+ *             uri: "arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key",
+ *         },
+ *     }],
+ * });
+ * ```
  */
 export class Cmek extends pulumi.CustomResource {
     /**
