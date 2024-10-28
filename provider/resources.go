@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"unicode"
 
+	// embed is used to store bridge-metadata.json in the compiled binary
 	_ "embed"
 
 	"github.com/cockroachdb/terraform-provider-cockroach/shim"
