@@ -6,6 +6,21 @@ import * as utilities from "./utilities";
 
 /**
  * Configure minor version upgrade deferral for a cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const offsetDuration = config.get("offsetDuration") || "FIXED_DEFERRAL";
+ * const example = new cockroach.VersionDeferral("example", {
+ *     clusterId: clusterId,
+ *     deferralPolicy: offsetDuration,
+ * });
+ * ```
  */
 export class VersionDeferral extends pulumi.CustomResource {
     /**
@@ -36,6 +51,10 @@ export class VersionDeferral extends pulumi.CustomResource {
     }
 
     /**
+     * Cluster ID.
+     */
+    public readonly clusterId!: pulumi.Output<string>;
+    /**
      * The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
      */
     public readonly deferralPolicy!: pulumi.Output<string>;
@@ -53,12 +72,17 @@ export class VersionDeferral extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as VersionDeferralState | undefined;
+            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["deferralPolicy"] = state ? state.deferralPolicy : undefined;
         } else {
             const args = argsOrState as VersionDeferralArgs | undefined;
+            if ((!args || args.clusterId === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'clusterId'");
+            }
             if ((!args || args.deferralPolicy === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'deferralPolicy'");
             }
+            resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["deferralPolicy"] = args ? args.deferralPolicy : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -71,6 +95,10 @@ export class VersionDeferral extends pulumi.CustomResource {
  */
 export interface VersionDeferralState {
     /**
+     * Cluster ID.
+     */
+    clusterId?: pulumi.Input<string>;
+    /**
      * The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
      */
     deferralPolicy?: pulumi.Input<string>;
@@ -80,6 +108,10 @@ export interface VersionDeferralState {
  * The set of arguments for constructing a VersionDeferral resource.
  */
 export interface VersionDeferralArgs {
+    /**
+     * Cluster ID.
+     */
+    clusterId: pulumi.Input<string>;
     /**
      * The policy for managing automated minor version upgrades. Set to FIXED*DEFERRAL to defer upgrades by 60 days or NOT*DEFERRED to apply upgrades immediately.
      */

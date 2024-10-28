@@ -12,6 +12,35 @@ import (
 )
 
 // Information about an individual user.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			emailAddress := cfg.Require("emailAddress")
+//			_, err := cockroach.GetPersonUser(ctx, &cockroach.GetPersonUserArgs{
+//				Email: emailAddress,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetPersonUser(ctx *pulumi.Context, args *GetPersonUserArgs, opts ...pulumi.InvokeOption) (*GetPersonUserResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPersonUserResult
@@ -38,14 +67,20 @@ type GetPersonUserResult struct {
 
 func GetPersonUserOutput(ctx *pulumi.Context, args GetPersonUserOutputArgs, opts ...pulumi.InvokeOption) GetPersonUserResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetPersonUserResult, error) {
+		ApplyT(func(v interface{}) (GetPersonUserResultOutput, error) {
 			args := v.(GetPersonUserArgs)
-			r, err := GetPersonUser(ctx, &args, opts...)
-			var s GetPersonUserResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetPersonUserResult
+			secret, err := ctx.InvokePackageRaw("cockroach:index/getPersonUser:getPersonUser", args, &rv, "", opts...)
+			if err != nil {
+				return GetPersonUserResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetPersonUserResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetPersonUserResultOutput), nil
+			}
+			return output, nil
 		}).(GetPersonUserResultOutput)
 }
 

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -22,6 +27,7 @@ __all__ = [
     'LogExportConfigGroup',
     'PrivateEndpointServicesService',
     'PrivateEndpointServicesServiceAws',
+    'UserRoleGrantRole',
     'UserRoleGrantsRole',
     'GetCockroachClusterDedicatedResult',
     'GetCockroachClusterRegionResult',
@@ -739,8 +745,12 @@ class PrivateEndpointServicesService(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "cloudProvider":
+        if key == "availabilityZoneIds":
+            suggest = "availability_zone_ids"
+        elif key == "cloudProvider":
             suggest = "cloud_provider"
+        elif key == "endpointServiceId":
+            suggest = "endpoint_service_id"
         elif key == "regionName":
             suggest = "region_name"
 
@@ -756,26 +766,47 @@ class PrivateEndpointServicesService(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 availability_zone_ids: Optional[Sequence[str]] = None,
                  aws: Optional['outputs.PrivateEndpointServicesServiceAws'] = None,
                  cloud_provider: Optional[str] = None,
+                 endpoint_service_id: Optional[str] = None,
+                 name: Optional[str] = None,
                  region_name: Optional[str] = None,
                  status: Optional[str] = None):
         """
+        :param Sequence[str] availability_zone_ids: Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
         :param str cloud_provider: Cloud provider associated with this service.
+        :param str endpoint_service_id: Server side ID of the private endpoint connection.
+        :param str name: Name of the endpoint service.
         :param str region_name: Cloud provider region code associated with this service.
         :param str status: Operation status of the service.
         """
+        if availability_zone_ids is not None:
+            pulumi.set(__self__, "availability_zone_ids", availability_zone_ids)
         if aws is not None:
             pulumi.set(__self__, "aws", aws)
         if cloud_provider is not None:
             pulumi.set(__self__, "cloud_provider", cloud_provider)
+        if endpoint_service_id is not None:
+            pulumi.set(__self__, "endpoint_service_id", endpoint_service_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if region_name is not None:
             pulumi.set(__self__, "region_name", region_name)
         if status is not None:
             pulumi.set(__self__, "status", status)
 
     @property
+    @pulumi.getter(name="availabilityZoneIds")
+    def availability_zone_ids(self) -> Optional[Sequence[str]]:
+        """
+        Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        """
+        return pulumi.get(self, "availability_zone_ids")
+
+    @property
     @pulumi.getter
+    @_utilities.deprecated("""nested aws fields have been moved one level up. These fields will be removed in a future version""")
     def aws(self) -> Optional['outputs.PrivateEndpointServicesServiceAws']:
         return pulumi.get(self, "aws")
 
@@ -786,6 +817,22 @@ class PrivateEndpointServicesService(dict):
         Cloud provider associated with this service.
         """
         return pulumi.get(self, "cloud_provider")
+
+    @property
+    @pulumi.getter(name="endpointServiceId")
+    def endpoint_service_id(self) -> Optional[str]:
+        """
+        Server side ID of the private endpoint connection.
+        """
+        return pulumi.get(self, "endpoint_service_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Name of the endpoint service.
+        """
+        return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="regionName")
@@ -869,6 +916,92 @@ class PrivateEndpointServicesServiceAws(dict):
 
 
 @pulumi.output_type
+class UserRoleGrantRole(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceType":
+            suggest = "resource_type"
+        elif key == "roleName":
+            suggest = "role_name"
+        elif key == "resourceId":
+            suggest = "resource_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in UserRoleGrantRole. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        UserRoleGrantRole.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        UserRoleGrantRole.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 resource_type: str,
+                 role_name: str,
+                 resource_id: Optional[str] = None):
+        """
+        :param str resource_type: Type of resource. Allowed values are:
+                 * ORGANIZATION
+                 * CLUSTER
+                 * FOLDER
+        :param str role_name: Name of the role to grant. Allowed values are:
+                 * BILLING_COORDINATOR
+                 * ORG_ADMIN
+                 * ORG_MEMBER
+                 * CLUSTER_ADMIN
+                 * CLUSTER_OPERATOR_WRITER
+                 * CLUSTER_DEVELOPER
+                 * CLUSTER_CREATOR
+                 * FOLDER_ADMIN
+                 * FOLDER_MOVER
+        :param str resource_id: ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+        """
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "role_name", role_name)
+        if resource_id is not None:
+            pulumi.set(__self__, "resource_id", resource_id)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        Type of resource. Allowed values are:
+          * ORGANIZATION
+          * CLUSTER
+          * FOLDER
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter(name="roleName")
+    def role_name(self) -> str:
+        """
+        Name of the role to grant. Allowed values are:
+          * BILLING_COORDINATOR
+          * ORG_ADMIN
+          * ORG_MEMBER
+          * CLUSTER_ADMIN
+          * CLUSTER_OPERATOR_WRITER
+          * CLUSTER_DEVELOPER
+          * CLUSTER_CREATOR
+          * FOLDER_ADMIN
+          * FOLDER_MOVER
+        """
+        return pulumi.get(self, "role_name")
+
+    @property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> Optional[str]:
+        """
+        ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+        """
+        return pulumi.get(self, "resource_id")
+
+
+@pulumi.output_type
 class UserRoleGrantsRole(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -901,8 +1034,6 @@ class UserRoleGrantsRole(dict):
                  * CLUSTER
                  * FOLDER
         :param str role_name: Name of the role to grant. Allowed values are:
-                 * DEVELOPER
-                 * ADMIN
                  * BILLING_COORDINATOR
                  * ORG_ADMIN
                  * ORG_MEMBER
@@ -912,7 +1043,7 @@ class UserRoleGrantsRole(dict):
                  * CLUSTER_CREATOR
                  * FOLDER_ADMIN
                  * FOLDER_MOVER
-        :param str resource_id: ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        :param str resource_id: ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
         """
         pulumi.set(__self__, "resource_type", resource_type)
         pulumi.set(__self__, "role_name", role_name)
@@ -935,8 +1066,6 @@ class UserRoleGrantsRole(dict):
     def role_name(self) -> str:
         """
         Name of the role to grant. Allowed values are:
-          * DEVELOPER
-          * ADMIN
           * BILLING_COORDINATOR
           * ORG_ADMIN
           * ORG_MEMBER
@@ -953,7 +1082,7 @@ class UserRoleGrantsRole(dict):
     @pulumi.getter(name="resourceId")
     def resource_id(self) -> Optional[str]:
         """
-        ID of the resource. Omit if resource_type is 'ORGANIZATION'.
+        ID of the resource. Required if the resource_type is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
         """
         return pulumi.get(self, "resource_id")
 

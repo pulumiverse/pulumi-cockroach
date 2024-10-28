@@ -5,7 +5,15 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * AWS PrivateLink Endpoint Connection.
+ * Private endpoint connections allow customer applications to connect to a CockroachDB Cloud cluster without traversing the public internet. All application-database traffic remains within the cloud-provider network.
+ *
+ * ## Import
+ *
+ * format: <cluster id>:<connection id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/privateEndpointConnection:PrivateEndpointConnection resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:vpce-0c1308d7312217abc
+ * ```
  */
 export class PrivateEndpointConnection extends pulumi.CustomResource {
     /**
@@ -41,7 +49,7 @@ export class PrivateEndpointConnection extends pulumi.CustomResource {
     public /*out*/ readonly cloudProvider!: pulumi.Output<string>;
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Client side ID of the PrivateLink connection.
+     * Client side ID of the Private Endpoint Connection.
      */
     public readonly endpointId!: pulumi.Output<string>;
     /**
@@ -49,7 +57,7 @@ export class PrivateEndpointConnection extends pulumi.CustomResource {
      */
     public /*out*/ readonly regionName!: pulumi.Output<string>;
     /**
-     * Server side ID of the PrivateLink connection.
+     * Server side ID of the Private Endpoint Connection.
      */
     public /*out*/ readonly serviceId!: pulumi.Output<string>;
 
@@ -100,7 +108,7 @@ export interface PrivateEndpointConnectionState {
     cloudProvider?: pulumi.Input<string>;
     clusterId?: pulumi.Input<string>;
     /**
-     * Client side ID of the PrivateLink connection.
+     * Client side ID of the Private Endpoint Connection.
      */
     endpointId?: pulumi.Input<string>;
     /**
@@ -108,7 +116,7 @@ export interface PrivateEndpointConnectionState {
      */
     regionName?: pulumi.Input<string>;
     /**
-     * Server side ID of the PrivateLink connection.
+     * Server side ID of the Private Endpoint Connection.
      */
     serviceId?: pulumi.Input<string>;
 }
@@ -119,7 +127,7 @@ export interface PrivateEndpointConnectionState {
 export interface PrivateEndpointConnectionArgs {
     clusterId: pulumi.Input<string>;
     /**
-     * Client side ID of the PrivateLink connection.
+     * Client side ID of the Private Endpoint Connection.
      */
     endpointId: pulumi.Input<string>;
 }

@@ -13,6 +13,44 @@ import (
 )
 
 // CockroachDB database.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			_, err := cockroach.NewDatabase(ctx, "cockroach", &cockroach.DatabaseArgs{
+//				Name:      pulumi.String("example-database"),
+//				ClusterId: pulumi.String(clusterId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// format: <cluster id>:<database name>
+//
+// ```sh
+// $ pulumi import cockroach:index/database:Database my_database 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:mydatabase
+// ```
 type Database struct {
 	pulumi.CustomResourceState
 

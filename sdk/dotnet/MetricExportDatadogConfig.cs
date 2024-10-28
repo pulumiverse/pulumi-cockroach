@@ -12,6 +12,30 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// DataDog metric export configuration for a cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var datadogSite = config.Require("datadogSite");
+    ///     var datadogApiKey = config.Require("datadogApiKey");
+    ///     var example = new Cockroach.MetricExportDatadogConfig("example", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///         Site = datadogSite,
+    ///         ApiKey = datadogApiKey,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig")]
     public partial class MetricExportDatadogConfig : global::Pulumi.CustomResource

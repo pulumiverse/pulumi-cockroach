@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -92,7 +97,15 @@ class UserRoleGrants(pulumi.CustomResource):
                  user_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Role grants for a single user.
+        ## Example Usage
+
+        ## Import
+
+        format: <user id>
+
+        ```sh
+        $ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -105,7 +118,15 @@ class UserRoleGrants(pulumi.CustomResource):
                  args: UserRoleGrantsArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Role grants for a single user.
+        ## Example Usage
+
+        ## Import
+
+        format: <user id>
+
+        ```sh
+        $ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
 
         :param str resource_name: The name of the resource.
         :param UserRoleGrantsArgs args: The arguments to use to populate this resource's properties.

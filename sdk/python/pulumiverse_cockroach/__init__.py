@@ -16,6 +16,7 @@ from .folder import *
 from .get_cluster_cert import *
 from .get_cockroach_cluster import *
 from .get_connection_string import *
+from .get_folder import *
 from .get_organization import *
 from .get_person_user import *
 from .log_export_config import *
@@ -27,6 +28,7 @@ from .private_endpoint_services import *
 from .private_endpoint_trusted_owner import *
 from .provider import *
 from .sql_user import *
+from .user_role_grant import *
 from .user_role_grants import *
 from .version_deferral import *
 from ._inputs import *
@@ -168,6 +170,14 @@ _utilities.register(
   "fqn": "pulumiverse_cockroach",
   "classes": {
    "cockroach:index/sqlUser:SqlUser": "SqlUser"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/userRoleGrant",
+  "fqn": "pulumiverse_cockroach",
+  "classes": {
+   "cockroach:index/userRoleGrant:UserRoleGrant": "UserRoleGrant"
   }
  },
  {

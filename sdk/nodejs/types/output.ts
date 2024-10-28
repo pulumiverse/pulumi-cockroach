@@ -290,11 +290,26 @@ export interface LogExportConfigGroup {
 }
 
 export interface PrivateEndpointServicesService {
+    /**
+     * Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+     */
+    availabilityZoneIds: string[];
+    /**
+     * @deprecated nested aws fields have been moved one level up. These fields will be removed in a future version
+     */
     aws: outputs.PrivateEndpointServicesServiceAws;
     /**
      * Cloud provider associated with this service.
      */
     cloudProvider: string;
+    /**
+     * Server side ID of the private endpoint connection.
+     */
+    endpointServiceId: string;
+    /**
+     * Name of the endpoint service.
+     */
+    name: string;
     /**
      * Cloud provider region code associated with this service.
      */
@@ -320,9 +335,36 @@ export interface PrivateEndpointServicesServiceAws {
     serviceName: string;
 }
 
+export interface UserRoleGrantRole {
+    /**
+     * ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
+     */
+    resourceId?: string;
+    /**
+     * Type of resource. Allowed values are:
+     *   * ORGANIZATION
+     *   * CLUSTER
+     *   * FOLDER
+     */
+    resourceType: string;
+    /**
+     * Name of the role to grant. Allowed values are:
+     *   * BILLING_COORDINATOR
+     *   * ORG_ADMIN
+     *   * ORG_MEMBER
+     *   * CLUSTER_ADMIN
+     *   * CLUSTER_OPERATOR_WRITER
+     *   * CLUSTER_DEVELOPER
+     *   * CLUSTER_CREATOR
+     *   * FOLDER_ADMIN
+     *   * FOLDER_MOVER
+     */
+    roleName: string;
+}
+
 export interface UserRoleGrantsRole {
     /**
-     * ID of the resource. Omit if resourceType is 'ORGANIZATION'.
+     * ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
      */
     resourceId?: string;
     /**
@@ -334,8 +376,6 @@ export interface UserRoleGrantsRole {
     resourceType: string;
     /**
      * Name of the role to grant. Allowed values are:
-     *   * DEVELOPER
-     *   * ADMIN
      *   * BILLING_COORDINATOR
      *   * ORG_ADMIN
      *   * ORG_MEMBER

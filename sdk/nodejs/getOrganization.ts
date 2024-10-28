@@ -6,9 +6,17 @@ import * as utilities from "./utilities";
 
 /**
  * Information about the organization associated with the user's API key.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const prod = cockroach.getOrganization({});
+ * ```
  */
 export function getOrganization(opts?: pulumi.InvokeOptions): Promise<GetOrganizationResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cockroach:index/getOrganization:getOrganization", {
     }, opts);
@@ -37,7 +45,18 @@ export interface GetOrganizationResult {
 }
 /**
  * Information about the organization associated with the user's API key.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const prod = cockroach.getOrganization({});
+ * ```
  */
 export function getOrganizationOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetOrganizationResult> {
-    return pulumi.output(getOrganization(opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("cockroach:index/getOrganization:getOrganization", {
+    }, opts);
 }

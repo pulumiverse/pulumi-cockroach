@@ -6,6 +6,21 @@ import * as utilities from "./utilities";
 
 /**
  * Manages client CA certs.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * // The X509 certificate in PEM format.
+ * const clientCertificate = config.require("clientCertificate");
+ * const prod = new cockroach.CaCert("prod", {
+ *     clusterId: prodCockroachCluster.id,
+ *     x509PemCert: clientCertificate,
+ * });
+ * ```
  */
 export class CaCert extends pulumi.CustomResource {
     /**

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -72,7 +77,26 @@ class PrivateEndpointServices(pulumi.CustomResource):
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
+        PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        cockroach = cockroach.PrivateEndpointServices("cockroach", cluster_id=cluster_id)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -84,7 +108,26 @@ class PrivateEndpointServices(pulumi.CustomResource):
                  args: PrivateEndpointServicesArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
+        PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        cockroach = cockroach.PrivateEndpointServices("cockroach", cluster_id=cluster_id)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
 
         :param str resource_name: The name of the resource.
         :param PrivateEndpointServicesArgs args: The arguments to use to populate this resource's properties.

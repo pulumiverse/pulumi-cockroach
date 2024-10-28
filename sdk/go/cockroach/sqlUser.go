@@ -13,6 +13,46 @@ import (
 )
 
 // CockroachDB SQL user.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			sqlUserPassword := cfg.Require("sqlUserPassword")
+//			_, err := cockroach.NewSqlUser(ctx, "cockroach", &cockroach.SqlUserArgs{
+//				Name:      pulumi.String("example-sql-user"),
+//				Password:  pulumi.String(sqlUserPassword),
+//				ClusterId: pulumi.String(clusterId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// format: <cluster id>:<sql user name>
+//
+// ```sh
+// $ pulumi import cockroach:index/sqlUser:SqlUser bill 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:bill
+// ```
 type SqlUser struct {
 	pulumi.CustomResourceState
 

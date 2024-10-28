@@ -6,6 +6,23 @@ import * as utilities from "./utilities";
 
 /**
  * Maintenance window configuration for a cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const offsetDuration = config.getNumber("offsetDuration") || 172800;
+ * const windowDuration = config.getNumber("windowDuration") || 21600;
+ * const example = new cockroach.MaintenanceWindow("example", {
+ *     clusterId: clusterId,
+ *     offsetDuration: offsetDuration,
+ *     windowDuration: windowDuration,
+ * });
+ * ```
  */
 export class MaintenanceWindow extends pulumi.CustomResource {
     /**

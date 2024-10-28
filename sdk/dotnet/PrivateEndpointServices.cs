@@ -11,7 +11,35 @@ using Pulumi;
 namespace Pulumiverse.Cockroach
 {
     /// <summary>
-    /// PrivateEndpointServices contains services that allow for VPC communication, either via PrivateLink (AWS) or Peering (GCP).
+    /// PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var cockroach = new Cockroach.PrivateEndpointServices("cockroach", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/privateEndpointServices:PrivateEndpointServices")]
     public partial class PrivateEndpointServices : global::Pulumi.CustomResource

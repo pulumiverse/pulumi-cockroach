@@ -13,6 +13,45 @@ import (
 )
 
 // List of IP ranges allowed to access the cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cockroach.NewAllowList(ctx, "vpn", &cockroach.AllowListArgs{
+//				Name:      pulumi.String("vpn"),
+//				CidrIp:    pulumi.String("123.123.1.1"),
+//				CidrMask:  pulumi.Int(32),
+//				Ui:        pulumi.Bool(true),
+//				Sql:       pulumi.Bool(true),
+//				ClusterId: pulumi.Any(staging.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// format: <cluster id>:<cidr ip>/<cidr mask>
+//
+// ```sh
+// $ pulumi import cockroach:index/allowList:AllowList home_office 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:123.123.1.1/32
+// ```
 type AllowList struct {
 	pulumi.CustomResourceState
 

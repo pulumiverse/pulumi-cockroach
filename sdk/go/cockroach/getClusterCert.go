@@ -14,6 +14,35 @@ import (
 // TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/<cluster name>-ca.crt` on MacOS or Linux, or `$env:appdata\CockroachCloud\certs\<cluster name>-ca.crt` on Windows.
 //
 // Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\postgresql\root.crt` on Windows.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			_, err := cockroach.GetClusterCert(ctx, &cockroach.GetClusterCertArgs{
+//				Id: clusterId,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetClusterCert(ctx *pulumi.Context, args *GetClusterCertArgs, opts ...pulumi.InvokeOption) (*GetClusterCertResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterCertResult
@@ -40,14 +69,20 @@ type GetClusterCertResult struct {
 
 func GetClusterCertOutput(ctx *pulumi.Context, args GetClusterCertOutputArgs, opts ...pulumi.InvokeOption) GetClusterCertResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetClusterCertResult, error) {
+		ApplyT(func(v interface{}) (GetClusterCertResultOutput, error) {
 			args := v.(GetClusterCertArgs)
-			r, err := GetClusterCert(ctx, &args, opts...)
-			var s GetClusterCertResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetClusterCertResult
+			secret, err := ctx.InvokePackageRaw("cockroach:index/getClusterCert:getClusterCert", args, &rv, "", opts...)
+			if err != nil {
+				return GetClusterCertResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetClusterCertResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetClusterCertResultOutput), nil
+			}
+			return output, nil
 		}).(GetClusterCertResultOutput)
 }
 

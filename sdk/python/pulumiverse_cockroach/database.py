@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['DatabaseArgs', 'Database']
@@ -116,6 +121,27 @@ class Database(pulumi.CustomResource):
         """
         CockroachDB database.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        cockroach = cockroach.Database("cockroach",
+            name="example-database",
+            cluster_id=cluster_id)
+        ```
+
+        ## Import
+
+        format: <cluster id>:<database name>
+
+        ```sh
+        $ pulumi import cockroach:index/database:Database my_database 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:mydatabase
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster the database belongs to.
@@ -129,6 +155,27 @@ class Database(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         CockroachDB database.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        cockroach = cockroach.Database("cockroach",
+            name="example-database",
+            cluster_id=cluster_id)
+        ```
+
+        ## Import
+
+        format: <cluster id>:<database name>
+
+        ```sh
+        $ pulumi import cockroach:index/database:Database my_database 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:mydatabase
+        ```
 
         :param str resource_name: The name of the resource.
         :param DatabaseArgs args: The arguments to use to populate this resource's properties.

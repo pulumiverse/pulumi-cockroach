@@ -14,11 +14,23 @@ namespace Pulumiverse.Cockroach.Outputs
     [OutputType]
     public sealed class PrivateEndpointServicesService
     {
+        /// <summary>
+        /// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        /// </summary>
+        public readonly ImmutableArray<string> AvailabilityZoneIds;
         public readonly Outputs.PrivateEndpointServicesServiceAws? Aws;
         /// <summary>
         /// Cloud provider associated with this service.
         /// </summary>
         public readonly string? CloudProvider;
+        /// <summary>
+        /// Server side ID of the private endpoint connection.
+        /// </summary>
+        public readonly string? EndpointServiceId;
+        /// <summary>
+        /// Name of the endpoint service.
+        /// </summary>
+        public readonly string? Name;
         /// <summary>
         /// Cloud provider region code associated with this service.
         /// </summary>
@@ -30,16 +42,25 @@ namespace Pulumiverse.Cockroach.Outputs
 
         [OutputConstructor]
         private PrivateEndpointServicesService(
+            ImmutableArray<string> availabilityZoneIds,
+
             Outputs.PrivateEndpointServicesServiceAws? aws,
 
             string? cloudProvider,
+
+            string? endpointServiceId,
+
+            string? name,
 
             string? regionName,
 
             string? status)
         {
+            AvailabilityZoneIds = availabilityZoneIds;
             Aws = aws;
             CloudProvider = cloudProvider;
+            EndpointServiceId = endpointServiceId;
+            Name = name;
             RegionName = regionName;
             Status = status;
         }

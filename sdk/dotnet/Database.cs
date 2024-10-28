@@ -12,6 +12,35 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// CockroachDB database.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var cockroach = new Cockroach.Database("cockroach", new()
+    ///     {
+    ///         Name = "example-database",
+    ///         ClusterId = clusterId,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;:&lt;database name&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/database:Database my_database 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:mydatabase
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/database:Database")]
     public partial class Database : global::Pulumi.CustomResource

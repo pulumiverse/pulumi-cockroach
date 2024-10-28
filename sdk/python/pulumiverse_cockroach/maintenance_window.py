@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['MaintenanceWindowArgs', 'MaintenanceWindow']
@@ -132,6 +137,26 @@ class MaintenanceWindow(pulumi.CustomResource):
         """
         Maintenance window configuration for a cluster.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        offset_duration = config.get_float("offsetDuration")
+        if offset_duration is None:
+            offset_duration = 172800
+        window_duration = config.get_float("windowDuration")
+        if window_duration is None:
+            window_duration = 21600
+        example = cockroach.MaintenanceWindow("example",
+            cluster_id=cluster_id,
+            offset_duration=offset_duration,
+            window_duration=window_duration)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -146,6 +171,26 @@ class MaintenanceWindow(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Maintenance window configuration for a cluster.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        config = pulumi.Config()
+        cluster_id = config.require("clusterId")
+        offset_duration = config.get_float("offsetDuration")
+        if offset_duration is None:
+            offset_duration = 172800
+        window_duration = config.get_float("windowDuration")
+        if window_duration is None:
+            window_duration = 21600
+        example = cockroach.MaintenanceWindow("example",
+            cluster_id=cluster_id,
+            offset_duration=offset_duration,
+            window_duration=window_duration)
+        ```
 
         :param str resource_name: The name of the resource.
         :param MaintenanceWindowArgs args: The arguments to use to populate this resource's properties.

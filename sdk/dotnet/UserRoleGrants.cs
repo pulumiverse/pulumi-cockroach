@@ -11,7 +11,15 @@ using Pulumi;
 namespace Pulumiverse.Cockroach
 {
     /// <summary>
-    /// Role grants for a single user.
+    /// ## Example Usage
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;user id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/userRoleGrants:UserRoleGrants")]
     public partial class UserRoleGrants : global::Pulumi.CustomResource

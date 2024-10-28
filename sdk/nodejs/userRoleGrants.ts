@@ -7,7 +7,15 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Role grants for a single user.
+ * ## Example Usage
+ *
+ * ## Import
+ *
+ * format: <user id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+ * ```
  */
 export class UserRoleGrants extends pulumi.CustomResource {
     /**

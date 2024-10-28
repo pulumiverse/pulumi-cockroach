@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['FolderArgs', 'Folder']
@@ -100,6 +105,20 @@ class Folder(pulumi.CustomResource):
         """
         CockroachDB Cloud folder.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        a_team = cockroach.Folder("a_team",
+            name="a-team",
+            parent_id="root")
+        a_team_dev = cockroach.Folder("a_team_dev",
+            name="dev",
+            parent_id=a_team.id)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the folder.
@@ -113,6 +132,20 @@ class Folder(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         CockroachDB Cloud folder.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumiverse_cockroach as cockroach
+
+        a_team = cockroach.Folder("a_team",
+            name="a-team",
+            parent_id="root")
+        a_team_dev = cockroach.Folder("a_team_dev",
+            name="dev",
+            parent_id=a_team.id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param FolderArgs args: The arguments to use to populate this resource's properties.

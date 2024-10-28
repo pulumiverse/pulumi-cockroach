@@ -12,6 +12,37 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Customer-managed encryption keys (CMEK) resource for a single cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var dedicated = new Cockroach.Cmek("dedicated", new()
+    ///     {
+    ///         ClusterId = dedicatedCockroachCluster.Id,
+    ///         Regions = new[]
+    ///         {
+    ///             new Cockroach.Inputs.CmekRegionArgs
+    ///             {
+    ///                 Region = "us-central-1",
+    ///                 Key = new Cockroach.Inputs.CmekRegionKeyArgs
+    ///                 {
+    ///                     AuthPrincipal = "arn:aws:iam::account:role/role-name-with-path",
+    ///                     Type = "AWS_KMS",
+    ///                     Uri = "arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key",
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/cmek:Cmek")]
     public partial class Cmek : global::Pulumi.CustomResource

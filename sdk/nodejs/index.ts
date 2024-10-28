@@ -60,6 +60,11 @@ export const getConnectionString: typeof import("./getConnectionString").getConn
 export const getConnectionStringOutput: typeof import("./getConnectionString").getConnectionStringOutput = null as any;
 utilities.lazyLoad(exports, ["getConnectionString","getConnectionStringOutput"], () => require("./getConnectionString"));
 
+export { GetFolderArgs, GetFolderResult, GetFolderOutputArgs } from "./getFolder";
+export const getFolder: typeof import("./getFolder").getFolder = null as any;
+export const getFolderOutput: typeof import("./getFolder").getFolderOutput = null as any;
+utilities.lazyLoad(exports, ["getFolder","getFolderOutput"], () => require("./getFolder"));
+
 export { GetOrganizationResult } from "./getOrganization";
 export const getOrganization: typeof import("./getOrganization").getOrganization = null as any;
 export const getOrganizationOutput: typeof import("./getOrganization").getOrganizationOutput = null as any;
@@ -114,6 +119,11 @@ export { SqlUserArgs, SqlUserState } from "./sqlUser";
 export type SqlUser = import("./sqlUser").SqlUser;
 export const SqlUser: typeof import("./sqlUser").SqlUser = null as any;
 utilities.lazyLoad(exports, ["SqlUser"], () => require("./sqlUser"));
+
+export { UserRoleGrantArgs, UserRoleGrantState } from "./userRoleGrant";
+export type UserRoleGrant = import("./userRoleGrant").UserRoleGrant;
+export const UserRoleGrant: typeof import("./userRoleGrant").UserRoleGrant = null as any;
+utilities.lazyLoad(exports, ["UserRoleGrant"], () => require("./userRoleGrant"));
 
 export { UserRoleGrantsArgs, UserRoleGrantsState } from "./userRoleGrants";
 export type UserRoleGrants = import("./userRoleGrants").UserRoleGrants;
@@ -171,6 +181,8 @@ const _module = {
                 return new PrivateEndpointTrustedOwner(name, <any>undefined, { urn })
             case "cockroach:index/sqlUser:SqlUser":
                 return new SqlUser(name, <any>undefined, { urn })
+            case "cockroach:index/userRoleGrant:UserRoleGrant":
+                return new UserRoleGrant(name, <any>undefined, { urn })
             case "cockroach:index/userRoleGrants:UserRoleGrants":
                 return new UserRoleGrants(name, <any>undefined, { urn })
             case "cockroach:index/versionDeferral:VersionDeferral":
@@ -196,6 +208,7 @@ pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointConnect
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointServices", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointTrustedOwner", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/sqlUser", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/userRoleGrant", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/userRoleGrants", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/versionDeferral", _module)
 pulumi.runtime.registerResourcePackage("cockroach", {

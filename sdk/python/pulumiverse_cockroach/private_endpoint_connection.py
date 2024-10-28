@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['PrivateEndpointConnectionArgs', 'PrivateEndpointConnection']
@@ -18,7 +23,7 @@ class PrivateEndpointConnectionArgs:
                  endpoint_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a PrivateEndpointConnection resource.
-        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the Private Endpoint Connection.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "endpoint_id", endpoint_id)
@@ -36,7 +41,7 @@ class PrivateEndpointConnectionArgs:
     @pulumi.getter(name="endpointId")
     def endpoint_id(self) -> pulumi.Input[str]:
         """
-        Client side ID of the PrivateLink connection.
+        Client side ID of the Private Endpoint Connection.
         """
         return pulumi.get(self, "endpoint_id")
 
@@ -56,9 +61,9 @@ class _PrivateEndpointConnectionState:
         """
         Input properties used for looking up and filtering PrivateEndpointConnection resources.
         :param pulumi.Input[str] cloud_provider: Cloud provider associated with this connection.
-        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the Private Endpoint Connection.
         :param pulumi.Input[str] region_name: Cloud provider region code associated with this connection.
-        :param pulumi.Input[str] service_id: Server side ID of the PrivateLink connection.
+        :param pulumi.Input[str] service_id: Server side ID of the Private Endpoint Connection.
         """
         if cloud_provider is not None:
             pulumi.set(__self__, "cloud_provider", cloud_provider)
@@ -96,7 +101,7 @@ class _PrivateEndpointConnectionState:
     @pulumi.getter(name="endpointId")
     def endpoint_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Client side ID of the PrivateLink connection.
+        Client side ID of the Private Endpoint Connection.
         """
         return pulumi.get(self, "endpoint_id")
 
@@ -120,7 +125,7 @@ class _PrivateEndpointConnectionState:
     @pulumi.getter(name="serviceId")
     def service_id(self) -> Optional[pulumi.Input[str]]:
         """
-        Server side ID of the PrivateLink connection.
+        Server side ID of the Private Endpoint Connection.
         """
         return pulumi.get(self, "service_id")
 
@@ -138,11 +143,19 @@ class PrivateEndpointConnection(pulumi.CustomResource):
                  endpoint_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        AWS PrivateLink Endpoint Connection.
+        Private endpoint connections allow customer applications to connect to a CockroachDB Cloud cluster without traversing the public internet. All application-database traffic remains within the cloud-provider network.
+
+        ## Import
+
+        format: <cluster id>:<connection id>
+
+        ```sh
+        $ pulumi import cockroach:index/privateEndpointConnection:PrivateEndpointConnection resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:vpce-0c1308d7312217abc
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the Private Endpoint Connection.
         """
         ...
     @overload
@@ -151,7 +164,15 @@ class PrivateEndpointConnection(pulumi.CustomResource):
                  args: PrivateEndpointConnectionArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        AWS PrivateLink Endpoint Connection.
+        Private endpoint connections allow customer applications to connect to a CockroachDB Cloud cluster without traversing the public internet. All application-database traffic remains within the cloud-provider network.
+
+        ## Import
+
+        format: <cluster id>:<connection id>
+
+        ```sh
+        $ pulumi import cockroach:index/privateEndpointConnection:PrivateEndpointConnection resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:vpce-0c1308d7312217abc
+        ```
 
         :param str resource_name: The name of the resource.
         :param PrivateEndpointConnectionArgs args: The arguments to use to populate this resource's properties.
@@ -211,9 +232,9 @@ class PrivateEndpointConnection(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cloud_provider: Cloud provider associated with this connection.
-        :param pulumi.Input[str] endpoint_id: Client side ID of the PrivateLink connection.
+        :param pulumi.Input[str] endpoint_id: Client side ID of the Private Endpoint Connection.
         :param pulumi.Input[str] region_name: Cloud provider region code associated with this connection.
-        :param pulumi.Input[str] service_id: Server side ID of the PrivateLink connection.
+        :param pulumi.Input[str] service_id: Server side ID of the Private Endpoint Connection.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -243,7 +264,7 @@ class PrivateEndpointConnection(pulumi.CustomResource):
     @pulumi.getter(name="endpointId")
     def endpoint_id(self) -> pulumi.Output[str]:
         """
-        Client side ID of the PrivateLink connection.
+        Client side ID of the Private Endpoint Connection.
         """
         return pulumi.get(self, "endpoint_id")
 
@@ -259,7 +280,7 @@ class PrivateEndpointConnection(pulumi.CustomResource):
     @pulumi.getter(name="serviceId")
     def service_id(self) -> pulumi.Output[str]:
         """
-        Server side ID of the PrivateLink connection.
+        Server side ID of the Private Endpoint Connection.
         """
         return pulumi.get(self, "service_id")
 

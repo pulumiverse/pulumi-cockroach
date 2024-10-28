@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
@@ -63,6 +68,17 @@ def get_cluster_cert(id: Optional[str] = None,
 
     Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\\postgresql\\root.crt` on Windows.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    cluster_id = config.require("clusterId")
+    cockroach = cockroach.get_cluster_cert(id=cluster_id)
+    ```
+
 
     :param str id: Cluster ID.
     """
@@ -74,9 +90,6 @@ def get_cluster_cert(id: Optional[str] = None,
     return AwaitableGetClusterCertResult(
         cert=pulumi.get(__ret__, 'cert'),
         id=pulumi.get(__ret__, 'id'))
-
-
-@_utilities.lift_output_func(get_cluster_cert)
 def get_cluster_cert_output(id: Optional[pulumi.Input[str]] = None,
                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetClusterCertResult]:
     """
@@ -84,7 +97,24 @@ def get_cluster_cert_output(id: Optional[pulumi.Input[str]] = None,
 
     Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\\postgresql\\root.crt` on Windows.
 
+    ## Example Usage
+
+    ```python
+    import pulumi
+    import pulumi_cockroach as cockroach
+
+    config = pulumi.Config()
+    cluster_id = config.require("clusterId")
+    cockroach = cockroach.get_cluster_cert(id=cluster_id)
+    ```
+
 
     :param str id: Cluster ID.
     """
-    ...
+    __args__ = dict()
+    __args__['id'] = id
+    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('cockroach:index/getClusterCert:getClusterCert', __args__, opts=opts, typ=GetClusterCertResult)
+    return __ret__.apply(lambda __response__: GetClusterCertResult(
+        cert=pulumi.get(__response__, 'cert'),
+        id=pulumi.get(__response__, 'id')))

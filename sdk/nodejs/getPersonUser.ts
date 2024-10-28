@@ -6,9 +6,21 @@ import * as utilities from "./utilities";
 
 /**
  * Information about an individual user.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const emailAddress = config.require("emailAddress");
+ * const cockroach = cockroach.getPersonUser({
+ *     email: emailAddress,
+ * });
+ * ```
  */
 export function getPersonUser(args: GetPersonUserArgs, opts?: pulumi.InvokeOptions): Promise<GetPersonUserResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cockroach:index/getPersonUser:getPersonUser", {
         "email": args.email,
@@ -40,9 +52,25 @@ export interface GetPersonUserResult {
 }
 /**
  * Information about an individual user.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumi/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const emailAddress = config.require("emailAddress");
+ * const cockroach = cockroach.getPersonUser({
+ *     email: emailAddress,
+ * });
+ * ```
  */
 export function getPersonUserOutput(args: GetPersonUserOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPersonUserResult> {
-    return pulumi.output(args).apply((a: any) => getPersonUser(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("cockroach:index/getPersonUser:getPersonUser", {
+        "email": args.email,
+    }, opts);
 }
 
 /**

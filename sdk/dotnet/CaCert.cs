@@ -12,6 +12,28 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Manages client CA certs.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     // The X509 certificate in PEM format.
+    ///     var clientCertificate = config.Require("clientCertificate");
+    ///     var prod = new Cockroach.CaCert("prod", new()
+    ///     {
+    ///         ClusterId = prodCockroachCluster.Id,
+    ///         X509PemCert = clientCertificate,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/caCert:CaCert")]
     public partial class CaCert : global::Pulumi.CustomResource

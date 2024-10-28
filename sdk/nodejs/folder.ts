@@ -6,6 +6,22 @@ import * as utilities from "./utilities";
 
 /**
  * CockroachDB Cloud folder.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const aTeam = new cockroach.Folder("a_team", {
+ *     name: "a-team",
+ *     parentId: "root",
+ * });
+ * const aTeamDev = new cockroach.Folder("a_team_dev", {
+ *     name: "dev",
+ *     parentId: aTeam.id,
+ * });
+ * ```
  */
 export class Folder extends pulumi.CustomResource {
     /**

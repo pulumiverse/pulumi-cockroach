@@ -13,6 +13,45 @@ import (
 )
 
 // Maintenance window configuration for a cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			offsetDuration := float64(172800)
+//			if param := cfg.GetFloat64("offsetDuration"); param != 0 {
+//				offsetDuration = param
+//			}
+//			windowDuration := float64(21600)
+//			if param := cfg.GetFloat64("windowDuration"); param != 0 {
+//				windowDuration = param
+//			}
+//			_, err := cockroach.NewMaintenanceWindow(ctx, "example", &cockroach.MaintenanceWindowArgs{
+//				ClusterId:      pulumi.String(clusterId),
+//				OffsetDuration: pulumi.Float64(offsetDuration),
+//				WindowDuration: pulumi.Float64(windowDuration),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type MaintenanceWindow struct {
 	pulumi.CustomResourceState
 

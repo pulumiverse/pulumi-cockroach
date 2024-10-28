@@ -13,6 +13,45 @@ import (
 )
 
 // Private Endpoint Trusted Owner.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			_, err := cockroach.NewPrivateEndpointTrustedOwner(ctx, "example", &cockroach.PrivateEndpointTrustedOwnerArgs{
+//				ClusterId:       pulumi.String(clusterId),
+//				Type:            pulumi.String("AWS_ACCOUNT_ID"),
+//				ExternalOwnerId: pulumi.String("012345678901"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// format: <cluster id>:<owner id>
+//
+// ```sh
+// $ pulumi import cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:e50aa10d-1a16-4be8-85e6-4c18221daa49
+// ```
 type PrivateEndpointTrustedOwner struct {
 	pulumi.CustomResourceState
 

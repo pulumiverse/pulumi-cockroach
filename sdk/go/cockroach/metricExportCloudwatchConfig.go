@@ -13,6 +13,41 @@ import (
 )
 
 // Amazon CloudWatch metric export configuration for a cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			clusterId := cfg.Require("clusterId")
+//			roleArn := cfg.Require("roleArn")
+//			logGroupName := cfg.Require("logGroupName")
+//			awsRegion := cfg.Require("awsRegion")
+//			_, err := cockroach.NewMetricExportCloudwatchConfig(ctx, "example", &cockroach.MetricExportCloudwatchConfigArgs{
+//				ClusterId:    pulumi.String(clusterId),
+//				RoleArn:      pulumi.String(roleArn),
+//				LogGroupName: pulumi.String(logGroupName),
+//				TargetRegion: pulumi.String(awsRegion),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type MetricExportCloudwatchConfig struct {
 	pulumi.CustomResourceState
 

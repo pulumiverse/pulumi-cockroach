@@ -6,6 +6,21 @@ import * as utilities from "./utilities";
 
 /**
  * Utility resource that represents the one-time action of finalizing a cluster's pending CockroachDB version upgrade.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const cockroachVersion = config.require("cockroachVersion");
+ * const cockroach = new cockroach.FinalizeVersionUpgrade("cockroach", {
+ *     clusterId: clusterId,
+ *     cockroachVersion: cockroachVersion,
+ * });
+ * ```
  */
 export class FinalizeVersionUpgrade extends pulumi.CustomResource {
     /**

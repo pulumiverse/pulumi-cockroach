@@ -11,7 +11,15 @@ using Pulumi;
 namespace Pulumiverse.Cockroach
 {
     /// <summary>
-    /// AWS PrivateLink Endpoint Connection.
+    /// Private endpoint connections allow customer applications to connect to a CockroachDB Cloud cluster without traversing the public internet. All application-database traffic remains within the cloud-provider network.
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;:&lt;connection id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/privateEndpointConnection:PrivateEndpointConnection resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:vpce-0c1308d7312217abc
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/privateEndpointConnection:PrivateEndpointConnection")]
     public partial class PrivateEndpointConnection : global::Pulumi.CustomResource
@@ -26,7 +34,7 @@ namespace Pulumiverse.Cockroach
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Client side ID of the PrivateLink connection.
+        /// Client side ID of the Private Endpoint Connection.
         /// </summary>
         [Output("endpointId")]
         public Output<string> EndpointId { get; private set; } = null!;
@@ -38,7 +46,7 @@ namespace Pulumiverse.Cockroach
         public Output<string> RegionName { get; private set; } = null!;
 
         /// <summary>
-        /// Server side ID of the PrivateLink connection.
+        /// Server side ID of the Private Endpoint Connection.
         /// </summary>
         [Output("serviceId")]
         public Output<string> ServiceId { get; private set; } = null!;
@@ -94,7 +102,7 @@ namespace Pulumiverse.Cockroach
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Client side ID of the PrivateLink connection.
+        /// Client side ID of the Private Endpoint Connection.
         /// </summary>
         [Input("endpointId", required: true)]
         public Input<string> EndpointId { get; set; } = null!;
@@ -117,7 +125,7 @@ namespace Pulumiverse.Cockroach
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Client side ID of the PrivateLink connection.
+        /// Client side ID of the Private Endpoint Connection.
         /// </summary>
         [Input("endpointId")]
         public Input<string>? EndpointId { get; set; }
@@ -129,7 +137,7 @@ namespace Pulumiverse.Cockroach
         public Input<string>? RegionName { get; set; }
 
         /// <summary>
-        /// Server side ID of the PrivateLink connection.
+        /// Server side ID of the Private Endpoint Connection.
         /// </summary>
         [Input("serviceId")]
         public Input<string>? ServiceId { get; set; }

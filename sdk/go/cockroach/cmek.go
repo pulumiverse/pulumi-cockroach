@@ -13,6 +13,42 @@ import (
 )
 
 // Customer-managed encryption keys (CMEK) resource for a single cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cockroach.NewCmek(ctx, "dedicated", &cockroach.CmekArgs{
+//				ClusterId: pulumi.Any(dedicatedCockroachCluster.Id),
+//				Regions: cockroach.CmekRegionArray{
+//					&cockroach.CmekRegionArgs{
+//						Region: pulumi.String("us-central-1"),
+//						Key: &cockroach.CmekRegionKeyArgs{
+//							AuthPrincipal: pulumi.String("arn:aws:iam::account:role/role-name-with-path"),
+//							Type:          pulumi.String("AWS_KMS"),
+//							Uri:           pulumi.String("arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Cmek struct {
 	pulumi.CustomResourceState
 

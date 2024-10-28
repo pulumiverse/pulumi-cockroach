@@ -12,6 +12,37 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// CockroachDB SQL user.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var sqlUserPassword = config.Require("sqlUserPassword");
+    ///     var cockroach = new Cockroach.SqlUser("cockroach", new()
+    ///     {
+    ///         Name = "example-sql-user",
+    ///         Password = sqlUserPassword,
+    ///         ClusterId = clusterId,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;:&lt;sql user name&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/sqlUser:SqlUser bill 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:bill
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/sqlUser:SqlUser")]
     public partial class SqlUser : global::Pulumi.CustomResource

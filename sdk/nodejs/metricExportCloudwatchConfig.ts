@@ -6,6 +6,25 @@ import * as utilities from "./utilities";
 
 /**
  * Amazon CloudWatch metric export configuration for a cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cockroach from "@pulumiverse/cockroach";
+ *
+ * const config = new pulumi.Config();
+ * const clusterId = config.require("clusterId");
+ * const roleArn = config.require("roleArn");
+ * const logGroupName = config.require("logGroupName");
+ * const awsRegion = config.require("awsRegion");
+ * const example = new cockroach.MetricExportCloudwatchConfig("example", {
+ *     clusterId: clusterId,
+ *     roleArn: roleArn,
+ *     logGroupName: logGroupName,
+ *     targetRegion: awsRegion,
+ * });
+ * ```
  */
 export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
     /**

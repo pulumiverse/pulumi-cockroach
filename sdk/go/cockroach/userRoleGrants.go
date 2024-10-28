@@ -12,7 +12,15 @@ import (
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
-// Role grants for a single user.
+// ## Example Usage
+//
+// ## Import
+//
+// format: <user id>
+//
+// ```sh
+// $ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type UserRoleGrants struct {
 	pulumi.CustomResourceState
 

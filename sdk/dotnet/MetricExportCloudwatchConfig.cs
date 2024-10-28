@@ -12,6 +12,32 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Amazon CloudWatch metric export configuration for a cluster.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Cockroach = Pulumiverse.Cockroach;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var clusterId = config.Require("clusterId");
+    ///     var roleArn = config.Require("roleArn");
+    ///     var logGroupName = config.Require("logGroupName");
+    ///     var awsRegion = config.Require("awsRegion");
+    ///     var example = new Cockroach.MetricExportCloudwatchConfig("example", new()
+    ///     {
+    ///         ClusterId = clusterId,
+    ///         RoleArn = roleArn,
+    ///         LogGroupName = logGroupName,
+    ///         TargetRegion = awsRegion,
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig")]
     public partial class MetricExportCloudwatchConfig : global::Pulumi.CustomResource
