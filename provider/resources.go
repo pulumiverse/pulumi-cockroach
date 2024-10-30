@@ -76,6 +76,7 @@ func Provider() tfbridge.ProviderInfo {
 		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"cockroach_allow_list":      {Tok: cockroachResource(cockroachMod, "AllowList")},
+			"cockroach_api_key":         {Tok: cockroachResource(cockroachMod, "ApiKey")},
 			"cockroach_api_oidc_config": {Tok: cockroachResource(cockroachMod, "ApiOidcConfig")},
 			"cockroach_client_ca_cert": {
 				Tok: cockroachResource(cockroachMod, "CaCert"),
@@ -163,6 +164,7 @@ func Provider() tfbridge.ProviderInfo {
 			"cockroach_private_endpoint_connection":    {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
 			"cockroach_private_endpoint_services":      {Tok: cockroachResource(cockroachMod, "PrivateEndpointServices")},
 			"cockroach_private_endpoint_trusted_owner": {Tok: cockroachResource(cockroachMod, "PrivateEndpointTrustedOwner")},
+			"cockroach_service_account":                {Tok: cockroachResource(cockroachMod, "ServiceAccount")},
 			"cockroach_sql_user":                       {Tok: cockroachResource(cockroachMod, "SqlUser")},
 			"cockroach_user_role_grant": {
 				Tok:       cockroachResource(cockroachMod, "UserRoleGrant"),
