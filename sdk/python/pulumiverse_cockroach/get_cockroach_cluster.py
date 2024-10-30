@@ -27,7 +27,7 @@ class GetCockroachClusterResult:
     """
     A collection of values returned by getCockroachCluster.
     """
-    def __init__(__self__, account_id=None, cloud_provider=None, cockroach_version=None, creator_id=None, dedicated=None, id=None, name=None, operation_status=None, parent_id=None, plan=None, regions=None, serverless=None, state=None, upgrade_status=None):
+    def __init__(__self__, account_id=None, cloud_provider=None, cockroach_version=None, creator_id=None, dedicated=None, delete_protection=None, id=None, name=None, operation_status=None, parent_id=None, plan=None, regions=None, serverless=None, state=None, upgrade_status=None):
         if account_id and not isinstance(account_id, str):
             raise TypeError("Expected argument 'account_id' to be a str")
         pulumi.set(__self__, "account_id", account_id)
@@ -43,6 +43,9 @@ class GetCockroachClusterResult:
         if dedicated and not isinstance(dedicated, dict):
             raise TypeError("Expected argument 'dedicated' to be a dict")
         pulumi.set(__self__, "dedicated", dedicated)
+        if delete_protection and not isinstance(delete_protection, bool):
+            raise TypeError("Expected argument 'delete_protection' to be a bool")
+        pulumi.set(__self__, "delete_protection", delete_protection)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -95,6 +98,11 @@ class GetCockroachClusterResult:
     @pulumi.getter
     def dedicated(self) -> 'outputs.GetCockroachClusterDedicatedResult':
         return pulumi.get(self, "dedicated")
+
+    @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> bool:
+        return pulumi.get(self, "delete_protection")
 
     @property
     @pulumi.getter
@@ -153,6 +161,7 @@ class AwaitableGetCockroachClusterResult(GetCockroachClusterResult):
             cockroach_version=self.cockroach_version,
             creator_id=self.creator_id,
             dedicated=self.dedicated,
+            delete_protection=self.delete_protection,
             id=self.id,
             name=self.name,
             operation_status=self.operation_status,
@@ -191,6 +200,7 @@ def get_cockroach_cluster(id: Optional[str] = None,
         cockroach_version=pulumi.get(__ret__, 'cockroach_version'),
         creator_id=pulumi.get(__ret__, 'creator_id'),
         dedicated=pulumi.get(__ret__, 'dedicated'),
+        delete_protection=pulumi.get(__ret__, 'delete_protection'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         operation_status=pulumi.get(__ret__, 'operation_status'),
@@ -226,6 +236,7 @@ def get_cockroach_cluster_output(id: Optional[pulumi.Input[str]] = None,
         cockroach_version=pulumi.get(__response__, 'cockroach_version'),
         creator_id=pulumi.get(__response__, 'creator_id'),
         dedicated=pulumi.get(__response__, 'dedicated'),
+        delete_protection=pulumi.get(__response__, 'delete_protection'),
         id=pulumi.get(__response__, 'id'),
         name=pulumi.get(__response__, 'name'),
         operation_status=pulumi.get(__response__, 'operation_status'),

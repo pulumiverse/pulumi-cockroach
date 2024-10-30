@@ -97,6 +97,7 @@ namespace Pulumiverse.Cockroach
         public readonly string CockroachVersion;
         public readonly string CreatorId;
         public readonly Outputs.GetCockroachClusterDedicatedResult Dedicated;
+        public readonly bool DeleteProtection;
         public readonly string Id;
         public readonly string Name;
         public readonly string OperationStatus;
@@ -118,6 +119,8 @@ namespace Pulumiverse.Cockroach
             string creatorId,
 
             Outputs.GetCockroachClusterDedicatedResult dedicated,
+
+            bool deleteProtection,
 
             string id,
 
@@ -142,6 +145,7 @@ namespace Pulumiverse.Cockroach
             CockroachVersion = cockroachVersion;
             CreatorId = creatorId;
             Dedicated = dedicated;
+            DeleteProtection = deleteProtection;
             Id = id;
             Name = name;
             OperationStatus = operationStatus;

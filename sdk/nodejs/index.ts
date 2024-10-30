@@ -10,6 +10,11 @@ export type AllowList = import("./allowList").AllowList;
 export const AllowList: typeof import("./allowList").AllowList = null as any;
 utilities.lazyLoad(exports, ["AllowList"], () => require("./allowList"));
 
+export { ApiKeyArgs, ApiKeyState } from "./apiKey";
+export type ApiKey = import("./apiKey").ApiKey;
+export const ApiKey: typeof import("./apiKey").ApiKey = null as any;
+utilities.lazyLoad(exports, ["ApiKey"], () => require("./apiKey"));
+
 export { ApiOidcConfigArgs, ApiOidcConfigState } from "./apiOidcConfig";
 export type ApiOidcConfig = import("./apiOidcConfig").ApiOidcConfig;
 export const ApiOidcConfig: typeof import("./apiOidcConfig").ApiOidcConfig = null as any;
@@ -115,6 +120,11 @@ export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
+export { ServiceAccountArgs, ServiceAccountState } from "./serviceAccount";
+export type ServiceAccount = import("./serviceAccount").ServiceAccount;
+export const ServiceAccount: typeof import("./serviceAccount").ServiceAccount = null as any;
+utilities.lazyLoad(exports, ["ServiceAccount"], () => require("./serviceAccount"));
+
 export { SqlUserArgs, SqlUserState } from "./sqlUser";
 export type SqlUser = import("./sqlUser").SqlUser;
 export const SqlUser: typeof import("./sqlUser").SqlUser = null as any;
@@ -151,6 +161,8 @@ const _module = {
         switch (type) {
             case "cockroach:index/allowList:AllowList":
                 return new AllowList(name, <any>undefined, { urn })
+            case "cockroach:index/apiKey:ApiKey":
+                return new ApiKey(name, <any>undefined, { urn })
             case "cockroach:index/apiOidcConfig:ApiOidcConfig":
                 return new ApiOidcConfig(name, <any>undefined, { urn })
             case "cockroach:index/caCert:CaCert":
@@ -179,6 +191,8 @@ const _module = {
                 return new PrivateEndpointServices(name, <any>undefined, { urn })
             case "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner":
                 return new PrivateEndpointTrustedOwner(name, <any>undefined, { urn })
+            case "cockroach:index/serviceAccount:ServiceAccount":
+                return new ServiceAccount(name, <any>undefined, { urn })
             case "cockroach:index/sqlUser:SqlUser":
                 return new SqlUser(name, <any>undefined, { urn })
             case "cockroach:index/userRoleGrant:UserRoleGrant":
@@ -193,6 +207,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("cockroach", "index/allowList", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/apiKey", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/apiOidcConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/caCert", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/cluster", _module)
@@ -207,6 +222,7 @@ pulumi.runtime.registerResourceModule("cockroach", "index/metricExportDatadogCon
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointConnection", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointServices", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointTrustedOwner", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/serviceAccount", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/sqlUser", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/userRoleGrant", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/userRoleGrants", _module)

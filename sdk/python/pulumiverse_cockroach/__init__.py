@@ -6,6 +6,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .allow_list import *
+from .api_key import *
 from .api_oidc_config import *
 from .ca_cert import *
 from .cluster import *
@@ -27,6 +28,7 @@ from .private_endpoint_connection import *
 from .private_endpoint_services import *
 from .private_endpoint_trusted_owner import *
 from .provider import *
+from .service_account import *
 from .sql_user import *
 from .user_role_grant import *
 from .user_role_grants import *
@@ -50,6 +52,14 @@ _utilities.register(
   "fqn": "pulumiverse_cockroach",
   "classes": {
    "cockroach:index/allowList:AllowList": "AllowList"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/apiKey",
+  "fqn": "pulumiverse_cockroach",
+  "classes": {
+   "cockroach:index/apiKey:ApiKey": "ApiKey"
   }
  },
  {
@@ -162,6 +172,14 @@ _utilities.register(
   "fqn": "pulumiverse_cockroach",
   "classes": {
    "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner": "PrivateEndpointTrustedOwner"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/serviceAccount",
+  "fqn": "pulumiverse_cockroach",
+  "classes": {
+   "cockroach:index/serviceAccount:ServiceAccount": "ServiceAccount"
   }
  },
  {

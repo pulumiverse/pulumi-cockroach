@@ -14,6 +14,7 @@
     },
     "files": [
         "allowList.ts",
+        "apiKey.ts",
         "apiOidcConfig.ts",
         "caCert.ts",
         "cluster.ts",
@@ -38,6 +39,7 @@
         "privateEndpointServices.ts",
         "privateEndpointTrustedOwner.ts",
         "provider.ts",
+        "serviceAccount.ts",
         "sqlUser.ts",
         "types/index.ts",
         "types/input.ts",

@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "cockroach:index/allowList:AllowList":
 		r = &AllowList{}
+	case "cockroach:index/apiKey:ApiKey":
+		r = &ApiKey{}
 	case "cockroach:index/apiOidcConfig:ApiOidcConfig":
 		r = &ApiOidcConfig{}
 	case "cockroach:index/caCert:CaCert":
@@ -51,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PrivateEndpointServices{}
 	case "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner":
 		r = &PrivateEndpointTrustedOwner{}
+	case "cockroach:index/serviceAccount:ServiceAccount":
+		r = &ServiceAccount{}
 	case "cockroach:index/sqlUser:SqlUser":
 		r = &SqlUser{}
 	case "cockroach:index/userRoleGrant:UserRoleGrant":
@@ -93,6 +97,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/allowList",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/apiKey",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -163,6 +172,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/privateEndpointTrustedOwner",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/serviceAccount",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
