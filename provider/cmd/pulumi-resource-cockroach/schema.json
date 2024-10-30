@@ -784,6 +784,66 @@
                 "type": "object"
             }
         },
+        "cockroach:index/apiKey:ApiKey": {
+            "description": "## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cockroach from \"@pulumiverse/cockroach\";\n\nconst example = new cockroach.ApiKey(\"example\", {\n    name: \"An example api key\",\n    serviceAccountId: exampleSa.id,\n});\nexport const exampleSecret = example.secret;\n```\n```python\nimport pulumi\nimport pulumiverse_cockroach as cockroach\n\nexample = cockroach.ApiKey(\"example\",\n    name=\"An example api key\",\n    service_account_id=example_sa[\"id\"])\npulumi.export(\"exampleSecret\", example.secret)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cockroach = Pulumiverse.Cockroach;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cockroach.ApiKey(\"example\", new()\n    {\n        Name = \"An example api key\",\n        ServiceAccountId = exampleSa.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleSecret\"] = example.Secret,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := cockroach.NewApiKey(ctx, \"example\", \u0026cockroach.ApiKeyArgs{\n\t\t\tName:             pulumi.String(\"An example api key\"),\n\t\t\tServiceAccountId: pulumi.Any(exampleSa.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleSecret\", example.Secret)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.ApiKey;\nimport com.pulumi.cockroach.ApiKeyArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApiKey(\"example\", ApiKeyArgs.builder()\n            .name(\"An example api key\")\n            .serviceAccountId(exampleSa.id())\n            .build());\n\n        ctx.export(\"exampleSecret\", example.secret());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cockroach:ApiKey\n    properties:\n      name: An example api key\n      serviceAccountId: ${exampleSa.id}\noutputs:\n  exampleSecret: ${example.secret}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nSince the secret, is not retreivable after creation, it must be provided\n\nduring import.  The API key ID can be derived from the secret.\n\n```sh\n$ pulumi import cockroach:index/apiKey:ApiKey format: \u003cresource\u003e \u003capi key secret\u003e\n```\n\n```sh\n$ pulumi import cockroach:index/apiKey:ApiKey example CCDB1_D4zMI3pZTmk5rGrzYqMhbc_NkcXLI8d81Mtx3djD45iwPfgtnaRv0XCh0Z9047K\n```\n\n",
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "description": "Creation time of the api key.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the api key.\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "secret": true
+                },
+                "serviceAccountId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "createdAt",
+                "name",
+                "secret",
+                "serviceAccountId"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the api key.\n"
+                },
+                "serviceAccountId": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "name",
+                "serviceAccountId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ApiKey resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Creation time of the api key.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the api key.\n"
+                    },
+                    "secret": {
+                        "type": "string",
+                        "secret": true
+                    },
+                    "serviceAccountId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "cockroach:index/apiOidcConfig:ApiOidcConfig": {
             "description": "Configuration to allow external OIDC providers to issue tokens for use with CC API.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.ApiOidcConfig;\nimport com.pulumi.cockroach.ApiOidcConfigArgs;\nimport com.pulumi.cockroach.inputs.ApiOidcConfigIdentityMapArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApiOidcConfig(\"example\", ApiOidcConfigArgs.builder()\n            .issuer(\"https://accounts.google.com\")\n            .audience(\"test_audience\")\n            .jwks(\"{\\\"keys\\\":[{\\\"alg\\\":\\\"RS256\\\",\\\"e\\\":\\\"AQAB\\\",\\\"kid\\\":\\\"test_kid1\\\",\\\"kty\\\":\\\"RSA\\\",\\\"n\\\":\\\"09lq1lCEuteonwDJOhGTDak11ThplZuC9JEWQNdBnBSQwlkJQIE7A7nTBO0xTibcsh2HwYkC-N_Gs1jP4iwN3dRqnu5FwG2ct5mY8KLwJiHzToFC0MKenSFQCy0FviNtOnpiObcUlDvR2NDeNtMl_6SPzcQEt7GUTBBYZgoAxPmOgevki6ZNO6Y86xFqx3y6v8EPwW010AiC60r4AHGCTBhYF4uqmq5JH2UU4dDh9Udc-9LZxlSqPwJvnKDG2GjcnD8TsU3wjfEM_nRmx3dnXsrZUXYfNGtdv5dlHywf5AhkJmTavqcsJkgrNA-PNBghFMcCR816_kCIkCYWLWC5vQ\\\"}]}\")\n            .claim(\"sub\")\n            .identityMaps(            \n                ApiOidcConfigIdentityMapArgs.builder()\n                    .token_identity(\"token_identity\")\n                    .cc_identity(\"cc_identity\")\n                    .is_regex(false)\n                    .build(),\n                ApiOidcConfigIdentityMapArgs.builder()\n                    .token_identity(\"(.*)\")\n                    .cc_identity(\"\\\\1@example.com\")\n                    .is_regex(true)\n                    .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cockroach:ApiOidcConfig\n    properties:\n      issuer: https://accounts.google.com\n      audience: test_audience\n      jwks: '{\"keys\":[{\"alg\":\"RS256\",\"e\":\"AQAB\",\"kid\":\"test_kid1\",\"kty\":\"RSA\",\"n\":\"09lq1lCEuteonwDJOhGTDak11ThplZuC9JEWQNdBnBSQwlkJQIE7A7nTBO0xTibcsh2HwYkC-N_Gs1jP4iwN3dRqnu5FwG2ct5mY8KLwJiHzToFC0MKenSFQCy0FviNtOnpiObcUlDvR2NDeNtMl_6SPzcQEt7GUTBBYZgoAxPmOgevki6ZNO6Y86xFqx3y6v8EPwW010AiC60r4AHGCTBhYF4uqmq5JH2UU4dDh9Udc-9LZxlSqPwJvnKDG2GjcnD8TsU3wjfEM_nRmx3dnXsrZUXYfNGtdv5dlHywf5AhkJmTavqcsJkgrNA-PNBghFMcCR816_kCIkCYWLWC5vQ\"}]}'\n      claim: sub\n      identityMaps:\n        - token_identity: token_identity\n          cc_identity: cc_identity\n          is_regex: false\n        - token_identity: (.*)\n          cc_identity: \\1@example.com\n          is_regex: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
@@ -933,7 +993,7 @@
             }
         },
         "cockroach:index/cluster:Cluster": {
-            "description": "CockroachDB Cloud cluster. Can be Dedicated or Serverless.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.Cluster;\nimport com.pulumi.cockroach.ClusterArgs;\nimport com.pulumi.cockroach.inputs.ClusterDedicatedArgs;\nimport com.pulumi.cockroach.inputs.ClusterRegionArgs;\nimport com.pulumi.cockroach.inputs.ClusterServerlessArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var dedicated = new Cluster(\"dedicated\", ClusterArgs.builder()\n            .name(\"cockroach-dedicated\")\n            .cloudProvider(\"GCP\")\n            .dedicated(ClusterDedicatedArgs.builder()\n                .storage_gib(15)\n                .machine_type(\"n1-standard-4\")\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-central1\")\n                .node_count(1)\n                .build())\n            .build());\n\n        var serverless = new Cluster(\"serverless\", ClusterArgs.builder()\n            .name(\"cockroach-serverless\")\n            .cloudProvider(\"GCP\")\n            .serverless(ClusterServerlessArgs.builder()\n                .spend_limit(1)\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-east1\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  dedicated:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-dedicated\n      cloudProvider: GCP\n      dedicated:\n        storage_gib: 15\n        machine_type: n1-standard-4\n      regions:\n        - name: us-central1\n          node_count: 1\n  serverless:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-serverless\n      cloudProvider: GCP\n      serverless:\n        spend_limit: 1\n      regions:\n        - name: us-east1\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "CockroachDB Cloud cluster. Can be Dedicated or Serverless.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.Cluster;\nimport com.pulumi.cockroach.ClusterArgs;\nimport com.pulumi.cockroach.inputs.ClusterDedicatedArgs;\nimport com.pulumi.cockroach.inputs.ClusterRegionArgs;\nimport com.pulumi.cockroach.inputs.ClusterServerlessArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var dedicated = new Cluster(\"dedicated\", ClusterArgs.builder()\n            .name(\"cockroach-dedicated\")\n            .cloudProvider(\"GCP\")\n            .dedicated(ClusterDedicatedArgs.builder()\n                .storage_gib(15)\n                .machine_type(\"n1-standard-4\")\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-central1\")\n                .node_count(1)\n                .build())\n            .deleteProtection(true)\n            .build());\n\n        var serverless = new Cluster(\"serverless\", ClusterArgs.builder()\n            .name(\"cockroach-serverless\")\n            .cloudProvider(\"GCP\")\n            .serverless(ClusterServerlessArgs.builder()\n                .spend_limit(1)\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-east1\")\n                .build())\n            .deleteProtection(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  dedicated:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-dedicated\n      cloudProvider: GCP\n      dedicated:\n        storage_gib: 15\n        machine_type: n1-standard-4\n      regions:\n        - name: us-central1\n          node_count: 1\n      deleteProtection: true\n  serverless:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-serverless\n      cloudProvider: GCP\n      serverless:\n        spend_limit: 1\n      regions:\n        - name: us-east1\n      deleteProtection: false\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "accountId": {
                     "type": "string",
@@ -956,6 +1016,10 @@
                 },
                 "dedicated": {
                     "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
+                },
+                "deleteProtection": {
+                    "type": "boolean",
+                    "description": "Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and\npreserves the value on cluster update.\n"
                 },
                 "name": {
                     "type": "string",
@@ -996,6 +1060,7 @@
                 "cloudProvider",
                 "cockroachVersion",
                 "creatorId",
+                "deleteProtection",
                 "clusterId",
                 "name",
                 "operationStatus",
@@ -1016,6 +1081,10 @@
                 },
                 "dedicated": {
                     "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
+                },
+                "deleteProtection": {
+                    "type": "boolean",
+                    "description": "Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and\npreserves the value on cluster update.\n"
                 },
                 "name": {
                     "type": "string",
@@ -1064,6 +1133,10 @@
                     },
                     "dedicated": {
                         "$ref": "#/types/cockroach:index/ClusterDedicated:ClusterDedicated"
+                    },
+                    "deleteProtection": {
+                        "type": "boolean",
+                        "description": "Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and\npreserves the value on cluster update.\n"
                     },
                     "name": {
                         "type": "string",
@@ -1910,6 +1983,68 @@
                 "type": "object"
             }
         },
+        "cockroach:index/serviceAccount:ServiceAccount": {
+            "description": "CockroachDB Cloud service account. A service account represents a non-person user. By default a service account has no access but it can be accompanied by either a cockroach.UserRoleGrants resource or any number of cockroach.UserRoleGrant resources to grant it roles.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.ServiceAccount;\nimport com.pulumi.cockroach.ServiceAccountArgs;\nimport com.pulumi.cockroach.UserRoleGrants;\nimport com.pulumi.cockroach.UserRoleGrantsArgs;\nimport com.pulumi.cockroach.inputs.UserRoleGrantsRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var prodSa = new ServiceAccount(\"prodSa\", ServiceAccountArgs.builder()\n            .name(\"Prod cluster SA\")\n            .description(\"A service account used for managing access to the prod cluster\")\n            .build());\n\n        var prodSaUserRoleGrants = new UserRoleGrants(\"prodSaUserRoleGrants\", UserRoleGrantsArgs.builder()\n            .userId(prodSa.id())\n            .roles(UserRoleGrantsRoleArgs.builder()\n                .role_name(\"CLUSTER_ADMIN\")\n                .resource_type(\"CLUSTER\")\n                .resource_id(prod.id())\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  prodSa:\n    type: cockroach:ServiceAccount\n    name: prod_sa\n    properties:\n      name: Prod cluster SA\n      description: A service account used for managing access to the prod cluster\n  prodSaUserRoleGrants:\n    type: cockroach:UserRoleGrants\n    name: prod_sa\n    properties:\n      userId: ${prodSa.id}\n      roles:\n        - role_name: CLUSTER_ADMIN\n          resource_type: CLUSTER\n          resource_id: ${prod.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nformat \u003cresource\u003e \u003cservice account id\u003e\n\n```sh\n$ pulumi import cockroach:index/serviceAccount:ServiceAccount api_service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d\n```\n\n",
+            "properties": {
+                "createdAt": {
+                    "type": "string",
+                    "description": "Creation time of the service account.\n"
+                },
+                "creatorName": {
+                    "type": "string",
+                    "description": "Name of the creator of the service account.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the service account.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the service account.\n"
+                }
+            },
+            "required": [
+                "createdAt",
+                "creatorName",
+                "description",
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the service account.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the service account.\n"
+                }
+            },
+            "requiredInputs": [
+                "name"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ServiceAccount resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Creation time of the service account.\n"
+                    },
+                    "creatorName": {
+                        "type": "string",
+                        "description": "Name of the creator of the service account.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the service account.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the service account.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "cockroach:index/sqlUser:SqlUser": {
             "description": "CockroachDB SQL user.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cockroach from \"@pulumiverse/cockroach\";\n\nconst config = new pulumi.Config();\nconst clusterId = config.require(\"clusterId\");\nconst sqlUserPassword = config.require(\"sqlUserPassword\");\nconst cockroach = new cockroach.SqlUser(\"cockroach\", {\n    name: \"example-sql-user\",\n    password: sqlUserPassword,\n    clusterId: clusterId,\n});\n```\n```python\nimport pulumi\nimport pulumiverse_cockroach as cockroach\n\nconfig = pulumi.Config()\ncluster_id = config.require(\"clusterId\")\nsql_user_password = config.require(\"sqlUserPassword\")\ncockroach = cockroach.SqlUser(\"cockroach\",\n    name=\"example-sql-user\",\n    password=sql_user_password,\n    cluster_id=cluster_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cockroach = Pulumiverse.Cockroach;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var config = new Config();\n    var clusterId = config.Require(\"clusterId\");\n    var sqlUserPassword = config.Require(\"sqlUserPassword\");\n    var cockroach = new Cockroach.SqlUser(\"cockroach\", new()\n    {\n        Name = \"example-sql-user\",\n        Password = sqlUserPassword,\n        ClusterId = clusterId,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config\"\n\t\"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcfg := config.New(ctx, \"\")\n\t\tclusterId := cfg.Require(\"clusterId\")\n\t\tsqlUserPassword := cfg.Require(\"sqlUserPassword\")\n\t\t_, err := cockroach.NewSqlUser(ctx, \"cockroach\", \u0026cockroach.SqlUserArgs{\n\t\t\tName:      pulumi.String(\"example-sql-user\"),\n\t\t\tPassword:  pulumi.String(sqlUserPassword),\n\t\t\tClusterId: pulumi.String(clusterId),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.SqlUser;\nimport com.pulumi.cockroach.SqlUserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var clusterId = config.get(\"clusterId\");\n        final var sqlUserPassword = config.get(\"sqlUserPassword\");\n        var cockroach = new SqlUser(\"cockroach\", SqlUserArgs.builder()\n            .name(\"example-sql-user\")\n            .password(sqlUserPassword)\n            .clusterId(clusterId)\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  clusterId:\n    type: string\n  # Remember that even variables marked sensitive will show up\n  # in the Terraform state file. Always follow best practices\n  # when managing sensitive info.\n  # https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables#sensitive-values-in-state\n  sqlUserPassword:\n    type: string\nresources:\n  cockroach:\n    type: cockroach:SqlUser\n    properties:\n      name: example-sql-user\n      password: ${sqlUserPassword}\n      clusterId: ${clusterId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nformat: \u003ccluster id\u003e:\u003csql user name\u003e\n\n```sh\n$ pulumi import cockroach:index/sqlUser:SqlUser bill 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:bill\n```\n\n",
             "properties": {
@@ -2170,6 +2305,9 @@
                     "dedicated": {
                         "$ref": "#/types/cockroach:index/getCockroachClusterDedicated:getCockroachClusterDedicated"
                     },
+                    "deleteProtection": {
+                        "type": "boolean"
+                    },
                     "id": {
                         "type": "string"
                     },
@@ -2207,6 +2345,7 @@
                     "cockroachVersion",
                     "creatorId",
                     "dedicated",
+                    "deleteProtection",
                     "id",
                     "name",
                     "operationStatus",

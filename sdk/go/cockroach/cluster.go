@@ -26,6 +26,9 @@ type Cluster struct {
 	// ID of the user who created the cluster.
 	CreatorId pulumi.StringOutput       `pulumi:"creatorId"`
 	Dedicated ClusterDedicatedPtrOutput `pulumi:"dedicated"`
+	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+	// preserves the value on cluster update.
+	DeleteProtection pulumi.BoolOutput `pulumi:"deleteProtection"`
 	// Name of the cluster.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Describes the current long-running operation, if any.
@@ -91,6 +94,9 @@ type clusterState struct {
 	// ID of the user who created the cluster.
 	CreatorId *string           `pulumi:"creatorId"`
 	Dedicated *ClusterDedicated `pulumi:"dedicated"`
+	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+	// preserves the value on cluster update.
+	DeleteProtection *bool `pulumi:"deleteProtection"`
 	// Name of the cluster.
 	Name *string `pulumi:"name"`
 	// Describes the current long-running operation, if any.
@@ -118,6 +124,9 @@ type ClusterState struct {
 	// ID of the user who created the cluster.
 	CreatorId pulumi.StringPtrInput
 	Dedicated ClusterDedicatedPtrInput
+	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+	// preserves the value on cluster update.
+	DeleteProtection pulumi.BoolPtrInput
 	// Name of the cluster.
 	Name pulumi.StringPtrInput
 	// Describes the current long-running operation, if any.
@@ -144,6 +153,9 @@ type clusterArgs struct {
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion *string           `pulumi:"cockroachVersion"`
 	Dedicated        *ClusterDedicated `pulumi:"dedicated"`
+	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+	// preserves the value on cluster update.
+	DeleteProtection *bool `pulumi:"deleteProtection"`
 	// Name of the cluster.
 	Name string `pulumi:"name"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
@@ -159,6 +171,9 @@ type ClusterArgs struct {
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringPtrInput
 	Dedicated        ClusterDedicatedPtrInput
+	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+	// preserves the value on cluster update.
+	DeleteProtection pulumi.BoolPtrInput
 	// Name of the cluster.
 	Name pulumi.StringInput
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
@@ -280,6 +295,12 @@ func (o ClusterOutput) CreatorId() pulumi.StringOutput {
 
 func (o ClusterOutput) Dedicated() ClusterDedicatedPtrOutput {
 	return o.ApplyT(func(v *Cluster) ClusterDedicatedPtrOutput { return v.Dedicated }).(ClusterDedicatedPtrOutput)
+}
+
+// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+// preserves the value on cluster update.
+func (o ClusterOutput) DeleteProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.DeleteProtection }).(pulumi.BoolOutput)
 }
 
 // Name of the cluster.

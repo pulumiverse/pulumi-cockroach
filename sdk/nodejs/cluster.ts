@@ -56,6 +56,11 @@ export class Cluster extends pulumi.CustomResource {
     public /*out*/ readonly creatorId!: pulumi.Output<string>;
     public readonly dedicated!: pulumi.Output<outputs.ClusterDedicated | undefined>;
     /**
+     * Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+     * preserves the value on cluster update.
+     */
+    public readonly deleteProtection!: pulumi.Output<boolean>;
+    /**
      * Name of the cluster.
      */
     public readonly name!: pulumi.Output<string>;
@@ -101,6 +106,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["cockroachVersion"] = state ? state.cockroachVersion : undefined;
             resourceInputs["creatorId"] = state ? state.creatorId : undefined;
             resourceInputs["dedicated"] = state ? state.dedicated : undefined;
+            resourceInputs["deleteProtection"] = state ? state.deleteProtection : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["operationStatus"] = state ? state.operationStatus : undefined;
             resourceInputs["parentId"] = state ? state.parentId : undefined;
@@ -123,6 +129,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["cloudProvider"] = args ? args.cloudProvider : undefined;
             resourceInputs["cockroachVersion"] = args ? args.cockroachVersion : undefined;
             resourceInputs["dedicated"] = args ? args.dedicated : undefined;
+            resourceInputs["deleteProtection"] = args ? args.deleteProtection : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["parentId"] = args ? args.parentId : undefined;
             resourceInputs["regions"] = args ? args.regions : undefined;
@@ -162,6 +169,11 @@ export interface ClusterState {
      */
     creatorId?: pulumi.Input<string>;
     dedicated?: pulumi.Input<inputs.ClusterDedicated>;
+    /**
+     * Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+     * preserves the value on cluster update.
+     */
+    deleteProtection?: pulumi.Input<boolean>;
     /**
      * Name of the cluster.
      */
@@ -203,6 +215,11 @@ export interface ClusterArgs {
      */
     cockroachVersion?: pulumi.Input<string>;
     dedicated?: pulumi.Input<inputs.ClusterDedicated>;
+    /**
+     * Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+     * preserves the value on cluster update.
+     */
+    deleteProtection?: pulumi.Input<boolean>;
     /**
      * Name of the cluster.
      */

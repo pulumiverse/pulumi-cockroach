@@ -26,6 +26,7 @@ class ClusterArgs:
                  regions: pulumi.Input[Sequence[pulumi.Input['ClusterRegionArgs']]],
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input['ClusterDedicatedArgs']] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
                  serverless: Optional[pulumi.Input['ClusterServerlessArgs']] = None):
         """
@@ -33,6 +34,8 @@ class ClusterArgs:
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
+        :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+               preserves the value on cluster update.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
         """
         pulumi.set(__self__, "cloud_provider", cloud_provider)
@@ -42,6 +45,8 @@ class ClusterArgs:
             pulumi.set(__self__, "cockroach_version", cockroach_version)
         if dedicated is not None:
             pulumi.set(__self__, "dedicated", dedicated)
+        if delete_protection is not None:
+            pulumi.set(__self__, "delete_protection", delete_protection)
         if parent_id is not None:
             pulumi.set(__self__, "parent_id", parent_id)
         if serverless is not None:
@@ -102,6 +107,19 @@ class ClusterArgs:
         pulumi.set(self, "dedicated", value)
 
     @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+        preserves the value on cluster update.
+        """
+        return pulumi.get(self, "delete_protection")
+
+    @delete_protection.setter
+    def delete_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_protection", value)
+
+    @property
     @pulumi.getter(name="parentId")
     def parent_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -132,6 +150,7 @@ class _ClusterState:
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  creator_id: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input['ClusterDedicatedArgs']] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  operation_status: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
@@ -146,6 +165,8 @@ class _ClusterState:
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[str] creator_id: ID of the user who created the cluster.
+        :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+               preserves the value on cluster update.
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] operation_status: Describes the current long-running operation, if any.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
@@ -165,6 +186,8 @@ class _ClusterState:
             pulumi.set(__self__, "creator_id", creator_id)
         if dedicated is not None:
             pulumi.set(__self__, "dedicated", dedicated)
+        if delete_protection is not None:
+            pulumi.set(__self__, "delete_protection", delete_protection)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if operation_status is not None:
@@ -247,6 +270,19 @@ class _ClusterState:
     @dedicated.setter
     def dedicated(self, value: Optional[pulumi.Input['ClusterDedicatedArgs']]):
         pulumi.set(self, "dedicated", value)
+
+    @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+        preserves the value on cluster update.
+        """
+        return pulumi.get(self, "delete_protection")
+
+    @delete_protection.setter
+    def delete_protection(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_protection", value)
 
     @property
     @pulumi.getter
@@ -347,6 +383,7 @@ class Cluster(pulumi.CustomResource):
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
                  regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
@@ -359,6 +396,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
+        :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+               preserves the value on cluster update.
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
         """
@@ -389,6 +428,7 @@ class Cluster(pulumi.CustomResource):
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
+                 delete_protection: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
                  regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
@@ -407,6 +447,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["cloud_provider"] = cloud_provider
             __props__.__dict__["cockroach_version"] = cockroach_version
             __props__.__dict__["dedicated"] = dedicated
+            __props__.__dict__["delete_protection"] = delete_protection
             if name is None and not opts.urn:
                 raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
@@ -438,6 +479,7 @@ class Cluster(pulumi.CustomResource):
             cockroach_version: Optional[pulumi.Input[str]] = None,
             creator_id: Optional[pulumi.Input[str]] = None,
             dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
+            delete_protection: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
             operation_status: Optional[pulumi.Input[str]] = None,
             parent_id: Optional[pulumi.Input[str]] = None,
@@ -457,6 +499,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[str] creator_id: ID of the user who created the cluster.
+        :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+               preserves the value on cluster update.
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] operation_status: Describes the current long-running operation, if any.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
@@ -474,6 +518,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["cockroach_version"] = cockroach_version
         __props__.__dict__["creator_id"] = creator_id
         __props__.__dict__["dedicated"] = dedicated
+        __props__.__dict__["delete_protection"] = delete_protection
         __props__.__dict__["name"] = name
         __props__.__dict__["operation_status"] = operation_status
         __props__.__dict__["parent_id"] = parent_id
@@ -525,6 +570,15 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter
     def dedicated(self) -> pulumi.Output[Optional['outputs.ClusterDedicated']]:
         return pulumi.get(self, "dedicated")
+
+    @property
+    @pulumi.getter(name="deleteProtection")
+    def delete_protection(self) -> pulumi.Output[bool]:
+        """
+        Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+        preserves the value on cluster update.
+        """
+        return pulumi.get(self, "delete_protection")
 
     @property
     @pulumi.getter

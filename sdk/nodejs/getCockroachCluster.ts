@@ -45,6 +45,7 @@ export interface GetCockroachClusterResult {
     readonly cockroachVersion: string;
     readonly creatorId: string;
     readonly dedicated: outputs.GetCockroachClusterDedicated;
+    readonly deleteProtection: boolean;
     readonly id: string;
     readonly name: string;
     readonly operationStatus: string;

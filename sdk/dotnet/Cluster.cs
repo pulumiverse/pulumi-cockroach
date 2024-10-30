@@ -47,6 +47,13 @@ namespace Pulumiverse.Cockroach
         public Output<Outputs.ClusterDedicated?> Dedicated { get; private set; } = null!;
 
         /// <summary>
+        /// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+        /// preserves the value on cluster update.
+        /// </summary>
+        [Output("deleteProtection")]
+        public Output<bool> DeleteProtection { get; private set; } = null!;
+
+        /// <summary>
         /// Name of the cluster.
         /// </summary>
         [Output("name")]
@@ -151,6 +158,13 @@ namespace Pulumiverse.Cockroach
         public Input<Inputs.ClusterDedicatedArgs>? Dedicated { get; set; }
 
         /// <summary>
+        /// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+        /// preserves the value on cluster update.
+        /// </summary>
+        [Input("deleteProtection")]
+        public Input<bool>? DeleteProtection { get; set; }
+
+        /// <summary>
         /// Name of the cluster.
         /// </summary>
         [Input("name", required: true)]
@@ -210,6 +224,13 @@ namespace Pulumiverse.Cockroach
 
         [Input("dedicated")]
         public Input<Inputs.ClusterDedicatedGetArgs>? Dedicated { get; set; }
+
+        /// <summary>
+        /// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
+        /// preserves the value on cluster update.
+        /// </summary>
+        [Input("deleteProtection")]
+        public Input<bool>? DeleteProtection { get; set; }
 
         /// <summary>
         /// Name of the cluster.

@@ -63,6 +63,7 @@ type GetCockroachClusterResult struct {
 	CockroachVersion string                        `pulumi:"cockroachVersion"`
 	CreatorId        string                        `pulumi:"creatorId"`
 	Dedicated        GetCockroachClusterDedicated  `pulumi:"dedicated"`
+	DeleteProtection bool                          `pulumi:"deleteProtection"`
 	Id               string                        `pulumi:"id"`
 	Name             string                        `pulumi:"name"`
 	OperationStatus  string                        `pulumi:"operationStatus"`
@@ -135,6 +136,10 @@ func (o GetCockroachClusterResultOutput) CreatorId() pulumi.StringOutput {
 
 func (o GetCockroachClusterResultOutput) Dedicated() GetCockroachClusterDedicatedOutput {
 	return o.ApplyT(func(v GetCockroachClusterResult) GetCockroachClusterDedicated { return v.Dedicated }).(GetCockroachClusterDedicatedOutput)
+}
+
+func (o GetCockroachClusterResultOutput) DeleteProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCockroachClusterResult) bool { return v.DeleteProtection }).(pulumi.BoolOutput)
 }
 
 func (o GetCockroachClusterResultOutput) Id() pulumi.StringOutput {
