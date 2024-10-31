@@ -24,6 +24,7 @@ from .log_export_config import *
 from .maintenance_window import *
 from .metric_export_cloudwatch_config import *
 from .metric_export_datadog_config import *
+from .metric_export_prometheus_config import *
 from .private_endpoint_connection import *
 from .private_endpoint_services import *
 from .private_endpoint_trusted_owner import *
@@ -148,6 +149,14 @@ _utilities.register(
   "fqn": "pulumiverse_cockroach",
   "classes": {
    "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig": "MetricExportDatadogConfig"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/metricExportPrometheusConfig",
+  "fqn": "pulumiverse_cockroach",
+  "classes": {
+   "cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig": "MetricExportPrometheusConfig"
   }
  },
  {

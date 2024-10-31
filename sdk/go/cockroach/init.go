@@ -47,6 +47,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &MetricExportCloudwatchConfig{}
 	case "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig":
 		r = &MetricExportDatadogConfig{}
+	case "cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig":
+		r = &MetricExportPrometheusConfig{}
 	case "cockroach:index/privateEndpointConnection:PrivateEndpointConnection":
 		r = &PrivateEndpointConnection{}
 	case "cockroach:index/privateEndpointServices:PrivateEndpointServices":
@@ -157,6 +159,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/metricExportDatadogConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/metricExportPrometheusConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

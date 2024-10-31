@@ -1805,6 +1805,59 @@
                 "type": "object"
             }
         },
+        "cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig": {
+            "description": "Prometheus metric export configuration for a cluster. This is only available for dedicated clusters with AWS and GCP cloud providers.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cockroach from \"@pulumiverse/cockroach\";\n\nconst config = new pulumi.Config();\nconst clusterId = config.require(\"clusterId\");\nconst example = new cockroach.MetricExportPrometheusConfig(\"example\", {clusterId: clusterId});\n```\n```python\nimport pulumi\nimport pulumiverse_cockroach as cockroach\n\nconfig = pulumi.Config()\ncluster_id = config.require(\"clusterId\")\nexample = cockroach.MetricExportPrometheusConfig(\"example\", cluster_id=cluster_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cockroach = Pulumiverse.Cockroach;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var config = new Config();\n    var clusterId = config.Require(\"clusterId\");\n    var example = new Cockroach.MetricExportPrometheusConfig(\"example\", new()\n    {\n        ClusterId = clusterId,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config\"\n\t\"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcfg := config.New(ctx, \"\")\n\t\tclusterId := cfg.Require(\"clusterId\")\n\t\t_, err := cockroach.NewMetricExportPrometheusConfig(ctx, \"example\", \u0026cockroach.MetricExportPrometheusConfigArgs{\n\t\t\tClusterId: pulumi.String(clusterId),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.MetricExportPrometheusConfig;\nimport com.pulumi.cockroach.MetricExportPrometheusConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var clusterId = config.get(\"clusterId\");\n        var example = new MetricExportPrometheusConfig(\"example\", MetricExportPrometheusConfigArgs.builder()\n            .clusterId(clusterId)\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  clusterId:\n    type: string\nresources:\n  example:\n    type: cockroach:MetricExportPrometheusConfig\n    properties:\n      clusterId: ${clusterId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The current state of the metric export configuration.  Possible values are: [`NOT_DEPLOYED` `DISABLING` `ENABLING` `ENABLED` `ERROR`]\n"
+                },
+                "targets": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "clusterId",
+                "status",
+                "targets"
+            ],
+            "inputProperties": {
+                "clusterId": {
+                    "type": "string",
+                    "description": "Cluster ID.\n"
+                }
+            },
+            "requiredInputs": [
+                "clusterId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering MetricExportPrometheusConfig resources.\n",
+                "properties": {
+                    "clusterId": {
+                        "type": "string",
+                        "description": "Cluster ID.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The current state of the metric export configuration.  Possible values are: [`NOT_DEPLOYED` `DISABLING` `ENABLING` `ENABLED` `ERROR`]\n"
+                    },
+                    "targets": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
         "cockroach:index/privateEndpointConnection:PrivateEndpointConnection": {
             "description": "Private endpoint connections allow customer applications to connect to a CockroachDB Cloud cluster without traversing the public internet. All application-database traffic remains within the cloud-provider network.\n\n## Import\n\nformat: \u003ccluster id\u003e:\u003cconnection id\u003e\n\n```sh\n$ pulumi import cockroach:index/privateEndpointConnection:PrivateEndpointConnection resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d:vpce-0c1308d7312217abc\n```\n\n",
             "properties": {
