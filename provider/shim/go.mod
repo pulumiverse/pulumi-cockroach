@@ -3,7 +3,7 @@ module github.com/cockroachdb/terraform-provider-cockroach/shim
 go 1.22
 
 require (
-	github.com/cockroachdb/terraform-provider-cockroach v1.6.0
+	github.com/cockroachdb/terraform-provider-cockroach v1.7.0
 	github.com/hashicorp/terraform-plugin-framework v1.6.1
 )
 
