@@ -100,6 +100,11 @@ export type MetricExportDatadogConfig = import("./metricExportDatadogConfig").Me
 export const MetricExportDatadogConfig: typeof import("./metricExportDatadogConfig").MetricExportDatadogConfig = null as any;
 utilities.lazyLoad(exports, ["MetricExportDatadogConfig"], () => require("./metricExportDatadogConfig"));
 
+export { MetricExportPrometheusConfigArgs, MetricExportPrometheusConfigState } from "./metricExportPrometheusConfig";
+export type MetricExportPrometheusConfig = import("./metricExportPrometheusConfig").MetricExportPrometheusConfig;
+export const MetricExportPrometheusConfig: typeof import("./metricExportPrometheusConfig").MetricExportPrometheusConfig = null as any;
+utilities.lazyLoad(exports, ["MetricExportPrometheusConfig"], () => require("./metricExportPrometheusConfig"));
+
 export { PrivateEndpointConnectionArgs, PrivateEndpointConnectionState } from "./privateEndpointConnection";
 export type PrivateEndpointConnection = import("./privateEndpointConnection").PrivateEndpointConnection;
 export const PrivateEndpointConnection: typeof import("./privateEndpointConnection").PrivateEndpointConnection = null as any;
@@ -185,6 +190,8 @@ const _module = {
                 return new MetricExportCloudwatchConfig(name, <any>undefined, { urn })
             case "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig":
                 return new MetricExportDatadogConfig(name, <any>undefined, { urn })
+            case "cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig":
+                return new MetricExportPrometheusConfig(name, <any>undefined, { urn })
             case "cockroach:index/privateEndpointConnection:PrivateEndpointConnection":
                 return new PrivateEndpointConnection(name, <any>undefined, { urn })
             case "cockroach:index/privateEndpointServices:PrivateEndpointServices":
@@ -219,6 +226,7 @@ pulumi.runtime.registerResourceModule("cockroach", "index/logExportConfig", _mod
 pulumi.runtime.registerResourceModule("cockroach", "index/maintenanceWindow", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/metricExportCloudwatchConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/metricExportDatadogConfig", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/metricExportPrometheusConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointConnection", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointServices", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/privateEndpointTrustedOwner", _module)

@@ -35,6 +35,7 @@
         "maintenanceWindow.ts",
         "metricExportCloudwatchConfig.ts",
         "metricExportDatadogConfig.ts",
+        "metricExportPrometheusConfig.ts",
         "privateEndpointConnection.ts",
         "privateEndpointServices.ts",
         "privateEndpointTrustedOwner.ts",
