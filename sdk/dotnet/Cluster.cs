@@ -28,9 +28,6 @@ namespace Pulumiverse.Cockroach
         [Output("cloudProvider")]
         public Output<string> CloudProvider { get; private set; } = null!;
 
-        [Output("clusterId")]
-        public Output<string> ClusterId { get; private set; } = null!;
-
         /// <summary>
         /// Major version of CockroachDB running on the cluster.
         /// </summary>
@@ -212,9 +209,6 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         [Input("cloudProvider")]
         public Input<string>? CloudProvider { get; set; }
-
-        [Input("clusterId")]
-        public Input<string>? ClusterId { get; set; }
 
         /// <summary>
         /// Major version of CockroachDB running on the cluster.

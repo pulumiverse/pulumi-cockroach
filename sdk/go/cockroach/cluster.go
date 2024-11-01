@@ -20,7 +20,6 @@ type Cluster struct {
 	AccountId pulumi.StringOutput `pulumi:"accountId"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
-	ClusterId     pulumi.StringOutput `pulumi:"clusterId"`
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringOutput `pulumi:"cockroachVersion"`
 	// ID of the user who created the cluster.
@@ -88,7 +87,6 @@ type clusterState struct {
 	AccountId *string `pulumi:"accountId"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider *string `pulumi:"cloudProvider"`
-	ClusterId     *string `pulumi:"clusterId"`
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion *string `pulumi:"cockroachVersion"`
 	// ID of the user who created the cluster.
@@ -118,7 +116,6 @@ type ClusterState struct {
 	AccountId pulumi.StringPtrInput
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringPtrInput
-	ClusterId     pulumi.StringPtrInput
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringPtrInput
 	// ID of the user who created the cluster.
@@ -281,10 +278,6 @@ func (o ClusterOutput) AccountId() pulumi.StringOutput {
 // Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 func (o ClusterOutput) CloudProvider() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CloudProvider }).(pulumi.StringOutput)
-}
-
-func (o ClusterOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 // Major version of CockroachDB running on the cluster.

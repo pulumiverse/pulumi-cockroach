@@ -45,7 +45,6 @@ export class Cluster extends pulumi.CustomResource {
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */
     public readonly cloudProvider!: pulumi.Output<string>;
-    public /*out*/ readonly clusterId!: pulumi.Output<string>;
     /**
      * Major version of CockroachDB running on the cluster.
      */
@@ -102,7 +101,6 @@ export class Cluster extends pulumi.CustomResource {
             const state = argsOrState as ClusterState | undefined;
             resourceInputs["accountId"] = state ? state.accountId : undefined;
             resourceInputs["cloudProvider"] = state ? state.cloudProvider : undefined;
-            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["cockroachVersion"] = state ? state.cockroachVersion : undefined;
             resourceInputs["creatorId"] = state ? state.creatorId : undefined;
             resourceInputs["dedicated"] = state ? state.dedicated : undefined;
@@ -136,7 +134,6 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["regions"] = args ? args.regions : undefined;
             resourceInputs["serverless"] = args ? args.serverless : undefined;
             resourceInputs["accountId"] = undefined /*out*/;
-            resourceInputs["clusterId"] = undefined /*out*/;
             resourceInputs["creatorId"] = undefined /*out*/;
             resourceInputs["operationStatus"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
@@ -159,7 +156,6 @@ export interface ClusterState {
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */
     cloudProvider?: pulumi.Input<string>;
-    clusterId?: pulumi.Input<string>;
     /**
      * Major version of CockroachDB running on the cluster.
      */

@@ -162,7 +162,6 @@ class _ClusterState:
     def __init__(__self__, *,
                  account_id: Optional[pulumi.Input[str]] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
-                 cluster_id: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  creator_id: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input['ClusterDedicatedArgs']] = None,
@@ -194,8 +193,6 @@ class _ClusterState:
             pulumi.set(__self__, "account_id", account_id)
         if cloud_provider is not None:
             pulumi.set(__self__, "cloud_provider", cloud_provider)
-        if cluster_id is not None:
-            pulumi.set(__self__, "cluster_id", cluster_id)
         if cockroach_version is not None:
             pulumi.set(__self__, "cockroach_version", cockroach_version)
         if creator_id is not None:
@@ -244,15 +241,6 @@ class _ClusterState:
     @cloud_provider.setter
     def cloud_provider(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "cloud_provider", value)
-
-    @property
-    @pulumi.getter(name="clusterId")
-    def cluster_id(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "cluster_id")
-
-    @cluster_id.setter
-    def cluster_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "cluster_id", value)
 
     @property
     @pulumi.getter(name="cockroachVersion")
@@ -477,7 +465,6 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["regions"] = regions
             __props__.__dict__["serverless"] = serverless
             __props__.__dict__["account_id"] = None
-            __props__.__dict__["cluster_id"] = None
             __props__.__dict__["creator_id"] = None
             __props__.__dict__["operation_status"] = None
             __props__.__dict__["state"] = None
@@ -494,7 +481,6 @@ class Cluster(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             account_id: Optional[pulumi.Input[str]] = None,
             cloud_provider: Optional[pulumi.Input[str]] = None,
-            cluster_id: Optional[pulumi.Input[str]] = None,
             cockroach_version: Optional[pulumi.Input[str]] = None,
             creator_id: Optional[pulumi.Input[str]] = None,
             dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
@@ -533,7 +519,6 @@ class Cluster(pulumi.CustomResource):
 
         __props__.__dict__["account_id"] = account_id
         __props__.__dict__["cloud_provider"] = cloud_provider
-        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["cockroach_version"] = cockroach_version
         __props__.__dict__["creator_id"] = creator_id
         __props__.__dict__["dedicated"] = dedicated
@@ -563,11 +548,6 @@ class Cluster(pulumi.CustomResource):
         Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         """
         return pulumi.get(self, "cloud_provider")
-
-    @property
-    @pulumi.getter(name="clusterId")
-    def cluster_id(self) -> pulumi.Output[str]:
-        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="cockroachVersion")

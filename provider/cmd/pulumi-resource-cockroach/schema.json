@@ -1099,9 +1099,6 @@
                     "type": "string",
                     "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
                 },
-                "clusterId": {
-                    "type": "string"
-                },
                 "cockroachVersion": {
                     "type": "string",
                     "description": "Major version of CockroachDB running on the cluster.\n"
@@ -1157,7 +1154,6 @@
                 "cockroachVersion",
                 "creatorId",
                 "deleteProtection",
-                "clusterId",
                 "name",
                 "operationStatus",
                 "parentId",
@@ -1219,9 +1215,6 @@
                     "cloudProvider": {
                         "type": "string",
                         "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
-                    },
-                    "clusterId": {
-                        "type": "string"
                     },
                     "cockroachVersion": {
                         "type": "string",
