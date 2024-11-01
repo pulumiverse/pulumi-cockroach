@@ -41,14 +41,18 @@ class PrivateEndpointServicesArgs:
 class _PrivateEndpointServicesState:
     def __init__(__self__, *,
                  cluster_id: Optional[pulumi.Input[str]] = None,
-                 services: Optional[pulumi.Input[Sequence[pulumi.Input['PrivateEndpointServicesServiceArgs']]]] = None):
+                 services: Optional[pulumi.Input[Sequence[pulumi.Input['PrivateEndpointServicesServiceArgs']]]] = None,
+                 services_map: Optional[pulumi.Input[Mapping[str, pulumi.Input['PrivateEndpointServicesServicesMapArgs']]]] = None):
         """
         Input properties used for looking up and filtering PrivateEndpointServices resources.
+        :param pulumi.Input[Mapping[str, pulumi.Input['PrivateEndpointServicesServicesMapArgs']]] services_map: a map of services keyed by the region name
         """
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
         if services is not None:
             pulumi.set(__self__, "services", services)
+        if services_map is not None:
+            pulumi.set(__self__, "services_map", services_map)
 
     @property
     @pulumi.getter(name="clusterId")
@@ -67,6 +71,18 @@ class _PrivateEndpointServicesState:
     @services.setter
     def services(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['PrivateEndpointServicesServiceArgs']]]]):
         pulumi.set(self, "services", value)
+
+    @property
+    @pulumi.getter(name="servicesMap")
+    def services_map(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input['PrivateEndpointServicesServicesMapArgs']]]]:
+        """
+        a map of services keyed by the region name
+        """
+        return pulumi.get(self, "services_map")
+
+    @services_map.setter
+    def services_map(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input['PrivateEndpointServicesServicesMapArgs']]]]):
+        pulumi.set(self, "services_map", value)
 
 
 class PrivateEndpointServices(pulumi.CustomResource):
@@ -158,6 +174,7 @@ class PrivateEndpointServices(pulumi.CustomResource):
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
             __props__.__dict__["services"] = None
+            __props__.__dict__["services_map"] = None
         super(PrivateEndpointServices, __self__).__init__(
             'cockroach:index/privateEndpointServices:PrivateEndpointServices',
             resource_name,
@@ -169,7 +186,8 @@ class PrivateEndpointServices(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             cluster_id: Optional[pulumi.Input[str]] = None,
-            services: Optional[pulumi.Input[Sequence[pulumi.Input[Union['PrivateEndpointServicesServiceArgs', 'PrivateEndpointServicesServiceArgsDict']]]]] = None) -> 'PrivateEndpointServices':
+            services: Optional[pulumi.Input[Sequence[pulumi.Input[Union['PrivateEndpointServicesServiceArgs', 'PrivateEndpointServicesServiceArgsDict']]]]] = None,
+            services_map: Optional[pulumi.Input[Mapping[str, pulumi.Input[Union['PrivateEndpointServicesServicesMapArgs', 'PrivateEndpointServicesServicesMapArgsDict']]]]] = None) -> 'PrivateEndpointServices':
         """
         Get an existing PrivateEndpointServices resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -177,6 +195,7 @@ class PrivateEndpointServices(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Mapping[str, pulumi.Input[Union['PrivateEndpointServicesServicesMapArgs', 'PrivateEndpointServicesServicesMapArgsDict']]]] services_map: a map of services keyed by the region name
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -184,6 +203,7 @@ class PrivateEndpointServices(pulumi.CustomResource):
 
         __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["services"] = services
+        __props__.__dict__["services_map"] = services_map
         return PrivateEndpointServices(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -195,4 +215,12 @@ class PrivateEndpointServices(pulumi.CustomResource):
     @pulumi.getter
     def services(self) -> pulumi.Output[Sequence['outputs.PrivateEndpointServicesService']]:
         return pulumi.get(self, "services")
+
+    @property
+    @pulumi.getter(name="servicesMap")
+    def services_map(self) -> pulumi.Output[Mapping[str, 'outputs.PrivateEndpointServicesServicesMap']]:
+        """
+        a map of services keyed by the region name
+        """
+        return pulumi.get(self, "services_map")
 

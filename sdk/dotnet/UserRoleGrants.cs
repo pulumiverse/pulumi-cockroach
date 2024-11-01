@@ -24,6 +24,9 @@ namespace Pulumiverse.Cockroach
     [CockroachResourceType("cockroach:index/userRoleGrants:UserRoleGrants")]
     public partial class UserRoleGrants : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// The list of roles to include. ORG_MEMBER must be included.
+        /// </summary>
         [Output("roles")]
         public Output<ImmutableArray<Outputs.UserRoleGrantsRole>> Roles { get; private set; } = null!;
 
@@ -82,6 +85,10 @@ namespace Pulumiverse.Cockroach
     {
         [Input("roles", required: true)]
         private InputList<Inputs.UserRoleGrantsRoleArgs>? _roles;
+
+        /// <summary>
+        /// The list of roles to include. ORG_MEMBER must be included.
+        /// </summary>
         public InputList<Inputs.UserRoleGrantsRoleArgs> Roles
         {
             get => _roles ?? (_roles = new InputList<Inputs.UserRoleGrantsRoleArgs>());
@@ -104,6 +111,10 @@ namespace Pulumiverse.Cockroach
     {
         [Input("roles")]
         private InputList<Inputs.UserRoleGrantsRoleGetArgs>? _roles;
+
+        /// <summary>
+        /// The list of roles to include. ORG_MEMBER must be included.
+        /// </summary>
         public InputList<Inputs.UserRoleGrantsRoleGetArgs> Roles
         {
             get => _roles ?? (_roles = new InputList<Inputs.UserRoleGrantsRoleGetArgs>());

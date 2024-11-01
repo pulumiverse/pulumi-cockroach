@@ -54,7 +54,7 @@ namespace Pulumiverse.Cockroach
         public Output<string> CidrIp { get; private set; } = null!;
 
         /// <summary>
-        /// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         /// </summary>
         [Output("cidrMask")]
         public Output<int> CidrMask { get; private set; } = null!;
@@ -63,10 +63,10 @@ namespace Pulumiverse.Cockroach
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Name of this allowlist entry.
+        /// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         /// </summary>
         [Output("name")]
-        public Output<string?> Name { get; private set; } = null!;
+        public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
         /// Set to 'true' to allow SQL connections from this CIDR range.
@@ -134,7 +134,7 @@ namespace Pulumiverse.Cockroach
         public Input<string> CidrIp { get; set; } = null!;
 
         /// <summary>
-        /// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         /// </summary>
         [Input("cidrMask", required: true)]
         public Input<int> CidrMask { get; set; } = null!;
@@ -143,7 +143,7 @@ namespace Pulumiverse.Cockroach
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Name of this allowlist entry.
+        /// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -175,7 +175,7 @@ namespace Pulumiverse.Cockroach
         public Input<string>? CidrIp { get; set; }
 
         /// <summary>
-        /// Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        /// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         /// </summary>
         [Input("cidrMask")]
         public Input<int>? CidrMask { get; set; }
@@ -184,7 +184,7 @@ namespace Pulumiverse.Cockroach
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Name of this allowlist entry.
+        /// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

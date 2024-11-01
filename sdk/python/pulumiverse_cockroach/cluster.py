@@ -28,6 +28,7 @@ class ClusterArgs:
                  dedicated: Optional[pulumi.Input['ClusterDedicatedArgs']] = None,
                  delete_protection: Optional[pulumi.Input[bool]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
+                 plan: Optional[pulumi.Input[str]] = None,
                  serverless: Optional[pulumi.Input['ClusterServerlessArgs']] = None):
         """
         The set of arguments for constructing a Cluster resource.
@@ -37,6 +38,7 @@ class ClusterArgs:
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+        :param pulumi.Input[str] plan: Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         """
         pulumi.set(__self__, "cloud_provider", cloud_provider)
         pulumi.set(__self__, "name", name)
@@ -49,6 +51,8 @@ class ClusterArgs:
             pulumi.set(__self__, "delete_protection", delete_protection)
         if parent_id is not None:
             pulumi.set(__self__, "parent_id", parent_id)
+        if plan is not None:
+            pulumi.set(__self__, "plan", plan)
         if serverless is not None:
             pulumi.set(__self__, "serverless", serverless)
 
@@ -133,6 +137,18 @@ class ClusterArgs:
 
     @property
     @pulumi.getter
+    def plan(self) -> Optional[pulumi.Input[str]]:
+        """
+        Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+        """
+        return pulumi.get(self, "plan")
+
+    @plan.setter
+    def plan(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "plan", value)
+
+    @property
+    @pulumi.getter
     def serverless(self) -> Optional[pulumi.Input['ClusterServerlessArgs']]:
         return pulumi.get(self, "serverless")
 
@@ -170,7 +186,7 @@ class _ClusterState:
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] operation_status: Describes the current long-running operation, if any.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
-        :param pulumi.Input[str] plan: Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+        :param pulumi.Input[str] plan: Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         :param pulumi.Input[str] state: Describes whether the cluster is being created, updated, deleted, etc.
         :param pulumi.Input[str] upgrade_status: Describes the status of any in-progress CockroachDB upgrade or rollback.
         """
@@ -324,7 +340,7 @@ class _ClusterState:
     @pulumi.getter
     def plan(self) -> Optional[pulumi.Input[str]]:
         """
-        Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+        Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         """
         return pulumi.get(self, "plan")
 
@@ -386,11 +402,12 @@ class Cluster(pulumi.CustomResource):
                  delete_protection: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
+                 plan: Optional[pulumi.Input[str]] = None,
                  regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
                  serverless: Optional[pulumi.Input[Union['ClusterServerlessArgs', 'ClusterServerlessArgsDict']]] = None,
                  __props__=None):
         """
-        CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+        CockroachDB Cloud cluster.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -400,6 +417,7 @@ class Cluster(pulumi.CustomResource):
                preserves the value on cluster update.
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
+        :param pulumi.Input[str] plan: Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         """
         ...
     @overload
@@ -408,7 +426,7 @@ class Cluster(pulumi.CustomResource):
                  args: ClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+        CockroachDB Cloud cluster.
 
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
@@ -431,6 +449,7 @@ class Cluster(pulumi.CustomResource):
                  delete_protection: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
+                 plan: Optional[pulumi.Input[str]] = None,
                  regions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ClusterRegionArgs', 'ClusterRegionArgsDict']]]]] = None,
                  serverless: Optional[pulumi.Input[Union['ClusterServerlessArgs', 'ClusterServerlessArgsDict']]] = None,
                  __props__=None):
@@ -452,6 +471,7 @@ class Cluster(pulumi.CustomResource):
                 raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             __props__.__dict__["parent_id"] = parent_id
+            __props__.__dict__["plan"] = plan
             if regions is None and not opts.urn:
                 raise TypeError("Missing required property 'regions'")
             __props__.__dict__["regions"] = regions
@@ -460,7 +480,6 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["cluster_id"] = None
             __props__.__dict__["creator_id"] = None
             __props__.__dict__["operation_status"] = None
-            __props__.__dict__["plan"] = None
             __props__.__dict__["state"] = None
             __props__.__dict__["upgrade_status"] = None
         super(Cluster, __self__).__init__(
@@ -504,7 +523,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] operation_status: Describes the current long-running operation, if any.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
-        :param pulumi.Input[str] plan: Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+        :param pulumi.Input[str] plan: Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         :param pulumi.Input[str] state: Describes whether the cluster is being created, updated, deleted, etc.
         :param pulumi.Input[str] upgrade_status: Describes the status of any in-progress CockroachDB upgrade or rollback.
         """
@@ -608,7 +627,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter
     def plan(self) -> pulumi.Output[str]:
         """
-        Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+        Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         """
         return pulumi.get(self, "plan")
 

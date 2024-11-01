@@ -61,7 +61,7 @@ export interface ClusterRegion {
      */
     nodeCount: number;
     /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+     * Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
      */
     primary: boolean;
     /**
@@ -81,20 +81,32 @@ export interface ClusterServerless {
     routingId: string;
     /**
      * Spend limit in US cents.
+     *
+     * @deprecated The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
      */
     spendLimit?: number;
+    /**
+     * Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+     *   * MANUAL
+     *   * AUTOMATIC
+     */
+    upgradeType: string;
     usageLimits?: outputs.ClusterServerlessUsageLimits;
 }
 
 export interface ClusterServerlessUsageLimits {
     /**
+     * Maximum number of vCPUs that the cluster can use.
+     */
+    provisionedVirtualCpus?: number;
+    /**
      * Maximum number of Request Units that the cluster can consume during the month.
      */
-    requestUnitLimit: number;
+    requestUnitLimit?: number;
     /**
      * Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
      */
-    storageMibLimit: number;
+    storageMibLimit?: number;
 }
 
 export interface CmekAdditionalRegion {
@@ -111,7 +123,7 @@ export interface CmekAdditionalRegion {
      */
     nodeCount: number;
     /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+     * Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
      */
     primary: boolean;
     /**
@@ -231,12 +243,22 @@ export interface GetCockroachClusterServerless {
     routingId: string;
     /**
      * Spend limit in US cents.
+     *
+     * @deprecated The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
      */
     spendLimit: number;
+    /**
+     * Dictates the behavior of cockroach major version upgrades.
+     */
+    upgradeType: string;
     usageLimits: outputs.GetCockroachClusterServerlessUsageLimits;
 }
 
 export interface GetCockroachClusterServerlessUsageLimits {
+    /**
+     * Maximum number of vCPUs that the cluster can use.
+     */
+    provisionedVirtualCpus: number;
     /**
      * Maximum number of Request Units that the cluster can consume during the month.
      */
@@ -321,6 +343,52 @@ export interface PrivateEndpointServicesService {
 }
 
 export interface PrivateEndpointServicesServiceAws {
+    /**
+     * AZ IDs users should create their VPCs in to minimize their cost.
+     */
+    availabilityZoneIds: string[];
+    /**
+     * Server side ID of the PrivateLink connection.
+     */
+    serviceId: string;
+    /**
+     * AWS service name used to create endpoints.
+     */
+    serviceName: string;
+}
+
+export interface PrivateEndpointServicesServicesMap {
+    /**
+     * Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+     */
+    availabilityZoneIds: string[];
+    /**
+     * @deprecated nested aws fields have been moved one level up. These fields will be removed in a future version
+     */
+    aws: outputs.PrivateEndpointServicesServicesMapAws;
+    /**
+     * Cloud provider associated with this service.
+     */
+    cloudProvider: string;
+    /**
+     * Server side ID of the private endpoint connection.
+     */
+    endpointServiceId: string;
+    /**
+     * Name of the endpoint service.
+     */
+    name: string;
+    /**
+     * Cloud provider region code associated with this service.
+     */
+    regionName: string;
+    /**
+     * Operation status of the service.
+     */
+    status: string;
+}
+
+export interface PrivateEndpointServicesServicesMapAws {
     /**
      * AZ IDs users should create their VPCs in to minimize their cost.
      */

@@ -24,6 +24,7 @@ import (
 type UserRoleGrants struct {
 	pulumi.CustomResourceState
 
+	// The list of roles to include. ORG_MEMBER must be included.
 	Roles UserRoleGrantsRoleArrayOutput `pulumi:"roles"`
 	// ID of the user to grant these roles to.
 	UserId pulumi.StringOutput `pulumi:"userId"`
@@ -65,12 +66,14 @@ func GetUserRoleGrants(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering UserRoleGrants resources.
 type userRoleGrantsState struct {
+	// The list of roles to include. ORG_MEMBER must be included.
 	Roles []UserRoleGrantsRole `pulumi:"roles"`
 	// ID of the user to grant these roles to.
 	UserId *string `pulumi:"userId"`
 }
 
 type UserRoleGrantsState struct {
+	// The list of roles to include. ORG_MEMBER must be included.
 	Roles UserRoleGrantsRoleArrayInput
 	// ID of the user to grant these roles to.
 	UserId pulumi.StringPtrInput
@@ -81,6 +84,7 @@ func (UserRoleGrantsState) ElementType() reflect.Type {
 }
 
 type userRoleGrantsArgs struct {
+	// The list of roles to include. ORG_MEMBER must be included.
 	Roles []UserRoleGrantsRole `pulumi:"roles"`
 	// ID of the user to grant these roles to.
 	UserId string `pulumi:"userId"`
@@ -88,6 +92,7 @@ type userRoleGrantsArgs struct {
 
 // The set of arguments for constructing a UserRoleGrants resource.
 type UserRoleGrantsArgs struct {
+	// The list of roles to include. ORG_MEMBER must be included.
 	Roles UserRoleGrantsRoleArrayInput
 	// ID of the user to grant these roles to.
 	UserId pulumi.StringInput
@@ -180,6 +185,7 @@ func (o UserRoleGrantsOutput) ToUserRoleGrantsOutputWithContext(ctx context.Cont
 	return o
 }
 
+// The list of roles to include. ORG_MEMBER must be included.
 func (o UserRoleGrantsOutput) Roles() UserRoleGrantsRoleArrayOutput {
 	return o.ApplyT(func(v *UserRoleGrants) UserRoleGrantsRoleArrayOutput { return v.Roles }).(UserRoleGrantsRoleArrayOutput)
 }

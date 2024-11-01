@@ -55,6 +55,8 @@ type PrivateEndpointServices struct {
 
 	ClusterId pulumi.StringOutput                       `pulumi:"clusterId"`
 	Services  PrivateEndpointServicesServiceArrayOutput `pulumi:"services"`
+	// a map of services keyed by the region name
+	ServicesMap PrivateEndpointServicesServicesMapMapOutput `pulumi:"servicesMap"`
 }
 
 // NewPrivateEndpointServices registers a new resource with the given unique name, arguments, and options.
@@ -92,11 +94,15 @@ func GetPrivateEndpointServices(ctx *pulumi.Context,
 type privateEndpointServicesState struct {
 	ClusterId *string                          `pulumi:"clusterId"`
 	Services  []PrivateEndpointServicesService `pulumi:"services"`
+	// a map of services keyed by the region name
+	ServicesMap map[string]PrivateEndpointServicesServicesMap `pulumi:"servicesMap"`
 }
 
 type PrivateEndpointServicesState struct {
 	ClusterId pulumi.StringPtrInput
 	Services  PrivateEndpointServicesServiceArrayInput
+	// a map of services keyed by the region name
+	ServicesMap PrivateEndpointServicesServicesMapMapInput
 }
 
 func (PrivateEndpointServicesState) ElementType() reflect.Type {
@@ -205,6 +211,11 @@ func (o PrivateEndpointServicesOutput) ClusterId() pulumi.StringOutput {
 
 func (o PrivateEndpointServicesOutput) Services() PrivateEndpointServicesServiceArrayOutput {
 	return o.ApplyT(func(v *PrivateEndpointServices) PrivateEndpointServicesServiceArrayOutput { return v.Services }).(PrivateEndpointServicesServiceArrayOutput)
+}
+
+// a map of services keyed by the region name
+func (o PrivateEndpointServicesOutput) ServicesMap() PrivateEndpointServicesServicesMapMapOutput {
+	return o.ApplyT(func(v *PrivateEndpointServices) PrivateEndpointServicesServicesMapMapOutput { return v.ServicesMap }).(PrivateEndpointServicesServicesMapMapOutput)
 }
 
 type PrivateEndpointServicesArrayOutput struct{ *pulumi.OutputState }

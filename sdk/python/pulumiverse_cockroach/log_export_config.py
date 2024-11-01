@@ -36,7 +36,7 @@ class LogExportConfigArgs:
         :param pulumi.Input[str] cluster_id: Cluster ID.
         :param pulumi.Input[str] log_name: An identifier for the logs in the customer's log sink.
         :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-               GCP_CLOUD_LOGGING
+               GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         :param pulumi.Input[Sequence[pulumi.Input[str]]] omitted_channels: Controls what CRDB channels do not get exported.
         :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks.
         :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
@@ -96,7 +96,7 @@ class LogExportConfigArgs:
     def type(self) -> pulumi.Input[str]:
         """
         The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-        GCP_CLOUD_LOGGING
+        GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         """
         return pulumi.get(self, "type")
 
@@ -177,7 +177,7 @@ class _LogExportConfigState:
         :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
         :param pulumi.Input[str] status: Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
         :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-               GCP_CLOUD_LOGGING
+               GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         :param pulumi.Input[str] updated_at: Indicates when the log export configuration was last updated.
         :param pulumi.Input[str] user_message: Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
                operations.
@@ -318,7 +318,7 @@ class _LogExportConfigState:
     def type(self) -> Optional[pulumi.Input[str]]:
         """
         The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-        GCP_CLOUD_LOGGING
+        GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         """
         return pulumi.get(self, "type")
 
@@ -379,7 +379,7 @@ class LogExportConfig(pulumi.CustomResource):
         :param pulumi.Input[bool] redact: Controls whether logs are redacted before forwarding to customer sinks.
         :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
         :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-               GCP_CLOUD_LOGGING
+               GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         """
         ...
     @overload
@@ -481,7 +481,7 @@ class LogExportConfig(pulumi.CustomResource):
         :param pulumi.Input[str] region: Controls whether all logs are sent to a specific region in the customer sink.
         :param pulumi.Input[str] status: Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
         :param pulumi.Input[str] type: The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-               GCP_CLOUD_LOGGING
+               GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         :param pulumi.Input[str] updated_at: Indicates when the log export configuration was last updated.
         :param pulumi.Input[str] user_message: Elaborates on the log export status and hints at how to fix issues that may have occurred during asynchronous
                operations.
@@ -579,7 +579,7 @@ class LogExportConfig(pulumi.CustomResource):
     def type(self) -> pulumi.Output[str]:
         """
         The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-        GCP_CLOUD_LOGGING
+        GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         """
         return pulumi.get(self, "type")
 

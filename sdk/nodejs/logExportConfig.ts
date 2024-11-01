@@ -73,7 +73,7 @@ export class LogExportConfig extends pulumi.CustomResource {
     public /*out*/ readonly status!: pulumi.Output<string>;
     /**
      * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-     * GCP_CLOUD_LOGGING
+     * GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
      */
     public readonly type!: pulumi.Output<string>;
     /**
@@ -183,7 +183,7 @@ export interface LogExportConfigState {
     status?: pulumi.Input<string>;
     /**
      * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-     * GCP_CLOUD_LOGGING
+     * GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
      */
     type?: pulumi.Input<string>;
     /**
@@ -229,7 +229,7 @@ export interface LogExportConfigArgs {
     region?: pulumi.Input<string>;
     /**
      * The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-     * GCP_CLOUD_LOGGING
+     * GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
      */
     type: pulumi.Input<string>;
 }

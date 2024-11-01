@@ -45,6 +45,9 @@ export class UserRoleGrants extends pulumi.CustomResource {
         return obj['__pulumiType'] === UserRoleGrants.__pulumiType;
     }
 
+    /**
+     * The list of roles to include. ORG_MEMBER must be included.
+     */
     public readonly roles!: pulumi.Output<outputs.UserRoleGrantsRole[]>;
     /**
      * ID of the user to grant these roles to.
@@ -86,6 +89,9 @@ export class UserRoleGrants extends pulumi.CustomResource {
  * Input properties used for looking up and filtering UserRoleGrants resources.
  */
 export interface UserRoleGrantsState {
+    /**
+     * The list of roles to include. ORG_MEMBER must be included.
+     */
     roles?: pulumi.Input<pulumi.Input<inputs.UserRoleGrantsRole>[]>;
     /**
      * ID of the user to grant these roles to.
@@ -97,6 +103,9 @@ export interface UserRoleGrantsState {
  * The set of arguments for constructing a UserRoleGrants resource.
  */
 export interface UserRoleGrantsArgs {
+    /**
+     * The list of roles to include. ORG_MEMBER must be included.
+     */
     roles: pulumi.Input<pulumi.Input<inputs.UserRoleGrantsRole>[]>;
     /**
      * ID of the user to grant these roles to.

@@ -15,6 +15,10 @@ namespace Pulumiverse.Cockroach.Outputs
     public sealed class GetCockroachClusterServerlessUsageLimitsResult
     {
         /// <summary>
+        /// Maximum number of vCPUs that the cluster can use.
+        /// </summary>
+        public readonly int ProvisionedVirtualCpus;
+        /// <summary>
         /// Maximum number of Request Units that the cluster can consume during the month.
         /// </summary>
         public readonly int RequestUnitLimit;
@@ -25,10 +29,13 @@ namespace Pulumiverse.Cockroach.Outputs
 
         [OutputConstructor]
         private GetCockroachClusterServerlessUsageLimitsResult(
+            int provisionedVirtualCpus,
+
             int requestUnitLimit,
 
             int storageMibLimit)
         {
+            ProvisionedVirtualCpus = provisionedVirtualCpus;
             RequestUnitLimit = requestUnitLimit;
             StorageMibLimit = storageMibLimit;
         }

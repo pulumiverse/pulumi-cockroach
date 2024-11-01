@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+ * CockroachDB Cloud cluster.
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -73,9 +73,9 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly parentId!: pulumi.Output<string>;
     /**
-     * Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+     * Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
      */
-    public /*out*/ readonly plan!: pulumi.Output<string>;
+    public readonly plan!: pulumi.Output<string>;
     public readonly regions!: pulumi.Output<outputs.ClusterRegion[]>;
     public readonly serverless!: pulumi.Output<outputs.ClusterServerless | undefined>;
     /**
@@ -132,13 +132,13 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["deleteProtection"] = args ? args.deleteProtection : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["parentId"] = args ? args.parentId : undefined;
+            resourceInputs["plan"] = args ? args.plan : undefined;
             resourceInputs["regions"] = args ? args.regions : undefined;
             resourceInputs["serverless"] = args ? args.serverless : undefined;
             resourceInputs["accountId"] = undefined /*out*/;
             resourceInputs["clusterId"] = undefined /*out*/;
             resourceInputs["creatorId"] = undefined /*out*/;
             resourceInputs["operationStatus"] = undefined /*out*/;
-            resourceInputs["plan"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
             resourceInputs["upgradeStatus"] = undefined /*out*/;
         }
@@ -187,7 +187,7 @@ export interface ClusterState {
      */
     parentId?: pulumi.Input<string>;
     /**
-     * Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+     * Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
      */
     plan?: pulumi.Input<string>;
     regions?: pulumi.Input<pulumi.Input<inputs.ClusterRegion>[]>;
@@ -228,6 +228,10 @@ export interface ClusterArgs {
      * The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
      */
     parentId?: pulumi.Input<string>;
+    /**
+     * Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+     */
+    plan?: pulumi.Input<string>;
     regions: pulumi.Input<pulumi.Input<inputs.ClusterRegion>[]>;
     serverless?: pulumi.Input<inputs.ClusterServerless>;
 }

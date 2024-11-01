@@ -61,7 +61,7 @@ export interface ClusterRegion {
      */
     nodeCount?: pulumi.Input<number>;
     /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+     * Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
      */
     primary?: pulumi.Input<boolean>;
     /**
@@ -81,20 +81,32 @@ export interface ClusterServerless {
     routingId?: pulumi.Input<string>;
     /**
      * Spend limit in US cents.
+     *
+     * @deprecated The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
      */
     spendLimit?: pulumi.Input<number>;
+    /**
+     * Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+     *   * MANUAL
+     *   * AUTOMATIC
+     */
+    upgradeType?: pulumi.Input<string>;
     usageLimits?: pulumi.Input<inputs.ClusterServerlessUsageLimits>;
 }
 
 export interface ClusterServerlessUsageLimits {
     /**
+     * Maximum number of vCPUs that the cluster can use.
+     */
+    provisionedVirtualCpus?: pulumi.Input<number>;
+    /**
      * Maximum number of Request Units that the cluster can consume during the month.
      */
-    requestUnitLimit: pulumi.Input<number>;
+    requestUnitLimit?: pulumi.Input<number>;
     /**
      * Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
      */
-    storageMibLimit: pulumi.Input<number>;
+    storageMibLimit?: pulumi.Input<number>;
 }
 
 export interface CmekAdditionalRegion {
@@ -111,7 +123,7 @@ export interface CmekAdditionalRegion {
      */
     nodeCount?: pulumi.Input<number>;
     /**
-     * Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+     * Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
      */
     primary?: pulumi.Input<boolean>;
     /**
@@ -221,6 +233,52 @@ export interface PrivateEndpointServicesService {
 }
 
 export interface PrivateEndpointServicesServiceAws {
+    /**
+     * AZ IDs users should create their VPCs in to minimize their cost.
+     */
+    availabilityZoneIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Server side ID of the PrivateLink connection.
+     */
+    serviceId?: pulumi.Input<string>;
+    /**
+     * AWS service name used to create endpoints.
+     */
+    serviceName?: pulumi.Input<string>;
+}
+
+export interface PrivateEndpointServicesServicesMap {
+    /**
+     * Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+     */
+    availabilityZoneIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * @deprecated nested aws fields have been moved one level up. These fields will be removed in a future version
+     */
+    aws?: pulumi.Input<inputs.PrivateEndpointServicesServicesMapAws>;
+    /**
+     * Cloud provider associated with this service.
+     */
+    cloudProvider?: pulumi.Input<string>;
+    /**
+     * Server side ID of the private endpoint connection.
+     */
+    endpointServiceId?: pulumi.Input<string>;
+    /**
+     * Name of the endpoint service.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Cloud provider region code associated with this service.
+     */
+    regionName?: pulumi.Input<string>;
+    /**
+     * Operation status of the service.
+     */
+    status?: pulumi.Input<string>;
+}
+
+export interface PrivateEndpointServicesServicesMapAws {
     /**
      * AZ IDs users should create their VPCs in to minimize their cost.
      */

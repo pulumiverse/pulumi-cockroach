@@ -70,7 +70,7 @@ namespace Pulumiverse.Cockroach
 
         /// <summary>
         /// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-        /// GCP_CLOUD_LOGGING
+        /// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -188,7 +188,7 @@ namespace Pulumiverse.Cockroach
 
         /// <summary>
         /// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-        /// GCP_CLOUD_LOGGING
+        /// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -266,7 +266,7 @@ namespace Pulumiverse.Cockroach
 
         /// <summary>
         /// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-        /// GCP_CLOUD_LOGGING
+        /// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

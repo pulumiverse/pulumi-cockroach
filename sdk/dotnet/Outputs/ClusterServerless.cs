@@ -22,6 +22,12 @@ namespace Pulumiverse.Cockroach.Outputs
         /// Spend limit in US cents.
         /// </summary>
         public readonly int? SpendLimit;
+        /// <summary>
+        /// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+        ///   * MANUAL
+        ///   * AUTOMATIC
+        /// </summary>
+        public readonly string? UpgradeType;
         public readonly Outputs.ClusterServerlessUsageLimits? UsageLimits;
 
         [OutputConstructor]
@@ -30,10 +36,13 @@ namespace Pulumiverse.Cockroach.Outputs
 
             int? spendLimit,
 
+            string? upgradeType,
+
             Outputs.ClusterServerlessUsageLimits? usageLimits)
         {
             RoutingId = routingId;
             SpendLimit = spendLimit;
+            UpgradeType = upgradeType;
             UsageLimits = usageLimits;
         }
     }

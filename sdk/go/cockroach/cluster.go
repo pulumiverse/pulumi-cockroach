@@ -12,7 +12,7 @@ import (
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
-// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+// CockroachDB Cloud cluster.
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -35,7 +35,7 @@ type Cluster struct {
 	OperationStatus pulumi.StringOutput `pulumi:"operationStatus"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId pulumi.StringOutput `pulumi:"parentId"`
-	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 	Plan       pulumi.StringOutput        `pulumi:"plan"`
 	Regions    ClusterRegionArrayOutput   `pulumi:"regions"`
 	Serverless ClusterServerlessPtrOutput `pulumi:"serverless"`
@@ -103,7 +103,7 @@ type clusterState struct {
 	OperationStatus *string `pulumi:"operationStatus"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId *string `pulumi:"parentId"`
-	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 	Plan       *string            `pulumi:"plan"`
 	Regions    []ClusterRegion    `pulumi:"regions"`
 	Serverless *ClusterServerless `pulumi:"serverless"`
@@ -133,7 +133,7 @@ type ClusterState struct {
 	OperationStatus pulumi.StringPtrInput
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId pulumi.StringPtrInput
-	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 	Plan       pulumi.StringPtrInput
 	Regions    ClusterRegionArrayInput
 	Serverless ClusterServerlessPtrInput
@@ -159,7 +159,9 @@ type clusterArgs struct {
 	// Name of the cluster.
 	Name string `pulumi:"name"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
-	ParentId   *string            `pulumi:"parentId"`
+	ParentId *string `pulumi:"parentId"`
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+	Plan       *string            `pulumi:"plan"`
 	Regions    []ClusterRegion    `pulumi:"regions"`
 	Serverless *ClusterServerless `pulumi:"serverless"`
 }
@@ -177,7 +179,9 @@ type ClusterArgs struct {
 	// Name of the cluster.
 	Name pulumi.StringInput
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
-	ParentId   pulumi.StringPtrInput
+	ParentId pulumi.StringPtrInput
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+	Plan       pulumi.StringPtrInput
 	Regions    ClusterRegionArrayInput
 	Serverless ClusterServerlessPtrInput
 }
@@ -318,7 +322,7 @@ func (o ClusterOutput) ParentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ParentId }).(pulumi.StringOutput)
 }
 
-// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 func (o ClusterOutput) Plan() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.Plan }).(pulumi.StringOutput)
 }

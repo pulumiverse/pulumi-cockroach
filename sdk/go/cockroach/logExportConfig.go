@@ -35,7 +35,7 @@ type LogExportConfig struct {
 	// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-	// GCP_CLOUD_LOGGING
+	// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
 	Type pulumi.StringOutput `pulumi:"type"`
 	// Indicates when the log export configuration was last updated.
 	UpdatedAt pulumi.StringOutput `pulumi:"updatedAt"`
@@ -105,7 +105,7 @@ type logExportConfigState struct {
 	// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 	Status *string `pulumi:"status"`
 	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-	// GCP_CLOUD_LOGGING
+	// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
 	Type *string `pulumi:"type"`
 	// Indicates when the log export configuration was last updated.
 	UpdatedAt *string `pulumi:"updatedAt"`
@@ -134,7 +134,7 @@ type LogExportConfigState struct {
 	// Encodes the possible states that a log export configuration can be in as it is created, deployed, and disabled.
 	Status pulumi.StringPtrInput
 	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-	// GCP_CLOUD_LOGGING
+	// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
 	Type pulumi.StringPtrInput
 	// Indicates when the log export configuration was last updated.
 	UpdatedAt pulumi.StringPtrInput
@@ -163,7 +163,7 @@ type logExportConfigArgs struct {
 	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region *string `pulumi:"region"`
 	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-	// GCP_CLOUD_LOGGING
+	// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
 	Type string `pulumi:"type"`
 }
 
@@ -184,7 +184,7 @@ type LogExportConfigArgs struct {
 	// Controls whether all logs are sent to a specific region in the customer sink.
 	Region pulumi.StringPtrInput
 	// The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-	// GCP_CLOUD_LOGGING
+	// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
 	Type pulumi.StringInput
 }
 
@@ -321,7 +321,7 @@ func (o LogExportConfigOutput) Status() pulumi.StringOutput {
 }
 
 // The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *
-// GCP_CLOUD_LOGGING
+// GCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS
 func (o LogExportConfigOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogExportConfig) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }

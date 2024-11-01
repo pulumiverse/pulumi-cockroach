@@ -27,7 +27,7 @@ namespace Pulumiverse.Cockroach.Outputs
         /// </summary>
         public readonly int? NodeCount;
         /// <summary>
-        /// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        /// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         /// </summary>
         public readonly bool? Primary;
         /// <summary>
