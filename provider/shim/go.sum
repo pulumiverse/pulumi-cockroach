@@ -6,10 +6,10 @@ github.com/apparentlymart/go-textseg/v15 v15.0.0 h1:uYvfpb3DyLSCGWnctWKGj857c6ew
 github.com/apparentlymart/go-textseg/v15 v15.0.0/go.mod h1:K8XmNZdhEBkdlyDdvbmmsvpAG721bKi0joRfFdHIWJ4=
 github.com/cloudflare/circl v1.3.7 h1:qlCDlTPz2n9fu58M0Nh1J/JzcFpfgkFHHX3O35r5vcU=
 github.com/cloudflare/circl v1.3.7/go.mod h1:sRTcRWXGLrKw6yIGJ+l7amYJFfAXbZG0kBSc8r4zxgA=
-github.com/cockroachdb/cockroach-cloud-sdk-go v1.11.0 h1:xqQ2/m+tCIbvoL9u61TAQ5qnu+KDrIH74A7Ym2gdzG4=
-github.com/cockroachdb/cockroach-cloud-sdk-go v1.11.0/go.mod h1:oG9ylbcVGOF7IbVAW2nx5F6ry9a2dZD1H9rd+qd4P60=
-github.com/cockroachdb/terraform-provider-cockroach v1.7.0 h1:Vllu5/7Ku99EdwW0WZwp6UjaNqyf+De5kQU8iAj2T2g=
-github.com/cockroachdb/terraform-provider-cockroach v1.7.0/go.mod h1:BmMUYvr61ABIuseEuaxXzG+GEArTHNDA6IoSdAPH4n4=
+github.com/cockroachdb/cockroach-cloud-sdk-go/v3 v3.0.0 h1:jbHNiRzBlJK0bJktxFwu753wq3OpMCQlR3GWqSTpJlQ=
+github.com/cockroachdb/cockroach-cloud-sdk-go/v3 v3.0.0/go.mod h1:RBE/ZEYOGeIqnmUYgysc8hTXLLkgW05fkHWdsMeEu6Q=
+github.com/cockroachdb/terraform-provider-cockroach v1.8.0 h1:ACf+FYoelFf4rFmQgm+Tn5cfPPkWDIjOlmqQcfNiqho=
+github.com/cockroachdb/terraform-provider-cockroach v1.8.0/go.mod h1:+OygEPSLegOQgLNKW2C4HKimAlP7VQzIpRepX9UY6Q4=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
