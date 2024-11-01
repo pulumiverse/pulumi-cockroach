@@ -50,6 +50,12 @@ namespace Pulumiverse.Cockroach
         [Output("services")]
         public Output<ImmutableArray<Outputs.PrivateEndpointServicesService>> Services { get; private set; } = null!;
 
+        /// <summary>
+        /// a map of services keyed by the region name
+        /// </summary>
+        [Output("servicesMap")]
+        public Output<ImmutableDictionary<string, Outputs.PrivateEndpointServicesServicesMap>> ServicesMap { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a PrivateEndpointServices resource with the given unique name, arguments, and options.
@@ -117,6 +123,18 @@ namespace Pulumiverse.Cockroach
         {
             get => _services ?? (_services = new InputList<Inputs.PrivateEndpointServicesServiceGetArgs>());
             set => _services = value;
+        }
+
+        [Input("servicesMap")]
+        private InputMap<Inputs.PrivateEndpointServicesServicesMapGetArgs>? _servicesMap;
+
+        /// <summary>
+        /// a map of services keyed by the region name
+        /// </summary>
+        public InputMap<Inputs.PrivateEndpointServicesServicesMapGetArgs> ServicesMap
+        {
+            get => _servicesMap ?? (_servicesMap = new InputMap<Inputs.PrivateEndpointServicesServicesMapGetArgs>());
+            set => _servicesMap = value;
         }
 
         public PrivateEndpointServicesState()

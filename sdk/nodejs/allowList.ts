@@ -64,14 +64,14 @@ export class AllowList extends pulumi.CustomResource {
      */
     public readonly cidrIp!: pulumi.Output<string>;
     /**
-     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
      */
     public readonly cidrMask!: pulumi.Output<number>;
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Name of this allowlist entry.
+     * Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
      */
-    public readonly name!: pulumi.Output<string | undefined>;
+    public readonly name!: pulumi.Output<string>;
     /**
      * Set to 'true' to allow SQL connections from this CIDR range.
      */
@@ -138,12 +138,12 @@ export interface AllowListState {
      */
     cidrIp?: pulumi.Input<string>;
     /**
-     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
      */
     cidrMask?: pulumi.Input<number>;
     clusterId?: pulumi.Input<string>;
     /**
-     * Name of this allowlist entry.
+     * Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
      */
     name?: pulumi.Input<string>;
     /**
@@ -165,12 +165,12 @@ export interface AllowListArgs {
      */
     cidrIp: pulumi.Input<string>;
     /**
-     * Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+     * The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
      */
     cidrMask: pulumi.Input<number>;
     clusterId: pulumi.Input<string>;
     /**
-     * Name of this allowlist entry.
+     * Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
      */
     name?: pulumi.Input<string>;
     /**

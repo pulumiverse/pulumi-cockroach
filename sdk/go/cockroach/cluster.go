@@ -12,7 +12,7 @@ import (
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
-// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+// CockroachDB Cloud cluster.
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -20,7 +20,6 @@ type Cluster struct {
 	AccountId pulumi.StringOutput `pulumi:"accountId"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
-	ClusterId     pulumi.StringOutput `pulumi:"clusterId"`
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringOutput `pulumi:"cockroachVersion"`
 	// ID of the user who created the cluster.
@@ -35,7 +34,7 @@ type Cluster struct {
 	OperationStatus pulumi.StringOutput `pulumi:"operationStatus"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId pulumi.StringOutput `pulumi:"parentId"`
-	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 	Plan       pulumi.StringOutput        `pulumi:"plan"`
 	Regions    ClusterRegionArrayOutput   `pulumi:"regions"`
 	Serverless ClusterServerlessPtrOutput `pulumi:"serverless"`
@@ -88,7 +87,6 @@ type clusterState struct {
 	AccountId *string `pulumi:"accountId"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider *string `pulumi:"cloudProvider"`
-	ClusterId     *string `pulumi:"clusterId"`
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion *string `pulumi:"cockroachVersion"`
 	// ID of the user who created the cluster.
@@ -103,7 +101,7 @@ type clusterState struct {
 	OperationStatus *string `pulumi:"operationStatus"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId *string `pulumi:"parentId"`
-	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 	Plan       *string            `pulumi:"plan"`
 	Regions    []ClusterRegion    `pulumi:"regions"`
 	Serverless *ClusterServerless `pulumi:"serverless"`
@@ -118,7 +116,6 @@ type ClusterState struct {
 	AccountId pulumi.StringPtrInput
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringPtrInput
-	ClusterId     pulumi.StringPtrInput
 	// Major version of CockroachDB running on the cluster.
 	CockroachVersion pulumi.StringPtrInput
 	// ID of the user who created the cluster.
@@ -133,7 +130,7 @@ type ClusterState struct {
 	OperationStatus pulumi.StringPtrInput
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId pulumi.StringPtrInput
-	// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 	Plan       pulumi.StringPtrInput
 	Regions    ClusterRegionArrayInput
 	Serverless ClusterServerlessPtrInput
@@ -159,7 +156,9 @@ type clusterArgs struct {
 	// Name of the cluster.
 	Name string `pulumi:"name"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
-	ParentId   *string            `pulumi:"parentId"`
+	ParentId *string `pulumi:"parentId"`
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+	Plan       *string            `pulumi:"plan"`
 	Regions    []ClusterRegion    `pulumi:"regions"`
 	Serverless *ClusterServerless `pulumi:"serverless"`
 }
@@ -177,7 +176,9 @@ type ClusterArgs struct {
 	// Name of the cluster.
 	Name pulumi.StringInput
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
-	ParentId   pulumi.StringPtrInput
+	ParentId pulumi.StringPtrInput
+	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+	Plan       pulumi.StringPtrInput
 	Regions    ClusterRegionArrayInput
 	Serverless ClusterServerlessPtrInput
 }
@@ -279,10 +280,6 @@ func (o ClusterOutput) CloudProvider() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CloudProvider }).(pulumi.StringOutput)
 }
 
-func (o ClusterOutput) ClusterId() pulumi.StringOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
-}
-
 // Major version of CockroachDB running on the cluster.
 func (o ClusterOutput) CockroachVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CockroachVersion }).(pulumi.StringOutput)
@@ -318,7 +315,7 @@ func (o ClusterOutput) ParentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ParentId }).(pulumi.StringOutput)
 }
 
-// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
 func (o ClusterOutput) Plan() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.Plan }).(pulumi.StringOutput)
 }

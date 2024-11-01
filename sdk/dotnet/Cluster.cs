@@ -11,7 +11,7 @@ using Pulumi;
 namespace Pulumiverse.Cockroach
 {
     /// <summary>
-    /// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+    /// CockroachDB Cloud cluster.
     /// </summary>
     [CockroachResourceType("cockroach:index/cluster:Cluster")]
     public partial class Cluster : global::Pulumi.CustomResource
@@ -27,9 +27,6 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         [Output("cloudProvider")]
         public Output<string> CloudProvider { get; private set; } = null!;
-
-        [Output("clusterId")]
-        public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
         /// Major version of CockroachDB running on the cluster.
@@ -72,7 +69,7 @@ namespace Pulumiverse.Cockroach
         public Output<string> ParentId { get; private set; } = null!;
 
         /// <summary>
-        /// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+        /// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         /// </summary>
         [Output("plan")]
         public Output<string> Plan { get; private set; } = null!;
@@ -176,6 +173,12 @@ namespace Pulumiverse.Cockroach
         [Input("parentId")]
         public Input<string>? ParentId { get; set; }
 
+        /// <summary>
+        /// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+        /// </summary>
+        [Input("plan")]
+        public Input<string>? Plan { get; set; }
+
         [Input("regions", required: true)]
         private InputList<Inputs.ClusterRegionArgs>? _regions;
         public InputList<Inputs.ClusterRegionArgs> Regions
@@ -206,9 +209,6 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         [Input("cloudProvider")]
         public Input<string>? CloudProvider { get; set; }
-
-        [Input("clusterId")]
-        public Input<string>? ClusterId { get; set; }
 
         /// <summary>
         /// Major version of CockroachDB running on the cluster.
@@ -251,7 +251,7 @@ namespace Pulumiverse.Cockroach
         public Input<string>? ParentId { get; set; }
 
         /// <summary>
-        /// Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+        /// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         /// </summary>
         [Input("plan")]
         public Input<string>? Plan { get; set; }

@@ -367,7 +367,7 @@ type ClusterRegion struct {
 	Name string `pulumi:"name"`
 	// Number of nodes in the region. Will always be 0 for serverless clusters.
 	NodeCount *int `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary *bool `pulumi:"primary"`
 	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 	SqlDns *string `pulumi:"sqlDns"`
@@ -393,7 +393,7 @@ type ClusterRegionArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 	// Number of nodes in the region. Will always be 0 for serverless clusters.
 	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary pulumi.BoolPtrInput `pulumi:"primary"`
 	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 	SqlDns pulumi.StringPtrInput `pulumi:"sqlDns"`
@@ -467,7 +467,7 @@ func (o ClusterRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
 
-// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 func (o ClusterRegionOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }
@@ -506,7 +506,13 @@ type ClusterServerless struct {
 	// Cluster identifier in a connection string.
 	RoutingId *string `pulumi:"routingId"`
 	// Spend limit in US cents.
-	SpendLimit  *int                          `pulumi:"spendLimit"`
+	//
+	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
+	SpendLimit *int `pulumi:"spendLimit"`
+	// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+	//   * MANUAL
+	//   * AUTOMATIC
+	UpgradeType *string                       `pulumi:"upgradeType"`
 	UsageLimits *ClusterServerlessUsageLimits `pulumi:"usageLimits"`
 }
 
@@ -525,7 +531,13 @@ type ClusterServerlessArgs struct {
 	// Cluster identifier in a connection string.
 	RoutingId pulumi.StringPtrInput `pulumi:"routingId"`
 	// Spend limit in US cents.
-	SpendLimit  pulumi.IntPtrInput                   `pulumi:"spendLimit"`
+	//
+	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
+	SpendLimit pulumi.IntPtrInput `pulumi:"spendLimit"`
+	// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+	//   * MANUAL
+	//   * AUTOMATIC
+	UpgradeType pulumi.StringPtrInput                `pulumi:"upgradeType"`
 	UsageLimits ClusterServerlessUsageLimitsPtrInput `pulumi:"usageLimits"`
 }
 
@@ -612,8 +624,17 @@ func (o ClusterServerlessOutput) RoutingId() pulumi.StringPtrOutput {
 }
 
 // Spend limit in US cents.
+//
+// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 func (o ClusterServerlessOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterServerless) *int { return v.SpendLimit }).(pulumi.IntPtrOutput)
+}
+
+// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+//   - MANUAL
+//   - AUTOMATIC
+func (o ClusterServerlessOutput) UpgradeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterServerless) *string { return v.UpgradeType }).(pulumi.StringPtrOutput)
 }
 
 func (o ClusterServerlessOutput) UsageLimits() ClusterServerlessUsageLimitsPtrOutput {
@@ -655,6 +676,8 @@ func (o ClusterServerlessPtrOutput) RoutingId() pulumi.StringPtrOutput {
 }
 
 // Spend limit in US cents.
+//
+// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 func (o ClusterServerlessPtrOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterServerless) *int {
 		if v == nil {
@@ -662,6 +685,18 @@ func (o ClusterServerlessPtrOutput) SpendLimit() pulumi.IntPtrOutput {
 		}
 		return v.SpendLimit
 	}).(pulumi.IntPtrOutput)
+}
+
+// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+//   - MANUAL
+//   - AUTOMATIC
+func (o ClusterServerlessPtrOutput) UpgradeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterServerless) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UpgradeType
+	}).(pulumi.StringPtrOutput)
 }
 
 func (o ClusterServerlessPtrOutput) UsageLimits() ClusterServerlessUsageLimitsPtrOutput {
@@ -674,10 +709,12 @@ func (o ClusterServerlessPtrOutput) UsageLimits() ClusterServerlessUsageLimitsPt
 }
 
 type ClusterServerlessUsageLimits struct {
+	// Maximum number of vCPUs that the cluster can use.
+	ProvisionedVirtualCpus *int `pulumi:"provisionedVirtualCpus"`
 	// Maximum number of Request Units that the cluster can consume during the month.
-	RequestUnitLimit int `pulumi:"requestUnitLimit"`
+	RequestUnitLimit *int `pulumi:"requestUnitLimit"`
 	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
-	StorageMibLimit int `pulumi:"storageMibLimit"`
+	StorageMibLimit *int `pulumi:"storageMibLimit"`
 }
 
 // ClusterServerlessUsageLimitsInput is an input type that accepts ClusterServerlessUsageLimitsArgs and ClusterServerlessUsageLimitsOutput values.
@@ -692,10 +729,12 @@ type ClusterServerlessUsageLimitsInput interface {
 }
 
 type ClusterServerlessUsageLimitsArgs struct {
+	// Maximum number of vCPUs that the cluster can use.
+	ProvisionedVirtualCpus pulumi.IntPtrInput `pulumi:"provisionedVirtualCpus"`
 	// Maximum number of Request Units that the cluster can consume during the month.
-	RequestUnitLimit pulumi.IntInput `pulumi:"requestUnitLimit"`
+	RequestUnitLimit pulumi.IntPtrInput `pulumi:"requestUnitLimit"`
 	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
-	StorageMibLimit pulumi.IntInput `pulumi:"storageMibLimit"`
+	StorageMibLimit pulumi.IntPtrInput `pulumi:"storageMibLimit"`
 }
 
 func (ClusterServerlessUsageLimitsArgs) ElementType() reflect.Type {
@@ -775,14 +814,19 @@ func (o ClusterServerlessUsageLimitsOutput) ToClusterServerlessUsageLimitsPtrOut
 	}).(ClusterServerlessUsageLimitsPtrOutput)
 }
 
+// Maximum number of vCPUs that the cluster can use.
+func (o ClusterServerlessUsageLimitsOutput) ProvisionedVirtualCpus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterServerlessUsageLimits) *int { return v.ProvisionedVirtualCpus }).(pulumi.IntPtrOutput)
+}
+
 // Maximum number of Request Units that the cluster can consume during the month.
-func (o ClusterServerlessUsageLimitsOutput) RequestUnitLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v ClusterServerlessUsageLimits) int { return v.RequestUnitLimit }).(pulumi.IntOutput)
+func (o ClusterServerlessUsageLimitsOutput) RequestUnitLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterServerlessUsageLimits) *int { return v.RequestUnitLimit }).(pulumi.IntPtrOutput)
 }
 
 // Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
-func (o ClusterServerlessUsageLimitsOutput) StorageMibLimit() pulumi.IntOutput {
-	return o.ApplyT(func(v ClusterServerlessUsageLimits) int { return v.StorageMibLimit }).(pulumi.IntOutput)
+func (o ClusterServerlessUsageLimitsOutput) StorageMibLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterServerlessUsageLimits) *int { return v.StorageMibLimit }).(pulumi.IntPtrOutput)
 }
 
 type ClusterServerlessUsageLimitsPtrOutput struct{ *pulumi.OutputState }
@@ -809,13 +853,23 @@ func (o ClusterServerlessUsageLimitsPtrOutput) Elem() ClusterServerlessUsageLimi
 	}).(ClusterServerlessUsageLimitsOutput)
 }
 
+// Maximum number of vCPUs that the cluster can use.
+func (o ClusterServerlessUsageLimitsPtrOutput) ProvisionedVirtualCpus() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterServerlessUsageLimits) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProvisionedVirtualCpus
+	}).(pulumi.IntPtrOutput)
+}
+
 // Maximum number of Request Units that the cluster can consume during the month.
 func (o ClusterServerlessUsageLimitsPtrOutput) RequestUnitLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterServerlessUsageLimits) *int {
 		if v == nil {
 			return nil
 		}
-		return &v.RequestUnitLimit
+		return v.RequestUnitLimit
 	}).(pulumi.IntPtrOutput)
 }
 
@@ -825,7 +879,7 @@ func (o ClusterServerlessUsageLimitsPtrOutput) StorageMibLimit() pulumi.IntPtrOu
 		if v == nil {
 			return nil
 		}
-		return &v.StorageMibLimit
+		return v.StorageMibLimit
 	}).(pulumi.IntPtrOutput)
 }
 
@@ -836,7 +890,7 @@ type CmekAdditionalRegion struct {
 	Name string `pulumi:"name"`
 	// Number of nodes in the region. Will always be 0 for serverless clusters.
 	NodeCount *int `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary *bool `pulumi:"primary"`
 	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 	SqlDns *string `pulumi:"sqlDns"`
@@ -862,7 +916,7 @@ type CmekAdditionalRegionArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 	// Number of nodes in the region. Will always be 0 for serverless clusters.
 	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
-	// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary pulumi.BoolPtrInput `pulumi:"primary"`
 	// DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
 	SqlDns pulumi.StringPtrInput `pulumi:"sqlDns"`
@@ -936,7 +990,7 @@ func (o CmekAdditionalRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
 
-// Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 func (o CmekAdditionalRegionOutput) Primary() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
 }
@@ -1648,6 +1702,332 @@ func (o PrivateEndpointServicesServiceAwsPtrOutput) ServiceName() pulumi.StringP
 	}).(pulumi.StringPtrOutput)
 }
 
+type PrivateEndpointServicesServicesMap struct {
+	// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+	AvailabilityZoneIds []string `pulumi:"availabilityZoneIds"`
+	// Deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version
+	Aws *PrivateEndpointServicesServicesMapAws `pulumi:"aws"`
+	// Cloud provider associated with this service.
+	CloudProvider *string `pulumi:"cloudProvider"`
+	// Server side ID of the private endpoint connection.
+	EndpointServiceId *string `pulumi:"endpointServiceId"`
+	// Name of the endpoint service.
+	Name *string `pulumi:"name"`
+	// Cloud provider region code associated with this service.
+	RegionName *string `pulumi:"regionName"`
+	// Operation status of the service.
+	Status *string `pulumi:"status"`
+}
+
+// PrivateEndpointServicesServicesMapInput is an input type that accepts PrivateEndpointServicesServicesMap and PrivateEndpointServicesServicesMapOutput values.
+// You can construct a concrete instance of `PrivateEndpointServicesServicesMapInput` via:
+//
+//	PrivateEndpointServicesServicesMap{ "key": PrivateEndpointServicesServicesArgs{...} }
+type PrivateEndpointServicesServicesMapInput interface {
+	pulumi.Input
+
+	ToPrivateEndpointServicesServicesMapOutput() PrivateEndpointServicesServicesMapOutput
+	ToPrivateEndpointServicesServicesMapOutputWithContext(context.Context) PrivateEndpointServicesServicesMapOutput
+}
+
+type PrivateEndpointServicesServicesMapArgs struct {
+	// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+	AvailabilityZoneIds pulumi.StringArrayInput `pulumi:"availabilityZoneIds"`
+	// Deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version
+	Aws PrivateEndpointServicesServicesMapAwsPtrInput `pulumi:"aws"`
+	// Cloud provider associated with this service.
+	CloudProvider pulumi.StringPtrInput `pulumi:"cloudProvider"`
+	// Server side ID of the private endpoint connection.
+	EndpointServiceId pulumi.StringPtrInput `pulumi:"endpointServiceId"`
+	// Name of the endpoint service.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Cloud provider region code associated with this service.
+	RegionName pulumi.StringPtrInput `pulumi:"regionName"`
+	// Operation status of the service.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (PrivateEndpointServicesServicesMapArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateEndpointServicesServicesMap)(nil)).Elem()
+}
+
+func (i PrivateEndpointServicesServicesMapArgs) ToPrivateEndpointServicesServicesMapOutput() PrivateEndpointServicesServicesMapOutput {
+	return i.ToPrivateEndpointServicesServicesMapOutputWithContext(context.Background())
+}
+
+func (i PrivateEndpointServicesServicesMapArgs) ToPrivateEndpointServicesServicesMapOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateEndpointServicesServicesMapOutput)
+}
+
+// PrivateEndpointServicesServicesMapMapInput is an input type that accepts PrivateEndpointServicesServicesMapMap and PrivateEndpointServicesServicesMapMapOutput values.
+// You can construct a concrete instance of `PrivateEndpointServicesServicesMapMapInput` via:
+//
+//	PrivateEndpointServicesServicesMapMap{ "key": PrivateEndpointServicesServicesMapArgs{...} }
+type PrivateEndpointServicesServicesMapMapInput interface {
+	pulumi.Input
+
+	ToPrivateEndpointServicesServicesMapMapOutput() PrivateEndpointServicesServicesMapMapOutput
+	ToPrivateEndpointServicesServicesMapMapOutputWithContext(context.Context) PrivateEndpointServicesServicesMapMapOutput
+}
+
+type PrivateEndpointServicesServicesMapMap map[string]PrivateEndpointServicesServicesMapInput
+
+func (PrivateEndpointServicesServicesMapMap) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]PrivateEndpointServicesServicesMap)(nil)).Elem()
+}
+
+func (i PrivateEndpointServicesServicesMapMap) ToPrivateEndpointServicesServicesMapMapOutput() PrivateEndpointServicesServicesMapMapOutput {
+	return i.ToPrivateEndpointServicesServicesMapMapOutputWithContext(context.Background())
+}
+
+func (i PrivateEndpointServicesServicesMapMap) ToPrivateEndpointServicesServicesMapMapOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateEndpointServicesServicesMapMapOutput)
+}
+
+type PrivateEndpointServicesServicesMapOutput struct{ *pulumi.OutputState }
+
+func (PrivateEndpointServicesServicesMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateEndpointServicesServicesMap)(nil)).Elem()
+}
+
+func (o PrivateEndpointServicesServicesMapOutput) ToPrivateEndpointServicesServicesMapOutput() PrivateEndpointServicesServicesMapOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapOutput) ToPrivateEndpointServicesServicesMapOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapOutput {
+	return o
+}
+
+// Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+func (o PrivateEndpointServicesServicesMapOutput) AvailabilityZoneIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) []string { return v.AvailabilityZoneIds }).(pulumi.StringArrayOutput)
+}
+
+// Deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version
+func (o PrivateEndpointServicesServicesMapOutput) Aws() PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) *PrivateEndpointServicesServicesMapAws { return v.Aws }).(PrivateEndpointServicesServicesMapAwsPtrOutput)
+}
+
+// Cloud provider associated with this service.
+func (o PrivateEndpointServicesServicesMapOutput) CloudProvider() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) *string { return v.CloudProvider }).(pulumi.StringPtrOutput)
+}
+
+// Server side ID of the private endpoint connection.
+func (o PrivateEndpointServicesServicesMapOutput) EndpointServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) *string { return v.EndpointServiceId }).(pulumi.StringPtrOutput)
+}
+
+// Name of the endpoint service.
+func (o PrivateEndpointServicesServicesMapOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Cloud provider region code associated with this service.
+func (o PrivateEndpointServicesServicesMapOutput) RegionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) *string { return v.RegionName }).(pulumi.StringPtrOutput)
+}
+
+// Operation status of the service.
+func (o PrivateEndpointServicesServicesMapOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMap) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type PrivateEndpointServicesServicesMapMapOutput struct{ *pulumi.OutputState }
+
+func (PrivateEndpointServicesServicesMapMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*map[string]PrivateEndpointServicesServicesMap)(nil)).Elem()
+}
+
+func (o PrivateEndpointServicesServicesMapMapOutput) ToPrivateEndpointServicesServicesMapMapOutput() PrivateEndpointServicesServicesMapMapOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapMapOutput) ToPrivateEndpointServicesServicesMapMapOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapMapOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapMapOutput) MapIndex(k pulumi.StringInput) PrivateEndpointServicesServicesMapOutput {
+	return pulumi.All(o, k).ApplyT(func(vs []interface{}) PrivateEndpointServicesServicesMap {
+		return vs[0].(map[string]PrivateEndpointServicesServicesMap)[vs[1].(string)]
+	}).(PrivateEndpointServicesServicesMapOutput)
+}
+
+type PrivateEndpointServicesServicesMapAws struct {
+	// AZ IDs users should create their VPCs in to minimize their cost.
+	AvailabilityZoneIds []string `pulumi:"availabilityZoneIds"`
+	// Server side ID of the PrivateLink connection.
+	ServiceId *string `pulumi:"serviceId"`
+	// AWS service name used to create endpoints.
+	ServiceName *string `pulumi:"serviceName"`
+}
+
+// PrivateEndpointServicesServicesMapAwsInput is an input type that accepts PrivateEndpointServicesServicesMapAwsArgs and PrivateEndpointServicesServicesMapAwsOutput values.
+// You can construct a concrete instance of `PrivateEndpointServicesServicesMapAwsInput` via:
+//
+//	PrivateEndpointServicesServicesMapAwsArgs{...}
+type PrivateEndpointServicesServicesMapAwsInput interface {
+	pulumi.Input
+
+	ToPrivateEndpointServicesServicesMapAwsOutput() PrivateEndpointServicesServicesMapAwsOutput
+	ToPrivateEndpointServicesServicesMapAwsOutputWithContext(context.Context) PrivateEndpointServicesServicesMapAwsOutput
+}
+
+type PrivateEndpointServicesServicesMapAwsArgs struct {
+	// AZ IDs users should create their VPCs in to minimize their cost.
+	AvailabilityZoneIds pulumi.StringArrayInput `pulumi:"availabilityZoneIds"`
+	// Server side ID of the PrivateLink connection.
+	ServiceId pulumi.StringPtrInput `pulumi:"serviceId"`
+	// AWS service name used to create endpoints.
+	ServiceName pulumi.StringPtrInput `pulumi:"serviceName"`
+}
+
+func (PrivateEndpointServicesServicesMapAwsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateEndpointServicesServicesMapAws)(nil)).Elem()
+}
+
+func (i PrivateEndpointServicesServicesMapAwsArgs) ToPrivateEndpointServicesServicesMapAwsOutput() PrivateEndpointServicesServicesMapAwsOutput {
+	return i.ToPrivateEndpointServicesServicesMapAwsOutputWithContext(context.Background())
+}
+
+func (i PrivateEndpointServicesServicesMapAwsArgs) ToPrivateEndpointServicesServicesMapAwsOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapAwsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateEndpointServicesServicesMapAwsOutput)
+}
+
+func (i PrivateEndpointServicesServicesMapAwsArgs) ToPrivateEndpointServicesServicesMapAwsPtrOutput() PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return i.ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(context.Background())
+}
+
+func (i PrivateEndpointServicesServicesMapAwsArgs) ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateEndpointServicesServicesMapAwsOutput).ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(ctx)
+}
+
+// PrivateEndpointServicesServicesMapAwsPtrInput is an input type that accepts PrivateEndpointServicesServicesMapAwsArgs, PrivateEndpointServicesServicesMapAwsPtr and PrivateEndpointServicesServicesMapAwsPtrOutput values.
+// You can construct a concrete instance of `PrivateEndpointServicesServicesMapAwsPtrInput` via:
+//
+//	        PrivateEndpointServicesServicesMapAwsArgs{...}
+//
+//	or:
+//
+//	        nil
+type PrivateEndpointServicesServicesMapAwsPtrInput interface {
+	pulumi.Input
+
+	ToPrivateEndpointServicesServicesMapAwsPtrOutput() PrivateEndpointServicesServicesMapAwsPtrOutput
+	ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(context.Context) PrivateEndpointServicesServicesMapAwsPtrOutput
+}
+
+type privateEndpointServicesServicesMapAwsPtrType PrivateEndpointServicesServicesMapAwsArgs
+
+func PrivateEndpointServicesServicesMapAwsPtr(v *PrivateEndpointServicesServicesMapAwsArgs) PrivateEndpointServicesServicesMapAwsPtrInput {
+	return (*privateEndpointServicesServicesMapAwsPtrType)(v)
+}
+
+func (*privateEndpointServicesServicesMapAwsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**PrivateEndpointServicesServicesMapAws)(nil)).Elem()
+}
+
+func (i *privateEndpointServicesServicesMapAwsPtrType) ToPrivateEndpointServicesServicesMapAwsPtrOutput() PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return i.ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(context.Background())
+}
+
+func (i *privateEndpointServicesServicesMapAwsPtrType) ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(PrivateEndpointServicesServicesMapAwsPtrOutput)
+}
+
+type PrivateEndpointServicesServicesMapAwsOutput struct{ *pulumi.OutputState }
+
+func (PrivateEndpointServicesServicesMapAwsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PrivateEndpointServicesServicesMapAws)(nil)).Elem()
+}
+
+func (o PrivateEndpointServicesServicesMapAwsOutput) ToPrivateEndpointServicesServicesMapAwsOutput() PrivateEndpointServicesServicesMapAwsOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapAwsOutput) ToPrivateEndpointServicesServicesMapAwsOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapAwsOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapAwsOutput) ToPrivateEndpointServicesServicesMapAwsPtrOutput() PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return o.ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(context.Background())
+}
+
+func (o PrivateEndpointServicesServicesMapAwsOutput) ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PrivateEndpointServicesServicesMapAws) *PrivateEndpointServicesServicesMapAws {
+		return &v
+	}).(PrivateEndpointServicesServicesMapAwsPtrOutput)
+}
+
+// AZ IDs users should create their VPCs in to minimize their cost.
+func (o PrivateEndpointServicesServicesMapAwsOutput) AvailabilityZoneIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMapAws) []string { return v.AvailabilityZoneIds }).(pulumi.StringArrayOutput)
+}
+
+// Server side ID of the PrivateLink connection.
+func (o PrivateEndpointServicesServicesMapAwsOutput) ServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMapAws) *string { return v.ServiceId }).(pulumi.StringPtrOutput)
+}
+
+// AWS service name used to create endpoints.
+func (o PrivateEndpointServicesServicesMapAwsOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v PrivateEndpointServicesServicesMapAws) *string { return v.ServiceName }).(pulumi.StringPtrOutput)
+}
+
+type PrivateEndpointServicesServicesMapAwsPtrOutput struct{ *pulumi.OutputState }
+
+func (PrivateEndpointServicesServicesMapAwsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**PrivateEndpointServicesServicesMapAws)(nil)).Elem()
+}
+
+func (o PrivateEndpointServicesServicesMapAwsPtrOutput) ToPrivateEndpointServicesServicesMapAwsPtrOutput() PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapAwsPtrOutput) ToPrivateEndpointServicesServicesMapAwsPtrOutputWithContext(ctx context.Context) PrivateEndpointServicesServicesMapAwsPtrOutput {
+	return o
+}
+
+func (o PrivateEndpointServicesServicesMapAwsPtrOutput) Elem() PrivateEndpointServicesServicesMapAwsOutput {
+	return o.ApplyT(func(v *PrivateEndpointServicesServicesMapAws) PrivateEndpointServicesServicesMapAws {
+		if v != nil {
+			return *v
+		}
+		var ret PrivateEndpointServicesServicesMapAws
+		return ret
+	}).(PrivateEndpointServicesServicesMapAwsOutput)
+}
+
+// AZ IDs users should create their VPCs in to minimize their cost.
+func (o PrivateEndpointServicesServicesMapAwsPtrOutput) AvailabilityZoneIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *PrivateEndpointServicesServicesMapAws) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AvailabilityZoneIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Server side ID of the PrivateLink connection.
+func (o PrivateEndpointServicesServicesMapAwsPtrOutput) ServiceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateEndpointServicesServicesMapAws) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceId
+	}).(pulumi.StringPtrOutput)
+}
+
+// AWS service name used to create endpoints.
+func (o PrivateEndpointServicesServicesMapAwsPtrOutput) ServiceName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PrivateEndpointServicesServicesMapAws) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceName
+	}).(pulumi.StringPtrOutput)
+}
+
 type UserRoleGrantRole struct {
 	// ID of the resource. Required if the resourceType is 'FOLDER' or 'CLUSTER'. It should be omitted otherwise.
 	ResourceId *string `pulumi:"resourceId"`
@@ -2265,7 +2645,11 @@ type GetCockroachClusterServerless struct {
 	// Cluster identifier in a connection string.
 	RoutingId string `pulumi:"routingId"`
 	// Spend limit in US cents.
-	SpendLimit  int                                      `pulumi:"spendLimit"`
+	//
+	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
+	SpendLimit int `pulumi:"spendLimit"`
+	// Dictates the behavior of cockroach major version upgrades.
+	UpgradeType string                                   `pulumi:"upgradeType"`
 	UsageLimits GetCockroachClusterServerlessUsageLimits `pulumi:"usageLimits"`
 }
 
@@ -2284,7 +2668,11 @@ type GetCockroachClusterServerlessArgs struct {
 	// Cluster identifier in a connection string.
 	RoutingId pulumi.StringInput `pulumi:"routingId"`
 	// Spend limit in US cents.
-	SpendLimit  pulumi.IntInput                               `pulumi:"spendLimit"`
+	//
+	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
+	SpendLimit pulumi.IntInput `pulumi:"spendLimit"`
+	// Dictates the behavior of cockroach major version upgrades.
+	UpgradeType pulumi.StringInput                            `pulumi:"upgradeType"`
 	UsageLimits GetCockroachClusterServerlessUsageLimitsInput `pulumi:"usageLimits"`
 }
 
@@ -2320,8 +2708,15 @@ func (o GetCockroachClusterServerlessOutput) RoutingId() pulumi.StringOutput {
 }
 
 // Spend limit in US cents.
+//
+// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 func (o GetCockroachClusterServerlessOutput) SpendLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerless) int { return v.SpendLimit }).(pulumi.IntOutput)
+}
+
+// Dictates the behavior of cockroach major version upgrades.
+func (o GetCockroachClusterServerlessOutput) UpgradeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCockroachClusterServerless) string { return v.UpgradeType }).(pulumi.StringOutput)
 }
 
 func (o GetCockroachClusterServerlessOutput) UsageLimits() GetCockroachClusterServerlessUsageLimitsOutput {
@@ -2329,6 +2724,8 @@ func (o GetCockroachClusterServerlessOutput) UsageLimits() GetCockroachClusterSe
 }
 
 type GetCockroachClusterServerlessUsageLimits struct {
+	// Maximum number of vCPUs that the cluster can use.
+	ProvisionedVirtualCpus int `pulumi:"provisionedVirtualCpus"`
 	// Maximum number of Request Units that the cluster can consume during the month.
 	RequestUnitLimit int `pulumi:"requestUnitLimit"`
 	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
@@ -2347,6 +2744,8 @@ type GetCockroachClusterServerlessUsageLimitsInput interface {
 }
 
 type GetCockroachClusterServerlessUsageLimitsArgs struct {
+	// Maximum number of vCPUs that the cluster can use.
+	ProvisionedVirtualCpus pulumi.IntInput `pulumi:"provisionedVirtualCpus"`
 	// Maximum number of Request Units that the cluster can consume during the month.
 	RequestUnitLimit pulumi.IntInput `pulumi:"requestUnitLimit"`
 	// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
@@ -2377,6 +2776,11 @@ func (o GetCockroachClusterServerlessUsageLimitsOutput) ToGetCockroachClusterSer
 
 func (o GetCockroachClusterServerlessUsageLimitsOutput) ToGetCockroachClusterServerlessUsageLimitsOutputWithContext(ctx context.Context) GetCockroachClusterServerlessUsageLimitsOutput {
 	return o
+}
+
+// Maximum number of vCPUs that the cluster can use.
+func (o GetCockroachClusterServerlessUsageLimitsOutput) ProvisionedVirtualCpus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCockroachClusterServerlessUsageLimits) int { return v.ProvisionedVirtualCpus }).(pulumi.IntOutput)
 }
 
 // Maximum number of Request Units that the cluster can consume during the month.
@@ -2499,6 +2903,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceArrayInput)(nil)).Elem(), PrivateEndpointServicesServiceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceAwsInput)(nil)).Elem(), PrivateEndpointServicesServiceAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceAwsPtrInput)(nil)).Elem(), PrivateEndpointServicesServiceAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServicesMapInput)(nil)).Elem(), PrivateEndpointServicesServicesMapArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServicesMapMapInput)(nil)).Elem(), PrivateEndpointServicesServicesMapMap{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServicesMapAwsInput)(nil)).Elem(), PrivateEndpointServicesServicesMapAwsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServicesMapAwsPtrInput)(nil)).Elem(), PrivateEndpointServicesServicesMapAwsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantRoleInput)(nil)).Elem(), UserRoleGrantRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantRolePtrInput)(nil)).Elem(), UserRoleGrantRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantsRoleInput)(nil)).Elem(), UserRoleGrantsRoleArgs{})
@@ -2530,6 +2938,10 @@ func init() {
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceArrayOutput{})
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceAwsOutput{})
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceAwsPtrOutput{})
+	pulumi.RegisterOutputType(PrivateEndpointServicesServicesMapOutput{})
+	pulumi.RegisterOutputType(PrivateEndpointServicesServicesMapMapOutput{})
+	pulumi.RegisterOutputType(PrivateEndpointServicesServicesMapAwsOutput{})
+	pulumi.RegisterOutputType(PrivateEndpointServicesServicesMapAwsPtrOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantRoleOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantRolePtrOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantsRoleOutput{})

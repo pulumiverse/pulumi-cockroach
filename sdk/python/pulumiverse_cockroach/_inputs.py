@@ -37,6 +37,10 @@ __all__ = [
     'PrivateEndpointServicesServiceArgsDict',
     'PrivateEndpointServicesServiceAwsArgs',
     'PrivateEndpointServicesServiceAwsArgsDict',
+    'PrivateEndpointServicesServicesMapArgs',
+    'PrivateEndpointServicesServicesMapArgsDict',
+    'PrivateEndpointServicesServicesMapAwsArgs',
+    'PrivateEndpointServicesServicesMapAwsArgsDict',
     'UserRoleGrantRoleArgs',
     'UserRoleGrantRoleArgsDict',
     'UserRoleGrantsRoleArgs',
@@ -263,7 +267,7 @@ if not MYPY:
         """
         primary: NotRequired[pulumi.Input[bool]]
         """
-        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         """
         sql_dns: NotRequired[pulumi.Input[str]]
         """
@@ -289,7 +293,7 @@ class ClusterRegionArgs:
         :param pulumi.Input[str] name: Name of the region. Should match the region code used by the cluster's cloud provider.
         :param pulumi.Input[str] internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
         :param pulumi.Input[int] node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
-        :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         :param pulumi.Input[str] sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
         :param pulumi.Input[str] ui_dns: DNS name used when connecting to the DB Console for the cluster.
         """
@@ -345,7 +349,7 @@ class ClusterRegionArgs:
     @pulumi.getter
     def primary(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         """
         return pulumi.get(self, "primary")
 
@@ -388,6 +392,12 @@ if not MYPY:
         """
         Spend limit in US cents.
         """
+        upgrade_type: NotRequired[pulumi.Input[str]]
+        """
+        Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+          * MANUAL
+          * AUTOMATIC
+        """
         usage_limits: NotRequired[pulumi.Input['ClusterServerlessUsageLimitsArgsDict']]
 elif False:
     ClusterServerlessArgsDict: TypeAlias = Mapping[str, Any]
@@ -397,15 +407,24 @@ class ClusterServerlessArgs:
     def __init__(__self__, *,
                  routing_id: Optional[pulumi.Input[str]] = None,
                  spend_limit: Optional[pulumi.Input[int]] = None,
+                 upgrade_type: Optional[pulumi.Input[str]] = None,
                  usage_limits: Optional[pulumi.Input['ClusterServerlessUsageLimitsArgs']] = None):
         """
         :param pulumi.Input[str] routing_id: Cluster identifier in a connection string.
         :param pulumi.Input[int] spend_limit: Spend limit in US cents.
+        :param pulumi.Input[str] upgrade_type: Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+                 * MANUAL
+                 * AUTOMATIC
         """
         if routing_id is not None:
             pulumi.set(__self__, "routing_id", routing_id)
         if spend_limit is not None:
+            warnings.warn("""The `spend_limit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.""", DeprecationWarning)
+            pulumi.log.warn("""spend_limit is deprecated: The `spend_limit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.""")
+        if spend_limit is not None:
             pulumi.set(__self__, "spend_limit", spend_limit)
+        if upgrade_type is not None:
+            pulumi.set(__self__, "upgrade_type", upgrade_type)
         if usage_limits is not None:
             pulumi.set(__self__, "usage_limits", usage_limits)
 
@@ -423,6 +442,7 @@ class ClusterServerlessArgs:
 
     @property
     @pulumi.getter(name="spendLimit")
+    @_utilities.deprecated("""The `spend_limit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.""")
     def spend_limit(self) -> Optional[pulumi.Input[int]]:
         """
         Spend limit in US cents.
@@ -432,6 +452,20 @@ class ClusterServerlessArgs:
     @spend_limit.setter
     def spend_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "spend_limit", value)
+
+    @property
+    @pulumi.getter(name="upgradeType")
+    def upgrade_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+          * MANUAL
+          * AUTOMATIC
+        """
+        return pulumi.get(self, "upgrade_type")
+
+    @upgrade_type.setter
+    def upgrade_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "upgrade_type", value)
 
     @property
     @pulumi.getter(name="usageLimits")
@@ -445,11 +479,15 @@ class ClusterServerlessArgs:
 
 if not MYPY:
     class ClusterServerlessUsageLimitsArgsDict(TypedDict):
-        request_unit_limit: pulumi.Input[int]
+        provisioned_virtual_cpus: NotRequired[pulumi.Input[int]]
+        """
+        Maximum number of vCPUs that the cluster can use.
+        """
+        request_unit_limit: NotRequired[pulumi.Input[int]]
         """
         Maximum number of Request Units that the cluster can consume during the month.
         """
-        storage_mib_limit: pulumi.Input[int]
+        storage_mib_limit: NotRequired[pulumi.Input[int]]
         """
         Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
         """
@@ -459,37 +497,55 @@ elif False:
 @pulumi.input_type
 class ClusterServerlessUsageLimitsArgs:
     def __init__(__self__, *,
-                 request_unit_limit: pulumi.Input[int],
-                 storage_mib_limit: pulumi.Input[int]):
+                 provisioned_virtual_cpus: Optional[pulumi.Input[int]] = None,
+                 request_unit_limit: Optional[pulumi.Input[int]] = None,
+                 storage_mib_limit: Optional[pulumi.Input[int]] = None):
         """
+        :param pulumi.Input[int] provisioned_virtual_cpus: Maximum number of vCPUs that the cluster can use.
         :param pulumi.Input[int] request_unit_limit: Maximum number of Request Units that the cluster can consume during the month.
         :param pulumi.Input[int] storage_mib_limit: Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
         """
-        pulumi.set(__self__, "request_unit_limit", request_unit_limit)
-        pulumi.set(__self__, "storage_mib_limit", storage_mib_limit)
+        if provisioned_virtual_cpus is not None:
+            pulumi.set(__self__, "provisioned_virtual_cpus", provisioned_virtual_cpus)
+        if request_unit_limit is not None:
+            pulumi.set(__self__, "request_unit_limit", request_unit_limit)
+        if storage_mib_limit is not None:
+            pulumi.set(__self__, "storage_mib_limit", storage_mib_limit)
+
+    @property
+    @pulumi.getter(name="provisionedVirtualCpus")
+    def provisioned_virtual_cpus(self) -> Optional[pulumi.Input[int]]:
+        """
+        Maximum number of vCPUs that the cluster can use.
+        """
+        return pulumi.get(self, "provisioned_virtual_cpus")
+
+    @provisioned_virtual_cpus.setter
+    def provisioned_virtual_cpus(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "provisioned_virtual_cpus", value)
 
     @property
     @pulumi.getter(name="requestUnitLimit")
-    def request_unit_limit(self) -> pulumi.Input[int]:
+    def request_unit_limit(self) -> Optional[pulumi.Input[int]]:
         """
         Maximum number of Request Units that the cluster can consume during the month.
         """
         return pulumi.get(self, "request_unit_limit")
 
     @request_unit_limit.setter
-    def request_unit_limit(self, value: pulumi.Input[int]):
+    def request_unit_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "request_unit_limit", value)
 
     @property
     @pulumi.getter(name="storageMibLimit")
-    def storage_mib_limit(self) -> pulumi.Input[int]:
+    def storage_mib_limit(self) -> Optional[pulumi.Input[int]]:
         """
         Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
         """
         return pulumi.get(self, "storage_mib_limit")
 
     @storage_mib_limit.setter
-    def storage_mib_limit(self, value: pulumi.Input[int]):
+    def storage_mib_limit(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "storage_mib_limit", value)
 
 
@@ -509,7 +565,7 @@ if not MYPY:
         """
         primary: NotRequired[pulumi.Input[bool]]
         """
-        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         """
         sql_dns: NotRequired[pulumi.Input[str]]
         """
@@ -535,7 +591,7 @@ class CmekAdditionalRegionArgs:
         :param pulumi.Input[str] name: Name of the region. Should match the region code used by the cluster's cloud provider.
         :param pulumi.Input[str] internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
         :param pulumi.Input[int] node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
-        :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         :param pulumi.Input[str] sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
         :param pulumi.Input[str] ui_dns: DNS name used when connecting to the DB Console for the cluster.
         """
@@ -591,7 +647,7 @@ class CmekAdditionalRegionArgs:
     @pulumi.getter
     def primary(self) -> Optional[pulumi.Input[bool]]:
         """
-        Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
+        Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         """
         return pulumi.get(self, "primary")
 
@@ -1103,6 +1159,227 @@ elif False:
 
 @pulumi.input_type
 class PrivateEndpointServicesServiceAwsArgs:
+    def __init__(__self__, *,
+                 availability_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 service_id: Optional[pulumi.Input[str]] = None,
+                 service_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_ids: AZ IDs users should create their VPCs in to minimize their cost.
+        :param pulumi.Input[str] service_id: Server side ID of the PrivateLink connection.
+        :param pulumi.Input[str] service_name: AWS service name used to create endpoints.
+        """
+        if availability_zone_ids is not None:
+            pulumi.set(__self__, "availability_zone_ids", availability_zone_ids)
+        if service_id is not None:
+            pulumi.set(__self__, "service_id", service_id)
+        if service_name is not None:
+            pulumi.set(__self__, "service_name", service_name)
+
+    @property
+    @pulumi.getter(name="availabilityZoneIds")
+    def availability_zone_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        AZ IDs users should create their VPCs in to minimize their cost.
+        """
+        return pulumi.get(self, "availability_zone_ids")
+
+    @availability_zone_ids.setter
+    def availability_zone_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "availability_zone_ids", value)
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server side ID of the PrivateLink connection.
+        """
+        return pulumi.get(self, "service_id")
+
+    @service_id.setter
+    def service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_id", value)
+
+    @property
+    @pulumi.getter(name="serviceName")
+    def service_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        AWS service name used to create endpoints.
+        """
+        return pulumi.get(self, "service_name")
+
+    @service_name.setter
+    def service_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "service_name", value)
+
+
+if not MYPY:
+    class PrivateEndpointServicesServicesMapArgsDict(TypedDict):
+        availability_zone_ids: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        """
+        aws: NotRequired[pulumi.Input['PrivateEndpointServicesServicesMapAwsArgsDict']]
+        cloud_provider: NotRequired[pulumi.Input[str]]
+        """
+        Cloud provider associated with this service.
+        """
+        endpoint_service_id: NotRequired[pulumi.Input[str]]
+        """
+        Server side ID of the private endpoint connection.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        """
+        Name of the endpoint service.
+        """
+        region_name: NotRequired[pulumi.Input[str]]
+        """
+        Cloud provider region code associated with this service.
+        """
+        status: NotRequired[pulumi.Input[str]]
+        """
+        Operation status of the service.
+        """
+elif False:
+    PrivateEndpointServicesServicesMapArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class PrivateEndpointServicesServicesMapArgs:
+    def __init__(__self__, *,
+                 availability_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 aws: Optional[pulumi.Input['PrivateEndpointServicesServicesMapAwsArgs']] = None,
+                 cloud_provider: Optional[pulumi.Input[str]] = None,
+                 endpoint_service_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 region_name: Optional[pulumi.Input[str]] = None,
+                 status: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] availability_zone_ids: Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        :param pulumi.Input[str] cloud_provider: Cloud provider associated with this service.
+        :param pulumi.Input[str] endpoint_service_id: Server side ID of the private endpoint connection.
+        :param pulumi.Input[str] name: Name of the endpoint service.
+        :param pulumi.Input[str] region_name: Cloud provider region code associated with this service.
+        :param pulumi.Input[str] status: Operation status of the service.
+        """
+        if availability_zone_ids is not None:
+            pulumi.set(__self__, "availability_zone_ids", availability_zone_ids)
+        if aws is not None:
+            warnings.warn("""nested aws fields have been moved one level up. These fields will be removed in a future version""", DeprecationWarning)
+            pulumi.log.warn("""aws is deprecated: nested aws fields have been moved one level up. These fields will be removed in a future version""")
+        if aws is not None:
+            pulumi.set(__self__, "aws", aws)
+        if cloud_provider is not None:
+            pulumi.set(__self__, "cloud_provider", cloud_provider)
+        if endpoint_service_id is not None:
+            pulumi.set(__self__, "endpoint_service_id", endpoint_service_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if region_name is not None:
+            pulumi.set(__self__, "region_name", region_name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="availabilityZoneIds")
+    def availability_zone_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.
+        """
+        return pulumi.get(self, "availability_zone_ids")
+
+    @availability_zone_ids.setter
+    def availability_zone_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "availability_zone_ids", value)
+
+    @property
+    @pulumi.getter
+    @_utilities.deprecated("""nested aws fields have been moved one level up. These fields will be removed in a future version""")
+    def aws(self) -> Optional[pulumi.Input['PrivateEndpointServicesServicesMapAwsArgs']]:
+        return pulumi.get(self, "aws")
+
+    @aws.setter
+    def aws(self, value: Optional[pulumi.Input['PrivateEndpointServicesServicesMapAwsArgs']]):
+        pulumi.set(self, "aws", value)
+
+    @property
+    @pulumi.getter(name="cloudProvider")
+    def cloud_provider(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud provider associated with this service.
+        """
+        return pulumi.get(self, "cloud_provider")
+
+    @cloud_provider.setter
+    def cloud_provider(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cloud_provider", value)
+
+    @property
+    @pulumi.getter(name="endpointServiceId")
+    def endpoint_service_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Server side ID of the private endpoint connection.
+        """
+        return pulumi.get(self, "endpoint_service_id")
+
+    @endpoint_service_id.setter
+    def endpoint_service_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "endpoint_service_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the endpoint service.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Cloud provider region code associated with this service.
+        """
+        return pulumi.get(self, "region_name")
+
+    @region_name.setter
+    def region_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "region_name", value)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Operation status of the service.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "status", value)
+
+
+if not MYPY:
+    class PrivateEndpointServicesServicesMapAwsArgsDict(TypedDict):
+        availability_zone_ids: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        AZ IDs users should create their VPCs in to minimize their cost.
+        """
+        service_id: NotRequired[pulumi.Input[str]]
+        """
+        Server side ID of the PrivateLink connection.
+        """
+        service_name: NotRequired[pulumi.Input[str]]
+        """
+        AWS service name used to create endpoints.
+        """
+elif False:
+    PrivateEndpointServicesServicesMapAwsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class PrivateEndpointServicesServicesMapAwsArgs:
     def __init__(__self__, *,
                  availability_zone_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  service_id: Optional[pulumi.Input[str]] = None,

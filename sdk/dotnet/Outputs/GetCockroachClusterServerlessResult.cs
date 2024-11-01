@@ -22,6 +22,10 @@ namespace Pulumiverse.Cockroach.Outputs
         /// Spend limit in US cents.
         /// </summary>
         public readonly int SpendLimit;
+        /// <summary>
+        /// Dictates the behavior of cockroach major version upgrades.
+        /// </summary>
+        public readonly string UpgradeType;
         public readonly Outputs.GetCockroachClusterServerlessUsageLimitsResult UsageLimits;
 
         [OutputConstructor]
@@ -30,10 +34,13 @@ namespace Pulumiverse.Cockroach.Outputs
 
             int spendLimit,
 
+            string upgradeType,
+
             Outputs.GetCockroachClusterServerlessUsageLimitsResult usageLimits)
         {
             RoutingId = routingId;
             SpendLimit = spendLimit;
+            UpgradeType = upgradeType;
             UsageLimits = usageLimits;
         }
     }

@@ -159,7 +159,7 @@
                 },
                 "primary": {
                     "type": "boolean",
-                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
+                    "description": "Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
                 },
                 "sqlDns": {
                     "type": "string",
@@ -195,7 +195,12 @@
                 },
                 "spendLimit": {
                     "type": "integer",
-                    "description": "Spend limit in US cents.\n"
+                    "description": "Spend limit in US cents.\n",
+                    "deprecationMessage": "The `spend_limit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead."
+                },
+                "upgradeType": {
+                    "type": "string",
+                    "description": "Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: \n  * MANUAL\n  * AUTOMATIC\n"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits"
@@ -205,13 +210,18 @@
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "routingId"
+                        "routingId",
+                        "upgradeType"
                     ]
                 }
             }
         },
         "cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits": {
             "properties": {
+                "provisionedVirtualCpus": {
+                    "type": "integer",
+                    "description": "Maximum number of vCPUs that the cluster can use.\n"
+                },
                 "requestUnitLimit": {
                     "type": "integer",
                     "description": "Maximum number of Request Units that the cluster can consume during the month.\n"
@@ -221,11 +231,7 @@
                     "description": "Maximum amount of storage (in MiB) that the cluster can have at any time during the month.\n"
                 }
             },
-            "type": "object",
-            "required": [
-                "requestUnitLimit",
-                "storageMibLimit"
-            ]
+            "type": "object"
         },
         "cockroach:index/CmekAdditionalRegion:CmekAdditionalRegion": {
             "properties": {
@@ -243,7 +249,7 @@
                 },
                 "primary": {
                     "type": "boolean",
-                    "description": "Set to true to mark this region as the primary for a Serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
+                    "description": "Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.\n"
                 },
                 "sqlDns": {
                     "type": "string",
@@ -457,6 +463,84 @@
                 }
             }
         },
+        "cockroach:index/PrivateEndpointServicesServicesMap:PrivateEndpointServicesServicesMap": {
+            "properties": {
+                "availabilityZoneIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Availability Zone IDs of the private endpoint service. It is recommended, for cost optimization purposes, to create the private endpoint spanning these same availability zones. For more information, see data transfer cost information for your cloud provider.\n"
+                },
+                "aws": {
+                    "$ref": "#/types/cockroach:index/PrivateEndpointServicesServicesMapAws:PrivateEndpointServicesServicesMapAws",
+                    "deprecationMessage": "nested aws fields have been moved one level up. These fields will be removed in a future version"
+                },
+                "cloudProvider": {
+                    "type": "string",
+                    "description": "Cloud provider associated with this service.\n"
+                },
+                "endpointServiceId": {
+                    "type": "string",
+                    "description": "Server side ID of the private endpoint connection.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the endpoint service.\n"
+                },
+                "regionName": {
+                    "type": "string",
+                    "description": "Cloud provider region code associated with this service.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Operation status of the service.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "availabilityZoneIds",
+                        "aws",
+                        "cloudProvider",
+                        "endpointServiceId",
+                        "name",
+                        "regionName",
+                        "status"
+                    ]
+                }
+            }
+        },
+        "cockroach:index/PrivateEndpointServicesServicesMapAws:PrivateEndpointServicesServicesMapAws": {
+            "properties": {
+                "availabilityZoneIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "AZ IDs users should create their VPCs in to minimize their cost.\n"
+                },
+                "serviceId": {
+                    "type": "string",
+                    "description": "Server side ID of the PrivateLink connection.\n"
+                },
+                "serviceName": {
+                    "type": "string",
+                    "description": "AWS service name used to create endpoints.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "availabilityZoneIds",
+                        "serviceId",
+                        "serviceName"
+                    ]
+                }
+            }
+        },
         "cockroach:index/UserRoleGrantRole:UserRoleGrantRole": {
             "properties": {
                 "resourceId": {
@@ -591,7 +675,12 @@
                 },
                 "spendLimit": {
                     "type": "integer",
-                    "description": "Spend limit in US cents.\n"
+                    "description": "Spend limit in US cents.\n",
+                    "deprecationMessage": "The `spend_limit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead."
+                },
+                "upgradeType": {
+                    "type": "string",
+                    "description": "Dictates the behavior of cockroach major version upgrades.\n"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits"
@@ -601,6 +690,7 @@
             "required": [
                 "routingId",
                 "spendLimit",
+                "upgradeType",
                 "usageLimits"
             ],
             "language": {
@@ -611,6 +701,10 @@
         },
         "cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits": {
             "properties": {
+                "provisionedVirtualCpus": {
+                    "type": "integer",
+                    "description": "Maximum number of vCPUs that the cluster can use.\n"
+                },
                 "requestUnitLimit": {
                     "type": "integer",
                     "description": "Maximum number of Request Units that the cluster can consume during the month.\n"
@@ -622,6 +716,7 @@
             },
             "type": "object",
             "required": [
+                "provisionedVirtualCpus",
                 "requestUnitLimit",
                 "storageMibLimit"
             ],
@@ -697,14 +792,14 @@
                 },
                 "cidrMask": {
                     "type": "integer",
-                    "description": "Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
+                    "description": "The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.\n"
                 },
                 "clusterId": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Name of this allowlist entry.\n"
+                    "description": "Name of this allowlist entry. If not set explicitly, this value does not sync with the server.\n"
                 },
                 "sql": {
                     "type": "boolean",
@@ -719,6 +814,7 @@
                 "cidrIp",
                 "cidrMask",
                 "clusterId",
+                "name",
                 "sql",
                 "ui"
             ],
@@ -729,14 +825,14 @@
                 },
                 "cidrMask": {
                     "type": "integer",
-                    "description": "Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
+                    "description": "The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.\n"
                 },
                 "clusterId": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string",
-                    "description": "Name of this allowlist entry.\n"
+                    "description": "Name of this allowlist entry. If not set explicitly, this value does not sync with the server.\n"
                 },
                 "sql": {
                     "type": "boolean",
@@ -763,14 +859,14 @@
                     },
                     "cidrMask": {
                         "type": "integer",
-                        "description": "Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.\n"
+                        "description": "The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.\n"
                     },
                     "clusterId": {
                         "type": "string"
                     },
                     "name": {
                         "type": "string",
-                        "description": "Name of this allowlist entry.\n"
+                        "description": "Name of this allowlist entry. If not set explicitly, this value does not sync with the server.\n"
                     },
                     "sql": {
                         "type": "boolean",
@@ -993,7 +1089,7 @@
             }
         },
         "cockroach:index/cluster:Cluster": {
-            "description": "CockroachDB Cloud cluster. Can be Dedicated or Serverless.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.Cluster;\nimport com.pulumi.cockroach.ClusterArgs;\nimport com.pulumi.cockroach.inputs.ClusterDedicatedArgs;\nimport com.pulumi.cockroach.inputs.ClusterRegionArgs;\nimport com.pulumi.cockroach.inputs.ClusterServerlessArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var dedicated = new Cluster(\"dedicated\", ClusterArgs.builder()\n            .name(\"cockroach-dedicated\")\n            .cloudProvider(\"GCP\")\n            .dedicated(ClusterDedicatedArgs.builder()\n                .storage_gib(15)\n                .machine_type(\"n1-standard-4\")\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-central1\")\n                .node_count(1)\n                .build())\n            .deleteProtection(true)\n            .build());\n\n        var serverless = new Cluster(\"serverless\", ClusterArgs.builder()\n            .name(\"cockroach-serverless\")\n            .cloudProvider(\"GCP\")\n            .serverless(ClusterServerlessArgs.builder()\n                .spend_limit(1)\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-east1\")\n                .build())\n            .deleteProtection(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  dedicated:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-dedicated\n      cloudProvider: GCP\n      dedicated:\n        storage_gib: 15\n        machine_type: n1-standard-4\n      regions:\n        - name: us-central1\n          node_count: 1\n      deleteProtection: true\n  serverless:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-serverless\n      cloudProvider: GCP\n      serverless:\n        spend_limit: 1\n      regions:\n        - name: us-east1\n      deleteProtection: false\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "CockroachDB Cloud cluster.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.Cluster;\nimport com.pulumi.cockroach.ClusterArgs;\nimport com.pulumi.cockroach.inputs.ClusterDedicatedArgs;\nimport com.pulumi.cockroach.inputs.ClusterRegionArgs;\nimport com.pulumi.cockroach.inputs.ClusterServerlessArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var advanced = new Cluster(\"advanced\", ClusterArgs.builder()\n            .name(\"cockroach-advanced\")\n            .cloudProvider(\"GCP\")\n            .plan(\"ADVANCED\")\n            .dedicated(ClusterDedicatedArgs.builder()\n                .storage_gib(15)\n                .machine_type(\"n2-standard-4\")\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-central1\")\n                .node_count(1)\n                .build())\n            .deleteProtection(true)\n            .build());\n\n        var standard = new Cluster(\"standard\", ClusterArgs.builder()\n            .name(\"cockroach-standard\")\n            .cloudProvider(\"GCP\")\n            .plan(\"STANDARD\")\n            .serverless(ClusterServerlessArgs.builder()\n                .usage_limits(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))\n                .upgrade_type(\"AUTOMATIC\")\n                .build())\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-east1\")\n                .build())\n            .deleteProtection(false)\n            .build());\n\n        var basic = new Cluster(\"basic\", ClusterArgs.builder()\n            .name(\"cockroach-basic\")\n            .cloudProvider(\"GCP\")\n            .plan(\"BASIC\")\n            .serverless()\n            .regions(ClusterRegionArgs.builder()\n                .name(\"us-east1\")\n                .build())\n            .deleteProtection(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  advanced:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-advanced\n      cloudProvider: GCP\n      plan: ADVANCED\n      dedicated:\n        storage_gib: 15\n        machine_type: n2-standard-4\n      regions:\n        - name: us-central1\n          node_count: 1\n      deleteProtection: true\n  standard:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-standard\n      cloudProvider: GCP\n      plan: STANDARD\n      serverless:\n        usage_limits:\n          provisionedVirtualCpus: 2\n        upgrade_type: AUTOMATIC\n      regions:\n        - name: us-east1\n      deleteProtection: false\n  basic:\n    type: cockroach:Cluster\n    properties:\n      name: cockroach-basic\n      cloudProvider: GCP\n      plan: BASIC\n      serverless: {}\n      regions:\n        - name: us-east1\n      deleteProtection: false\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "accountId": {
                     "type": "string",
@@ -1002,9 +1098,6 @@
                 "cloudProvider": {
                     "type": "string",
                     "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
-                },
-                "clusterId": {
-                    "type": "string"
                 },
                 "cockroachVersion": {
                     "type": "string",
@@ -1035,7 +1128,7 @@
                 },
                 "plan": {
                     "type": "string",
-                    "description": "Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.\n"
+                    "description": "Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.\n"
                 },
                 "regions": {
                     "type": "array",
@@ -1061,7 +1154,6 @@
                 "cockroachVersion",
                 "creatorId",
                 "deleteProtection",
-                "clusterId",
                 "name",
                 "operationStatus",
                 "parentId",
@@ -1094,6 +1186,10 @@
                     "type": "string",
                     "description": "The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.\n"
                 },
+                "plan": {
+                    "type": "string",
+                    "description": "Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.\n"
+                },
                 "regions": {
                     "type": "array",
                     "items": {
@@ -1119,9 +1215,6 @@
                     "cloudProvider": {
                         "type": "string",
                         "description": "Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE\n"
-                    },
-                    "clusterId": {
-                        "type": "string"
                     },
                     "cockroachVersion": {
                         "type": "string",
@@ -1152,7 +1245,7 @@
                     },
                     "plan": {
                         "type": "string",
-                        "description": "Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.\n"
+                        "description": "Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.\n"
                     },
                     "regions": {
                         "type": "array",
@@ -1450,7 +1543,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING\n"
+                    "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS\n"
                 },
                 "updatedAt": {
                     "type": "string",
@@ -1508,7 +1601,7 @@
                 },
                 "type": {
                     "type": "string",
-                    "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING\n"
+                    "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS\n"
                 }
             },
             "requiredInputs": [
@@ -1563,7 +1656,7 @@
                     },
                     "type": {
                         "type": "string",
-                        "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING\n"
+                        "description": "The cloud selection being exported to along with the cloud logging platform. Possible values are: * AWS_CLOUDWATCH *\nGCP_CLOUD_LOGGING * AZURE_LOG_ANALYTICS\n"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -1928,7 +2021,7 @@
             }
         },
         "cockroach:index/privateEndpointServices:PrivateEndpointServices": {
-            "description": "PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cockroach from \"@pulumiverse/cockroach\";\n\nconst config = new pulumi.Config();\nconst clusterId = config.require(\"clusterId\");\nconst cockroach = new cockroach.PrivateEndpointServices(\"cockroach\", {clusterId: clusterId});\n```\n```python\nimport pulumi\nimport pulumiverse_cockroach as cockroach\n\nconfig = pulumi.Config()\ncluster_id = config.require(\"clusterId\")\ncockroach = cockroach.PrivateEndpointServices(\"cockroach\", cluster_id=cluster_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cockroach = Pulumiverse.Cockroach;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var config = new Config();\n    var clusterId = config.Require(\"clusterId\");\n    var cockroach = new Cockroach.PrivateEndpointServices(\"cockroach\", new()\n    {\n        ClusterId = clusterId,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config\"\n\t\"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcfg := config.New(ctx, \"\")\n\t\tclusterId := cfg.Require(\"clusterId\")\n\t\t_, err := cockroach.NewPrivateEndpointServices(ctx, \"cockroach\", \u0026cockroach.PrivateEndpointServicesArgs{\n\t\t\tClusterId: pulumi.String(clusterId),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.PrivateEndpointServices;\nimport com.pulumi.cockroach.PrivateEndpointServicesArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var clusterId = config.get(\"clusterId\");\n        var cockroach = new PrivateEndpointServices(\"cockroach\", PrivateEndpointServicesArgs.builder()\n            .clusterId(clusterId)\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  clusterId:\n    type: string\nresources:\n  cockroach:\n    type: cockroach:PrivateEndpointServices\n    properties:\n      clusterId: ${clusterId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nformat: \u003ccluster id\u003e\n\n```sh\n$ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d\n```\n\n",
+            "description": "PrivateEndpointServices contains services that allow for private connectivity to the CockroachDB Cloud cluster.\n\t\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cockroach from \"@pulumiverse/cockroach\";\n\nconst config = new pulumi.Config();\nconst clusterId = config.require(\"clusterId\");\nconst cockroach = new cockroach.PrivateEndpointServices(\"cockroach\", {clusterId: clusterId});\n```\n```python\nimport pulumi\nimport pulumiverse_cockroach as cockroach\n\nconfig = pulumi.Config()\ncluster_id = config.require(\"clusterId\")\ncockroach = cockroach.PrivateEndpointServices(\"cockroach\", cluster_id=cluster_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cockroach = Pulumiverse.Cockroach;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var config = new Config();\n    var clusterId = config.Require(\"clusterId\");\n    var cockroach = new Cockroach.PrivateEndpointServices(\"cockroach\", new()\n    {\n        ClusterId = clusterId,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config\"\n\t\"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcfg := config.New(ctx, \"\")\n\t\tclusterId := cfg.Require(\"clusterId\")\n\t\t_, err := cockroach.NewPrivateEndpointServices(ctx, \"cockroach\", \u0026cockroach.PrivateEndpointServicesArgs{\n\t\t\tClusterId: pulumi.String(clusterId),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.PrivateEndpointServices;\nimport com.pulumi.cockroach.PrivateEndpointServicesArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var clusterId = config.get(\"clusterId\");\n        var cockroach = new PrivateEndpointServices(\"cockroach\", PrivateEndpointServicesArgs.builder()\n            .clusterId(clusterId)\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  clusterId:\n    type: string\nresources:\n  cockroach:\n    type: cockroach:PrivateEndpointServices\n    properties:\n      clusterId: ${clusterId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nformat: \u003ccluster id\u003e\n\n```sh\n$ pulumi import cockroach:index/privateEndpointServices:PrivateEndpointServices resource_name 1f69fdd2-600a-4cfc-a9ba-16995df0d77d\n```\n\n",
             "properties": {
                 "clusterId": {
                     "type": "string"
@@ -1938,11 +2031,19 @@
                     "items": {
                         "$ref": "#/types/cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService"
                     }
+                },
+                "servicesMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/types/cockroach:index/PrivateEndpointServicesServicesMap:PrivateEndpointServicesServicesMap"
+                    },
+                    "description": "a map of services keyed by the region name\n"
                 }
             },
             "required": [
                 "clusterId",
-                "services"
+                "services",
+                "servicesMap"
             ],
             "inputProperties": {
                 "clusterId": {
@@ -1963,6 +2064,13 @@
                         "items": {
                             "$ref": "#/types/cockroach:index/PrivateEndpointServicesService:PrivateEndpointServicesService"
                         }
+                    },
+                    "servicesMap": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/types/cockroach:index/PrivateEndpointServicesServicesMap:PrivateEndpointServicesServicesMap"
+                        },
+                        "description": "a map of services keyed by the region name\n"
                     }
                 },
                 "type": "object"
@@ -2195,13 +2303,14 @@
             }
         },
         "cockroach:index/userRoleGrants:UserRoleGrants": {
-            "description": "## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.UserRoleGrants;\nimport com.pulumi.cockroach.UserRoleGrantsArgs;\nimport com.pulumi.cockroach.inputs.UserRoleGrantsRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var userId = config.get(\"userId\");\n        var cockroach = new UserRoleGrants(\"cockroach\", UserRoleGrantsArgs.builder()\n            .userId(userId)\n            .roles(            \n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"ORG_ADMIN\")\n                    .resource_type(\"ORGANIZATION\")\n                    .resource_id(\"\")\n                    .build(),\n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"CLUSTER_ADMIN\")\n                    .resource_type(\"CLUSTER\")\n                    .resource_id(prod.id())\n                    .build(),\n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"FOLDER_ADMIN\")\n                    .resource_type(\"FOLDER\")\n                    .resource_id(dev.id())\n                    .build())\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  userId:\n    type: string\nresources:\n  cockroach:\n    type: cockroach:UserRoleGrants\n    properties:\n      userId: ${userId}\n      roles:\n        - role_name: ORG_ADMIN\n          resource_type: ORGANIZATION\n          resource_id:\n        - role_name: CLUSTER_ADMIN\n          resource_type: CLUSTER\n          resource_id: ${prod.id}\n        - role_name: FOLDER_ADMIN\n          resource_type: FOLDER\n          resource_id: ${dev.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nformat: \u003cuser id\u003e\n\n```sh\n$ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d\n```\n\n",
+            "description": "## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.UserRoleGrants;\nimport com.pulumi.cockroach.UserRoleGrantsArgs;\nimport com.pulumi.cockroach.inputs.UserRoleGrantsRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var config = ctx.config();\n        final var userId = config.get(\"userId\");\n        var cockroach = new UserRoleGrants(\"cockroach\", UserRoleGrantsArgs.builder()\n            .userId(userId)\n            .roles(            \n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"ORG_MEMBER\")\n                    .resource_type(\"ORGANIZATION\")\n                    .resource_id(\"\")\n                    .build(),\n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"ORG_ADMIN\")\n                    .resource_type(\"ORGANIZATION\")\n                    .resource_id(\"\")\n                    .build(),\n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"CLUSTER_ADMIN\")\n                    .resource_type(\"CLUSTER\")\n                    .resource_id(prod.id())\n                    .build(),\n                UserRoleGrantsRoleArgs.builder()\n                    .role_name(\"FOLDER_ADMIN\")\n                    .resource_type(\"FOLDER\")\n                    .resource_id(dev.id())\n                    .build())\n            .build());\n\n    }\n}\n```\n```yaml\nconfiguration:\n  userId:\n    type: string\nresources:\n  cockroach:\n    type: cockroach:UserRoleGrants\n    properties:\n      userId: ${userId}\n      roles:\n        - role_name: ORG_MEMBER\n          resource_type: ORGANIZATION\n          resource_id:\n        - role_name: ORG_ADMIN\n          resource_type: ORGANIZATION\n          resource_id:\n        - role_name: CLUSTER_ADMIN\n          resource_type: CLUSTER\n          resource_id: ${prod.id}\n        - role_name: FOLDER_ADMIN\n          resource_type: FOLDER\n          resource_id: ${dev.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\nformat: \u003cuser id\u003e\n\n```sh\n$ pulumi import cockroach:index/userRoleGrants:UserRoleGrants service_account 1f69fdd2-600a-4cfc-a9ba-16995df0d77d\n```\n\n",
             "properties": {
                 "roles": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole"
-                    }
+                    },
+                    "description": "The list of roles to include. ORG_MEMBER must be included.\n"
                 },
                 "userId": {
                     "type": "string",
@@ -2217,7 +2326,8 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/types/cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole"
-                    }
+                    },
+                    "description": "The list of roles to include. ORG_MEMBER must be included.\n"
                 },
                 "userId": {
                     "type": "string",
@@ -2235,7 +2345,8 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/types/cockroach:index/UserRoleGrantsRole:UserRoleGrantsRole"
-                        }
+                        },
+                        "description": "The list of roles to include. ORG_MEMBER must be included.\n"
                     },
                     "userId": {
                         "type": "string",

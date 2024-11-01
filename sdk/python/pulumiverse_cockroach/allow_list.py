@@ -28,10 +28,10 @@ class AllowListArgs:
         """
         The set of arguments for constructing a AllowList resource.
         :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        :param pulumi.Input[int] cidr_mask: The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
         :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
-        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[str] name: Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         """
         pulumi.set(__self__, "cidr_ip", cidr_ip)
         pulumi.set(__self__, "cidr_mask", cidr_mask)
@@ -57,7 +57,7 @@ class AllowListArgs:
     @pulumi.getter(name="cidrMask")
     def cidr_mask(self) -> pulumi.Input[int]:
         """
-        Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         """
         return pulumi.get(self, "cidr_mask")
 
@@ -102,7 +102,7 @@ class AllowListArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of this allowlist entry.
+        Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         """
         return pulumi.get(self, "name")
 
@@ -123,8 +123,8 @@ class _AllowListState:
         """
         Input properties used for looking up and filtering AllowList resources.
         :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[int] cidr_mask: The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
+        :param pulumi.Input[str] name: Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
         :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
         """
@@ -157,7 +157,7 @@ class _AllowListState:
     @pulumi.getter(name="cidrMask")
     def cidr_mask(self) -> Optional[pulumi.Input[int]]:
         """
-        Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         """
         return pulumi.get(self, "cidr_mask")
 
@@ -178,7 +178,7 @@ class _AllowListState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        Name of this allowlist entry.
+        Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         """
         return pulumi.get(self, "name")
 
@@ -252,8 +252,8 @@ class AllowList(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[int] cidr_mask: The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
+        :param pulumi.Input[str] name: Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
         :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
         """
@@ -359,8 +359,8 @@ class AllowList(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cidr_ip: IP address component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[int] cidr_mask: Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
-        :param pulumi.Input[str] name: Name of this allowlist entry.
+        :param pulumi.Input[int] cidr_mask: The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
+        :param pulumi.Input[str] name: Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         :param pulumi.Input[bool] sql: Set to 'true' to allow SQL connections from this CIDR range.
         :param pulumi.Input[bool] ui: Set to 'true' to allow access to the management console from this CIDR range.
         """
@@ -388,7 +388,7 @@ class AllowList(pulumi.CustomResource):
     @pulumi.getter(name="cidrMask")
     def cidr_mask(self) -> pulumi.Output[int]:
         """
-        Map component of the [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) range for this entry.
+        The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
         """
         return pulumi.get(self, "cidr_mask")
 
@@ -399,9 +399,9 @@ class AllowList(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def name(self) -> pulumi.Output[Optional[str]]:
+    def name(self) -> pulumi.Output[str]:
         """
-        Name of this allowlist entry.
+        Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
         """
         return pulumi.get(self, "name")
 

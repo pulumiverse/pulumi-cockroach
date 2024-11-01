@@ -88,16 +88,7 @@ func Provider() tfbridge.ProviderInfo {
 				},
 				ComputeID: computeIDField("id"),
 			},
-			"cockroach_cluster": {
-				Tok: cockroachResource(cockroachMod, "Cluster"),
-				Fields: map[string]*tfbridge.SchemaInfo{
-					"id": {
-						Name: "clusterId",
-						Type: "string",
-					},
-				},
-				ComputeID: computeIDField("id"),
-			},
+			"cockroach_cluster": {Tok: cockroachResource(cockroachMod, "Cluster")},
 			"cockroach_cmek": {
 				Tok: cockroachResource(cockroachMod, "Cmek"),
 				Fields: map[string]*tfbridge.SchemaInfo{

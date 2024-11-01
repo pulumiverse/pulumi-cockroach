@@ -25,6 +25,14 @@ namespace Pulumiverse.Cockroach.Inputs
         [Input("spendLimit")]
         public Input<int>? SpendLimit { get; set; }
 
+        /// <summary>
+        /// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+        ///   * MANUAL
+        ///   * AUTOMATIC
+        /// </summary>
+        [Input("upgradeType")]
+        public Input<string>? UpgradeType { get; set; }
+
         [Input("usageLimits")]
         public Input<Inputs.ClusterServerlessUsageLimitsArgs>? UsageLimits { get; set; }
 

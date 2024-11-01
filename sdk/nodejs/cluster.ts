@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+ * CockroachDB Cloud cluster.
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -45,7 +45,6 @@ export class Cluster extends pulumi.CustomResource {
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */
     public readonly cloudProvider!: pulumi.Output<string>;
-    public /*out*/ readonly clusterId!: pulumi.Output<string>;
     /**
      * Major version of CockroachDB running on the cluster.
      */
@@ -73,9 +72,9 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly parentId!: pulumi.Output<string>;
     /**
-     * Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+     * Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
      */
-    public /*out*/ readonly plan!: pulumi.Output<string>;
+    public readonly plan!: pulumi.Output<string>;
     public readonly regions!: pulumi.Output<outputs.ClusterRegion[]>;
     public readonly serverless!: pulumi.Output<outputs.ClusterServerless | undefined>;
     /**
@@ -102,7 +101,6 @@ export class Cluster extends pulumi.CustomResource {
             const state = argsOrState as ClusterState | undefined;
             resourceInputs["accountId"] = state ? state.accountId : undefined;
             resourceInputs["cloudProvider"] = state ? state.cloudProvider : undefined;
-            resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["cockroachVersion"] = state ? state.cockroachVersion : undefined;
             resourceInputs["creatorId"] = state ? state.creatorId : undefined;
             resourceInputs["dedicated"] = state ? state.dedicated : undefined;
@@ -132,13 +130,12 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["deleteProtection"] = args ? args.deleteProtection : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["parentId"] = args ? args.parentId : undefined;
+            resourceInputs["plan"] = args ? args.plan : undefined;
             resourceInputs["regions"] = args ? args.regions : undefined;
             resourceInputs["serverless"] = args ? args.serverless : undefined;
             resourceInputs["accountId"] = undefined /*out*/;
-            resourceInputs["clusterId"] = undefined /*out*/;
             resourceInputs["creatorId"] = undefined /*out*/;
             resourceInputs["operationStatus"] = undefined /*out*/;
-            resourceInputs["plan"] = undefined /*out*/;
             resourceInputs["state"] = undefined /*out*/;
             resourceInputs["upgradeStatus"] = undefined /*out*/;
         }
@@ -159,7 +156,6 @@ export interface ClusterState {
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */
     cloudProvider?: pulumi.Input<string>;
-    clusterId?: pulumi.Input<string>;
     /**
      * Major version of CockroachDB running on the cluster.
      */
@@ -187,7 +183,7 @@ export interface ClusterState {
      */
     parentId?: pulumi.Input<string>;
     /**
-     * Denotes cluster deployment type: 'DEDICATED' or 'SERVERLESS'.
+     * Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
      */
     plan?: pulumi.Input<string>;
     regions?: pulumi.Input<pulumi.Input<inputs.ClusterRegion>[]>;
@@ -228,6 +224,10 @@ export interface ClusterArgs {
      * The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
      */
     parentId?: pulumi.Input<string>;
+    /**
+     * Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
+     */
+    plan?: pulumi.Input<string>;
     regions: pulumi.Input<pulumi.Input<inputs.ClusterRegion>[]>;
     serverless?: pulumi.Input<inputs.ClusterServerless>;
 }

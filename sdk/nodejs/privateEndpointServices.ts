@@ -58,6 +58,10 @@ export class PrivateEndpointServices extends pulumi.CustomResource {
 
     public readonly clusterId!: pulumi.Output<string>;
     public /*out*/ readonly services!: pulumi.Output<outputs.PrivateEndpointServicesService[]>;
+    /**
+     * a map of services keyed by the region name
+     */
+    public /*out*/ readonly servicesMap!: pulumi.Output<{[key: string]: outputs.PrivateEndpointServicesServicesMap}>;
 
     /**
      * Create a PrivateEndpointServices resource with the given unique name, arguments, and options.
@@ -74,6 +78,7 @@ export class PrivateEndpointServices extends pulumi.CustomResource {
             const state = argsOrState as PrivateEndpointServicesState | undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["services"] = state ? state.services : undefined;
+            resourceInputs["servicesMap"] = state ? state.servicesMap : undefined;
         } else {
             const args = argsOrState as PrivateEndpointServicesArgs | undefined;
             if ((!args || args.clusterId === undefined) && !opts.urn) {
@@ -81,6 +86,7 @@ export class PrivateEndpointServices extends pulumi.CustomResource {
             }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["services"] = undefined /*out*/;
+            resourceInputs["servicesMap"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(PrivateEndpointServices.__pulumiType, name, resourceInputs, opts);
@@ -93,6 +99,10 @@ export class PrivateEndpointServices extends pulumi.CustomResource {
 export interface PrivateEndpointServicesState {
     clusterId?: pulumi.Input<string>;
     services?: pulumi.Input<pulumi.Input<inputs.PrivateEndpointServicesService>[]>;
+    /**
+     * a map of services keyed by the region name
+     */
+    servicesMap?: pulumi.Input<{[key: string]: pulumi.Input<inputs.PrivateEndpointServicesServicesMap>}>;
 }
 
 /**

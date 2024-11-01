@@ -14,16 +14,22 @@ namespace Pulumiverse.Cockroach.Inputs
     public sealed class ClusterServerlessUsageLimitsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Maximum number of vCPUs that the cluster can use.
+        /// </summary>
+        [Input("provisionedVirtualCpus")]
+        public Input<int>? ProvisionedVirtualCpus { get; set; }
+
+        /// <summary>
         /// Maximum number of Request Units that the cluster can consume during the month.
         /// </summary>
-        [Input("requestUnitLimit", required: true)]
-        public Input<int> RequestUnitLimit { get; set; } = null!;
+        [Input("requestUnitLimit")]
+        public Input<int>? RequestUnitLimit { get; set; }
 
         /// <summary>
         /// Maximum amount of storage (in MiB) that the cluster can have at any time during the month.
         /// </summary>
-        [Input("storageMibLimit", required: true)]
-        public Input<int> StorageMibLimit { get; set; } = null!;
+        [Input("storageMibLimit")]
+        public Input<int>? StorageMibLimit { get; set; }
 
         public ClusterServerlessUsageLimitsGetArgs()
         {
