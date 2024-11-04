@@ -77,9 +77,6 @@ export class Folder extends pulumi.CustomResource {
             resourceInputs["parentId"] = state ? state.parentId : undefined;
         } else {
             const args = argsOrState as FolderArgs | undefined;
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             if ((!args || args.parentId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'parentId'");
             }
@@ -112,7 +109,7 @@ export interface FolderArgs {
     /**
      * Name of the folder.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * ID of the parent folder. Use 'root' for the root level (no parent folder).
      */

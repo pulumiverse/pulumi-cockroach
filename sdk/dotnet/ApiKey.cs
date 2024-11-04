@@ -123,8 +123,8 @@ namespace Pulumiverse.Cockroach
         /// <summary>
         /// Name of the api key.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         [Input("serviceAccountId", required: true)]
         public Input<string> ServiceAccountId { get; set; } = null!;

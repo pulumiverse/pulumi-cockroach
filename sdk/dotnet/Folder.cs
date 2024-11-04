@@ -103,8 +103,8 @@ namespace Pulumiverse.Cockroach
         /// <summary>
         /// Name of the folder.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         /// <summary>
         /// ID of the parent folder. Use 'root' for the root level (no parent folder).

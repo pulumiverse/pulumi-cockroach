@@ -116,8 +116,8 @@ namespace Pulumiverse.Cockroach
         /// <summary>
         /// SQL user name.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         [Input("password")]
         private Input<string>? _password;

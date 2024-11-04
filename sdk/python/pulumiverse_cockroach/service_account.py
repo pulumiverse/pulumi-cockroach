@@ -19,28 +19,17 @@ __all__ = ['ServiceAccountArgs', 'ServiceAccount']
 @pulumi.input_type
 class ServiceAccountArgs:
     def __init__(__self__, *,
-                 name: pulumi.Input[str],
-                 description: Optional[pulumi.Input[str]] = None):
+                 description: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ServiceAccount resource.
-        :param pulumi.Input[str] name: Name of the service account.
         :param pulumi.Input[str] description: Description of the service account.
+        :param pulumi.Input[str] name: Name of the service account.
         """
-        pulumi.set(__self__, "name", name)
         if description is not None:
             pulumi.set(__self__, "description", description)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[str]:
-        """
-        Name of the service account.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "name", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter
@@ -53,6 +42,18 @@ class ServiceAccountArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the service account.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
@@ -155,7 +156,7 @@ class ServiceAccount(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ServiceAccountArgs,
+                 args: Optional[ServiceAccountArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         CockroachDB Cloud service account. A service account represents a non-person user. By default a service account has no access but it can be accompanied by either a UserRoleGrants resource or any number of UserRoleGrant resources to grant it roles.
@@ -195,8 +196,6 @@ class ServiceAccount(pulumi.CustomResource):
             __props__ = ServiceAccountArgs.__new__(ServiceAccountArgs)
 
             __props__.__dict__["description"] = description
-            if name is None and not opts.urn:
-                raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             __props__.__dict__["created_at"] = None
             __props__.__dict__["creator_name"] = None

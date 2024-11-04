@@ -91,9 +91,6 @@ export class Database extends pulumi.CustomResource {
             if ((!args || args.clusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clusterId'");
             }
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["tableCount"] = undefined /*out*/;
@@ -132,5 +129,5 @@ export interface DatabaseArgs {
     /**
      * Database name.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
 }

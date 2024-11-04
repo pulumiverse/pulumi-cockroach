@@ -19,26 +19,15 @@ __all__ = ['ApiKeyArgs', 'ApiKey']
 @pulumi.input_type
 class ApiKeyArgs:
     def __init__(__self__, *,
-                 name: pulumi.Input[str],
-                 service_account_id: pulumi.Input[str]):
+                 service_account_id: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ApiKey resource.
         :param pulumi.Input[str] name: Name of the api key.
         """
-        pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "service_account_id", service_account_id)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[str]:
-        """
-        Name of the api key.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "name", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter(name="serviceAccountId")
@@ -48,6 +37,18 @@ class ApiKeyArgs:
     @service_account_id.setter
     def service_account_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "service_account_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the api key.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
@@ -212,8 +213,6 @@ class ApiKey(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ApiKeyArgs.__new__(ApiKeyArgs)
 
-            if name is None and not opts.urn:
-                raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             if service_account_id is None and not opts.urn:
                 raise TypeError("Missing required property 'service_account_id'")

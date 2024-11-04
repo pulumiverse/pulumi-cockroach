@@ -72,9 +72,6 @@ func NewDatabase(ctx *pulumi.Context,
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Database
 	err := ctx.RegisterResource("cockroach:index/database:Database", name, args, &resource, opts...)
@@ -123,7 +120,7 @@ type databaseArgs struct {
 	// ID of the cluster the database belongs to.
 	ClusterId string `pulumi:"clusterId"`
 	// Database name.
-	Name string `pulumi:"name"`
+	Name *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a Database resource.
@@ -131,7 +128,7 @@ type DatabaseArgs struct {
 	// ID of the cluster the database belongs to.
 	ClusterId pulumi.StringInput
 	// Database name.
-	Name pulumi.StringInput
+	Name pulumi.StringPtrInput
 }
 
 func (DatabaseArgs) ElementType() reflect.Type {

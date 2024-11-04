@@ -20,14 +20,15 @@ __all__ = ['SqlUserArgs', 'SqlUser']
 class SqlUserArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[str],
-                 name: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a SqlUser resource.
         :param pulumi.Input[str] name: SQL user name.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
-        pulumi.set(__self__, "name", name)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if password is not None:
             pulumi.set(__self__, "password", password)
 
@@ -42,14 +43,14 @@ class SqlUserArgs:
 
     @property
     @pulumi.getter
-    def name(self) -> pulumi.Input[str]:
+    def name(self) -> Optional[pulumi.Input[str]]:
         """
         SQL user name.
         """
         return pulumi.get(self, "name")
 
     @name.setter
-    def name(self, value: pulumi.Input[str]):
+    def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
     @property
@@ -211,8 +212,6 @@ class SqlUser(pulumi.CustomResource):
             if cluster_id is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
-            if name is None and not opts.urn:
-                raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["password"])

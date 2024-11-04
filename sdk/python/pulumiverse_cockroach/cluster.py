@@ -22,26 +22,25 @@ __all__ = ['ClusterArgs', 'Cluster']
 class ClusterArgs:
     def __init__(__self__, *,
                  cloud_provider: pulumi.Input[str],
-                 name: pulumi.Input[str],
                  regions: pulumi.Input[Sequence[pulumi.Input['ClusterRegionArgs']]],
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input['ClusterDedicatedArgs']] = None,
                  delete_protection: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
                  parent_id: Optional[pulumi.Input[str]] = None,
                  plan: Optional[pulumi.Input[str]] = None,
                  serverless: Optional[pulumi.Input['ClusterServerlessArgs']] = None):
         """
         The set of arguments for constructing a Cluster resource.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
-        :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
+        :param pulumi.Input[str] name: Name of the cluster.
         :param pulumi.Input[str] parent_id: The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
         :param pulumi.Input[str] plan: Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
         """
         pulumi.set(__self__, "cloud_provider", cloud_provider)
-        pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "regions", regions)
         if cockroach_version is not None:
             pulumi.set(__self__, "cockroach_version", cockroach_version)
@@ -49,6 +48,8 @@ class ClusterArgs:
             pulumi.set(__self__, "dedicated", dedicated)
         if delete_protection is not None:
             pulumi.set(__self__, "delete_protection", delete_protection)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if parent_id is not None:
             pulumi.set(__self__, "parent_id", parent_id)
         if plan is not None:
@@ -67,18 +68,6 @@ class ClusterArgs:
     @cloud_provider.setter
     def cloud_provider(self, value: pulumi.Input[str]):
         pulumi.set(self, "cloud_provider", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[str]:
-        """
-        Name of the cluster.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter
@@ -122,6 +111,18 @@ class ClusterArgs:
     @delete_protection.setter
     def delete_protection(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "delete_protection", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the cluster.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="parentId")
@@ -455,8 +456,6 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["cockroach_version"] = cockroach_version
             __props__.__dict__["dedicated"] = dedicated
             __props__.__dict__["delete_protection"] = delete_protection
-            if name is None and not opts.urn:
-                raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             __props__.__dict__["parent_id"] = parent_id
             __props__.__dict__["plan"] = plan

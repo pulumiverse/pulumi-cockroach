@@ -12,6 +12,7 @@ import (
 
 	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
+	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
@@ -231,6 +232,8 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	prov.MustComputeTokens(tks.SingleModule("cockroach_", cockroachMod, tks.MakeStandard(cockroachPkg)))
+	prov.SetAutonaming(255, "-")
 	prov.MustApplyAutoAliases()
 
 	return prov

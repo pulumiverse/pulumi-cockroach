@@ -87,9 +87,6 @@ export class SqlUser extends pulumi.CustomResource {
             if ((!args || args.clusterId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clusterId'");
             }
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
@@ -121,6 +118,6 @@ export interface SqlUserArgs {
     /**
      * SQL user name.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     password?: pulumi.Input<string>;
 }

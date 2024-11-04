@@ -19,27 +19,16 @@ __all__ = ['FolderArgs', 'Folder']
 @pulumi.input_type
 class FolderArgs:
     def __init__(__self__, *,
-                 name: pulumi.Input[str],
-                 parent_id: pulumi.Input[str]):
+                 parent_id: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Folder resource.
-        :param pulumi.Input[str] name: Name of the folder.
         :param pulumi.Input[str] parent_id: ID of the parent folder. Use 'root' for the root level (no parent folder).
+        :param pulumi.Input[str] name: Name of the folder.
         """
-        pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "parent_id", parent_id)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[str]:
-        """
-        Name of the folder.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "name", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter(name="parentId")
@@ -52,6 +41,18 @@ class FolderArgs:
     @parent_id.setter
     def parent_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "parent_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Name of the folder.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
 
 
 @pulumi.input_type
@@ -173,8 +174,6 @@ class Folder(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = FolderArgs.__new__(FolderArgs)
 
-            if name is None and not opts.urn:
-                raise TypeError("Missing required property 'name'")
             __props__.__dict__["name"] = name
             if parent_id is None and not opts.urn:
                 raise TypeError("Missing required property 'parent_id'")
