@@ -1,4 +1,173 @@
 {
+    "auto-aliasing": {
+        "resources": {
+            "cockroach_allow_list": {
+                "current": "cockroach:index/allowList:AllowList"
+            },
+            "cockroach_api_key": {
+                "current": "cockroach:index/apiKey:ApiKey"
+            },
+            "cockroach_api_oidc_config": {
+                "current": "cockroach:index/apiOidcConfig:ApiOidcConfig",
+                "fields": {
+                    "identity_map": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_client_ca_cert": {
+                "current": "cockroach:index/caCert:CaCert"
+            },
+            "cockroach_cluster": {
+                "current": "cockroach:index/cluster:Cluster",
+                "fields": {
+                    "regions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_cmek": {
+                "current": "cockroach:index/cmek:Cmek",
+                "fields": {
+                    "additional_regions": {
+                        "maxItemsOne": false
+                    },
+                    "regions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_database": {
+                "current": "cockroach:index/database:Database"
+            },
+            "cockroach_finalize_version_upgrade": {
+                "current": "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade"
+            },
+            "cockroach_folder": {
+                "current": "cockroach:index/folder:Folder"
+            },
+            "cockroach_log_export_config": {
+                "current": "cockroach:index/logExportConfig:LogExportConfig",
+                "fields": {
+                    "groups": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "channels": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "omitted_channels": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_maintenance_window": {
+                "current": "cockroach:index/maintenanceWindow:MaintenanceWindow"
+            },
+            "cockroach_metric_export_cloudwatch_config": {
+                "current": "cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig"
+            },
+            "cockroach_metric_export_datadog_config": {
+                "current": "cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig"
+            },
+            "cockroach_metric_export_prometheus_config": {
+                "current": "cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig"
+            },
+            "cockroach_private_endpoint_connection": {
+                "current": "cockroach:index/privateEndpointConnection:PrivateEndpointConnection"
+            },
+            "cockroach_private_endpoint_services": {
+                "current": "cockroach:index/privateEndpointServices:PrivateEndpointServices",
+                "fields": {
+                    "services": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "availability_zone_ids": {
+                                    "maxItemsOne": false
+                                },
+                                "aws": {
+                                    "fields": {
+                                        "availability_zone_ids": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "services_map": {
+                        "elem": {
+                            "fields": {
+                                "availability_zone_ids": {
+                                    "maxItemsOne": false
+                                },
+                                "aws": {
+                                    "fields": {
+                                        "availability_zone_ids": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "cockroach_private_endpoint_trusted_owner": {
+                "current": "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner"
+            },
+            "cockroach_service_account": {
+                "current": "cockroach:index/serviceAccount:ServiceAccount"
+            },
+            "cockroach_sql_user": {
+                "current": "cockroach:index/sqlUser:SqlUser"
+            },
+            "cockroach_user_role_grant": {
+                "current": "cockroach:index/userRoleGrant:UserRoleGrant"
+            },
+            "cockroach_user_role_grants": {
+                "current": "cockroach:index/userRoleGrants:UserRoleGrants",
+                "fields": {
+                    "roles": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_version_deferral": {
+                "current": "cockroach:index/versionDeferral:VersionDeferral"
+            }
+        },
+        "datasources": {
+            "cockroach_cluster": {
+                "current": "cockroach:index/getCockroachCluster:getCockroachCluster",
+                "fields": {
+                    "regions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_cluster_cert": {
+                "current": "cockroach:index/getClusterCert:getClusterCert"
+            },
+            "cockroach_connection_string": {
+                "current": "cockroach:index/getConnectionString:getConnectionString"
+            },
+            "cockroach_folder": {
+                "current": "cockroach:index/getFolder:getFolder"
+            },
+            "cockroach_organization": {
+                "current": "cockroach:index/getOrganization:getOrganization"
+            },
+            "cockroach_person_user": {
+                "current": "cockroach:index/getPersonUser:getPersonUser"
+            }
+        }
+    },
+    "auto-settings": {},
     "renames": {
         "resources": {
             "cockroach:index/allowList:AllowList": "cockroach_allow_list",

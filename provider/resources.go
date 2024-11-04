@@ -59,7 +59,7 @@ func computeIDField(field resource.PropertyKey) tfbridge.ComputeID {
 
 // Provider returns additional overlaid schema and metadata associated with the tls package.
 func Provider() tfbridge.ProviderInfo {
-	info := tfbridge.ProviderInfo{
+	prov := tfbridge.ProviderInfo{
 		P:                 tfpfbridge.ShimProvider(shim.NewProvider(version.Version)),
 		Name:              "cockroach",
 		DisplayName:       "CockroachDB",
@@ -231,5 +231,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
-	return info
+	prov.MustApplyAutoAliases()
+
+	return prov
 }
