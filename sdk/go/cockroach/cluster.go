@@ -54,9 +54,6 @@ func NewCluster(ctx *pulumi.Context,
 	if args.CloudProvider == nil {
 		return nil, errors.New("invalid value for required argument 'CloudProvider'")
 	}
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	if args.Regions == nil {
 		return nil, errors.New("invalid value for required argument 'Regions'")
 	}
@@ -154,7 +151,7 @@ type clusterArgs struct {
 	// preserves the value on cluster update.
 	DeleteProtection *bool `pulumi:"deleteProtection"`
 	// Name of the cluster.
-	Name string `pulumi:"name"`
+	Name *string `pulumi:"name"`
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId *string `pulumi:"parentId"`
 	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.
@@ -174,7 +171,7 @@ type ClusterArgs struct {
 	// preserves the value on cluster update.
 	DeleteProtection pulumi.BoolPtrInput
 	// Name of the cluster.
-	Name pulumi.StringInput
+	Name pulumi.StringPtrInput
 	// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
 	ParentId pulumi.StringPtrInput
 	// Denotes cluster plan type: 'BASIC' or 'STANDARD' or 'ADVANCED'.

@@ -63,9 +63,6 @@ func NewFolder(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	if args.ParentId == nil {
 		return nil, errors.New("invalid value for required argument 'ParentId'")
 	}
@@ -111,7 +108,7 @@ func (FolderState) ElementType() reflect.Type {
 
 type folderArgs struct {
 	// Name of the folder.
-	Name string `pulumi:"name"`
+	Name *string `pulumi:"name"`
 	// ID of the parent folder. Use 'root' for the root level (no parent folder).
 	ParentId string `pulumi:"parentId"`
 }
@@ -119,7 +116,7 @@ type folderArgs struct {
 // The set of arguments for constructing a Folder resource.
 type FolderArgs struct {
 	// Name of the folder.
-	Name pulumi.StringInput
+	Name pulumi.StringPtrInput
 	// ID of the parent folder. Use 'root' for the root level (no parent folder).
 	ParentId pulumi.StringInput
 }

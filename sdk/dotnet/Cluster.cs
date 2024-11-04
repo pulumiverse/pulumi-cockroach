@@ -164,8 +164,8 @@ namespace Pulumiverse.Cockroach
         /// <summary>
         /// Name of the cluster.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         /// <summary>
         /// The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.

@@ -71,9 +71,6 @@ func NewApiKey(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	if args.ServiceAccountId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceAccountId'")
 	}
@@ -127,14 +124,14 @@ func (ApiKeyState) ElementType() reflect.Type {
 
 type apiKeyArgs struct {
 	// Name of the api key.
-	Name             string `pulumi:"name"`
-	ServiceAccountId string `pulumi:"serviceAccountId"`
+	Name             *string `pulumi:"name"`
+	ServiceAccountId string  `pulumi:"serviceAccountId"`
 }
 
 // The set of arguments for constructing a ApiKey resource.
 type ApiKeyArgs struct {
 	// Name of the api key.
-	Name             pulumi.StringInput
+	Name             pulumi.StringPtrInput
 	ServiceAccountId pulumi.StringInput
 }
 

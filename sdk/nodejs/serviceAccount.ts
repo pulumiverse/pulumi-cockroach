@@ -67,7 +67,7 @@ export class ServiceAccount extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ServiceAccountArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: ServiceAccountArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ServiceAccountArgs | ServiceAccountState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -79,9 +79,6 @@ export class ServiceAccount extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
         } else {
             const args = argsOrState as ServiceAccountArgs | undefined;
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["createdAt"] = undefined /*out*/;
@@ -125,5 +122,5 @@ export interface ServiceAccountArgs {
     /**
      * Name of the service account.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
 }

@@ -72,9 +72,6 @@ func NewSqlUser(ctx *pulumi.Context,
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	if args.Password != nil {
 		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
 	}
@@ -125,7 +122,7 @@ func (SqlUserState) ElementType() reflect.Type {
 type sqlUserArgs struct {
 	ClusterId string `pulumi:"clusterId"`
 	// SQL user name.
-	Name     string  `pulumi:"name"`
+	Name     *string `pulumi:"name"`
 	Password *string `pulumi:"password"`
 }
 
@@ -133,7 +130,7 @@ type sqlUserArgs struct {
 type SqlUserArgs struct {
 	ClusterId pulumi.StringInput
 	// SQL user name.
-	Name     pulumi.StringInput
+	Name     pulumi.StringPtrInput
 	Password pulumi.StringPtrInput
 }
 

@@ -118,9 +118,6 @@ export class Cluster extends pulumi.CustomResource {
             if ((!args || args.cloudProvider === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'cloudProvider'");
             }
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             if ((!args || args.regions === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'regions'");
             }
@@ -219,7 +216,7 @@ export interface ClusterArgs {
     /**
      * Name of the cluster.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * The ID of the cluster's parent folder. 'root' is used for a cluster at the root level.
      */

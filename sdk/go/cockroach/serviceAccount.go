@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
@@ -38,12 +37,9 @@ type ServiceAccount struct {
 func NewServiceAccount(ctx *pulumi.Context,
 	name string, args *ServiceAccountArgs, opts ...pulumi.ResourceOption) (*ServiceAccount, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ServiceAccountArgs{}
 	}
 
-	if args.Name == nil {
-		return nil, errors.New("invalid value for required argument 'Name'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ServiceAccount
 	err := ctx.RegisterResource("cockroach:index/serviceAccount:ServiceAccount", name, args, &resource, opts...)
@@ -96,7 +92,7 @@ type serviceAccountArgs struct {
 	// Description of the service account.
 	Description *string `pulumi:"description"`
 	// Name of the service account.
-	Name string `pulumi:"name"`
+	Name *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a ServiceAccount resource.
@@ -104,7 +100,7 @@ type ServiceAccountArgs struct {
 	// Description of the service account.
 	Description pulumi.StringPtrInput
 	// Name of the service account.
-	Name pulumi.StringInput
+	Name pulumi.StringPtrInput
 }
 
 func (ServiceAccountArgs) ElementType() reflect.Type {

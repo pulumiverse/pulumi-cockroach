@@ -90,9 +90,6 @@ export class ApiKey extends pulumi.CustomResource {
             resourceInputs["serviceAccountId"] = state ? state.serviceAccountId : undefined;
         } else {
             const args = argsOrState as ApiKeyArgs | undefined;
-            if ((!args || args.name === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'name'");
-            }
             if ((!args || args.serviceAccountId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'serviceAccountId'");
             }
@@ -131,6 +128,6 @@ export interface ApiKeyArgs {
     /**
      * Name of the api key.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     serviceAccountId: pulumi.Input<string>;
 }
