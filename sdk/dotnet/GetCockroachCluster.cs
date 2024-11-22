@@ -93,6 +93,7 @@ namespace Pulumiverse.Cockroach
     public sealed class GetCockroachClusterResult
     {
         public readonly string AccountId;
+        public readonly Outputs.GetCockroachClusterBackupConfigResult BackupConfig;
         public readonly string CloudProvider;
         public readonly string CockroachVersion;
         public readonly string CreatorId;
@@ -111,6 +112,8 @@ namespace Pulumiverse.Cockroach
         [OutputConstructor]
         private GetCockroachClusterResult(
             string accountId,
+
+            Outputs.GetCockroachClusterBackupConfigResult backupConfig,
 
             string cloudProvider,
 
@@ -141,6 +144,7 @@ namespace Pulumiverse.Cockroach
             string upgradeStatus)
         {
             AccountId = accountId;
+            BackupConfig = backupConfig;
             CloudProvider = cloudProvider;
             CockroachVersion = cockroachVersion;
             CreatorId = creatorId;

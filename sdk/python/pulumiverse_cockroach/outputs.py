@@ -16,6 +16,7 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
+    'ClusterBackupConfig',
     'ClusterDedicated',
     'ClusterRegion',
     'ClusterServerless',
@@ -31,6 +32,7 @@ __all__ = [
     'PrivateEndpointServicesServicesMapAws',
     'UserRoleGrantRole',
     'UserRoleGrantsRole',
+    'GetCockroachClusterBackupConfigResult',
     'GetCockroachClusterDedicatedResult',
     'GetCockroachClusterRegionResult',
     'GetCockroachClusterServerlessResult',
@@ -39,11 +41,75 @@ __all__ = [
 ]
 
 @pulumi.output_type
+class ClusterBackupConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "frequencyMinutes":
+            suggest = "frequency_minutes"
+        elif key == "retentionDays":
+            suggest = "retention_days"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ClusterBackupConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ClusterBackupConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ClusterBackupConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: Optional[bool] = None,
+                 frequency_minutes: Optional[int] = None,
+                 retention_days: Optional[int] = None):
+        """
+        :param bool enabled: Indicates whether backups are enabled. If set to false, no backups will be created.
+        :param int frequency_minutes: The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+        :param int retention_days: The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+        """
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if frequency_minutes is not None:
+            pulumi.set(__self__, "frequency_minutes", frequency_minutes)
+        if retention_days is not None:
+            pulumi.set(__self__, "retention_days", retention_days)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[bool]:
+        """
+        Indicates whether backups are enabled. If set to false, no backups will be created.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="frequencyMinutes")
+    def frequency_minutes(self) -> Optional[int]:
+        """
+        The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+        """
+        return pulumi.get(self, "frequency_minutes")
+
+    @property
+    @pulumi.getter(name="retentionDays")
+    def retention_days(self) -> Optional[int]:
+        """
+        The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+        """
+        return pulumi.get(self, "retention_days")
+
+
+@pulumi.output_type
 class ClusterDedicated(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "diskIops":
+        if key == "cidrRange":
+            suggest = "cidr_range"
+        elif key == "diskIops":
             suggest = "disk_iops"
         elif key == "machineType":
             suggest = "machine_type"
@@ -68,6 +134,7 @@ class ClusterDedicated(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 cidr_range: Optional[str] = None,
                  disk_iops: Optional[int] = None,
                  machine_type: Optional[str] = None,
                  memory_gib: Optional[float] = None,
@@ -75,6 +142,7 @@ class ClusterDedicated(dict):
                  private_network_visibility: Optional[bool] = None,
                  storage_gib: Optional[int] = None):
         """
+        :param str cidr_range: The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
         :param int disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
         :param str machine_type: Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
         :param float memory_gib: Memory per node in GiB.
@@ -82,6 +150,8 @@ class ClusterDedicated(dict):
         :param bool private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
         :param int storage_gib: Storage amount per node in GiB.
         """
+        if cidr_range is not None:
+            pulumi.set(__self__, "cidr_range", cidr_range)
         if disk_iops is not None:
             pulumi.set(__self__, "disk_iops", disk_iops)
         if machine_type is not None:
@@ -94,6 +164,14 @@ class ClusterDedicated(dict):
             pulumi.set(__self__, "private_network_visibility", private_network_visibility)
         if storage_gib is not None:
             pulumi.set(__self__, "storage_gib", storage_gib)
+
+    @property
+    @pulumi.getter(name="cidrRange")
+    def cidr_range(self) -> Optional[str]:
+        """
+        The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+        """
+        return pulumi.get(self, "cidr_range")
 
     @property
     @pulumi.getter(name="diskIops")
@@ -1286,8 +1364,49 @@ class UserRoleGrantsRole(dict):
 
 
 @pulumi.output_type
+class GetCockroachClusterBackupConfigResult(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 frequency_minutes: int,
+                 retention_days: int):
+        """
+        :param bool enabled: Indicates whether backups are enabled.
+        :param int frequency_minutes: The frequency of backups in minutes.
+        :param int retention_days: The number of days to retain backups for.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "frequency_minutes", frequency_minutes)
+        pulumi.set(__self__, "retention_days", retention_days)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Indicates whether backups are enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="frequencyMinutes")
+    def frequency_minutes(self) -> int:
+        """
+        The frequency of backups in minutes.
+        """
+        return pulumi.get(self, "frequency_minutes")
+
+    @property
+    @pulumi.getter(name="retentionDays")
+    def retention_days(self) -> int:
+        """
+        The number of days to retain backups for.
+        """
+        return pulumi.get(self, "retention_days")
+
+
+@pulumi.output_type
 class GetCockroachClusterDedicatedResult(dict):
     def __init__(__self__, *,
+                 cidr_range: str,
                  disk_iops: int,
                  machine_type: str,
                  memory_gib: float,
@@ -1295,6 +1414,7 @@ class GetCockroachClusterDedicatedResult(dict):
                  private_network_visibility: bool,
                  storage_gib: int):
         """
+        :param str cidr_range: The IPv4 range in CIDR format that is in use by the cluster. It is only set on GCP clusters and is otherwise empty.
         :param int disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
         :param str machine_type: Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
         :param float memory_gib: Memory per node in GiB.
@@ -1302,12 +1422,21 @@ class GetCockroachClusterDedicatedResult(dict):
         :param bool private_network_visibility: Indicates whether private IP addresses are assigned to nodes. Required for CMEK and other advanced networking features.
         :param int storage_gib: Storage amount per node in GiB.
         """
+        pulumi.set(__self__, "cidr_range", cidr_range)
         pulumi.set(__self__, "disk_iops", disk_iops)
         pulumi.set(__self__, "machine_type", machine_type)
         pulumi.set(__self__, "memory_gib", memory_gib)
         pulumi.set(__self__, "num_virtual_cpus", num_virtual_cpus)
         pulumi.set(__self__, "private_network_visibility", private_network_visibility)
         pulumi.set(__self__, "storage_gib", storage_gib)
+
+    @property
+    @pulumi.getter(name="cidrRange")
+    def cidr_range(self) -> str:
+        """
+        The IPv4 range in CIDR format that is in use by the cluster. It is only set on GCP clusters and is otherwise empty.
+        """
+        return pulumi.get(self, "cidr_range")
 
     @property
     @pulumi.getter(name="diskIops")

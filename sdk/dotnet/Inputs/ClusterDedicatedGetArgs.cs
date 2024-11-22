@@ -14,6 +14,12 @@ namespace Pulumiverse.Cockroach.Inputs
     public sealed class ClusterDedicatedGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+        /// </summary>
+        [Input("cidrRange")]
+        public Input<string>? CidrRange { get; set; }
+
+        /// <summary>
         /// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
         /// </summary>
         [Input("diskIops")]

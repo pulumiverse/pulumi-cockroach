@@ -32,9 +32,22 @@ namespace Pulumiverse.Cockroach
 
         private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("cockroach");
 
+        private static readonly __Value<string?> _apijwt = new __Value<string?>(() => __config.Get("apijwt"));
+        /// <summary>
+        /// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+        /// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+        /// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+        /// variable, and should contain either a user email address or a service account ID.
+        /// </summary>
+        public static string? Apijwt
+        {
+            get => _apijwt.Get();
+            set => _apijwt.Set(value);
+        }
+
         private static readonly __Value<string?> _apikey = new __Value<string?>(() => __config.Get("apikey"));
         /// <summary>
-        /// apikey to access cockroach cloud
+        /// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         /// </summary>
         public static string? Apikey
         {

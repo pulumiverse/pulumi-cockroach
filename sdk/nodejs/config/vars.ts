@@ -8,7 +8,21 @@ declare var exports: any;
 const __config = new pulumi.Config("cockroach");
 
 /**
- * apikey to access cockroach cloud
+ * The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+ * organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+ * mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+ * variable, and should contain either a user email address or a service account ID.
+ */
+export declare const apijwt: string | undefined;
+Object.defineProperty(exports, "apijwt", {
+    get() {
+        return __config.get("apijwt");
+    },
+    enumerable: true,
+});
+
+/**
+ * The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
  */
 export declare const apikey: string | undefined;
 Object.defineProperty(exports, "apikey", {

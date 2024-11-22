@@ -38,6 +38,14 @@ namespace Pulumiverse.Cockroach
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig")]
     public partial class MetricExportCloudwatchConfig : global::Pulumi.CustomResource

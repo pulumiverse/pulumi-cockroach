@@ -13,6 +13,14 @@ import (
 )
 
 // Log Export configuration for a cluster.
+//
+// ## Import
+//
+// format: <cluster id>
+//
+// ```sh
+// $ pulumi import cockroach:index/logExportConfig:LogExportConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type LogExportConfig struct {
 	pulumi.CustomResourceState
 

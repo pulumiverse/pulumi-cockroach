@@ -206,6 +206,20 @@ class JwtIssuer(pulumi.CustomResource):
         """
         Configuration to manage external JSON Web Token (JWT) Issuers for authentication to the CockroachDB Cloud API.
 
+        ## Import
+
+        JWT Issuer ID can be found by running a GET against the Cockroach Cloud API to
+
+        list all existing JWT issuers.
+
+        https://www.cockroachlabs.com/docs/api/cloud/v1#get-/api/v1/jwt-issuers
+
+        format: <jwt issuer id>
+
+        ```sh
+        $ pulumi import cockroach:index/jwtIssuer:JwtIssuer my_issuer 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] audience: The intended audience for consuming the JWT.
@@ -222,6 +236,20 @@ class JwtIssuer(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Configuration to manage external JSON Web Token (JWT) Issuers for authentication to the CockroachDB Cloud API.
+
+        ## Import
+
+        JWT Issuer ID can be found by running a GET against the Cockroach Cloud API to
+
+        list all existing JWT issuers.
+
+        https://www.cockroachlabs.com/docs/api/cloud/v1#get-/api/v1/jwt-issuers
+
+        format: <jwt issuer id>
+
+        ```sh
+        $ pulumi import cockroach:index/jwtIssuer:JwtIssuer my_issuer 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
 
         :param str resource_name: The name of the resource.
         :param JwtIssuerArgs args: The arguments to use to populate this resource's properties.

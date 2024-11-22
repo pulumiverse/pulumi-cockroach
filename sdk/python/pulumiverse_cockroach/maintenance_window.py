@@ -157,6 +157,14 @@ class MaintenanceWindow(pulumi.CustomResource):
             window_duration=window_duration)
         ```
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/maintenanceWindow:MaintenanceWindow example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -190,6 +198,14 @@ class MaintenanceWindow(pulumi.CustomResource):
             cluster_id=cluster_id,
             offset_duration=offset_duration,
             window_duration=window_duration)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/maintenanceWindow:MaintenanceWindow example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.

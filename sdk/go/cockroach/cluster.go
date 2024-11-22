@@ -13,11 +13,22 @@ import (
 )
 
 // CockroachDB Cloud cluster.
+//
+// ## Import
+//
+// format: <cluster id>
+//
+// ```sh
+// $ pulumi import cockroach:index/cluster:Cluster my_cluster 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type Cluster struct {
 	pulumi.CustomResourceState
 
 	// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
 	AccountId pulumi.StringOutput `pulumi:"accountId"`
+	// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+	// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+	BackupConfig ClusterBackupConfigOutput `pulumi:"backupConfig"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
 	// Major version of CockroachDB running on the cluster.
@@ -82,6 +93,9 @@ func GetCluster(ctx *pulumi.Context,
 type clusterState struct {
 	// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
 	AccountId *string `pulumi:"accountId"`
+	// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+	// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+	BackupConfig *ClusterBackupConfig `pulumi:"backupConfig"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider *string `pulumi:"cloudProvider"`
 	// Major version of CockroachDB running on the cluster.
@@ -111,6 +125,9 @@ type clusterState struct {
 type ClusterState struct {
 	// The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
 	AccountId pulumi.StringPtrInput
+	// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+	// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+	BackupConfig ClusterBackupConfigPtrInput
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringPtrInput
 	// Major version of CockroachDB running on the cluster.
@@ -142,6 +159,9 @@ func (ClusterState) ElementType() reflect.Type {
 }
 
 type clusterArgs struct {
+	// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+	// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+	BackupConfig *ClusterBackupConfig `pulumi:"backupConfig"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider string `pulumi:"cloudProvider"`
 	// Major version of CockroachDB running on the cluster.
@@ -162,6 +182,9 @@ type clusterArgs struct {
 
 // The set of arguments for constructing a Cluster resource.
 type ClusterArgs struct {
+	// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+	// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+	BackupConfig ClusterBackupConfigPtrInput
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringInput
 	// Major version of CockroachDB running on the cluster.
@@ -270,6 +293,12 @@ func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOu
 // The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
 func (o ClusterOutput) AccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.AccountId }).(pulumi.StringOutput)
+}
+
+// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+func (o ClusterOutput) BackupConfig() ClusterBackupConfigOutput {
+	return o.ApplyT(func(v *Cluster) ClusterBackupConfigOutput { return v.BackupConfig }).(ClusterBackupConfigOutput)
 }
 
 // Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE

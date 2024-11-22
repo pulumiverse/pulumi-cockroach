@@ -13,7 +13,184 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ClusterBackupConfig struct {
+	// Indicates whether backups are enabled. If set to false, no backups will be created.
+	Enabled *bool `pulumi:"enabled"`
+	// The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+	FrequencyMinutes *int `pulumi:"frequencyMinutes"`
+	// The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+	RetentionDays *int `pulumi:"retentionDays"`
+}
+
+// ClusterBackupConfigInput is an input type that accepts ClusterBackupConfigArgs and ClusterBackupConfigOutput values.
+// You can construct a concrete instance of `ClusterBackupConfigInput` via:
+//
+//	ClusterBackupConfigArgs{...}
+type ClusterBackupConfigInput interface {
+	pulumi.Input
+
+	ToClusterBackupConfigOutput() ClusterBackupConfigOutput
+	ToClusterBackupConfigOutputWithContext(context.Context) ClusterBackupConfigOutput
+}
+
+type ClusterBackupConfigArgs struct {
+	// Indicates whether backups are enabled. If set to false, no backups will be created.
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+	FrequencyMinutes pulumi.IntPtrInput `pulumi:"frequencyMinutes"`
+	// The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+	RetentionDays pulumi.IntPtrInput `pulumi:"retentionDays"`
+}
+
+func (ClusterBackupConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterBackupConfig)(nil)).Elem()
+}
+
+func (i ClusterBackupConfigArgs) ToClusterBackupConfigOutput() ClusterBackupConfigOutput {
+	return i.ToClusterBackupConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterBackupConfigArgs) ToClusterBackupConfigOutputWithContext(ctx context.Context) ClusterBackupConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterBackupConfigOutput)
+}
+
+func (i ClusterBackupConfigArgs) ToClusterBackupConfigPtrOutput() ClusterBackupConfigPtrOutput {
+	return i.ToClusterBackupConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterBackupConfigArgs) ToClusterBackupConfigPtrOutputWithContext(ctx context.Context) ClusterBackupConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterBackupConfigOutput).ToClusterBackupConfigPtrOutputWithContext(ctx)
+}
+
+// ClusterBackupConfigPtrInput is an input type that accepts ClusterBackupConfigArgs, ClusterBackupConfigPtr and ClusterBackupConfigPtrOutput values.
+// You can construct a concrete instance of `ClusterBackupConfigPtrInput` via:
+//
+//	        ClusterBackupConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterBackupConfigPtrInput interface {
+	pulumi.Input
+
+	ToClusterBackupConfigPtrOutput() ClusterBackupConfigPtrOutput
+	ToClusterBackupConfigPtrOutputWithContext(context.Context) ClusterBackupConfigPtrOutput
+}
+
+type clusterBackupConfigPtrType ClusterBackupConfigArgs
+
+func ClusterBackupConfigPtr(v *ClusterBackupConfigArgs) ClusterBackupConfigPtrInput {
+	return (*clusterBackupConfigPtrType)(v)
+}
+
+func (*clusterBackupConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterBackupConfig)(nil)).Elem()
+}
+
+func (i *clusterBackupConfigPtrType) ToClusterBackupConfigPtrOutput() ClusterBackupConfigPtrOutput {
+	return i.ToClusterBackupConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterBackupConfigPtrType) ToClusterBackupConfigPtrOutputWithContext(ctx context.Context) ClusterBackupConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterBackupConfigPtrOutput)
+}
+
+type ClusterBackupConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterBackupConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterBackupConfig)(nil)).Elem()
+}
+
+func (o ClusterBackupConfigOutput) ToClusterBackupConfigOutput() ClusterBackupConfigOutput {
+	return o
+}
+
+func (o ClusterBackupConfigOutput) ToClusterBackupConfigOutputWithContext(ctx context.Context) ClusterBackupConfigOutput {
+	return o
+}
+
+func (o ClusterBackupConfigOutput) ToClusterBackupConfigPtrOutput() ClusterBackupConfigPtrOutput {
+	return o.ToClusterBackupConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterBackupConfigOutput) ToClusterBackupConfigPtrOutputWithContext(ctx context.Context) ClusterBackupConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterBackupConfig) *ClusterBackupConfig {
+		return &v
+	}).(ClusterBackupConfigPtrOutput)
+}
+
+// Indicates whether backups are enabled. If set to false, no backups will be created.
+func (o ClusterBackupConfigOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterBackupConfig) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+func (o ClusterBackupConfigOutput) FrequencyMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterBackupConfig) *int { return v.FrequencyMinutes }).(pulumi.IntPtrOutput)
+}
+
+// The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+func (o ClusterBackupConfigOutput) RetentionDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterBackupConfig) *int { return v.RetentionDays }).(pulumi.IntPtrOutput)
+}
+
+type ClusterBackupConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterBackupConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterBackupConfig)(nil)).Elem()
+}
+
+func (o ClusterBackupConfigPtrOutput) ToClusterBackupConfigPtrOutput() ClusterBackupConfigPtrOutput {
+	return o
+}
+
+func (o ClusterBackupConfigPtrOutput) ToClusterBackupConfigPtrOutputWithContext(ctx context.Context) ClusterBackupConfigPtrOutput {
+	return o
+}
+
+func (o ClusterBackupConfigPtrOutput) Elem() ClusterBackupConfigOutput {
+	return o.ApplyT(func(v *ClusterBackupConfig) ClusterBackupConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterBackupConfig
+		return ret
+	}).(ClusterBackupConfigOutput)
+}
+
+// Indicates whether backups are enabled. If set to false, no backups will be created.
+func (o ClusterBackupConfigPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ClusterBackupConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+func (o ClusterBackupConfigPtrOutput) FrequencyMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterBackupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FrequencyMinutes
+	}).(pulumi.IntPtrOutput)
+}
+
+// The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+func (o ClusterBackupConfigPtrOutput) RetentionDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterBackupConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RetentionDays
+	}).(pulumi.IntPtrOutput)
+}
+
 type ClusterDedicated struct {
+	// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+	CidrRange *string `pulumi:"cidrRange"`
 	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 	DiskIops *int `pulumi:"diskIops"`
 	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
@@ -40,6 +217,8 @@ type ClusterDedicatedInput interface {
 }
 
 type ClusterDedicatedArgs struct {
+	// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+	CidrRange pulumi.StringPtrInput `pulumi:"cidrRange"`
 	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 	DiskIops pulumi.IntPtrInput `pulumi:"diskIops"`
 	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
@@ -131,6 +310,11 @@ func (o ClusterDedicatedOutput) ToClusterDedicatedPtrOutputWithContext(ctx conte
 	}).(ClusterDedicatedPtrOutput)
 }
 
+// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+func (o ClusterDedicatedOutput) CidrRange() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterDedicated) *string { return v.CidrRange }).(pulumi.StringPtrOutput)
+}
+
 // Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 func (o ClusterDedicatedOutput) DiskIops() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.DiskIops }).(pulumi.IntPtrOutput)
@@ -183,6 +367,16 @@ func (o ClusterDedicatedPtrOutput) Elem() ClusterDedicatedOutput {
 		var ret ClusterDedicated
 		return ret
 	}).(ClusterDedicatedOutput)
+}
+
+// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+func (o ClusterDedicatedPtrOutput) CidrRange() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterDedicated) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CidrRange
+	}).(pulumi.StringPtrOutput)
 }
 
 // Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
@@ -2393,7 +2587,79 @@ func (o UserRoleGrantsRoleArrayOutput) Index(i pulumi.IntInput) UserRoleGrantsRo
 	}).(UserRoleGrantsRoleOutput)
 }
 
+type GetCockroachClusterBackupConfig struct {
+	// Indicates whether backups are enabled.
+	Enabled bool `pulumi:"enabled"`
+	// The frequency of backups in minutes.
+	FrequencyMinutes int `pulumi:"frequencyMinutes"`
+	// The number of days to retain backups for.
+	RetentionDays int `pulumi:"retentionDays"`
+}
+
+// GetCockroachClusterBackupConfigInput is an input type that accepts GetCockroachClusterBackupConfigArgs and GetCockroachClusterBackupConfigOutput values.
+// You can construct a concrete instance of `GetCockroachClusterBackupConfigInput` via:
+//
+//	GetCockroachClusterBackupConfigArgs{...}
+type GetCockroachClusterBackupConfigInput interface {
+	pulumi.Input
+
+	ToGetCockroachClusterBackupConfigOutput() GetCockroachClusterBackupConfigOutput
+	ToGetCockroachClusterBackupConfigOutputWithContext(context.Context) GetCockroachClusterBackupConfigOutput
+}
+
+type GetCockroachClusterBackupConfigArgs struct {
+	// Indicates whether backups are enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// The frequency of backups in minutes.
+	FrequencyMinutes pulumi.IntInput `pulumi:"frequencyMinutes"`
+	// The number of days to retain backups for.
+	RetentionDays pulumi.IntInput `pulumi:"retentionDays"`
+}
+
+func (GetCockroachClusterBackupConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCockroachClusterBackupConfig)(nil)).Elem()
+}
+
+func (i GetCockroachClusterBackupConfigArgs) ToGetCockroachClusterBackupConfigOutput() GetCockroachClusterBackupConfigOutput {
+	return i.ToGetCockroachClusterBackupConfigOutputWithContext(context.Background())
+}
+
+func (i GetCockroachClusterBackupConfigArgs) ToGetCockroachClusterBackupConfigOutputWithContext(ctx context.Context) GetCockroachClusterBackupConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCockroachClusterBackupConfigOutput)
+}
+
+type GetCockroachClusterBackupConfigOutput struct{ *pulumi.OutputState }
+
+func (GetCockroachClusterBackupConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCockroachClusterBackupConfig)(nil)).Elem()
+}
+
+func (o GetCockroachClusterBackupConfigOutput) ToGetCockroachClusterBackupConfigOutput() GetCockroachClusterBackupConfigOutput {
+	return o
+}
+
+func (o GetCockroachClusterBackupConfigOutput) ToGetCockroachClusterBackupConfigOutputWithContext(ctx context.Context) GetCockroachClusterBackupConfigOutput {
+	return o
+}
+
+// Indicates whether backups are enabled.
+func (o GetCockroachClusterBackupConfigOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCockroachClusterBackupConfig) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// The frequency of backups in minutes.
+func (o GetCockroachClusterBackupConfigOutput) FrequencyMinutes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCockroachClusterBackupConfig) int { return v.FrequencyMinutes }).(pulumi.IntOutput)
+}
+
+// The number of days to retain backups for.
+func (o GetCockroachClusterBackupConfigOutput) RetentionDays() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCockroachClusterBackupConfig) int { return v.RetentionDays }).(pulumi.IntOutput)
+}
+
 type GetCockroachClusterDedicated struct {
+	// The IPv4 range in CIDR format that is in use by the cluster. It is only set on GCP clusters and is otherwise empty.
+	CidrRange string `pulumi:"cidrRange"`
 	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 	DiskIops int `pulumi:"diskIops"`
 	// Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
@@ -2420,6 +2686,8 @@ type GetCockroachClusterDedicatedInput interface {
 }
 
 type GetCockroachClusterDedicatedArgs struct {
+	// The IPv4 range in CIDR format that is in use by the cluster. It is only set on GCP clusters and is otherwise empty.
+	CidrRange pulumi.StringInput `pulumi:"cidrRange"`
 	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 	DiskIops pulumi.IntInput `pulumi:"diskIops"`
 	// Machine type identifier within the given cloud provider, ex. m6.xlarge, n2-standard-4.
@@ -2458,6 +2726,11 @@ func (o GetCockroachClusterDedicatedOutput) ToGetCockroachClusterDedicatedOutput
 
 func (o GetCockroachClusterDedicatedOutput) ToGetCockroachClusterDedicatedOutputWithContext(ctx context.Context) GetCockroachClusterDedicatedOutput {
 	return o
+}
+
+// The IPv4 range in CIDR format that is in use by the cluster. It is only set on GCP clusters and is otherwise empty.
+func (o GetCockroachClusterDedicatedOutput) CidrRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCockroachClusterDedicated) string { return v.CidrRange }).(pulumi.StringOutput)
 }
 
 // Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
@@ -2873,6 +3146,8 @@ func (o GetConnectionStringConnectionParamsOutput) Username() pulumi.StringOutpu
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterBackupConfigInput)(nil)).Elem(), ClusterBackupConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterBackupConfigPtrInput)(nil)).Elem(), ClusterBackupConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDedicatedInput)(nil)).Elem(), ClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDedicatedPtrInput)(nil)).Elem(), ClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRegionInput)(nil)).Elem(), ClusterRegionArgs{})
@@ -2902,12 +3177,15 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantRolePtrInput)(nil)).Elem(), UserRoleGrantRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantsRoleInput)(nil)).Elem(), UserRoleGrantsRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UserRoleGrantsRoleArrayInput)(nil)).Elem(), UserRoleGrantsRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterBackupConfigInput)(nil)).Elem(), GetCockroachClusterBackupConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterDedicatedInput)(nil)).Elem(), GetCockroachClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterRegionInput)(nil)).Elem(), GetCockroachClusterRegionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterRegionArrayInput)(nil)).Elem(), GetCockroachClusterRegionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterServerlessInput)(nil)).Elem(), GetCockroachClusterServerlessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterServerlessUsageLimitsInput)(nil)).Elem(), GetCockroachClusterServerlessUsageLimitsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionStringConnectionParamsInput)(nil)).Elem(), GetConnectionStringConnectionParamsArgs{})
+	pulumi.RegisterOutputType(ClusterBackupConfigOutput{})
+	pulumi.RegisterOutputType(ClusterBackupConfigPtrOutput{})
 	pulumi.RegisterOutputType(ClusterDedicatedOutput{})
 	pulumi.RegisterOutputType(ClusterDedicatedPtrOutput{})
 	pulumi.RegisterOutputType(ClusterRegionOutput{})
@@ -2937,6 +3215,7 @@ func init() {
 	pulumi.RegisterOutputType(UserRoleGrantRolePtrOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantsRoleOutput{})
 	pulumi.RegisterOutputType(UserRoleGrantsRoleArrayOutput{})
+	pulumi.RegisterOutputType(GetCockroachClusterBackupConfigOutput{})
 	pulumi.RegisterOutputType(GetCockroachClusterDedicatedOutput{})
 	pulumi.RegisterOutputType(GetCockroachClusterRegionOutput{})
 	pulumi.RegisterOutputType(GetCockroachClusterRegionArrayOutput{})

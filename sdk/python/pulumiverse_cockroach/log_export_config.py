@@ -369,6 +369,14 @@ class LogExportConfig(pulumi.CustomResource):
         """
         Log Export configuration for a cluster.
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/logExportConfig:LogExportConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] auth_principal: Either the AWS Role ARN that identifies a role that the cluster account can assume to write to CloudWatch or the GCP
@@ -389,6 +397,14 @@ class LogExportConfig(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Log Export configuration for a cluster.
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/logExportConfig:LogExportConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
 
         :param str resource_name: The name of the resource.
         :param LogExportConfigArgs args: The arguments to use to populate this resource's properties.

@@ -120,6 +120,14 @@ class Folder(pulumi.CustomResource):
             parent_id=a_team.id)
         ```
 
+        ## Import
+
+        format: <folder id>
+
+        ```sh
+        $ pulumi import cockroach:index/folder:Folder my_folder 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the folder.
@@ -146,6 +154,14 @@ class Folder(pulumi.CustomResource):
         a_team_dev = cockroach.Folder("a_team_dev",
             name="dev",
             parent_id=a_team.id)
+        ```
+
+        ## Import
+
+        format: <folder id>
+
+        ```sh
+        $ pulumi import cockroach:index/folder:Folder my_folder 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.

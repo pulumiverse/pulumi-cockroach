@@ -11,7 +11,15 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-// apikey to access cockroach cloud
+// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+// variable, and should contain either a user email address or a service account ID.
+func GetApijwt(ctx *pulumi.Context) string {
+	return config.Get(ctx, "cockroach:apijwt")
+}
+
+// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
 func GetApikey(ctx *pulumi.Context) string {
 	return config.Get(ctx, "cockroach:apikey")
 }

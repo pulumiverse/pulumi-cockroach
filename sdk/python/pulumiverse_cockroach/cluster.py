@@ -23,6 +23,7 @@ class ClusterArgs:
     def __init__(__self__, *,
                  cloud_provider: pulumi.Input[str],
                  regions: pulumi.Input[Sequence[pulumi.Input['ClusterRegionArgs']]],
+                 backup_config: Optional[pulumi.Input['ClusterBackupConfigArgs']] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input['ClusterDedicatedArgs']] = None,
                  delete_protection: Optional[pulumi.Input[bool]] = None,
@@ -33,6 +34,8 @@ class ClusterArgs:
         """
         The set of arguments for constructing a Cluster resource.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
+        :param pulumi.Input['ClusterBackupConfigArgs'] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+               frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
@@ -42,6 +45,8 @@ class ClusterArgs:
         """
         pulumi.set(__self__, "cloud_provider", cloud_provider)
         pulumi.set(__self__, "regions", regions)
+        if backup_config is not None:
+            pulumi.set(__self__, "backup_config", backup_config)
         if cockroach_version is not None:
             pulumi.set(__self__, "cockroach_version", cockroach_version)
         if dedicated is not None:
@@ -77,6 +82,19 @@ class ClusterArgs:
     @regions.setter
     def regions(self, value: pulumi.Input[Sequence[pulumi.Input['ClusterRegionArgs']]]):
         pulumi.set(self, "regions", value)
+
+    @property
+    @pulumi.getter(name="backupConfig")
+    def backup_config(self) -> Optional[pulumi.Input['ClusterBackupConfigArgs']]:
+        """
+        The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+        frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+        """
+        return pulumi.get(self, "backup_config")
+
+    @backup_config.setter
+    def backup_config(self, value: Optional[pulumi.Input['ClusterBackupConfigArgs']]):
+        pulumi.set(self, "backup_config", value)
 
     @property
     @pulumi.getter(name="cockroachVersion")
@@ -162,6 +180,7 @@ class ClusterArgs:
 class _ClusterState:
     def __init__(__self__, *,
                  account_id: Optional[pulumi.Input[str]] = None,
+                 backup_config: Optional[pulumi.Input['ClusterBackupConfigArgs']] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  creator_id: Optional[pulumi.Input[str]] = None,
@@ -178,6 +197,8 @@ class _ClusterState:
         """
         Input properties used for looking up and filtering Cluster resources.
         :param pulumi.Input[str] account_id: The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+        :param pulumi.Input['ClusterBackupConfigArgs'] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+               frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[str] creator_id: ID of the user who created the cluster.
@@ -192,6 +213,8 @@ class _ClusterState:
         """
         if account_id is not None:
             pulumi.set(__self__, "account_id", account_id)
+        if backup_config is not None:
+            pulumi.set(__self__, "backup_config", backup_config)
         if cloud_provider is not None:
             pulumi.set(__self__, "cloud_provider", cloud_provider)
         if cockroach_version is not None:
@@ -230,6 +253,19 @@ class _ClusterState:
     @account_id.setter
     def account_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "account_id", value)
+
+    @property
+    @pulumi.getter(name="backupConfig")
+    def backup_config(self) -> Optional[pulumi.Input['ClusterBackupConfigArgs']]:
+        """
+        The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+        frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+        """
+        return pulumi.get(self, "backup_config")
+
+    @backup_config.setter
+    def backup_config(self, value: Optional[pulumi.Input['ClusterBackupConfigArgs']]):
+        pulumi.set(self, "backup_config", value)
 
     @property
     @pulumi.getter(name="cloudProvider")
@@ -385,6 +421,7 @@ class Cluster(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 backup_config: Optional[pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']]] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
@@ -398,8 +435,18 @@ class Cluster(pulumi.CustomResource):
         """
         CockroachDB Cloud cluster.
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/cluster:Cluster my_cluster 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+               frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
@@ -417,6 +464,14 @@ class Cluster(pulumi.CustomResource):
         """
         CockroachDB Cloud cluster.
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/cluster:Cluster my_cluster 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -432,6 +487,7 @@ class Cluster(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 backup_config: Optional[pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']]] = None,
                  cloud_provider: Optional[pulumi.Input[str]] = None,
                  cockroach_version: Optional[pulumi.Input[str]] = None,
                  dedicated: Optional[pulumi.Input[Union['ClusterDedicatedArgs', 'ClusterDedicatedArgsDict']]] = None,
@@ -450,6 +506,7 @@ class Cluster(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ClusterArgs.__new__(ClusterArgs)
 
+            __props__.__dict__["backup_config"] = backup_config
             if cloud_provider is None and not opts.urn:
                 raise TypeError("Missing required property 'cloud_provider'")
             __props__.__dict__["cloud_provider"] = cloud_provider
@@ -479,6 +536,7 @@ class Cluster(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             account_id: Optional[pulumi.Input[str]] = None,
+            backup_config: Optional[pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']]] = None,
             cloud_provider: Optional[pulumi.Input[str]] = None,
             cockroach_version: Optional[pulumi.Input[str]] = None,
             creator_id: Optional[pulumi.Input[str]] = None,
@@ -500,6 +558,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] account_id: The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
+        :param pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+               frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
         :param pulumi.Input[str] creator_id: ID of the user who created the cluster.
@@ -517,6 +577,7 @@ class Cluster(pulumi.CustomResource):
         __props__ = _ClusterState.__new__(_ClusterState)
 
         __props__.__dict__["account_id"] = account_id
+        __props__.__dict__["backup_config"] = backup_config
         __props__.__dict__["cloud_provider"] = cloud_provider
         __props__.__dict__["cockroach_version"] = cockroach_version
         __props__.__dict__["creator_id"] = creator_id
@@ -539,6 +600,15 @@ class Cluster(pulumi.CustomResource):
         The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
         """
         return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter(name="backupConfig")
+    def backup_config(self) -> pulumi.Output['outputs.ClusterBackupConfig']:
+        """
+        The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+        frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+        """
+        return pulumi.get(self, "backup_config")
 
     @property
     @pulumi.getter(name="cloudProvider")

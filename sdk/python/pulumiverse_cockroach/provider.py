@@ -19,19 +19,41 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
+                 apijwt: Optional[pulumi.Input[str]] = None,
                  apikey: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
-        :param pulumi.Input[str] apikey: apikey to access cockroach cloud
+        :param pulumi.Input[str] apijwt: The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+               organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+               mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+               variable, and should contain either a user email address or a service account ID.
+        :param pulumi.Input[str] apikey: The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         """
+        if apijwt is not None:
+            pulumi.set(__self__, "apijwt", apijwt)
         if apikey is not None:
             pulumi.set(__self__, "apikey", apikey)
 
     @property
     @pulumi.getter
+    def apijwt(self) -> Optional[pulumi.Input[str]]:
+        """
+        The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+        organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+        mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+        variable, and should contain either a user email address or a service account ID.
+        """
+        return pulumi.get(self, "apijwt")
+
+    @apijwt.setter
+    def apijwt(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "apijwt", value)
+
+    @property
+    @pulumi.getter
     def apikey(self) -> Optional[pulumi.Input[str]]:
         """
-        apikey to access cockroach cloud
+        The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         """
         return pulumi.get(self, "apikey")
 
@@ -45,6 +67,7 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 apijwt: Optional[pulumi.Input[str]] = None,
                  apikey: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -55,7 +78,11 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] apikey: apikey to access cockroach cloud
+        :param pulumi.Input[str] apijwt: The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+               organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+               mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+               variable, and should contain either a user email address or a service account ID.
+        :param pulumi.Input[str] apikey: The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         """
         ...
     @overload
@@ -84,6 +111,7 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 apijwt: Optional[pulumi.Input[str]] = None,
                  apikey: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -94,8 +122,9 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            __props__.__dict__["apijwt"] = None if apijwt is None else pulumi.Output.secret(apijwt)
             __props__.__dict__["apikey"] = None if apikey is None else pulumi.Output.secret(apikey)
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apikey"])
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apijwt", "apikey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Provider, __self__).__init__(
             'cockroach',
@@ -105,9 +134,20 @@ class Provider(pulumi.ProviderResource):
 
     @property
     @pulumi.getter
+    def apijwt(self) -> pulumi.Output[Optional[str]]:
+        """
+        The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+        organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+        mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+        variable, and should contain either a user email address or a service account ID.
+        """
+        return pulumi.get(self, "apijwt")
+
+    @property
+    @pulumi.getter
     def apikey(self) -> pulumi.Output[Optional[str]]:
         """
-        apikey to access cockroach cloud
+        The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         """
         return pulumi.get(self, "apikey")
 

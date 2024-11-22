@@ -112,6 +112,14 @@ class MetricExportPrometheusConfig(pulumi.CustomResource):
         example = cockroach.MetricExportPrometheusConfig("example", cluster_id=cluster_id)
         ```
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -134,6 +142,14 @@ class MetricExportPrometheusConfig(pulumi.CustomResource):
         config = pulumi.Config()
         cluster_id = config.require("clusterId")
         example = cockroach.MetricExportPrometheusConfig("example", cluster_id=cluster_id)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.

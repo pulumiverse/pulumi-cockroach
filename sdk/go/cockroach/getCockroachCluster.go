@@ -58,21 +58,22 @@ type GetCockroachClusterArgs struct {
 
 // A collection of values returned by getCockroachCluster.
 type GetCockroachClusterResult struct {
-	AccountId        string                        `pulumi:"accountId"`
-	CloudProvider    string                        `pulumi:"cloudProvider"`
-	CockroachVersion string                        `pulumi:"cockroachVersion"`
-	CreatorId        string                        `pulumi:"creatorId"`
-	Dedicated        GetCockroachClusterDedicated  `pulumi:"dedicated"`
-	DeleteProtection bool                          `pulumi:"deleteProtection"`
-	Id               string                        `pulumi:"id"`
-	Name             string                        `pulumi:"name"`
-	OperationStatus  string                        `pulumi:"operationStatus"`
-	ParentId         string                        `pulumi:"parentId"`
-	Plan             string                        `pulumi:"plan"`
-	Regions          []GetCockroachClusterRegion   `pulumi:"regions"`
-	Serverless       GetCockroachClusterServerless `pulumi:"serverless"`
-	State            string                        `pulumi:"state"`
-	UpgradeStatus    string                        `pulumi:"upgradeStatus"`
+	AccountId        string                          `pulumi:"accountId"`
+	BackupConfig     GetCockroachClusterBackupConfig `pulumi:"backupConfig"`
+	CloudProvider    string                          `pulumi:"cloudProvider"`
+	CockroachVersion string                          `pulumi:"cockroachVersion"`
+	CreatorId        string                          `pulumi:"creatorId"`
+	Dedicated        GetCockroachClusterDedicated    `pulumi:"dedicated"`
+	DeleteProtection bool                            `pulumi:"deleteProtection"`
+	Id               string                          `pulumi:"id"`
+	Name             string                          `pulumi:"name"`
+	OperationStatus  string                          `pulumi:"operationStatus"`
+	ParentId         string                          `pulumi:"parentId"`
+	Plan             string                          `pulumi:"plan"`
+	Regions          []GetCockroachClusterRegion     `pulumi:"regions"`
+	Serverless       GetCockroachClusterServerless   `pulumi:"serverless"`
+	State            string                          `pulumi:"state"`
+	UpgradeStatus    string                          `pulumi:"upgradeStatus"`
 }
 
 func GetCockroachClusterOutput(ctx *pulumi.Context, args GetCockroachClusterOutputArgs, opts ...pulumi.InvokeOption) GetCockroachClusterResultOutput {
@@ -120,6 +121,10 @@ func (o GetCockroachClusterResultOutput) ToGetCockroachClusterResultOutputWithCo
 
 func (o GetCockroachClusterResultOutput) AccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterResult) string { return v.AccountId }).(pulumi.StringOutput)
+}
+
+func (o GetCockroachClusterResultOutput) BackupConfig() GetCockroachClusterBackupConfigOutput {
+	return o.ApplyT(func(v GetCockroachClusterResult) GetCockroachClusterBackupConfig { return v.BackupConfig }).(GetCockroachClusterBackupConfigOutput)
 }
 
 func (o GetCockroachClusterResultOutput) CloudProvider() pulumi.StringOutput {

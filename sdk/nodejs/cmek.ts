@@ -15,8 +15,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as cockroach from "@pulumiverse/cockroach";
  *
- * const dedicated = new cockroach.Cmek("dedicated", {
- *     clusterId: dedicatedCockroachCluster.id,
+ * const advanced = new cockroach.Cmek("advanced", {
+ *     clusterId: advancedCockroachCluster.id,
  *     regions: [{
  *         region: "us-central-1",
  *         key: {
@@ -26,6 +26,14 @@ import * as utilities from "./utilities";
  *         },
  *     }],
  * });
+ * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/cmek:Cmek advanced 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
  * ```
  */
 export class Cmek extends pulumi.CustomResource {

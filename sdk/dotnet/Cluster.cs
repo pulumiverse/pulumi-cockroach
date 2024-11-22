@@ -12,6 +12,14 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// CockroachDB Cloud cluster.
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/cluster:Cluster my_cluster 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/cluster:Cluster")]
     public partial class Cluster : global::Pulumi.CustomResource
@@ -21,6 +29,13 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         [Output("accountId")]
         public Output<string> AccountId { get; private set; } = null!;
+
+        /// <summary>
+        /// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+        /// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+        /// </summary>
+        [Output("backupConfig")]
+        public Output<Outputs.ClusterBackupConfig> BackupConfig { get; private set; } = null!;
 
         /// <summary>
         /// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
@@ -140,6 +155,13 @@ namespace Pulumiverse.Cockroach
     public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+        /// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+        /// </summary>
+        [Input("backupConfig")]
+        public Input<Inputs.ClusterBackupConfigArgs>? BackupConfig { get; set; }
+
+        /// <summary>
         /// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         /// </summary>
         [Input("cloudProvider", required: true)]
@@ -203,6 +225,13 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         [Input("accountId")]
         public Input<string>? AccountId { get; set; }
+
+        /// <summary>
+        /// The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+        /// frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+        /// </summary>
+        [Input("backupConfig")]
+        public Input<Inputs.ClusterBackupConfigGetArgs>? BackupConfig { get; set; }
 
         /// <summary>
         /// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE

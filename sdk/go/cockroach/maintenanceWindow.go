@@ -52,6 +52,14 @@ import (
 //	}
 //
 // ```
+//
+// ## Import
+//
+// format: <cluster id>
+//
+// ```sh
+// $ pulumi import cockroach:index/maintenanceWindow:MaintenanceWindow example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type MaintenanceWindow struct {
 	pulumi.CustomResourceState
 

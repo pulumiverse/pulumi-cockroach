@@ -135,6 +135,14 @@ class CaCert(pulumi.CustomResource):
             x509_pem_cert=client_certificate)
         ```
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/caCert:CaCert prod 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -161,6 +169,14 @@ class CaCert(pulumi.CustomResource):
         prod = cockroach.CaCert("prod",
             cluster_id=prod_cockroach_cluster["id"],
             x509_pem_cert=client_certificate)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/caCert:CaCert prod 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.
