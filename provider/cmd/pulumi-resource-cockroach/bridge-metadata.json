@@ -7,14 +7,6 @@
             "cockroach_api_key": {
                 "current": "cockroach:index/apiKey:ApiKey"
             },
-            "cockroach_api_oidc_config": {
-                "current": "cockroach:index/apiOidcConfig:ApiOidcConfig",
-                "fields": {
-                    "identity_map": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "cockroach_client_ca_cert": {
                 "current": "cockroach:index/caCert:CaCert"
             },
@@ -45,6 +37,14 @@
             },
             "cockroach_folder": {
                 "current": "cockroach:index/folder:Folder"
+            },
+            "cockroach_jwt_issuer": {
+                "current": "cockroach:index/jwtIssuer:JwtIssuer",
+                "fields": {
+                    "identity_map": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "cockroach_log_export_config": {
                 "current": "cockroach:index/logExportConfig:LogExportConfig",

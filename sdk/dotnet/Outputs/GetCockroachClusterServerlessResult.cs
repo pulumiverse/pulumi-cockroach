@@ -23,7 +23,7 @@ namespace Pulumiverse.Cockroach.Outputs
         /// </summary>
         public readonly int SpendLimit;
         /// <summary>
-        /// Dictates the behavior of cockroach major version upgrades.
+        /// Dictates the behavior of CockroachDB major version upgrades.
         /// </summary>
         public readonly string UpgradeType;
         public readonly Outputs.GetCockroachClusterServerlessUsageLimitsResult UsageLimits;

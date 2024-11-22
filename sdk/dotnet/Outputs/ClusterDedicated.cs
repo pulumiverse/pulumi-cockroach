@@ -31,7 +31,7 @@ namespace Pulumiverse.Cockroach.Outputs
         /// </summary>
         public readonly int? NumVirtualCpus;
         /// <summary>
-        /// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+        /// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
         /// </summary>
         public readonly bool? PrivateNetworkVisibility;
         /// <summary>

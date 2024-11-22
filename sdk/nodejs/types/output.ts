@@ -5,21 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface ApiOidcConfigIdentityMap {
-    /**
-     * The username (email or service account id) of the CC user that the token should map to.
-     */
-    ccIdentity: string;
-    /**
-     * Indicates that the tokenPrincipal field is a regex value.
-     */
-    isRegex: boolean;
-    /**
-     * The token value that needs to be mapped.
-     */
-    tokenIdentity: string;
-}
-
 export interface ClusterDedicated {
     /**
      * Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
@@ -38,7 +23,7 @@ export interface ClusterDedicated {
      */
     numVirtualCpus: number;
     /**
-     * Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+     * Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
      */
     privateNetworkVisibility: boolean;
     /**
@@ -86,7 +71,7 @@ export interface ClusterServerless {
      */
     spendLimit?: number;
     /**
-     * Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+     * Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
      *   * MANUAL
      *   * AUTOMATIC
      */
@@ -248,7 +233,7 @@ export interface GetCockroachClusterServerless {
      */
     spendLimit: number;
     /**
-     * Dictates the behavior of cockroach major version upgrades.
+     * Dictates the behavior of CockroachDB major version upgrades.
      */
     upgradeType: string;
     usageLimits: outputs.GetCockroachClusterServerlessUsageLimits;
@@ -290,6 +275,17 @@ export interface GetConnectionStringConnectionParams {
      * Username value to use in a connection URL.
      */
     username: string;
+}
+
+export interface JwtIssuerIdentityMap {
+    /**
+     * Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\1).
+     */
+    ccIdentity: string;
+    /**
+     * Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
+     */
+    tokenIdentity: string;
 }
 
 export interface LogExportConfigGroup {

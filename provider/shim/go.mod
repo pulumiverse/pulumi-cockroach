@@ -3,13 +3,13 @@ module github.com/cockroachdb/terraform-provider-cockroach/shim
 go 1.22
 
 require (
-	github.com/cockroachdb/terraform-provider-cockroach v1.8.0
+	github.com/cockroachdb/terraform-provider-cockroach v1.9.0
 	github.com/hashicorp/terraform-plugin-framework v1.6.1
 )
 
 require (
 	github.com/agext/levenshtein v1.2.3 // indirect
-	github.com/cockroachdb/cockroach-cloud-sdk-go/v3 v3.0.0 // indirect
+	github.com/cockroachdb/cockroach-cloud-sdk-go/v4 v4.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/google/uuid v1.4.0 // indirect

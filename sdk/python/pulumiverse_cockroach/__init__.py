@@ -7,7 +7,6 @@ import typing
 # Export this package's modules as members:
 from .allow_list import *
 from .api_key import *
-from .api_oidc_config import *
 from .ca_cert import *
 from .cluster import *
 from .cmek import *
@@ -20,6 +19,7 @@ from .get_connection_string import *
 from .get_folder import *
 from .get_organization import *
 from .get_person_user import *
+from .jwt_issuer import *
 from .log_export_config import *
 from .maintenance_window import *
 from .metric_export_cloudwatch_config import *
@@ -61,14 +61,6 @@ _utilities.register(
   "fqn": "pulumiverse_cockroach",
   "classes": {
    "cockroach:index/apiKey:ApiKey": "ApiKey"
-  }
- },
- {
-  "pkg": "cockroach",
-  "mod": "index/apiOidcConfig",
-  "fqn": "pulumiverse_cockroach",
-  "classes": {
-   "cockroach:index/apiOidcConfig:ApiOidcConfig": "ApiOidcConfig"
   }
  },
  {
@@ -117,6 +109,14 @@ _utilities.register(
   "fqn": "pulumiverse_cockroach",
   "classes": {
    "cockroach:index/folder:Folder": "Folder"
+  }
+ },
+ {
+  "pkg": "cockroach",
+  "mod": "index/jwtIssuer",
+  "fqn": "pulumiverse_cockroach",
+  "classes": {
+   "cockroach:index/jwtIssuer:JwtIssuer": "JwtIssuer"
   }
  },
  {

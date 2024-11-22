@@ -26,7 +26,7 @@ namespace Pulumiverse.Cockroach.Inputs
         public Input<int>? SpendLimit { get; set; }
 
         /// <summary>
-        /// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+        /// Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
         ///   * MANUAL
         ///   * AUTOMATIC
         /// </summary>
