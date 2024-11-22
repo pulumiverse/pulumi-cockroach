@@ -12,31 +12,24 @@ namespace Pulumiverse.Cockroach.Outputs
 {
 
     [OutputType]
-    public sealed class ApiOidcConfigIdentityMap
+    public sealed class JwtIssuerIdentityMap
     {
         /// <summary>
-        /// The username (email or service account id) of the CC user that the token should map to.
+        /// Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\1).
         /// </summary>
         public readonly string CcIdentity;
         /// <summary>
-        /// Indicates that the token_principal field is a regex value.
-        /// </summary>
-        public readonly bool? IsRegex;
-        /// <summary>
-        /// The token value that needs to be mapped.
+        /// Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
         /// </summary>
         public readonly string TokenIdentity;
 
         [OutputConstructor]
-        private ApiOidcConfigIdentityMap(
+        private JwtIssuerIdentityMap(
             string ccIdentity,
-
-            bool? isRegex,
 
             string tokenIdentity)
         {
             CcIdentity = ccIdentity;
-            IsRegex = isRegex;
             TokenIdentity = tokenIdentity;
         }
     }

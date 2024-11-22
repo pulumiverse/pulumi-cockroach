@@ -15,11 +15,6 @@ export type ApiKey = import("./apiKey").ApiKey;
 export const ApiKey: typeof import("./apiKey").ApiKey = null as any;
 utilities.lazyLoad(exports, ["ApiKey"], () => require("./apiKey"));
 
-export { ApiOidcConfigArgs, ApiOidcConfigState } from "./apiOidcConfig";
-export type ApiOidcConfig = import("./apiOidcConfig").ApiOidcConfig;
-export const ApiOidcConfig: typeof import("./apiOidcConfig").ApiOidcConfig = null as any;
-utilities.lazyLoad(exports, ["ApiOidcConfig"], () => require("./apiOidcConfig"));
-
 export { CaCertArgs, CaCertState } from "./caCert";
 export type CaCert = import("./caCert").CaCert;
 export const CaCert: typeof import("./caCert").CaCert = null as any;
@@ -79,6 +74,11 @@ export { GetPersonUserArgs, GetPersonUserResult, GetPersonUserOutputArgs } from 
 export const getPersonUser: typeof import("./getPersonUser").getPersonUser = null as any;
 export const getPersonUserOutput: typeof import("./getPersonUser").getPersonUserOutput = null as any;
 utilities.lazyLoad(exports, ["getPersonUser","getPersonUserOutput"], () => require("./getPersonUser"));
+
+export { JwtIssuerArgs, JwtIssuerState } from "./jwtIssuer";
+export type JwtIssuer = import("./jwtIssuer").JwtIssuer;
+export const JwtIssuer: typeof import("./jwtIssuer").JwtIssuer = null as any;
+utilities.lazyLoad(exports, ["JwtIssuer"], () => require("./jwtIssuer"));
 
 export { LogExportConfigArgs, LogExportConfigState } from "./logExportConfig";
 export type LogExportConfig = import("./logExportConfig").LogExportConfig;
@@ -168,8 +168,6 @@ const _module = {
                 return new AllowList(name, <any>undefined, { urn })
             case "cockroach:index/apiKey:ApiKey":
                 return new ApiKey(name, <any>undefined, { urn })
-            case "cockroach:index/apiOidcConfig:ApiOidcConfig":
-                return new ApiOidcConfig(name, <any>undefined, { urn })
             case "cockroach:index/caCert:CaCert":
                 return new CaCert(name, <any>undefined, { urn })
             case "cockroach:index/cluster:Cluster":
@@ -182,6 +180,8 @@ const _module = {
                 return new FinalizeVersionUpgrade(name, <any>undefined, { urn })
             case "cockroach:index/folder:Folder":
                 return new Folder(name, <any>undefined, { urn })
+            case "cockroach:index/jwtIssuer:JwtIssuer":
+                return new JwtIssuer(name, <any>undefined, { urn })
             case "cockroach:index/logExportConfig:LogExportConfig":
                 return new LogExportConfig(name, <any>undefined, { urn })
             case "cockroach:index/maintenanceWindow:MaintenanceWindow":
@@ -215,13 +215,13 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("cockroach", "index/allowList", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/apiKey", _module)
-pulumi.runtime.registerResourceModule("cockroach", "index/apiOidcConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/caCert", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/cluster", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/cmek", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/database", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/finalizeVersionUpgrade", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/folder", _module)
+pulumi.runtime.registerResourceModule("cockroach", "index/jwtIssuer", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/logExportConfig", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/maintenanceWindow", _module)
 pulumi.runtime.registerResourceModule("cockroach", "index/metricExportCloudwatchConfig", _module)

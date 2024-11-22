@@ -25,8 +25,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AllowList{}
 	case "cockroach:index/apiKey:ApiKey":
 		r = &ApiKey{}
-	case "cockroach:index/apiOidcConfig:ApiOidcConfig":
-		r = &ApiOidcConfig{}
 	case "cockroach:index/caCert:CaCert":
 		r = &CaCert{}
 	case "cockroach:index/cluster:Cluster":
@@ -39,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &FinalizeVersionUpgrade{}
 	case "cockroach:index/folder:Folder":
 		r = &Folder{}
+	case "cockroach:index/jwtIssuer:JwtIssuer":
+		r = &JwtIssuer{}
 	case "cockroach:index/logExportConfig:LogExportConfig":
 		r = &LogExportConfig{}
 	case "cockroach:index/maintenanceWindow:MaintenanceWindow":
@@ -108,11 +108,6 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"cockroach",
-		"index/apiOidcConfig",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"cockroach",
 		"index/caCert",
 		&module{version},
 	)
@@ -139,6 +134,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cockroach",
 		"index/folder",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cockroach",
+		"index/jwtIssuer",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

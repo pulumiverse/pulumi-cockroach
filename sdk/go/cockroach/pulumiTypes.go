@@ -13,121 +13,6 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-type ApiOidcConfigIdentityMap struct {
-	// The username (email or service account id) of the CC user that the token should map to.
-	CcIdentity string `pulumi:"ccIdentity"`
-	// Indicates that the tokenPrincipal field is a regex value.
-	IsRegex *bool `pulumi:"isRegex"`
-	// The token value that needs to be mapped.
-	TokenIdentity string `pulumi:"tokenIdentity"`
-}
-
-// ApiOidcConfigIdentityMapInput is an input type that accepts ApiOidcConfigIdentityMap and ApiOidcConfigIdentityMapOutput values.
-// You can construct a concrete instance of `ApiOidcConfigIdentityMapInput` via:
-//
-//	ApiOidcConfigIdentityMap{ "key": ApiOidcConfigIdentityArgs{...} }
-type ApiOidcConfigIdentityMapInput interface {
-	pulumi.Input
-
-	ToApiOidcConfigIdentityMapOutput() ApiOidcConfigIdentityMapOutput
-	ToApiOidcConfigIdentityMapOutputWithContext(context.Context) ApiOidcConfigIdentityMapOutput
-}
-
-type ApiOidcConfigIdentityMapArgs struct {
-	// The username (email or service account id) of the CC user that the token should map to.
-	CcIdentity pulumi.StringInput `pulumi:"ccIdentity"`
-	// Indicates that the tokenPrincipal field is a regex value.
-	IsRegex pulumi.BoolPtrInput `pulumi:"isRegex"`
-	// The token value that needs to be mapped.
-	TokenIdentity pulumi.StringInput `pulumi:"tokenIdentity"`
-}
-
-func (ApiOidcConfigIdentityMapArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApiOidcConfigIdentityMap)(nil)).Elem()
-}
-
-func (i ApiOidcConfigIdentityMapArgs) ToApiOidcConfigIdentityMapOutput() ApiOidcConfigIdentityMapOutput {
-	return i.ToApiOidcConfigIdentityMapOutputWithContext(context.Background())
-}
-
-func (i ApiOidcConfigIdentityMapArgs) ToApiOidcConfigIdentityMapOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApiOidcConfigIdentityMapOutput)
-}
-
-// ApiOidcConfigIdentityMapArrayInput is an input type that accepts ApiOidcConfigIdentityMapArray and ApiOidcConfigIdentityMapArrayOutput values.
-// You can construct a concrete instance of `ApiOidcConfigIdentityMapArrayInput` via:
-//
-//	ApiOidcConfigIdentityMapArray{ ApiOidcConfigIdentityMapArgs{...} }
-type ApiOidcConfigIdentityMapArrayInput interface {
-	pulumi.Input
-
-	ToApiOidcConfigIdentityMapArrayOutput() ApiOidcConfigIdentityMapArrayOutput
-	ToApiOidcConfigIdentityMapArrayOutputWithContext(context.Context) ApiOidcConfigIdentityMapArrayOutput
-}
-
-type ApiOidcConfigIdentityMapArray []ApiOidcConfigIdentityMapInput
-
-func (ApiOidcConfigIdentityMapArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ApiOidcConfigIdentityMap)(nil)).Elem()
-}
-
-func (i ApiOidcConfigIdentityMapArray) ToApiOidcConfigIdentityMapArrayOutput() ApiOidcConfigIdentityMapArrayOutput {
-	return i.ToApiOidcConfigIdentityMapArrayOutputWithContext(context.Background())
-}
-
-func (i ApiOidcConfigIdentityMapArray) ToApiOidcConfigIdentityMapArrayOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApiOidcConfigIdentityMapArrayOutput)
-}
-
-type ApiOidcConfigIdentityMapOutput struct{ *pulumi.OutputState }
-
-func (ApiOidcConfigIdentityMapOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApiOidcConfigIdentityMap)(nil)).Elem()
-}
-
-func (o ApiOidcConfigIdentityMapOutput) ToApiOidcConfigIdentityMapOutput() ApiOidcConfigIdentityMapOutput {
-	return o
-}
-
-func (o ApiOidcConfigIdentityMapOutput) ToApiOidcConfigIdentityMapOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapOutput {
-	return o
-}
-
-// The username (email or service account id) of the CC user that the token should map to.
-func (o ApiOidcConfigIdentityMapOutput) CcIdentity() pulumi.StringOutput {
-	return o.ApplyT(func(v ApiOidcConfigIdentityMap) string { return v.CcIdentity }).(pulumi.StringOutput)
-}
-
-// Indicates that the tokenPrincipal field is a regex value.
-func (o ApiOidcConfigIdentityMapOutput) IsRegex() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ApiOidcConfigIdentityMap) *bool { return v.IsRegex }).(pulumi.BoolPtrOutput)
-}
-
-// The token value that needs to be mapped.
-func (o ApiOidcConfigIdentityMapOutput) TokenIdentity() pulumi.StringOutput {
-	return o.ApplyT(func(v ApiOidcConfigIdentityMap) string { return v.TokenIdentity }).(pulumi.StringOutput)
-}
-
-type ApiOidcConfigIdentityMapArrayOutput struct{ *pulumi.OutputState }
-
-func (ApiOidcConfigIdentityMapArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ApiOidcConfigIdentityMap)(nil)).Elem()
-}
-
-func (o ApiOidcConfigIdentityMapArrayOutput) ToApiOidcConfigIdentityMapArrayOutput() ApiOidcConfigIdentityMapArrayOutput {
-	return o
-}
-
-func (o ApiOidcConfigIdentityMapArrayOutput) ToApiOidcConfigIdentityMapArrayOutputWithContext(ctx context.Context) ApiOidcConfigIdentityMapArrayOutput {
-	return o
-}
-
-func (o ApiOidcConfigIdentityMapArrayOutput) Index(i pulumi.IntInput) ApiOidcConfigIdentityMapOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApiOidcConfigIdentityMap {
-		return vs[0].([]ApiOidcConfigIdentityMap)[vs[1].(int)]
-	}).(ApiOidcConfigIdentityMapOutput)
-}
-
 type ClusterDedicated struct {
 	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
 	DiskIops *int `pulumi:"diskIops"`
@@ -137,7 +22,7 @@ type ClusterDedicated struct {
 	MemoryGib *float64 `pulumi:"memoryGib"`
 	// Number of virtual CPUs per node in the cluster.
 	NumVirtualCpus *int `pulumi:"numVirtualCpus"`
-	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
 	PrivateNetworkVisibility *bool `pulumi:"privateNetworkVisibility"`
 	// Storage amount per node in GiB.
 	StorageGib *int `pulumi:"storageGib"`
@@ -163,7 +48,7 @@ type ClusterDedicatedArgs struct {
 	MemoryGib pulumi.Float64PtrInput `pulumi:"memoryGib"`
 	// Number of virtual CPUs per node in the cluster.
 	NumVirtualCpus pulumi.IntPtrInput `pulumi:"numVirtualCpus"`
-	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+	// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
 	PrivateNetworkVisibility pulumi.BoolPtrInput `pulumi:"privateNetworkVisibility"`
 	// Storage amount per node in GiB.
 	StorageGib pulumi.IntPtrInput `pulumi:"storageGib"`
@@ -266,7 +151,7 @@ func (o ClusterDedicatedOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.NumVirtualCpus }).(pulumi.IntPtrOutput)
 }
 
-// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
 func (o ClusterDedicatedOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *bool { return v.PrivateNetworkVisibility }).(pulumi.BoolPtrOutput)
 }
@@ -340,7 +225,7 @@ func (o ClusterDedicatedPtrOutput) NumVirtualCpus() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+// Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
 func (o ClusterDedicatedPtrOutput) PrivateNetworkVisibility() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *bool {
 		if v == nil {
@@ -509,7 +394,7 @@ type ClusterServerless struct {
 	//
 	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 	SpendLimit *int `pulumi:"spendLimit"`
-	// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+	// Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
 	//   * MANUAL
 	//   * AUTOMATIC
 	UpgradeType *string                       `pulumi:"upgradeType"`
@@ -534,7 +419,7 @@ type ClusterServerlessArgs struct {
 	//
 	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 	SpendLimit pulumi.IntPtrInput `pulumi:"spendLimit"`
-	// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+	// Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
 	//   * MANUAL
 	//   * AUTOMATIC
 	UpgradeType pulumi.StringPtrInput                `pulumi:"upgradeType"`
@@ -630,7 +515,7 @@ func (o ClusterServerlessOutput) SpendLimit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterServerless) *int { return v.SpendLimit }).(pulumi.IntPtrOutput)
 }
 
-// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+// Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
 //   - MANUAL
 //   - AUTOMATIC
 func (o ClusterServerlessOutput) UpgradeType() pulumi.StringPtrOutput {
@@ -687,7 +572,7 @@ func (o ClusterServerlessPtrOutput) SpendLimit() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are:
+// Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
 //   - MANUAL
 //   - AUTOMATIC
 func (o ClusterServerlessPtrOutput) UpgradeType() pulumi.StringPtrOutput {
@@ -1250,6 +1135,112 @@ func (o CmekRegionKeyOutput) Uri() pulumi.StringOutput {
 // Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
 func (o CmekRegionKeyOutput) UserMessage() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CmekRegionKey) *string { return v.UserMessage }).(pulumi.StringPtrOutput)
+}
+
+type JwtIssuerIdentityMap struct {
+	// Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\1).
+	CcIdentity string `pulumi:"ccIdentity"`
+	// Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
+	TokenIdentity string `pulumi:"tokenIdentity"`
+}
+
+// JwtIssuerIdentityMapInput is an input type that accepts JwtIssuerIdentityMap and JwtIssuerIdentityMapOutput values.
+// You can construct a concrete instance of `JwtIssuerIdentityMapInput` via:
+//
+//	JwtIssuerIdentityMap{ "key": JwtIssuerIdentityArgs{...} }
+type JwtIssuerIdentityMapInput interface {
+	pulumi.Input
+
+	ToJwtIssuerIdentityMapOutput() JwtIssuerIdentityMapOutput
+	ToJwtIssuerIdentityMapOutputWithContext(context.Context) JwtIssuerIdentityMapOutput
+}
+
+type JwtIssuerIdentityMapArgs struct {
+	// Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\1).
+	CcIdentity pulumi.StringInput `pulumi:"ccIdentity"`
+	// Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
+	TokenIdentity pulumi.StringInput `pulumi:"tokenIdentity"`
+}
+
+func (JwtIssuerIdentityMapArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*JwtIssuerIdentityMap)(nil)).Elem()
+}
+
+func (i JwtIssuerIdentityMapArgs) ToJwtIssuerIdentityMapOutput() JwtIssuerIdentityMapOutput {
+	return i.ToJwtIssuerIdentityMapOutputWithContext(context.Background())
+}
+
+func (i JwtIssuerIdentityMapArgs) ToJwtIssuerIdentityMapOutputWithContext(ctx context.Context) JwtIssuerIdentityMapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(JwtIssuerIdentityMapOutput)
+}
+
+// JwtIssuerIdentityMapArrayInput is an input type that accepts JwtIssuerIdentityMapArray and JwtIssuerIdentityMapArrayOutput values.
+// You can construct a concrete instance of `JwtIssuerIdentityMapArrayInput` via:
+//
+//	JwtIssuerIdentityMapArray{ JwtIssuerIdentityMapArgs{...} }
+type JwtIssuerIdentityMapArrayInput interface {
+	pulumi.Input
+
+	ToJwtIssuerIdentityMapArrayOutput() JwtIssuerIdentityMapArrayOutput
+	ToJwtIssuerIdentityMapArrayOutputWithContext(context.Context) JwtIssuerIdentityMapArrayOutput
+}
+
+type JwtIssuerIdentityMapArray []JwtIssuerIdentityMapInput
+
+func (JwtIssuerIdentityMapArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]JwtIssuerIdentityMap)(nil)).Elem()
+}
+
+func (i JwtIssuerIdentityMapArray) ToJwtIssuerIdentityMapArrayOutput() JwtIssuerIdentityMapArrayOutput {
+	return i.ToJwtIssuerIdentityMapArrayOutputWithContext(context.Background())
+}
+
+func (i JwtIssuerIdentityMapArray) ToJwtIssuerIdentityMapArrayOutputWithContext(ctx context.Context) JwtIssuerIdentityMapArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(JwtIssuerIdentityMapArrayOutput)
+}
+
+type JwtIssuerIdentityMapOutput struct{ *pulumi.OutputState }
+
+func (JwtIssuerIdentityMapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*JwtIssuerIdentityMap)(nil)).Elem()
+}
+
+func (o JwtIssuerIdentityMapOutput) ToJwtIssuerIdentityMapOutput() JwtIssuerIdentityMapOutput {
+	return o
+}
+
+func (o JwtIssuerIdentityMapOutput) ToJwtIssuerIdentityMapOutputWithContext(ctx context.Context) JwtIssuerIdentityMapOutput {
+	return o
+}
+
+// Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\1).
+func (o JwtIssuerIdentityMapOutput) CcIdentity() pulumi.StringOutput {
+	return o.ApplyT(func(v JwtIssuerIdentityMap) string { return v.CcIdentity }).(pulumi.StringOutput)
+}
+
+// Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
+func (o JwtIssuerIdentityMapOutput) TokenIdentity() pulumi.StringOutput {
+	return o.ApplyT(func(v JwtIssuerIdentityMap) string { return v.TokenIdentity }).(pulumi.StringOutput)
+}
+
+type JwtIssuerIdentityMapArrayOutput struct{ *pulumi.OutputState }
+
+func (JwtIssuerIdentityMapArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]JwtIssuerIdentityMap)(nil)).Elem()
+}
+
+func (o JwtIssuerIdentityMapArrayOutput) ToJwtIssuerIdentityMapArrayOutput() JwtIssuerIdentityMapArrayOutput {
+	return o
+}
+
+func (o JwtIssuerIdentityMapArrayOutput) ToJwtIssuerIdentityMapArrayOutputWithContext(ctx context.Context) JwtIssuerIdentityMapArrayOutput {
+	return o
+}
+
+func (o JwtIssuerIdentityMapArrayOutput) Index(i pulumi.IntInput) JwtIssuerIdentityMapOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) JwtIssuerIdentityMap {
+		return vs[0].([]JwtIssuerIdentityMap)[vs[1].(int)]
+	}).(JwtIssuerIdentityMapOutput)
 }
 
 type LogExportConfigGroup struct {
@@ -2648,7 +2639,7 @@ type GetCockroachClusterServerless struct {
 	//
 	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 	SpendLimit int `pulumi:"spendLimit"`
-	// Dictates the behavior of cockroach major version upgrades.
+	// Dictates the behavior of CockroachDB major version upgrades.
 	UpgradeType string                                   `pulumi:"upgradeType"`
 	UsageLimits GetCockroachClusterServerlessUsageLimits `pulumi:"usageLimits"`
 }
@@ -2671,7 +2662,7 @@ type GetCockroachClusterServerlessArgs struct {
 	//
 	// Deprecated: The `spendLimit` attribute is deprecated and will be removed in a future release of the provider. Configure 'usage_limits' instead.
 	SpendLimit pulumi.IntInput `pulumi:"spendLimit"`
-	// Dictates the behavior of cockroach major version upgrades.
+	// Dictates the behavior of CockroachDB major version upgrades.
 	UpgradeType pulumi.StringInput                            `pulumi:"upgradeType"`
 	UsageLimits GetCockroachClusterServerlessUsageLimitsInput `pulumi:"usageLimits"`
 }
@@ -2714,7 +2705,7 @@ func (o GetCockroachClusterServerlessOutput) SpendLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerless) int { return v.SpendLimit }).(pulumi.IntOutput)
 }
 
-// Dictates the behavior of cockroach major version upgrades.
+// Dictates the behavior of CockroachDB major version upgrades.
 func (o GetCockroachClusterServerlessOutput) UpgradeType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCockroachClusterServerless) string { return v.UpgradeType }).(pulumi.StringOutput)
 }
@@ -2882,8 +2873,6 @@ func (o GetConnectionStringConnectionParamsOutput) Username() pulumi.StringOutpu
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ApiOidcConfigIdentityMapInput)(nil)).Elem(), ApiOidcConfigIdentityMapArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ApiOidcConfigIdentityMapArrayInput)(nil)).Elem(), ApiOidcConfigIdentityMapArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDedicatedInput)(nil)).Elem(), ClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterDedicatedPtrInput)(nil)).Elem(), ClusterDedicatedArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRegionInput)(nil)).Elem(), ClusterRegionArgs{})
@@ -2897,6 +2886,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CmekRegionInput)(nil)).Elem(), CmekRegionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CmekRegionArrayInput)(nil)).Elem(), CmekRegionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CmekRegionKeyInput)(nil)).Elem(), CmekRegionKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*JwtIssuerIdentityMapInput)(nil)).Elem(), JwtIssuerIdentityMapArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*JwtIssuerIdentityMapArrayInput)(nil)).Elem(), JwtIssuerIdentityMapArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogExportConfigGroupInput)(nil)).Elem(), LogExportConfigGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LogExportConfigGroupArrayInput)(nil)).Elem(), LogExportConfigGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PrivateEndpointServicesServiceInput)(nil)).Elem(), PrivateEndpointServicesServiceArgs{})
@@ -2917,8 +2908,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterServerlessInput)(nil)).Elem(), GetCockroachClusterServerlessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCockroachClusterServerlessUsageLimitsInput)(nil)).Elem(), GetCockroachClusterServerlessUsageLimitsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConnectionStringConnectionParamsInput)(nil)).Elem(), GetConnectionStringConnectionParamsArgs{})
-	pulumi.RegisterOutputType(ApiOidcConfigIdentityMapOutput{})
-	pulumi.RegisterOutputType(ApiOidcConfigIdentityMapArrayOutput{})
 	pulumi.RegisterOutputType(ClusterDedicatedOutput{})
 	pulumi.RegisterOutputType(ClusterDedicatedPtrOutput{})
 	pulumi.RegisterOutputType(ClusterRegionOutput{})
@@ -2932,6 +2921,8 @@ func init() {
 	pulumi.RegisterOutputType(CmekRegionOutput{})
 	pulumi.RegisterOutputType(CmekRegionArrayOutput{})
 	pulumi.RegisterOutputType(CmekRegionKeyOutput{})
+	pulumi.RegisterOutputType(JwtIssuerIdentityMapOutput{})
+	pulumi.RegisterOutputType(JwtIssuerIdentityMapArrayOutput{})
 	pulumi.RegisterOutputType(LogExportConfigGroupOutput{})
 	pulumi.RegisterOutputType(LogExportConfigGroupArrayOutput{})
 	pulumi.RegisterOutputType(PrivateEndpointServicesServiceOutput{})

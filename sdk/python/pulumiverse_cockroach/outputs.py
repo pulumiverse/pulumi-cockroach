@@ -16,7 +16,6 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
-    'ApiOidcConfigIdentityMap',
     'ClusterDedicated',
     'ClusterRegion',
     'ClusterServerless',
@@ -24,6 +23,7 @@ __all__ = [
     'CmekAdditionalRegion',
     'CmekRegion',
     'CmekRegionKey',
+    'JwtIssuerIdentityMap',
     'LogExportConfigGroup',
     'PrivateEndpointServicesService',
     'PrivateEndpointServicesServiceAws',
@@ -37,68 +37,6 @@ __all__ = [
     'GetCockroachClusterServerlessUsageLimitsResult',
     'GetConnectionStringConnectionParamsResult',
 ]
-
-@pulumi.output_type
-class ApiOidcConfigIdentityMap(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "ccIdentity":
-            suggest = "cc_identity"
-        elif key == "tokenIdentity":
-            suggest = "token_identity"
-        elif key == "isRegex":
-            suggest = "is_regex"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ApiOidcConfigIdentityMap. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ApiOidcConfigIdentityMap.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ApiOidcConfigIdentityMap.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 cc_identity: str,
-                 token_identity: str,
-                 is_regex: Optional[bool] = None):
-        """
-        :param str cc_identity: The username (email or service account id) of the CC user that the token should map to.
-        :param str token_identity: The token value that needs to be mapped.
-        :param bool is_regex: Indicates that the token_principal field is a regex value.
-        """
-        pulumi.set(__self__, "cc_identity", cc_identity)
-        pulumi.set(__self__, "token_identity", token_identity)
-        if is_regex is not None:
-            pulumi.set(__self__, "is_regex", is_regex)
-
-    @property
-    @pulumi.getter(name="ccIdentity")
-    def cc_identity(self) -> str:
-        """
-        The username (email or service account id) of the CC user that the token should map to.
-        """
-        return pulumi.get(self, "cc_identity")
-
-    @property
-    @pulumi.getter(name="tokenIdentity")
-    def token_identity(self) -> str:
-        """
-        The token value that needs to be mapped.
-        """
-        return pulumi.get(self, "token_identity")
-
-    @property
-    @pulumi.getter(name="isRegex")
-    def is_regex(self) -> Optional[bool]:
-        """
-        Indicates that the token_principal field is a regex value.
-        """
-        return pulumi.get(self, "is_regex")
-
 
 @pulumi.output_type
 class ClusterDedicated(dict):
@@ -141,7 +79,7 @@ class ClusterDedicated(dict):
         :param str machine_type: Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
         :param float memory_gib: Memory per node in GiB.
         :param int num_virtual_cpus: Number of virtual CPUs per node in the cluster.
-        :param bool private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+        :param bool private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
         :param int storage_gib: Storage amount per node in GiB.
         """
         if disk_iops is not None:
@@ -193,7 +131,7 @@ class ClusterDedicated(dict):
     @pulumi.getter(name="privateNetworkVisibility")
     def private_network_visibility(self) -> Optional[bool]:
         """
-        Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.
+        Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
         """
         return pulumi.get(self, "private_network_visibility")
 
@@ -340,7 +278,7 @@ class ClusterServerless(dict):
         """
         :param str routing_id: Cluster identifier in a connection string.
         :param int spend_limit: Spend limit in US cents.
-        :param str upgrade_type: Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+        :param str upgrade_type: Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
                  * MANUAL
                  * AUTOMATIC
         """
@@ -374,7 +312,7 @@ class ClusterServerless(dict):
     @pulumi.getter(name="upgradeType")
     def upgrade_type(self) -> Optional[str]:
         """
-        Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: 
+        Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:
           * MANUAL
           * AUTOMATIC
         """
@@ -703,6 +641,54 @@ class CmekRegionKey(dict):
         Elaborates on the key's status and hints at how to fix issues that may have occurred during asynchronous key operations.
         """
         return pulumi.get(self, "user_message")
+
+
+@pulumi.output_type
+class JwtIssuerIdentityMap(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ccIdentity":
+            suggest = "cc_identity"
+        elif key == "tokenIdentity":
+            suggest = "token_identity"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in JwtIssuerIdentityMap. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        JwtIssuerIdentityMap.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        JwtIssuerIdentityMap.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cc_identity: str,
+                 token_identity: str):
+        """
+        :param str cc_identity: Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \\1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\\\1).
+        :param str token_identity: Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
+        """
+        pulumi.set(__self__, "cc_identity", cc_identity)
+        pulumi.set(__self__, "token_identity", token_identity)
+
+    @property
+    @pulumi.getter(name="ccIdentity")
+    def cc_identity(self) -> str:
+        """
+        Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \\1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\\\1).
+        """
+        return pulumi.get(self, "cc_identity")
+
+    @property
+    @pulumi.getter(name="tokenIdentity")
+    def token_identity(self) -> str:
+        """
+        Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.
+        """
+        return pulumi.get(self, "token_identity")
 
 
 @pulumi.output_type
@@ -1455,7 +1441,7 @@ class GetCockroachClusterServerlessResult(dict):
         """
         :param str routing_id: Cluster identifier in a connection string.
         :param int spend_limit: Spend limit in US cents.
-        :param str upgrade_type: Dictates the behavior of cockroach major version upgrades.
+        :param str upgrade_type: Dictates the behavior of CockroachDB major version upgrades.
         """
         pulumi.set(__self__, "routing_id", routing_id)
         pulumi.set(__self__, "spend_limit", spend_limit)
@@ -1483,7 +1469,7 @@ class GetCockroachClusterServerlessResult(dict):
     @pulumi.getter(name="upgradeType")
     def upgrade_type(self) -> str:
         """
-        Dictates the behavior of cockroach major version upgrades.
+        Dictates the behavior of CockroachDB major version upgrades.
         """
         return pulumi.get(self, "upgrade_type")
 

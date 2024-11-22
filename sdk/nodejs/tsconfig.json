@@ -15,7 +15,6 @@
     "files": [
         "allowList.ts",
         "apiKey.ts",
-        "apiOidcConfig.ts",
         "caCert.ts",
         "cluster.ts",
         "cmek.ts",
@@ -31,6 +30,7 @@
         "getOrganization.ts",
         "getPersonUser.ts",
         "index.ts",
+        "jwtIssuer.ts",
         "logExportConfig.ts",
         "maintenanceWindow.ts",
         "metricExportCloudwatchConfig.ts",
