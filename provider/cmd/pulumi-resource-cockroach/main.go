@@ -13,7 +13,7 @@ import (
 
 	_ "embed"
 
-	tfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	tfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 
 	cockroach "github.com/pulumiverse/pulumi-cockroach/provider"
 )
