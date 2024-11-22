@@ -12,6 +12,20 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Configuration to manage external JSON Web Token (JWT) Issuers for authentication to the CockroachDB Cloud API.
+    /// 
+    /// ## Import
+    /// 
+    /// JWT Issuer ID can be found by running a GET against the Cockroach Cloud API to
+    /// 
+    /// list all existing JWT issuers.
+    /// 
+    /// https://www.cockroachlabs.com/docs/api/cloud/v1#get-/api/v1/jwt-issuers
+    /// 
+    /// format: &lt;jwt issuer id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/jwtIssuer:JwtIssuer my_issuer 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/jwtIssuer:JwtIssuer")]
     public partial class JwtIssuer : global::Pulumi.CustomResource

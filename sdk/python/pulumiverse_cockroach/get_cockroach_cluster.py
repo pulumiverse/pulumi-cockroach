@@ -27,10 +27,13 @@ class GetCockroachClusterResult:
     """
     A collection of values returned by getCockroachCluster.
     """
-    def __init__(__self__, account_id=None, cloud_provider=None, cockroach_version=None, creator_id=None, dedicated=None, delete_protection=None, id=None, name=None, operation_status=None, parent_id=None, plan=None, regions=None, serverless=None, state=None, upgrade_status=None):
+    def __init__(__self__, account_id=None, backup_config=None, cloud_provider=None, cockroach_version=None, creator_id=None, dedicated=None, delete_protection=None, id=None, name=None, operation_status=None, parent_id=None, plan=None, regions=None, serverless=None, state=None, upgrade_status=None):
         if account_id and not isinstance(account_id, str):
             raise TypeError("Expected argument 'account_id' to be a str")
         pulumi.set(__self__, "account_id", account_id)
+        if backup_config and not isinstance(backup_config, dict):
+            raise TypeError("Expected argument 'backup_config' to be a dict")
+        pulumi.set(__self__, "backup_config", backup_config)
         if cloud_provider and not isinstance(cloud_provider, str):
             raise TypeError("Expected argument 'cloud_provider' to be a str")
         pulumi.set(__self__, "cloud_provider", cloud_provider)
@@ -78,6 +81,11 @@ class GetCockroachClusterResult:
     @pulumi.getter(name="accountId")
     def account_id(self) -> str:
         return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter(name="backupConfig")
+    def backup_config(self) -> 'outputs.GetCockroachClusterBackupConfigResult':
+        return pulumi.get(self, "backup_config")
 
     @property
     @pulumi.getter(name="cloudProvider")
@@ -157,6 +165,7 @@ class AwaitableGetCockroachClusterResult(GetCockroachClusterResult):
             yield self
         return GetCockroachClusterResult(
             account_id=self.account_id,
+            backup_config=self.backup_config,
             cloud_provider=self.cloud_provider,
             cockroach_version=self.cockroach_version,
             creator_id=self.creator_id,
@@ -196,6 +205,7 @@ def get_cockroach_cluster(id: Optional[str] = None,
 
     return AwaitableGetCockroachClusterResult(
         account_id=pulumi.get(__ret__, 'account_id'),
+        backup_config=pulumi.get(__ret__, 'backup_config'),
         cloud_provider=pulumi.get(__ret__, 'cloud_provider'),
         cockroach_version=pulumi.get(__ret__, 'cockroach_version'),
         creator_id=pulumi.get(__ret__, 'creator_id'),
@@ -232,6 +242,7 @@ def get_cockroach_cluster_output(id: Optional[pulumi.Input[str]] = None,
     __ret__ = pulumi.runtime.invoke_output('cockroach:index/getCockroachCluster:getCockroachCluster', __args__, opts=opts, typ=GetCockroachClusterResult)
     return __ret__.apply(lambda __response__: GetCockroachClusterResult(
         account_id=pulumi.get(__response__, 'account_id'),
+        backup_config=pulumi.get(__response__, 'backup_config'),
         cloud_provider=pulumi.get(__response__, 'cloud_provider'),
         cockroach_version=pulumi.get(__response__, 'cockroach_version'),
         creator_id=pulumi.get(__response__, 'creator_id'),

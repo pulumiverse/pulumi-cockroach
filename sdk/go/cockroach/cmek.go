@@ -28,8 +28,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cockroach.NewCmek(ctx, "dedicated", &cockroach.CmekArgs{
-//				ClusterId: pulumi.Any(dedicatedCockroachCluster.Id),
+//			_, err := cockroach.NewCmek(ctx, "advanced", &cockroach.CmekArgs{
+//				ClusterId: pulumi.Any(advancedCockroachCluster.Id),
 //				Regions: cockroach.CmekRegionArray{
 //					&cockroach.CmekRegionArgs{
 //						Region: pulumi.String("us-central-1"),
@@ -48,6 +48,14 @@ import (
 //		})
 //	}
 //
+// ```
+//
+// ## Import
+//
+// format: <cluster id>
+//
+// ```sh
+// $ pulumi import cockroach:index/cmek:Cmek advanced 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
 // ```
 type Cmek struct {
 	pulumi.CustomResourceState

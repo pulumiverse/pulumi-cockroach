@@ -18,7 +18,12 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
-	// apikey to access cockroach cloud
+	// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+	// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+	// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+	// variable, and should contain either a user email address or a service account ID.
+	Apijwt pulumi.StringPtrOutput `pulumi:"apijwt"`
+	// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
 	Apikey pulumi.StringPtrOutput `pulumi:"apikey"`
 }
 
@@ -29,10 +34,14 @@ func NewProvider(ctx *pulumi.Context,
 		args = &ProviderArgs{}
 	}
 
+	if args.Apijwt != nil {
+		args.Apijwt = pulumi.ToSecret(args.Apijwt).(pulumi.StringPtrInput)
+	}
 	if args.Apikey != nil {
 		args.Apikey = pulumi.ToSecret(args.Apikey).(pulumi.StringPtrInput)
 	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"apijwt",
 		"apikey",
 	})
 	opts = append(opts, secrets)
@@ -46,13 +55,23 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	// apikey to access cockroach cloud
+	// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+	// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+	// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+	// variable, and should contain either a user email address or a service account ID.
+	Apijwt *string `pulumi:"apijwt"`
+	// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
 	Apikey *string `pulumi:"apikey"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	// apikey to access cockroach cloud
+	// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+	// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+	// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+	// variable, and should contain either a user email address or a service account ID.
+	Apijwt pulumi.StringPtrInput
+	// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
 	Apikey pulumi.StringPtrInput
 }
 
@@ -93,7 +112,15 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
-// apikey to access cockroach cloud
+// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+// variable, and should contain either a user email address or a service account ID.
+func (o ProviderOutput) Apijwt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Apijwt }).(pulumi.StringPtrOutput)
+}
+
+// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
 func (o ProviderOutput) Apikey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Apikey }).(pulumi.StringPtrOutput)
 }

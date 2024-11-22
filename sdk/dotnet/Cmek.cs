@@ -23,9 +23,9 @@ namespace Pulumiverse.Cockroach
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var dedicated = new Cockroach.Cmek("dedicated", new()
+    ///     var advanced = new Cockroach.Cmek("advanced", new()
     ///     {
-    ///         ClusterId = dedicatedCockroachCluster.Id,
+    ///         ClusterId = advancedCockroachCluster.Id,
     ///         Regions = new[]
     ///         {
     ///             new Cockroach.Inputs.CmekRegionArgs
@@ -42,6 +42,14 @@ namespace Pulumiverse.Cockroach
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/cmek:Cmek advanced 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
     /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/cmek:Cmek")]

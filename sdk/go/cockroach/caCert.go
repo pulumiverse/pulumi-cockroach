@@ -44,6 +44,14 @@ import (
 //	}
 //
 // ```
+//
+// ## Import
+//
+// format: <cluster id>
+//
+// ```sh
+// $ pulumi import cockroach:index/caCert:CaCert prod 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type CaCert struct {
 	pulumi.CustomResourceState
 

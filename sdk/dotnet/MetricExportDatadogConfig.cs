@@ -36,6 +36,14 @@ namespace Pulumiverse.Cockroach
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig")]
     public partial class MetricExportDatadogConfig : global::Pulumi.CustomResource

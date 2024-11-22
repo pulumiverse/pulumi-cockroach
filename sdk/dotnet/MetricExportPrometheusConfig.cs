@@ -32,6 +32,14 @@ namespace Pulumiverse.Cockroach
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig")]
     public partial class MetricExportPrometheusConfig : global::Pulumi.CustomResource

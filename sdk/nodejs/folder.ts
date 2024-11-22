@@ -22,6 +22,14 @@ import * as utilities from "./utilities";
  *     parentId: aTeam.id,
  * });
  * ```
+ *
+ * ## Import
+ *
+ * format: <folder id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/folder:Folder my_folder 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+ * ```
  */
 export class Folder extends pulumi.CustomResource {
     /**

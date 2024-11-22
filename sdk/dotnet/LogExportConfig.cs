@@ -12,6 +12,14 @@ namespace Pulumiverse.Cockroach
 {
     /// <summary>
     /// Log Export configuration for a cluster.
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/logExportConfig:LogExportConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/logExportConfig:LogExportConfig")]
     public partial class LogExportConfig : global::Pulumi.CustomResource

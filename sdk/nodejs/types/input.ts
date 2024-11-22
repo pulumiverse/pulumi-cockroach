@@ -5,7 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ClusterBackupConfig {
+    /**
+     * Indicates whether backups are enabled. If set to false, no backups will be created.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+     */
+    frequencyMinutes?: pulumi.Input<number>;
+    /**
+     * The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+     */
+    retentionDays?: pulumi.Input<number>;
+}
+
 export interface ClusterDedicated {
+    /**
+     * The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+     */
+    cidrRange?: pulumi.Input<string>;
     /**
      * Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
      */

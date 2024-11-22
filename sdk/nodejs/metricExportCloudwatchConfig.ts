@@ -25,6 +25,14 @@ import * as utilities from "./utilities";
  *     targetRegion: awsRegion,
  * });
  * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+ * ```
  */
 export class MetricExportCloudwatchConfig extends pulumi.CustomResource {
     /**

@@ -8,6 +8,14 @@ import * as utilities from "./utilities";
 
 /**
  * CockroachDB Cloud cluster.
+ *
+ * ## Import
+ *
+ * format: <cluster id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/cluster:Cluster my_cluster 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+ * ```
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -41,6 +49,11 @@ export class Cluster extends pulumi.CustomResource {
      * The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
      */
     public /*out*/ readonly accountId!: pulumi.Output<string>;
+    /**
+     * The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+     * frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+     */
+    public readonly backupConfig!: pulumi.Output<outputs.ClusterBackupConfig>;
     /**
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */
@@ -100,6 +113,7 @@ export class Cluster extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ClusterState | undefined;
             resourceInputs["accountId"] = state ? state.accountId : undefined;
+            resourceInputs["backupConfig"] = state ? state.backupConfig : undefined;
             resourceInputs["cloudProvider"] = state ? state.cloudProvider : undefined;
             resourceInputs["cockroachVersion"] = state ? state.cockroachVersion : undefined;
             resourceInputs["creatorId"] = state ? state.creatorId : undefined;
@@ -121,6 +135,7 @@ export class Cluster extends pulumi.CustomResource {
             if ((!args || args.regions === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'regions'");
             }
+            resourceInputs["backupConfig"] = args ? args.backupConfig : undefined;
             resourceInputs["cloudProvider"] = args ? args.cloudProvider : undefined;
             resourceInputs["cockroachVersion"] = args ? args.cockroachVersion : undefined;
             resourceInputs["dedicated"] = args ? args.dedicated : undefined;
@@ -149,6 +164,11 @@ export interface ClusterState {
      * The cloud provider account ID that hosts the cluster. Needed for CMEK and other advanced features.
      */
     accountId?: pulumi.Input<string>;
+    /**
+     * The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+     * frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+     */
+    backupConfig?: pulumi.Input<inputs.ClusterBackupConfig>;
     /**
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */
@@ -199,6 +219,11 @@ export interface ClusterState {
  * The set of arguments for constructing a Cluster resource.
  */
 export interface ClusterArgs {
+    /**
+     * The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
+     * frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
+     */
+    backupConfig?: pulumi.Input<inputs.ClusterBackupConfig>;
     /**
      * Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
      */

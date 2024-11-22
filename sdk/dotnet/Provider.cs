@@ -20,7 +20,16 @@ namespace Pulumiverse.Cockroach
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
-        /// apikey to access cockroach cloud
+        /// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+        /// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+        /// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+        /// variable, and should contain either a user email address or a service account ID.
+        /// </summary>
+        [Output("apijwt")]
+        public Output<string?> Apijwt { get; private set; } = null!;
+
+        /// <summary>
+        /// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         /// </summary>
         [Output("apikey")]
         public Output<string?> Apikey { get; private set; } = null!;
@@ -46,6 +55,7 @@ namespace Pulumiverse.Cockroach
                 PluginDownloadURL = "github://api.github.com/pulumiverse",
                 AdditionalSecretOutputs =
                 {
+                    "apijwt",
                     "apikey",
                 },
             };
@@ -58,11 +68,30 @@ namespace Pulumiverse.Cockroach
 
     public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
+        [Input("apijwt")]
+        private Input<string>? _apijwt;
+
+        /// <summary>
+        /// The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+        /// organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+        /// mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+        /// variable, and should contain either a user email address or a service account ID.
+        /// </summary>
+        public Input<string>? Apijwt
+        {
+            get => _apijwt;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _apijwt = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
         [Input("apikey")]
         private Input<string>? _apikey;
 
         /// <summary>
-        /// apikey to access cockroach cloud
+        /// The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
         /// </summary>
         public Input<string>? Apikey
         {

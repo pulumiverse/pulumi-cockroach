@@ -47,6 +47,14 @@ import (
 //	}
 //
 // ```
+//
+// ## Import
+//
+// format: <folder id>
+//
+// ```sh
+// $ pulumi import cockroach:index/folder:Folder my_folder 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+// ```
 type Folder struct {
 	pulumi.CustomResourceState
 

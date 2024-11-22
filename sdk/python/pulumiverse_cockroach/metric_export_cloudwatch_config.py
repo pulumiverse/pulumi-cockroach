@@ -221,6 +221,14 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
             target_region=aws_region)
         ```
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: Cluster ID.
@@ -253,6 +261,14 @@ class MetricExportCloudwatchConfig(pulumi.CustomResource):
             role_arn=role_arn,
             log_group_name=log_group_name,
             target_region=aws_region)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/metricExportCloudwatchConfig:MetricExportCloudwatchConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.

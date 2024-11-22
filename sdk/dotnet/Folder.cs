@@ -37,6 +37,14 @@ namespace Pulumiverse.Cockroach
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;folder id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/folder:Folder my_folder 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/folder:Folder")]
     public partial class Folder : global::Pulumi.CustomResource

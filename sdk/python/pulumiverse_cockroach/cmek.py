@@ -175,8 +175,8 @@ class Cmek(pulumi.CustomResource):
         import pulumi
         import pulumiverse_cockroach as cockroach
 
-        dedicated = cockroach.Cmek("dedicated",
-            cluster_id=dedicated_cockroach_cluster["id"],
+        advanced = cockroach.Cmek("advanced",
+            cluster_id=advanced_cockroach_cluster["id"],
             regions=[{
                 "region": "us-central-1",
                 "key": {
@@ -185,6 +185,14 @@ class Cmek(pulumi.CustomResource):
                     "uri": "arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key",
                 },
             }])
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/cmek:Cmek advanced 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.
@@ -209,8 +217,8 @@ class Cmek(pulumi.CustomResource):
         import pulumi
         import pulumiverse_cockroach as cockroach
 
-        dedicated = cockroach.Cmek("dedicated",
-            cluster_id=dedicated_cockroach_cluster["id"],
+        advanced = cockroach.Cmek("advanced",
+            cluster_id=advanced_cockroach_cluster["id"],
             regions=[{
                 "region": "us-central-1",
                 "key": {
@@ -219,6 +227,14 @@ class Cmek(pulumi.CustomResource):
                     "uri": "arn:aws:kms:us-west-2:111122223333:key/id-of-kms-key",
                 },
             }])
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/cmek:Cmek advanced 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.

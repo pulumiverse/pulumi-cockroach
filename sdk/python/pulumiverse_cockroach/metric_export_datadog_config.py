@@ -185,6 +185,14 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
             api_key=datadog_api_key)
         ```
 
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_key: A Datadog API key.
@@ -214,6 +222,14 @@ class MetricExportDatadogConfig(pulumi.CustomResource):
             cluster_id=cluster_id,
             site=datadog_site,
             api_key=datadog_api_key)
+        ```
+
+        ## Import
+
+        format: <cluster id>
+
+        ```sh
+        $ pulumi import cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
         ```
 
         :param str resource_name: The name of the resource.

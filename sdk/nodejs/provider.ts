@@ -26,7 +26,14 @@ export class Provider extends pulumi.ProviderResource {
     }
 
     /**
-     * apikey to access cockroach cloud
+     * The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+     * organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+     * mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+     * variable, and should contain either a user email address or a service account ID.
+     */
+    public readonly apijwt!: pulumi.Output<string | undefined>;
+    /**
+     * The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
      */
     public readonly apikey!: pulumi.Output<string | undefined>;
 
@@ -41,10 +48,11 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
+            resourceInputs["apijwt"] = args?.apijwt ? pulumi.secret(args.apijwt) : undefined;
             resourceInputs["apikey"] = args?.apikey ? pulumi.secret(args.apikey) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["apikey"] };
+        const secretOpts = { additionalSecretOutputs: ["apijwt", "apikey"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
@@ -55,7 +63,14 @@ export class Provider extends pulumi.ProviderResource {
  */
 export interface ProviderArgs {
     /**
-     * apikey to access cockroach cloud
+     * The JWT from a JWT Issuer configured for the CockroachDB Cloud Organization. In this case, the vanity name of the
+     * organization is required and can be provided using the `COCKROACH_VANITY_NAME` environment variable. If the JWT is
+     * mapped to multiple identities, the identity to impersonate should be provided using the `COCKROACH_USERNAME` environment
+     * variable, and should contain either a user email address or a service account ID.
+     */
+    apijwt?: pulumi.Input<string>;
+    /**
+     * The API key to access CockroachDB Cloud. If this field is provided, it is used and `apijwt` is ignored.
      */
     apikey?: pulumi.Input<string>;
 }

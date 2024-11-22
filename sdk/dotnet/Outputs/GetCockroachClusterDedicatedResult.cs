@@ -15,6 +15,10 @@ namespace Pulumiverse.Cockroach.Outputs
     public sealed class GetCockroachClusterDedicatedResult
     {
         /// <summary>
+        /// The IPv4 range in CIDR format that is in use by the cluster. It is only set on GCP clusters and is otherwise empty.
+        /// </summary>
+        public readonly string CidrRange;
+        /// <summary>
         /// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
         /// </summary>
         public readonly int DiskIops;
@@ -41,6 +45,8 @@ namespace Pulumiverse.Cockroach.Outputs
 
         [OutputConstructor]
         private GetCockroachClusterDedicatedResult(
+            string cidrRange,
+
             int diskIops,
 
             string machineType,
@@ -53,6 +59,7 @@ namespace Pulumiverse.Cockroach.Outputs
 
             int storageGib)
         {
+            CidrRange = cidrRange;
             DiskIops = diskIops;
             MachineType = machineType;
             MemoryGib = memoryGib;

@@ -15,6 +15,8 @@ else:
 from . import _utilities
 
 __all__ = [
+    'ClusterBackupConfigArgs',
+    'ClusterBackupConfigArgsDict',
     'ClusterDedicatedArgs',
     'ClusterDedicatedArgsDict',
     'ClusterRegionArgs',
@@ -50,7 +52,83 @@ __all__ = [
 MYPY = False
 
 if not MYPY:
+    class ClusterBackupConfigArgsDict(TypedDict):
+        enabled: NotRequired[pulumi.Input[bool]]
+        """
+        Indicates whether backups are enabled. If set to false, no backups will be created.
+        """
+        frequency_minutes: NotRequired[pulumi.Input[int]]
+        """
+        The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+        """
+        retention_days: NotRequired[pulumi.Input[int]]
+        """
+        The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+        """
+elif False:
+    ClusterBackupConfigArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ClusterBackupConfigArgs:
+    def __init__(__self__, *,
+                 enabled: Optional[pulumi.Input[bool]] = None,
+                 frequency_minutes: Optional[pulumi.Input[int]] = None,
+                 retention_days: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Indicates whether backups are enabled. If set to false, no backups will be created.
+        :param pulumi.Input[int] frequency_minutes: The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+        :param pulumi.Input[int] retention_days: The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+        """
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if frequency_minutes is not None:
+            pulumi.set(__self__, "frequency_minutes", frequency_minutes)
+        if retention_days is not None:
+            pulumi.set(__self__, "retention_days", retention_days)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Indicates whether backups are enabled. If set to false, no backups will be created.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="frequencyMinutes")
+    def frequency_minutes(self) -> Optional[pulumi.Input[int]]:
+        """
+        The frequency of backups in minutes.  Valid values are [5, 10, 15, 30, 60, 240, 1440]
+        """
+        return pulumi.get(self, "frequency_minutes")
+
+    @frequency_minutes.setter
+    def frequency_minutes(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "frequency_minutes", value)
+
+    @property
+    @pulumi.getter(name="retentionDays")
+    def retention_days(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of days to retain backups for.  Valid values are [2, 7, 30, 90, 365]. Can only be set once, further changes require opening a support ticket. See Updating backup retention for more information.
+        """
+        return pulumi.get(self, "retention_days")
+
+    @retention_days.setter
+    def retention_days(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "retention_days", value)
+
+
+if not MYPY:
     class ClusterDedicatedArgsDict(TypedDict):
+        cidr_range: NotRequired[pulumi.Input[str]]
+        """
+        The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+        """
         disk_iops: NotRequired[pulumi.Input[int]]
         """
         Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
@@ -81,6 +159,7 @@ elif False:
 @pulumi.input_type
 class ClusterDedicatedArgs:
     def __init__(__self__, *,
+                 cidr_range: Optional[pulumi.Input[str]] = None,
                  disk_iops: Optional[pulumi.Input[int]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
                  memory_gib: Optional[pulumi.Input[float]] = None,
@@ -88,6 +167,7 @@ class ClusterDedicatedArgs:
                  private_network_visibility: Optional[pulumi.Input[bool]] = None,
                  storage_gib: Optional[pulumi.Input[int]] = None):
         """
+        :param pulumi.Input[str] cidr_range: The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
         :param pulumi.Input[int] disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
         :param pulumi.Input[str] machine_type: Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
         :param pulumi.Input[float] memory_gib: Memory per node in GiB.
@@ -95,6 +175,8 @@ class ClusterDedicatedArgs:
         :param pulumi.Input[bool] private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
         :param pulumi.Input[int] storage_gib: Storage amount per node in GiB.
         """
+        if cidr_range is not None:
+            pulumi.set(__self__, "cidr_range", cidr_range)
         if disk_iops is not None:
             pulumi.set(__self__, "disk_iops", disk_iops)
         if machine_type is not None:
@@ -107,6 +189,18 @@ class ClusterDedicatedArgs:
             pulumi.set(__self__, "private_network_visibility", private_network_visibility)
         if storage_gib is not None:
             pulumi.set(__self__, "storage_gib", storage_gib)
+
+    @property
+    @pulumi.getter(name="cidrRange")
+    def cidr_range(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
+        """
+        return pulumi.get(self, "cidr_range")
+
+    @cidr_range.setter
+    def cidr_range(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cidr_range", value)
 
     @property
     @pulumi.getter(name="diskIops")

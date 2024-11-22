@@ -34,6 +34,14 @@ namespace Pulumiverse.Cockroach
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// format: &lt;cluster id&gt;
+    /// 
+    /// ```sh
+    /// $ pulumi import cockroach:index/versionDeferral:VersionDeferral example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+    /// ```
     /// </summary>
     [CockroachResourceType("cockroach:index/versionDeferral:VersionDeferral")]
     public partial class VersionDeferral : global::Pulumi.CustomResource

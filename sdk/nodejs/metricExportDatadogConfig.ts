@@ -23,6 +23,14 @@ import * as utilities from "./utilities";
  *     apiKey: datadogApiKey,
  * });
  * ```
+ *
+ * ## Import
+ *
+ * format: <cluster id>
+ *
+ * ```sh
+ * $ pulumi import cockroach:index/metricExportDatadogConfig:MetricExportDatadogConfig example 1f69fdd2-600a-4cfc-a9ba-16995df0d77d
+ * ```
  */
 export class MetricExportDatadogConfig extends pulumi.CustomResource {
     /**
