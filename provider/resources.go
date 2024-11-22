@@ -76,9 +76,8 @@ func Provider() tfbridge.ProviderInfo {
 		GitHubOrg:         "cockroachdb",
 		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"cockroach_allow_list":      {Tok: cockroachResource(cockroachMod, "AllowList")},
-			"cockroach_api_key":         {Tok: cockroachResource(cockroachMod, "ApiKey")},
-			"cockroach_api_oidc_config": {Tok: cockroachResource(cockroachMod, "ApiOidcConfig")},
+			"cockroach_allow_list": {Tok: cockroachResource(cockroachMod, "AllowList")},
+			"cockroach_api_key":    {Tok: cockroachResource(cockroachMod, "ApiKey")},
 			"cockroach_client_ca_cert": {
 				Tok: cockroachResource(cockroachMod, "CaCert"),
 				Fields: map[string]*tfbridge.SchemaInfo{

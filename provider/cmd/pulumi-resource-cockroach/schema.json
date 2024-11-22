@@ -72,36 +72,6 @@
         }
     },
     "types": {
-        "cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap": {
-            "properties": {
-                "ccIdentity": {
-                    "type": "string",
-                    "description": "The username (email or service account id) of the CC user that the token should map to.\n"
-                },
-                "isRegex": {
-                    "type": "boolean",
-                    "description": "Indicates that the token_principal field is a regex value.\n"
-                },
-                "tokenIdentity": {
-                    "type": "string",
-                    "description": "The token value that needs to be mapped.\n"
-                }
-            },
-            "type": "object",
-            "required": [
-                "ccIdentity",
-                "tokenIdentity"
-            ],
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "ccIdentity",
-                        "isRegex",
-                        "tokenIdentity"
-                    ]
-                }
-            }
-        },
         "cockroach:index/ClusterDedicated:ClusterDedicated": {
             "properties": {
                 "diskIops": {
@@ -122,7 +92,7 @@
                 },
                 "privateNetworkVisibility": {
                     "type": "boolean",
-                    "description": "Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features.\n"
+                    "description": "Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.\n"
                 },
                 "storageGib": {
                     "type": "integer",
@@ -200,7 +170,7 @@
                 },
                 "upgradeType": {
                     "type": "string",
-                    "description": "Dictates the behavior of cockroach major version upgrades. If plan type is 'BASIC', this attribute must be left empty or set to 'AUTOMATIC'. Allowed values are: \n  * MANUAL\n  * AUTOMATIC\n"
+                    "description": "Dictates the behavior of CockroachDB major version upgrades. Manual upgrades are not supported on CockroachDB Basic. Manual or automatic upgrades are supported on CockroachDB Standard. If you omit the field, it defaults to `AUTOMATIC`. Allowed values are:\n  * MANUAL\n  * AUTOMATIC\n"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/ClusterServerlessUsageLimits:ClusterServerlessUsageLimits"
@@ -356,6 +326,23 @@
                     ]
                 }
             }
+        },
+        "cockroach:index/JwtIssuerIdentityMap:JwtIssuerIdentityMap": {
+            "properties": {
+                "ccIdentity": {
+                    "type": "string",
+                    "description": "Specifies how to map the fetched token identity to an identity in CockroachDB Cloud. In case of a regular expression for token_identity, this must contain a \\1 placeholder for the matched content. Note that you will need to escape the backslash in the string as in the example usage (\\\\1).\n"
+                },
+                "tokenIdentity": {
+                    "type": "string",
+                    "description": "Specifies how to fetch external identity from the token claim. A regular expression must start with a forward slash. The regular expression must be in RE2 compatible syntax. For further details, please see https://github.com/google/re2/wiki/Syntax.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "ccIdentity",
+                "tokenIdentity"
+            ]
         },
         "cockroach:index/LogExportConfigGroup:LogExportConfigGroup": {
             "properties": {
@@ -680,7 +667,7 @@
                 },
                 "upgradeType": {
                     "type": "string",
-                    "description": "Dictates the behavior of cockroach major version upgrades.\n"
+                    "description": "Dictates the behavior of CockroachDB major version upgrades.\n"
                 },
                 "usageLimits": {
                     "$ref": "#/types/cockroach:index/getCockroachClusterServerlessUsageLimits:getCockroachClusterServerlessUsageLimits"
@@ -934,100 +921,6 @@
                     },
                     "serviceAccountId": {
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            }
-        },
-        "cockroach:index/apiOidcConfig:ApiOidcConfig": {
-            "description": "Configuration to allow external OIDC providers to issue tokens for use with CC API.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.ApiOidcConfig;\nimport com.pulumi.cockroach.ApiOidcConfigArgs;\nimport com.pulumi.cockroach.inputs.ApiOidcConfigIdentityMapArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApiOidcConfig(\"example\", ApiOidcConfigArgs.builder()\n            .issuer(\"https://accounts.google.com\")\n            .audience(\"test_audience\")\n            .jwks(\"{\\\"keys\\\":[{\\\"alg\\\":\\\"RS256\\\",\\\"e\\\":\\\"AQAB\\\",\\\"kid\\\":\\\"test_kid1\\\",\\\"kty\\\":\\\"RSA\\\",\\\"n\\\":\\\"09lq1lCEuteonwDJOhGTDak11ThplZuC9JEWQNdBnBSQwlkJQIE7A7nTBO0xTibcsh2HwYkC-N_Gs1jP4iwN3dRqnu5FwG2ct5mY8KLwJiHzToFC0MKenSFQCy0FviNtOnpiObcUlDvR2NDeNtMl_6SPzcQEt7GUTBBYZgoAxPmOgevki6ZNO6Y86xFqx3y6v8EPwW010AiC60r4AHGCTBhYF4uqmq5JH2UU4dDh9Udc-9LZxlSqPwJvnKDG2GjcnD8TsU3wjfEM_nRmx3dnXsrZUXYfNGtdv5dlHywf5AhkJmTavqcsJkgrNA-PNBghFMcCR816_kCIkCYWLWC5vQ\\\"}]}\")\n            .claim(\"sub\")\n            .identityMaps(            \n                ApiOidcConfigIdentityMapArgs.builder()\n                    .token_identity(\"token_identity\")\n                    .cc_identity(\"cc_identity\")\n                    .is_regex(false)\n                    .build(),\n                ApiOidcConfigIdentityMapArgs.builder()\n                    .token_identity(\"(.*)\")\n                    .cc_identity(\"\\\\1@example.com\")\n                    .is_regex(true)\n                    .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cockroach:ApiOidcConfig\n    properties:\n      issuer: https://accounts.google.com\n      audience: test_audience\n      jwks: '{\"keys\":[{\"alg\":\"RS256\",\"e\":\"AQAB\",\"kid\":\"test_kid1\",\"kty\":\"RSA\",\"n\":\"09lq1lCEuteonwDJOhGTDak11ThplZuC9JEWQNdBnBSQwlkJQIE7A7nTBO0xTibcsh2HwYkC-N_Gs1jP4iwN3dRqnu5FwG2ct5mY8KLwJiHzToFC0MKenSFQCy0FviNtOnpiObcUlDvR2NDeNtMl_6SPzcQEt7GUTBBYZgoAxPmOgevki6ZNO6Y86xFqx3y6v8EPwW010AiC60r4AHGCTBhYF4uqmq5JH2UU4dDh9Udc-9LZxlSqPwJvnKDG2GjcnD8TsU3wjfEM_nRmx3dnXsrZUXYfNGtdv5dlHywf5AhkJmTavqcsJkgrNA-PNBghFMcCR816_kCIkCYWLWC5vQ\"}]}'\n      claim: sub\n      identityMaps:\n        - token_identity: token_identity\n          cc_identity: cc_identity\n          is_regex: false\n        - token_identity: (.*)\n          cc_identity: \\1@example.com\n          is_regex: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
-            "properties": {
-                "audience": {
-                    "type": "string",
-                    "description": "The audience that CC API should accept for this API OIDC Configuration.\n"
-                },
-                "claim": {
-                    "type": "string",
-                    "description": "The JWT claim that should be used as the user identifier. Defaults to the subject.\n"
-                },
-                "identityMaps": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap"
-                    },
-                    "description": "The mapping rules to convert token user identifiers into a new form.\n"
-                },
-                "issuer": {
-                    "type": "string",
-                    "description": "The issuer of tokens for the API OIDC Configuration. Usually this is a url.\n"
-                },
-                "jwks": {
-                    "type": "string",
-                    "description": "The JSON Web Key Set used to check the signature of the JWTs.\n"
-                }
-            },
-            "required": [
-                "audience",
-                "claim",
-                "identityMaps",
-                "issuer",
-                "jwks"
-            ],
-            "inputProperties": {
-                "audience": {
-                    "type": "string",
-                    "description": "The audience that CC API should accept for this API OIDC Configuration.\n"
-                },
-                "claim": {
-                    "type": "string",
-                    "description": "The JWT claim that should be used as the user identifier. Defaults to the subject.\n"
-                },
-                "identityMaps": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap"
-                    },
-                    "description": "The mapping rules to convert token user identifiers into a new form.\n"
-                },
-                "issuer": {
-                    "type": "string",
-                    "description": "The issuer of tokens for the API OIDC Configuration. Usually this is a url.\n"
-                },
-                "jwks": {
-                    "type": "string",
-                    "description": "The JSON Web Key Set used to check the signature of the JWTs.\n"
-                }
-            },
-            "requiredInputs": [
-                "audience",
-                "issuer",
-                "jwks"
-            ],
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering ApiOidcConfig resources.\n",
-                "properties": {
-                    "audience": {
-                        "type": "string",
-                        "description": "The audience that CC API should accept for this API OIDC Configuration.\n"
-                    },
-                    "claim": {
-                        "type": "string",
-                        "description": "The JWT claim that should be used as the user identifier. Defaults to the subject.\n"
-                    },
-                    "identityMaps": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/cockroach:index/ApiOidcConfigIdentityMap:ApiOidcConfigIdentityMap"
-                        },
-                        "description": "The mapping rules to convert token user identifiers into a new form.\n"
-                    },
-                    "issuer": {
-                        "type": "string",
-                        "description": "The issuer of tokens for the API OIDC Configuration. Usually this is a url.\n"
-                    },
-                    "jwks": {
-                        "type": "string",
-                        "description": "The JSON Web Key Set used to check the signature of the JWTs.\n"
                     }
                 },
                 "type": "object"
@@ -1488,6 +1381,96 @@
                     "parentId": {
                         "type": "string",
                         "description": "ID of the parent folder. Use 'root' for the root level (no parent folder).\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cockroach:index/jwtIssuer:JwtIssuer": {
+            "description": "Configuration to manage external JSON Web Token (JWT) Issuers for authentication to the CockroachDB Cloud API.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cockroach.JwtIssuer;\nimport com.pulumi.cockroach.JwtIssuerArgs;\nimport com.pulumi.cockroach.inputs.JwtIssuerIdentityMapArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new JwtIssuer(\"example\", JwtIssuerArgs.builder()\n            .issuerUrl(\"https://accounts.google.com\")\n            .audience(\"test_audience\")\n            .jwks(\"{\\\"keys\\\":[{\\\"alg\\\":\\\"RS256\\\",\\\"e\\\":\\\"AQAB\\\",\\\"kid\\\":\\\"test_kid1\\\",\\\"kty\\\":\\\"RSA\\\",\\\"n\\\":\\\"09lq1lCEuteonwDJOhGTDak11ThplZuC9JEWQNdBnBSQwlkJQIE7A7nTBO0xTibcsh2HwYkC-N_Gs1jP4iwN3dRqnu5FwG2ct5mY8KLwJiHzToFC0MKenSFQCy0FviNtOnpiObcUlDvR2NDeNtMl_6SPzcQEt7GUTBBYZgoAxPmOgevki6ZNO6Y86xFqx3y6v8EPwW010AiC60r4AHGCTBhYF4uqmq5JH2UU4dDh9Udc-9LZxlSqPwJvnKDG2GjcnD8TsU3wjfEM_nRmx3dnXsrZUXYfNGtdv5dlHywf5AhkJmTavqcsJkgrNA-PNBghFMcCR816_kCIkCYWLWC5vQ\\\"}]}\")\n            .claim(\"email\")\n            .identityMaps(            \n                JwtIssuerIdentityMapArgs.builder()\n                    .token_identity(\"test_user\")\n                    .cc_identity(\"abc@example.com\")\n                    .build(),\n                JwtIssuerIdentityMapArgs.builder()\n                    .token_identity(\"/^sso_(.*)$\")\n                    .cc_identity(\"\\\\1@example.com\")\n                    .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cockroach:JwtIssuer\n    properties:\n      issuerUrl: https://accounts.google.com\n      audience: test_audience\n      jwks: '{\"keys\":[{\"alg\":\"RS256\",\"e\":\"AQAB\",\"kid\":\"test_kid1\",\"kty\":\"RSA\",\"n\":\"09lq1lCEuteonwDJOhGTDak11ThplZuC9JEWQNdBnBSQwlkJQIE7A7nTBO0xTibcsh2HwYkC-N_Gs1jP4iwN3dRqnu5FwG2ct5mY8KLwJiHzToFC0MKenSFQCy0FviNtOnpiObcUlDvR2NDeNtMl_6SPzcQEt7GUTBBYZgoAxPmOgevki6ZNO6Y86xFqx3y6v8EPwW010AiC60r4AHGCTBhYF4uqmq5JH2UU4dDh9Udc-9LZxlSqPwJvnKDG2GjcnD8TsU3wjfEM_nRmx3dnXsrZUXYfNGtdv5dlHywf5AhkJmTavqcsJkgrNA-PNBghFMcCR816_kCIkCYWLWC5vQ\"}]}'\n      claim: email\n      identityMaps:\n        - token_identity: test_user\n          cc_identity: abc@example.com\n        - token_identity: /^sso_(.*)$\n          cc_identity: \\1@example.com\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "audience": {
+                    "type": "string",
+                    "description": "The intended audience for consuming the JWT.\n"
+                },
+                "claim": {
+                    "type": "string",
+                    "description": "Used to identify the user from the external Identity Provider. Defaults to \"sub\".\n"
+                },
+                "identityMaps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/JwtIssuerIdentityMap:JwtIssuerIdentityMap"
+                    },
+                    "description": "A list of mappings to map the external token identity into CockroachDB Cloud.\n"
+                },
+                "issuerUrl": {
+                    "type": "string",
+                    "description": "The URL of the server issuing JWTs.\n"
+                },
+                "jwks": {
+                    "type": "string",
+                    "description": "A set of public keys (JWKS) used to verify the JWT.\n"
+                }
+            },
+            "required": [
+                "audience",
+                "issuerUrl"
+            ],
+            "inputProperties": {
+                "audience": {
+                    "type": "string",
+                    "description": "The intended audience for consuming the JWT.\n"
+                },
+                "claim": {
+                    "type": "string",
+                    "description": "Used to identify the user from the external Identity Provider. Defaults to \"sub\".\n"
+                },
+                "identityMaps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/cockroach:index/JwtIssuerIdentityMap:JwtIssuerIdentityMap"
+                    },
+                    "description": "A list of mappings to map the external token identity into CockroachDB Cloud.\n"
+                },
+                "issuerUrl": {
+                    "type": "string",
+                    "description": "The URL of the server issuing JWTs.\n"
+                },
+                "jwks": {
+                    "type": "string",
+                    "description": "A set of public keys (JWKS) used to verify the JWT.\n"
+                }
+            },
+            "requiredInputs": [
+                "audience",
+                "issuerUrl"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering JwtIssuer resources.\n",
+                "properties": {
+                    "audience": {
+                        "type": "string",
+                        "description": "The intended audience for consuming the JWT.\n"
+                    },
+                    "claim": {
+                        "type": "string",
+                        "description": "Used to identify the user from the external Identity Provider. Defaults to \"sub\".\n"
+                    },
+                    "identityMaps": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/cockroach:index/JwtIssuerIdentityMap:JwtIssuerIdentityMap"
+                        },
+                        "description": "A list of mappings to map the external token identity into CockroachDB Cloud.\n"
+                    },
+                    "issuerUrl": {
+                        "type": "string",
+                        "description": "The URL of the server issuing JWTs.\n"
+                    },
+                    "jwks": {
+                        "type": "string",
+                        "description": "A set of public keys (JWKS) used to verify the JWT.\n"
                     }
                 },
                 "type": "object"
