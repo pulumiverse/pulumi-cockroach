@@ -120,7 +120,7 @@ def get_folder(id: Optional[str] = None,
         path=pulumi.get(__ret__, 'path'))
 def get_folder_output(id: Optional[pulumi.Input[Optional[str]]] = None,
                       path: Optional[pulumi.Input[Optional[str]]] = None,
-                      opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetFolderResult]:
+                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetFolderResult]:
     """
     A CockroachDB Cloud folder. Folders can contain clusters or other folders.  They can be used to group resources together for the purposes of access control, organization or fine grained invoicing.
 
@@ -143,7 +143,7 @@ def get_folder_output(id: Optional[pulumi.Input[Optional[str]]] = None,
     __args__ = dict()
     __args__['id'] = id
     __args__['path'] = path
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('cockroach:index/getFolder:getFolder', __args__, opts=opts, typ=GetFolderResult)
     return __ret__.apply(lambda __response__: GetFolderResult(
         id=pulumi.get(__response__, 'id'),

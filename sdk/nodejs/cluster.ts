@@ -59,7 +59,8 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly cloudProvider!: pulumi.Output<string>;
     /**
-     * Major version of CockroachDB running on the cluster.
+     * Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+     * for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
      */
     public readonly cockroachVersion!: pulumi.Output<string>;
     /**
@@ -174,7 +175,8 @@ export interface ClusterState {
      */
     cloudProvider?: pulumi.Input<string>;
     /**
-     * Major version of CockroachDB running on the cluster.
+     * Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+     * for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
      */
     cockroachVersion?: pulumi.Input<string>;
     /**
@@ -229,7 +231,8 @@ export interface ClusterArgs {
      */
     cloudProvider: pulumi.Input<string>;
     /**
-     * Major version of CockroachDB running on the cluster.
+     * Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+     * for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
      */
     cockroachVersion?: pulumi.Input<string>;
     dedicated?: pulumi.Input<inputs.ClusterDedicated>;

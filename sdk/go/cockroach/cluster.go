@@ -31,7 +31,8 @@ type Cluster struct {
 	BackupConfig ClusterBackupConfigOutput `pulumi:"backupConfig"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringOutput `pulumi:"cloudProvider"`
-	// Major version of CockroachDB running on the cluster.
+	// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+	// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
 	CockroachVersion pulumi.StringOutput `pulumi:"cockroachVersion"`
 	// ID of the user who created the cluster.
 	CreatorId pulumi.StringOutput       `pulumi:"creatorId"`
@@ -98,7 +99,8 @@ type clusterState struct {
 	BackupConfig *ClusterBackupConfig `pulumi:"backupConfig"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider *string `pulumi:"cloudProvider"`
-	// Major version of CockroachDB running on the cluster.
+	// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+	// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
 	CockroachVersion *string `pulumi:"cockroachVersion"`
 	// ID of the user who created the cluster.
 	CreatorId *string           `pulumi:"creatorId"`
@@ -130,7 +132,8 @@ type ClusterState struct {
 	BackupConfig ClusterBackupConfigPtrInput
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringPtrInput
-	// Major version of CockroachDB running on the cluster.
+	// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+	// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
 	CockroachVersion pulumi.StringPtrInput
 	// ID of the user who created the cluster.
 	CreatorId pulumi.StringPtrInput
@@ -164,7 +167,8 @@ type clusterArgs struct {
 	BackupConfig *ClusterBackupConfig `pulumi:"backupConfig"`
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider string `pulumi:"cloudProvider"`
-	// Major version of CockroachDB running on the cluster.
+	// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+	// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
 	CockroachVersion *string           `pulumi:"cockroachVersion"`
 	Dedicated        *ClusterDedicated `pulumi:"dedicated"`
 	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
@@ -187,7 +191,8 @@ type ClusterArgs struct {
 	BackupConfig ClusterBackupConfigPtrInput
 	// Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
 	CloudProvider pulumi.StringInput
-	// Major version of CockroachDB running on the cluster.
+	// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+	// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
 	CockroachVersion pulumi.StringPtrInput
 	Dedicated        ClusterDedicatedPtrInput
 	// Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
@@ -306,7 +311,8 @@ func (o ClusterOutput) CloudProvider() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CloudProvider }).(pulumi.StringOutput)
 }
 
-// Major version of CockroachDB running on the cluster.
+// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
 func (o ClusterOutput) CockroachVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.CockroachVersion }).(pulumi.StringOutput)
 }

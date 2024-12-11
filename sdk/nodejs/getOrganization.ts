@@ -55,7 +55,7 @@ export interface GetOrganizationResult {
  * const prod = cockroach.getOrganization({});
  * ```
  */
-export function getOrganizationOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetOrganizationResult> {
+export function getOrganizationOutput(opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrganizationResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cockroach:index/getOrganization:getOrganization", {
     }, opts);
