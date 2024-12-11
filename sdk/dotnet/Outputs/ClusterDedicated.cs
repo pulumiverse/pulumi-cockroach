@@ -19,11 +19,11 @@ namespace Pulumiverse.Cockroach.Outputs
         /// </summary>
         public readonly string? CidrRange;
         /// <summary>
-        /// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        /// Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
         /// </summary>
         public readonly int? DiskIops;
         /// <summary>
-        /// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        /// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `num_virtual_cpus` to control the machine type.
         /// </summary>
         public readonly string? MachineType;
         /// <summary>

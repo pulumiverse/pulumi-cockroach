@@ -20,13 +20,13 @@ namespace Pulumiverse.Cockroach.Inputs
         public Input<string>? CidrRange { get; set; }
 
         /// <summary>
-        /// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        /// Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
         /// </summary>
         [Input("diskIops")]
         public Input<int>? DiskIops { get; set; }
 
         /// <summary>
-        /// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        /// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `num_virtual_cpus` to control the machine type.
         /// </summary>
         [Input("machineType")]
         public Input<string>? MachineType { get; set; }

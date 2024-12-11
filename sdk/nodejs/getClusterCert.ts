@@ -70,7 +70,7 @@ export interface GetClusterCertResult {
  * });
  * ```
  */
-export function getClusterCertOutput(args: GetClusterCertOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterCertResult> {
+export function getClusterCertOutput(args: GetClusterCertOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterCertResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cockroach:index/getClusterCert:getClusterCert", {
         "id": args.id,

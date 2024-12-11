@@ -88,7 +88,7 @@ export interface GetConnectionStringResult {
  * });
  * ```
  */
-export function getConnectionStringOutput(args: GetConnectionStringOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConnectionStringResult> {
+export function getConnectionStringOutput(args: GetConnectionStringOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConnectionStringResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cockroach:index/getConnectionString:getConnectionString", {
         "database": args.database,

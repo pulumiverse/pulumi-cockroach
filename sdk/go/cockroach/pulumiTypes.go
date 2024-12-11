@@ -191,9 +191,9 @@ func (o ClusterBackupConfigPtrOutput) RetentionDays() pulumi.IntPtrOutput {
 type ClusterDedicated struct {
 	// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
 	CidrRange *string `pulumi:"cidrRange"`
-	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+	// Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
 	DiskIops *int `pulumi:"diskIops"`
-	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `numVirtualCpus` to control the machine type.
 	MachineType *string `pulumi:"machineType"`
 	// Memory per node in GiB.
 	MemoryGib *float64 `pulumi:"memoryGib"`
@@ -219,9 +219,9 @@ type ClusterDedicatedInput interface {
 type ClusterDedicatedArgs struct {
 	// The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
 	CidrRange pulumi.StringPtrInput `pulumi:"cidrRange"`
-	// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+	// Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
 	DiskIops pulumi.IntPtrInput `pulumi:"diskIops"`
-	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+	// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `numVirtualCpus` to control the machine type.
 	MachineType pulumi.StringPtrInput `pulumi:"machineType"`
 	// Memory per node in GiB.
 	MemoryGib pulumi.Float64PtrInput `pulumi:"memoryGib"`
@@ -315,12 +315,12 @@ func (o ClusterDedicatedOutput) CidrRange() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *string { return v.CidrRange }).(pulumi.StringPtrOutput)
 }
 
-// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+// Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
 func (o ClusterDedicatedOutput) DiskIops() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *int { return v.DiskIops }).(pulumi.IntPtrOutput)
 }
 
-// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `numVirtualCpus` to control the machine type.
 func (o ClusterDedicatedOutput) MachineType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterDedicated) *string { return v.MachineType }).(pulumi.StringPtrOutput)
 }
@@ -379,7 +379,7 @@ func (o ClusterDedicatedPtrOutput) CidrRange() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+// Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
 func (o ClusterDedicatedPtrOutput) DiskIops() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *int {
 		if v == nil {
@@ -389,7 +389,7 @@ func (o ClusterDedicatedPtrOutput) DiskIops() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+// Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `numVirtualCpus` to control the machine type.
 func (o ClusterDedicatedPtrOutput) MachineType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterDedicated) *string {
 		if v == nil {
@@ -444,7 +444,7 @@ type ClusterRegion struct {
 	InternalDns *string `pulumi:"internalDns"`
 	// Name of the region. Should match the region code used by the cluster's cloud provider.
 	Name string `pulumi:"name"`
-	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	// Number of nodes in the region. Valid for Advanced clusters only.
 	NodeCount *int `pulumi:"nodeCount"`
 	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary *bool `pulumi:"primary"`
@@ -470,7 +470,7 @@ type ClusterRegionArgs struct {
 	InternalDns pulumi.StringPtrInput `pulumi:"internalDns"`
 	// Name of the region. Should match the region code used by the cluster's cloud provider.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	// Number of nodes in the region. Valid for Advanced clusters only.
 	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
 	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary pulumi.BoolPtrInput `pulumi:"primary"`
@@ -541,7 +541,7 @@ func (o ClusterRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ClusterRegion) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Number of nodes in the region. Will always be 0 for serverless clusters.
+// Number of nodes in the region. Valid for Advanced clusters only.
 func (o ClusterRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }
@@ -967,7 +967,7 @@ type CmekAdditionalRegion struct {
 	InternalDns *string `pulumi:"internalDns"`
 	// Name of the region. Should match the region code used by the cluster's cloud provider.
 	Name string `pulumi:"name"`
-	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	// Number of nodes in the region. Valid for Advanced clusters only.
 	NodeCount *int `pulumi:"nodeCount"`
 	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary *bool `pulumi:"primary"`
@@ -993,7 +993,7 @@ type CmekAdditionalRegionArgs struct {
 	InternalDns pulumi.StringPtrInput `pulumi:"internalDns"`
 	// Name of the region. Should match the region code used by the cluster's cloud provider.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Number of nodes in the region. Will always be 0 for serverless clusters.
+	// Number of nodes in the region. Valid for Advanced clusters only.
 	NodeCount pulumi.IntPtrInput `pulumi:"nodeCount"`
 	// Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
 	Primary pulumi.BoolPtrInput `pulumi:"primary"`
@@ -1064,7 +1064,7 @@ func (o CmekAdditionalRegionOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Number of nodes in the region. Will always be 0 for serverless clusters.
+// Number of nodes in the region. Valid for Advanced clusters only.
 func (o CmekAdditionalRegionOutput) NodeCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CmekAdditionalRegion) *int { return v.NodeCount }).(pulumi.IntPtrOutput)
 }

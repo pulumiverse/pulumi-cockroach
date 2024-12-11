@@ -36,7 +36,8 @@ class ClusterArgs:
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
         :param pulumi.Input['ClusterBackupConfigArgs'] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
                frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
-        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
+        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+               for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
         :param pulumi.Input[str] name: Name of the cluster.
@@ -100,7 +101,8 @@ class ClusterArgs:
     @pulumi.getter(name="cockroachVersion")
     def cockroach_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Major version of CockroachDB running on the cluster.
+        Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+        for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         """
         return pulumi.get(self, "cockroach_version")
 
@@ -200,7 +202,8 @@ class _ClusterState:
         :param pulumi.Input['ClusterBackupConfigArgs'] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
                frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
-        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
+        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+               for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         :param pulumi.Input[str] creator_id: ID of the user who created the cluster.
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
@@ -283,7 +286,8 @@ class _ClusterState:
     @pulumi.getter(name="cockroachVersion")
     def cockroach_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Major version of CockroachDB running on the cluster.
+        Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+        for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         """
         return pulumi.get(self, "cockroach_version")
 
@@ -448,7 +452,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
                frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
-        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
+        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+               for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
         :param pulumi.Input[str] name: Name of the cluster.
@@ -561,7 +566,8 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Union['ClusterBackupConfigArgs', 'ClusterBackupConfigArgsDict']] backup_config: The backup settings for a cluster. Each cluster has backup settings that determine if backups are enabled, how
                frequently they are taken, and how long they are retained for. Use this attribute to manage those settings.
         :param pulumi.Input[str] cloud_provider: Cloud provider used to host the cluster. Allowed values are: * GCP * AWS * AZURE
-        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster.
+        :param pulumi.Input[str] cockroach_version: Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+               for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         :param pulumi.Input[str] creator_id: ID of the user who created the cluster.
         :param pulumi.Input[bool] delete_protection: Set to true to enable delete protection on the cluster. If unset, the server chooses the value on cluster creation, and
                preserves the value on cluster update.
@@ -622,7 +628,8 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="cockroachVersion")
     def cockroach_version(self) -> pulumi.Output[str]:
         """
-        Major version of CockroachDB running on the cluster.
+        Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+        for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         """
         return pulumi.get(self, "cockroach_version")
 
