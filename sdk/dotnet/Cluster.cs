@@ -44,7 +44,8 @@ namespace Pulumiverse.Cockroach
         public Output<string> CloudProvider { get; private set; } = null!;
 
         /// <summary>
-        /// Major version of CockroachDB running on the cluster.
+        /// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+        /// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         /// </summary>
         [Output("cockroachVersion")]
         public Output<string> CockroachVersion { get; private set; } = null!;
@@ -168,7 +169,8 @@ namespace Pulumiverse.Cockroach
         public Input<string> CloudProvider { get; set; } = null!;
 
         /// <summary>
-        /// Major version of CockroachDB running on the cluster.
+        /// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+        /// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         /// </summary>
         [Input("cockroachVersion")]
         public Input<string>? CockroachVersion { get; set; }
@@ -240,7 +242,8 @@ namespace Pulumiverse.Cockroach
         public Input<string>? CloudProvider { get; set; }
 
         /// <summary>
-        /// Major version of CockroachDB running on the cluster.
+        /// Major version of CockroachDB running on the cluster. This value can be used to orchestrate version upgrades. Supported
+        /// for ADVANCED and STANDARD clusters (when `serverless.upgrade_type` set to 'MANUAL').
         /// </summary>
         [Input("cockroachVersion")]
         public Input<string>? CockroachVersion { get; set; }

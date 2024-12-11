@@ -91,7 +91,7 @@ def get_cluster_cert(id: Optional[str] = None,
         cert=pulumi.get(__ret__, 'cert'),
         id=pulumi.get(__ret__, 'id'))
 def get_cluster_cert_output(id: Optional[pulumi.Input[str]] = None,
-                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetClusterCertResult]:
+                            opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetClusterCertResult]:
     """
     TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/<cluster name>-ca.crt` on MacOS or Linux, or `$env:appdata\\CockroachCloud\\certs\\<cluster name>-ca.crt` on Windows.
 
@@ -113,7 +113,7 @@ def get_cluster_cert_output(id: Optional[pulumi.Input[str]] = None,
     """
     __args__ = dict()
     __args__['id'] = id
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('cockroach:index/getClusterCert:getClusterCert', __args__, opts=opts, typ=GetClusterCertResult)
     return __ret__.apply(lambda __response__: GetClusterCertResult(
         cert=pulumi.get(__response__, 'cert'),

@@ -131,11 +131,11 @@ if not MYPY:
         """
         disk_iops: NotRequired[pulumi.Input[int]]
         """
-        Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
         """
         machine_type: NotRequired[pulumi.Input[str]]
         """
-        Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `num_virtual_cpus` to control the machine type.
         """
         memory_gib: NotRequired[pulumi.Input[float]]
         """
@@ -168,8 +168,8 @@ class ClusterDedicatedArgs:
                  storage_gib: Optional[pulumi.Input[int]] = None):
         """
         :param pulumi.Input[str] cidr_range: The IPv4 range in CIDR format that will be used by the cluster. This is supported only on GCP, and must have a subnet mask no larger than /19. Defaults to "172.28.0.0/14". This cannot be changed after cluster creation.
-        :param pulumi.Input[int] disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
-        :param pulumi.Input[str] machine_type: Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        :param pulumi.Input[int] disk_iops: Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
+        :param pulumi.Input[str] machine_type: Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `num_virtual_cpus` to control the machine type.
         :param pulumi.Input[float] memory_gib: Memory per node in GiB.
         :param pulumi.Input[int] num_virtual_cpus: Number of virtual CPUs per node in the cluster.
         :param pulumi.Input[bool] private_network_visibility: Set to true to assign private IP addresses to nodes. Required for CMEK and other advanced networking features. Clusters created with this flag will have advanced security features enabled.  This cannot be changed after cluster creation and incurs additional charges.  See [Create an Advanced Cluster](https://www.cockroachlabs.com/docs/cockroachcloud/create-an-advanced-cluster.html#step-6-configure-advanced-security-features) and [Pricing](https://www.cockroachlabs.com/pricing/) for more information.
@@ -206,7 +206,7 @@ class ClusterDedicatedArgs:
     @pulumi.getter(name="diskIops")
     def disk_iops(self) -> Optional[pulumi.Input[int]]:
         """
-        Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+        Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
         """
         return pulumi.get(self, "disk_iops")
 
@@ -218,7 +218,7 @@ class ClusterDedicatedArgs:
     @pulumi.getter(name="machineType")
     def machine_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+        Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `num_virtual_cpus` to control the machine type.
         """
         return pulumi.get(self, "machine_type")
 
@@ -287,7 +287,7 @@ if not MYPY:
         """
         node_count: NotRequired[pulumi.Input[int]]
         """
-        Number of nodes in the region. Will always be 0 for serverless clusters.
+        Number of nodes in the region. Valid for Advanced clusters only.
         """
         primary: NotRequired[pulumi.Input[bool]]
         """
@@ -316,7 +316,7 @@ class ClusterRegionArgs:
         """
         :param pulumi.Input[str] name: Name of the region. Should match the region code used by the cluster's cloud provider.
         :param pulumi.Input[str] internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
-        :param pulumi.Input[int] node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
+        :param pulumi.Input[int] node_count: Number of nodes in the region. Valid for Advanced clusters only.
         :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         :param pulumi.Input[str] sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
         :param pulumi.Input[str] ui_dns: DNS name used when connecting to the DB Console for the cluster.
@@ -361,7 +361,7 @@ class ClusterRegionArgs:
     @pulumi.getter(name="nodeCount")
     def node_count(self) -> Optional[pulumi.Input[int]]:
         """
-        Number of nodes in the region. Will always be 0 for serverless clusters.
+        Number of nodes in the region. Valid for Advanced clusters only.
         """
         return pulumi.get(self, "node_count")
 
@@ -585,7 +585,7 @@ if not MYPY:
         """
         node_count: NotRequired[pulumi.Input[int]]
         """
-        Number of nodes in the region. Will always be 0 for serverless clusters.
+        Number of nodes in the region. Valid for Advanced clusters only.
         """
         primary: NotRequired[pulumi.Input[bool]]
         """
@@ -614,7 +614,7 @@ class CmekAdditionalRegionArgs:
         """
         :param pulumi.Input[str] name: Name of the region. Should match the region code used by the cluster's cloud provider.
         :param pulumi.Input[str] internal_dns: Internal DNS name of the cluster within the cloud provider's network. Used to connect to the cluster with PrivateLink or VPC peering.
-        :param pulumi.Input[int] node_count: Number of nodes in the region. Will always be 0 for serverless clusters.
+        :param pulumi.Input[int] node_count: Number of nodes in the region. Valid for Advanced clusters only.
         :param pulumi.Input[bool] primary: Set to true to mark this region as the primary for a serverless cluster. Exactly one region must be primary. Dedicated clusters expect to have no primary region.
         :param pulumi.Input[str] sql_dns: DNS name of the cluster's SQL interface. Used to connect to the cluster with IP allowlisting.
         :param pulumi.Input[str] ui_dns: DNS name used when connecting to the DB Console for the cluster.
@@ -659,7 +659,7 @@ class CmekAdditionalRegionArgs:
     @pulumi.getter(name="nodeCount")
     def node_count(self) -> Optional[pulumi.Input[int]]:
         """
-        Number of nodes in the region. Will always be 0 for serverless clusters.
+        Number of nodes in the region. Valid for Advanced clusters only.
         """
         return pulumi.get(self, "node_count")
 

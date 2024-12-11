@@ -151,7 +151,7 @@ def get_connection_string_output(database: Optional[pulumi.Input[Optional[str]]]
                                  os: Optional[pulumi.Input[Optional[str]]] = None,
                                  password: Optional[pulumi.Input[Optional[str]]] = None,
                                  sql_user: Optional[pulumi.Input[Optional[str]]] = None,
-                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetConnectionStringResult]:
+                                 opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetConnectionStringResult]:
     """
     Generic connection string for a cluster.
 
@@ -180,7 +180,7 @@ def get_connection_string_output(database: Optional[pulumi.Input[Optional[str]]]
     __args__['os'] = os
     __args__['password'] = password
     __args__['sqlUser'] = sql_user
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('cockroach:index/getConnectionString:getConnectionString', __args__, opts=opts, typ=GetConnectionStringResult)
     return __ret__.apply(lambda __response__: GetConnectionStringResult(
         connection_params=pulumi.get(__response__, 'connection_params'),

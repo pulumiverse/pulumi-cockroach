@@ -66,7 +66,7 @@ export interface GetPersonUserResult {
  * });
  * ```
  */
-export function getPersonUserOutput(args: GetPersonUserOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPersonUserResult> {
+export function getPersonUserOutput(args: GetPersonUserOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPersonUserResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cockroach:index/getPersonUser:getPersonUser", {
         "email": args.email,

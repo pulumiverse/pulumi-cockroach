@@ -135,7 +135,7 @@ class MaintenanceWindow(pulumi.CustomResource):
                  window_duration: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Maintenance window configuration for a cluster.
+        Maintenance window configuration for a cluster. Maintenance Windows are supported for Advanced clusters only.
 
         ## Example Usage
 
@@ -178,7 +178,7 @@ class MaintenanceWindow(pulumi.CustomResource):
                  args: MaintenanceWindowArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Maintenance window configuration for a cluster.
+        Maintenance window configuration for a cluster. Maintenance Windows are supported for Advanced clusters only.
 
         ## Example Usage
 

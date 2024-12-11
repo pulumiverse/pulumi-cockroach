@@ -89,7 +89,7 @@ def get_person_user(email: Optional[str] = None,
         email=pulumi.get(__ret__, 'email'),
         id=pulumi.get(__ret__, 'id'))
 def get_person_user_output(email: Optional[pulumi.Input[str]] = None,
-                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPersonUserResult]:
+                           opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetPersonUserResult]:
     """
     Information about an individual user.
 
@@ -109,7 +109,7 @@ def get_person_user_output(email: Optional[pulumi.Input[str]] = None,
     """
     __args__ = dict()
     __args__['email'] = email
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('cockroach:index/getPersonUser:getPersonUser', __args__, opts=opts, typ=GetPersonUserResult)
     return __ret__.apply(lambda __response__: GetPersonUserResult(
         email=pulumi.get(__response__, 'email'),

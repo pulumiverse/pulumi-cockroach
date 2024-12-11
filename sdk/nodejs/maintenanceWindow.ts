@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Maintenance window configuration for a cluster.
+ * Maintenance window configuration for a cluster. Maintenance Windows are supported for Advanced clusters only.
  *
  * ## Example Usage
  *

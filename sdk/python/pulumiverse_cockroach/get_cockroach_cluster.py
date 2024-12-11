@@ -221,7 +221,7 @@ def get_cockroach_cluster(id: Optional[str] = None,
         state=pulumi.get(__ret__, 'state'),
         upgrade_status=pulumi.get(__ret__, 'upgrade_status'))
 def get_cockroach_cluster_output(id: Optional[pulumi.Input[str]] = None,
-                                 opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetCockroachClusterResult]:
+                                 opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetCockroachClusterResult]:
     """
     CockroachDB Cloud cluster. Can be Dedicated or Serverless.
 
@@ -238,7 +238,7 @@ def get_cockroach_cluster_output(id: Optional[pulumi.Input[str]] = None,
     """
     __args__ = dict()
     __args__['id'] = id
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('cockroach:index/getCockroachCluster:getCockroachCluster', __args__, opts=opts, typ=GetCockroachClusterResult)
     return __ret__.apply(lambda __response__: GetCockroachClusterResult(
         account_id=pulumi.get(__response__, 'account_id'),

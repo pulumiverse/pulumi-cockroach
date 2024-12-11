@@ -12,7 +12,7 @@ import (
 	"github.com/pulumiverse/pulumi-cockroach/sdk/go/cockroach/internal"
 )
 
-// Maintenance window configuration for a cluster.
+// Maintenance window configuration for a cluster. Maintenance Windows are supported for Advanced clusters only.
 //
 // ## Example Usage
 //

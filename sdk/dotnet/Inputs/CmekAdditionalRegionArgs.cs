@@ -26,7 +26,7 @@ namespace Pulumiverse.Cockroach.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// Number of nodes in the region. Will always be 0 for serverless clusters.
+        /// Number of nodes in the region. Valid for Advanced clusters only.
         /// </summary>
         [Input("nodeCount")]
         public Input<int>? NodeCount { get; set; }

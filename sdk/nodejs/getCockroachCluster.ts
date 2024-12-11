@@ -73,7 +73,7 @@ export interface GetCockroachClusterResult {
  * });
  * ```
  */
-export function getCockroachClusterOutput(args: GetCockroachClusterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCockroachClusterResult> {
+export function getCockroachClusterOutput(args: GetCockroachClusterOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCockroachClusterResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("cockroach:index/getCockroachCluster:getCockroachCluster", {
         "id": args.id,

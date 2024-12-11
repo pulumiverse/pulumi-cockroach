@@ -23,7 +23,7 @@ namespace Pulumiverse.Cockroach.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Number of nodes in the region. Will always be 0 for serverless clusters.
+        /// Number of nodes in the region. Valid for Advanced clusters only.
         /// </summary>
         public readonly int? NodeCount;
         /// <summary>

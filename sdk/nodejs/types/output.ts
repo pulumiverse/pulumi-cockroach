@@ -26,11 +26,11 @@ export interface ClusterDedicated {
      */
     cidrRange: string;
     /**
-     * Number of disk I/O operations per second that are permitted on each node in the cluster. Zero indicates the cloud provider-specific default.
+     * Number of disk I/O operations per second that are permitted on each node in the cluster. Omitting this attribute will result in the cloud provider-specific default.
      */
     diskIops: number;
     /**
-     * Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4.
+     * Machine type identifier within the given cloud provider, e.g., m6.xlarge, n2-standard-4. This attribute requires a feature flag to be enabled. It is recommended to leave this empty and use `numVirtualCpus` to control the machine type.
      */
     machineType: string;
     /**
@@ -61,7 +61,7 @@ export interface ClusterRegion {
      */
     name: string;
     /**
-     * Number of nodes in the region. Will always be 0 for serverless clusters.
+     * Number of nodes in the region. Valid for Advanced clusters only.
      */
     nodeCount: number;
     /**
@@ -123,7 +123,7 @@ export interface CmekAdditionalRegion {
      */
     name: string;
     /**
-     * Number of nodes in the region. Will always be 0 for serverless clusters.
+     * Number of nodes in the region. Valid for Advanced clusters only.
      */
     nodeCount: number;
     /**
