@@ -1,3 +1,0 @@
-name: cockroachdb_provider_ts
-runtime: nodejs
-description: Testing cockroach db provider
