@@ -63,7 +63,7 @@ namespace Pulumiverse.Cockroach
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+        /// Name of this allowlist entry. If left unset, it will inherit a server-side default.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -143,7 +143,7 @@ namespace Pulumiverse.Cockroach
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+        /// Name of this allowlist entry. If left unset, it will inherit a server-side default.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -184,7 +184,7 @@ namespace Pulumiverse.Cockroach
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+        /// Name of this allowlist entry. If left unset, it will inherit a server-side default.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

@@ -73,6 +73,37 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         public static Output<GetFolderResult> Invoke(GetFolderInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFolderResult>("cockroach:index/getFolder:getFolder", args ?? new GetFolderInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// A CockroachDB Cloud folder. Folders can contain clusters or other folders.  They can be used to group resources together for the purposes of access control, organization or fine grained invoicing.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var prodFolderId = config.Require("prodFolderId");
+        ///     var team1 = Cockroach.GetFolder.Invoke(new()
+        ///     {
+        ///         Path = "/prod/team1",
+        ///     });
+        /// 
+        ///     var prod = Cockroach.GetFolder.Invoke(new()
+        ///     {
+        ///         Id = prodFolderId,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetFolderResult> Invoke(GetFolderInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetFolderResult>("cockroach:index/getFolder:getFolder", args ?? new GetFolderInvokeArgs(), options.WithDefaults());
     }
 
 

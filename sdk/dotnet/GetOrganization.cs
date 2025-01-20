@@ -53,6 +53,27 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         public static Output<GetOrganizationResult> Invoke(InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationResult>("cockroach:index/getOrganization:getOrganization", InvokeArgs.Empty, options.WithDefaults());
+
+        /// <summary>
+        /// Information about the organization associated with the user's API key.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var prod = Cockroach.GetOrganization.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetOrganizationResult> Invoke(InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrganizationResult>("cockroach:index/getOrganization:getOrganization", InvokeArgs.Empty, options.WithDefaults());
     }
 
 

@@ -67,6 +67,34 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         public static Output<GetClusterCertResult> Invoke(GetClusterCertInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterCertResult>("cockroach:index/getClusterCert:getClusterCert", args ?? new GetClusterCertInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// TLS certificate for the specified CockroachDB cluster. Certificates for dedicated clusters should be written to `$HOME/Library/CockroachCloud/certs/&lt;cluster name&gt;-ca.crt` on MacOS or Linux, or `$env:appdata\CockroachCloud\certs\&lt;cluster name&gt;-ca.crt` on Windows. 
+        /// 
+        /// Serverless clusters use the root PostgreSQL CA cert. If it isn't already installed, the certificate can be appended to `$HOME/.postgresql/root.crt` on MacOS or Linux, or `$env:appdata\postgresql\root.crt` on Windows.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var clusterId = config.Require("clusterId");
+        ///     var cockroach = Cockroach.GetClusterCert.Invoke(new()
+        ///     {
+        ///         Id = clusterId,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetClusterCertResult> Invoke(GetClusterCertInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterCertResult>("cockroach:index/getClusterCert:getClusterCert", args ?? new GetClusterCertInvokeArgs(), options.WithDefaults());
     }
 
 
