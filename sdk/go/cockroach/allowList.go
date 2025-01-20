@@ -60,7 +60,7 @@ type AllowList struct {
 	// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
 	CidrMask  pulumi.IntOutput    `pulumi:"cidrMask"`
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+	// Name of this allowlist entry. If left unset, it will inherit a server-side default.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Set to 'true' to allow SQL connections from this CIDR range.
 	Sql pulumi.BoolOutput `pulumi:"sql"`
@@ -118,7 +118,7 @@ type allowListState struct {
 	// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
 	CidrMask  *int    `pulumi:"cidrMask"`
 	ClusterId *string `pulumi:"clusterId"`
-	// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+	// Name of this allowlist entry. If left unset, it will inherit a server-side default.
 	Name *string `pulumi:"name"`
 	// Set to 'true' to allow SQL connections from this CIDR range.
 	Sql *bool `pulumi:"sql"`
@@ -132,7 +132,7 @@ type AllowListState struct {
 	// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
 	CidrMask  pulumi.IntPtrInput
 	ClusterId pulumi.StringPtrInput
-	// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+	// Name of this allowlist entry. If left unset, it will inherit a server-side default.
 	Name pulumi.StringPtrInput
 	// Set to 'true' to allow SQL connections from this CIDR range.
 	Sql pulumi.BoolPtrInput
@@ -150,7 +150,7 @@ type allowListArgs struct {
 	// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
 	CidrMask  int    `pulumi:"cidrMask"`
 	ClusterId string `pulumi:"clusterId"`
-	// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+	// Name of this allowlist entry. If left unset, it will inherit a server-side default.
 	Name *string `pulumi:"name"`
 	// Set to 'true' to allow SQL connections from this CIDR range.
 	Sql bool `pulumi:"sql"`
@@ -165,7 +165,7 @@ type AllowListArgs struct {
 	// The [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) notation prefix length. A number ranging from 0 to 32 indicating the size of the network. Use 32 to allow a single IP address.
 	CidrMask  pulumi.IntInput
 	ClusterId pulumi.StringInput
-	// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+	// Name of this allowlist entry. If left unset, it will inherit a server-side default.
 	Name pulumi.StringPtrInput
 	// Set to 'true' to allow SQL connections from this CIDR range.
 	Sql pulumi.BoolInput
@@ -274,7 +274,7 @@ func (o AllowListOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+// Name of this allowlist entry. If left unset, it will inherit a server-side default.
 func (o AllowListOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *AllowList) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

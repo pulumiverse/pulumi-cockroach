@@ -68,21 +68,11 @@ type GetClusterCertResult struct {
 }
 
 func GetClusterCertOutput(ctx *pulumi.Context, args GetClusterCertOutputArgs, opts ...pulumi.InvokeOption) GetClusterCertResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetClusterCertResultOutput, error) {
 			args := v.(GetClusterCertArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetClusterCertResult
-			secret, err := ctx.InvokePackageRaw("cockroach:index/getClusterCert:getClusterCert", args, &rv, "", opts...)
-			if err != nil {
-				return GetClusterCertResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetClusterCertResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetClusterCertResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("cockroach:index/getClusterCert:getClusterCert", args, GetClusterCertResultOutput{}, options).(GetClusterCertResultOutput), nil
 		}).(GetClusterCertResultOutput)
 }
 

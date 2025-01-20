@@ -69,7 +69,7 @@ export class AllowList extends pulumi.CustomResource {
     public readonly cidrMask!: pulumi.Output<number>;
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+     * Name of this allowlist entry. If left unset, it will inherit a server-side default.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -143,7 +143,7 @@ export interface AllowListState {
     cidrMask?: pulumi.Input<number>;
     clusterId?: pulumi.Input<string>;
     /**
-     * Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+     * Name of this allowlist entry. If left unset, it will inherit a server-side default.
      */
     name?: pulumi.Input<string>;
     /**
@@ -170,7 +170,7 @@ export interface AllowListArgs {
     cidrMask: pulumi.Input<number>;
     clusterId: pulumi.Input<string>;
     /**
-     * Name of this allowlist entry. If not set explicitly, this value does not sync with the server.
+     * Name of this allowlist entry. If left unset, it will inherit a server-side default.
      */
     name?: pulumi.Input<string>;
     /**

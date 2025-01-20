@@ -5,7 +5,7 @@ go 1.22.0
 toolchain go1.22.10
 
 require (
-	github.com/cockroachdb/terraform-provider-cockroach v1.11.0
+	github.com/cockroachdb/terraform-provider-cockroach v1.11.1
 	github.com/hashicorp/terraform-plugin-framework v1.13.0
 )
 

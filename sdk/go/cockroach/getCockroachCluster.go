@@ -77,21 +77,11 @@ type GetCockroachClusterResult struct {
 }
 
 func GetCockroachClusterOutput(ctx *pulumi.Context, args GetCockroachClusterOutputArgs, opts ...pulumi.InvokeOption) GetCockroachClusterResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetCockroachClusterResultOutput, error) {
 			args := v.(GetCockroachClusterArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetCockroachClusterResult
-			secret, err := ctx.InvokePackageRaw("cockroach:index/getCockroachCluster:getCockroachCluster", args, &rv, "", opts...)
-			if err != nil {
-				return GetCockroachClusterResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetCockroachClusterResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetCockroachClusterResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("cockroach:index/getCockroachCluster:getCockroachCluster", args, GetCockroachClusterResultOutput{}, options).(GetCockroachClusterResultOutput), nil
 		}).(GetCockroachClusterResultOutput)
 }
 

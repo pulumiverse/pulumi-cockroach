@@ -63,6 +63,32 @@ namespace Pulumiverse.Cockroach
         /// </summary>
         public static Output<GetCockroachClusterResult> Invoke(GetCockroachClusterInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCockroachClusterResult>("cockroach:index/getCockroachCluster:getCockroachCluster", args ?? new GetCockroachClusterInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// CockroachDB Cloud cluster. Can be Dedicated or Serverless.
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Cockroach = Pulumi.Cockroach;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var config = new Config();
+        ///     var clusterId = config.Require("clusterId");
+        ///     var cockroach = Cockroach.GetCockroachCluster.Invoke(new()
+        ///     {
+        ///         Id = clusterId,
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetCockroachClusterResult> Invoke(GetCockroachClusterInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetCockroachClusterResult>("cockroach:index/getCockroachCluster:getCockroachCluster", args ?? new GetCockroachClusterInvokeArgs(), options.WithDefaults());
     }
 
 

@@ -80,21 +80,11 @@ type GetConnectionStringResult struct {
 }
 
 func GetConnectionStringOutput(ctx *pulumi.Context, args GetConnectionStringOutputArgs, opts ...pulumi.InvokeOption) GetConnectionStringResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetConnectionStringResultOutput, error) {
 			args := v.(GetConnectionStringArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetConnectionStringResult
-			secret, err := ctx.InvokePackageRaw("cockroach:index/getConnectionString:getConnectionString", args, &rv, "", opts...)
-			if err != nil {
-				return GetConnectionStringResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetConnectionStringResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetConnectionStringResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("cockroach:index/getConnectionString:getConnectionString", args, GetConnectionStringResultOutput{}, options).(GetConnectionStringResultOutput), nil
 		}).(GetConnectionStringResultOutput)
 }
 

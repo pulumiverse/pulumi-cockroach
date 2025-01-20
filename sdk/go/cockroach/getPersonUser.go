@@ -66,21 +66,11 @@ type GetPersonUserResult struct {
 }
 
 func GetPersonUserOutput(ctx *pulumi.Context, args GetPersonUserOutputArgs, opts ...pulumi.InvokeOption) GetPersonUserResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetPersonUserResultOutput, error) {
 			args := v.(GetPersonUserArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetPersonUserResult
-			secret, err := ctx.InvokePackageRaw("cockroach:index/getPersonUser:getPersonUser", args, &rv, "", opts...)
-			if err != nil {
-				return GetPersonUserResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetPersonUserResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetPersonUserResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("cockroach:index/getPersonUser:getPersonUser", args, GetPersonUserResultOutput{}, options).(GetPersonUserResultOutput), nil
 		}).(GetPersonUserResultOutput)
 }
 
