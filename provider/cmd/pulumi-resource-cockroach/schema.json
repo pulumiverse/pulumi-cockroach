@@ -864,7 +864,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Name of this allowlist entry. If not set explicitly, this value does not sync with the server.\n"
+                    "description": "Name of this allowlist entry. If left unset, it will inherit a server-side default.\n"
                 },
                 "sql": {
                     "type": "boolean",
@@ -897,7 +897,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "Name of this allowlist entry. If not set explicitly, this value does not sync with the server.\n"
+                    "description": "Name of this allowlist entry. If left unset, it will inherit a server-side default.\n"
                 },
                 "sql": {
                     "type": "boolean",
@@ -931,7 +931,7 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "Name of this allowlist entry. If not set explicitly, this value does not sync with the server.\n"
+                        "description": "Name of this allowlist entry. If left unset, it will inherit a server-side default.\n"
                     },
                     "sql": {
                         "type": "boolean",
