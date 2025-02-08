@@ -5,7 +5,7 @@ go 1.22.0
 toolchain go1.22.10
 
 require (
-	github.com/cockroachdb/terraform-provider-cockroach v1.11.1
+	github.com/cockroachdb/terraform-provider-cockroach v1.11.2
 	github.com/hashicorp/terraform-plugin-framework v1.13.0
 )
 
@@ -14,7 +14,7 @@ require (
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/cloudflare/circl v1.3.7 // indirect
-	github.com/cockroachdb/cockroach-cloud-sdk-go/v5 v5.0.0 // indirect
+	github.com/cockroachdb/cockroach-cloud-sdk-go/v5 v5.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
