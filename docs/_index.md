@@ -8,6 +8,8 @@ The Cockroach provider for Pulumi can be used to provision any of the cloud reso
 
 The Cockroach provider must be configured with credentials to deploy and update resources in CockroachDB.
 
+** NOTE ** this is a community package in [need of new maintainers](https://github.com/pulumiverse/pulumi-cockroach/issues/75).
+
 ## Example
 
 {{< chooser language "typescript,python" >}}
