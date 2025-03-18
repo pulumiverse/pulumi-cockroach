@@ -1,4 +1,0 @@
----
-upstream-provider-name: terraform-provider-cockroach
-upstream-provider-org: cockroachdb
-remove-plugins: true
