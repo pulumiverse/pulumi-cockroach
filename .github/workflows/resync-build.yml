@@ -2,9 +2,11 @@
 name: "Resync Build Workflows"
 
 on:
-  schedule:
-    # 3 AM UTC ~ 8 PM PDT / 7 PM PST every Tuesday.
-    - cron: 0 3 * * TUE
+  workflow_dispatch:
+
+  # schedule:
+  # 3 AM UTC ~ 8 PM PDT / 7 PM PST every Tuesday.
+  # - cron: 0 3 * * TUE
 
 permissions:
   contents: write
@@ -31,7 +33,8 @@ jobs:
         with:
           author: pulumi-bot <bot@pulumi.com>
           base: main
-          body: This pull request was generated automatically by the resync-build workflow
+          body:
+            This pull request was generated automatically by the resync-build workflow
             in this repository.
           branch: chore/resync-${{ github.run_id }}
           commit-message: Regenerate workflows for pulumi-cockroach
