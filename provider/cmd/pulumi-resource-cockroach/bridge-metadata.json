@@ -7,6 +7,9 @@
             "cockroach_api_key": {
                 "current": "cockroach:index/apiKey:ApiKey"
             },
+            "cockroach_blackout_window": {
+                "current": "cockroach:index/blackoutWindow:BlackoutWindow"
+            },
             "cockroach_client_ca_cert": {
                 "current": "cockroach:index/caCert:CaCert"
             },
@@ -31,6 +34,28 @@
             },
             "cockroach_database": {
                 "current": "cockroach:index/database:Database"
+            },
+            "cockroach_egress_private_endpoint": {
+                "current": "cockroach:index/egressPrivateEndpoint:EgressPrivateEndpoint"
+            },
+            "cockroach_egress_private_endpoint_domain_names": {
+                "current": "cockroach:index/egressPrivateEndpointDomainNames:EgressPrivateEndpointDomainNames",
+                "fields": {
+                    "domain_names": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_egress_rule": {
+                "current": "cockroach:index/egressRule:EgressRule",
+                "fields": {
+                    "ports": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_egress_traffic_policy": {
+                "current": "cockroach:index/egressTrafficPolicy:EgressTrafficPolicy"
             },
             "cockroach_finalize_version_upgrade": {
                 "current": "cockroach:index/finalizeVersionUpgrade:FinalizeVersionUpgrade"
@@ -76,6 +101,9 @@
             "cockroach_metric_export_prometheus_config": {
                 "current": "cockroach:index/metricExportPrometheusConfig:MetricExportPrometheusConfig"
             },
+            "cockroach_physical_replication_stream": {
+                "current": "cockroach:index/physicalReplicationStream:PhysicalReplicationStream"
+            },
             "cockroach_private_endpoint_connection": {
                 "current": "cockroach:index/privateEndpointConnection:PrivateEndpointConnection"
             },
@@ -120,6 +148,21 @@
             "cockroach_private_endpoint_trusted_owner": {
                 "current": "cockroach:index/privateEndpointTrustedOwner:PrivateEndpointTrustedOwner"
             },
+            "cockroach_restore": {
+                "current": "cockroach:index/restore:Restore",
+                "fields": {
+                    "objects": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tables": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "cockroach_service_account": {
                 "current": "cockroach:index/serviceAccount:ServiceAccount"
             },
@@ -142,6 +185,22 @@
             }
         },
         "datasources": {
+            "cockroach_backups": {
+                "current": "cockroach:index/getBackups:getBackups",
+                "fields": {
+                    "backups": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "cockroach_blackout_windows": {
+                "current": "cockroach:index/getBlackoutWindows:getBlackoutWindows",
+                "fields": {
+                    "blackout_windows": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "cockroach_cluster": {
                 "current": "cockroach:index/getCockroachCluster:getCockroachCluster",
                 "fields": {
@@ -164,6 +223,28 @@
             },
             "cockroach_person_user": {
                 "current": "cockroach:index/getPersonUser:getPersonUser"
+            },
+            "cockroach_restores": {
+                "current": "cockroach:index/getRestores:getRestores",
+                "fields": {
+                    "restores": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "objects": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "tables": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
