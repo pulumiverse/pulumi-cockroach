@@ -162,6 +162,16 @@ func Provider() tfbridge.ProviderInfo {
 				ComputeID: computeIDField("id"),
 			},
 
+			"cockroach_egress_traffic_policy": {
+				Tok: cockroachResource(cockroachMod, "EgressTrafficPolicy"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"id": {
+						Name: "clusterId",
+						Type: "string",
+					},
+				},
+				ComputeID: computeIDField("id"),
+			},
 			"cockroach_private_endpoint_connection":    {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
 			"cockroach_private_endpoint_services":      {Tok: cockroachResource(cockroachMod, "PrivateEndpointServices")},
 			"cockroach_private_endpoint_trusted_owner": {Tok: cockroachResource(cockroachMod, "PrivateEndpointTrustedOwner")},
