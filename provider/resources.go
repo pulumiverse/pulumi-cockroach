@@ -86,7 +86,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_cluster": {Tok: cockroachResource(cockroachMod, "Cluster")},
 			"cockroach_cmek": {
@@ -97,7 +97,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_database": {Tok: cockroachResource(cockroachMod, "Database")},
 			"cockroach_folder":   {Tok: cockroachResource(cockroachMod, "Folder")},
@@ -109,7 +109,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_log_export_config": {
 				Tok: cockroachResource(cockroachMod, "LogExportConfig"),
@@ -119,7 +119,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_maintenance_window": {
 				Tok: cockroachResource(cockroachMod, "MaintenanceWindow"),
@@ -129,7 +129,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_metric_export_cloudwatch_config": {
 				Tok: cockroachResource(cockroachMod, "MetricExportCloudwatchConfig"),
@@ -139,7 +139,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_metric_export_datadog_config": {
 				Tok: cockroachResource(cockroachMod, "MetricExportDatadogConfig"),
@@ -149,7 +149,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 			"cockroach_metric_export_prometheus_config": {
 				Tok: cockroachResource(cockroachMod, "MetricExportPrometheusConfig"),
@@ -159,7 +159,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 
 			"cockroach_private_endpoint_connection":    {Tok: cockroachResource(cockroachMod, "PrivateEndpointConnection")},
@@ -180,7 +180,7 @@ func Provider() tfbridge.ProviderInfo {
 						Type: "string",
 					},
 				},
-				ComputeID: computeIDField("id"),
+				ComputeID: computeIDField("clusterId"),
 			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
